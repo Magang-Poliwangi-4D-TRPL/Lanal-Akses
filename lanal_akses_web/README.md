@@ -62,3 +62,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# LANAL AKSES
+
+Lanal Akses adalah aplikasi absensi dan data personil berbasis web dan mobile dengan fitur qrcode scanner untuk absensi personil di Lanal Banyuwangi. Web ini juga digunakan untuk memenuhi persyaratan penilaian magang di Prodi Teknologi Rekayasa Perangkat Lunak Politeknik Negeri Banyuwangi
