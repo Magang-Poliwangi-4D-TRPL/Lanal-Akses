@@ -1,0 +1,8 @@
+:root {
+    --green-main: #4E6766;
+    --white: #ffffff;
+  }
+
+.btn-green {
+    background-color: var(--green-main) !important;
+}
