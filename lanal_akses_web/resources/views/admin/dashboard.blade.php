@@ -3,6 +3,68 @@
 @section('title-page', 'Admin | Dashboard')
 
 @section('content')
-    <h1 class="text-black">Dashboard</h1>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi sint, temporibus consectetur error voluptatibus officiis totam quibusdam sunt facilis non blanditiis doloremque, quia natus exercitationem, quas tenetur! Itaque quidem ex impedit consectetur laborum accusamus quaerat ipsam deserunt! Alias recusandae blanditiis adipisci asperiores similique ut tenetur sapiente? Impedit ullam quasi provident!</p>
+
+<div class="container">
+  <div class="container">
+    <div class="card-columns mx-auto">
+      <div class="card bg-bluemain">
+        <div class="card-body ">
+          <h5 class="card-title text-white">Absensi Hari ini</h5>
+          <p class="card-text mb-4 text-white">Total data personil :</p>
+          <h2 class="text-center text-white">200</h2>
+        </div>
+      </div>
+      
+      <div class="card bg-blueaccent ">
+        <div class="card-body ">
+          <h5 class="card-title text-white">Jumlah Personil</h5>
+          <p class="card-text mb-4 text-white">Jumlah seluruh personil :</p>
+          <h2 class="text-center text-white">200</h2>
+          </div>
+        </div>
+     
+    </div> 
+    <div class="container bg-white mt-4 p-4" style=" padding-top: 3rem !important;">
+        <h1 class="text-black">Hasilkan Qr-Code</h1>
+        <p class="muted-text">Cetak semua QR-Code berdasarkan kode unik PNS/Personil</p>
+
+        <div class="card-columns">
+          <div class="card">
+            <div class="card-body ">
+              <h5 class="card-title">Data Personil</h5>
+              <p class="card-text ">Total data personil :</p>
+              <div class="container border-bottom mb-4 mt-2">
+                <p class="text-muted text-center">200</p>
+              </div>
+              <p class="text-subtitle">
+                Cetak Semua QR-Code 
+              </p>
+              <button class="btn btn-lg text-white bg-bluemain" type="submit" style="height: 5rem; width: 100%"><iconify-icon class="mt-2" icon="ph:qr-code-bold" width="36"></iconify-icon></button>
+            </div>
+          </div>
+          
+            <div class="card">
+              <div class="card-body ">
+                <h5 class="card-title">Data PNS</h5>
+                <p class="card-text ">Total data PNS :</p>
+                <div class="container border-bottom mb-4 mt-2">
+                  <p class="text-muted text-center">200</p>
+                </div>
+                <p class="text-subtitle">
+                  Cetak Semua QR-Code 
+                </p>
+                <button class="btn btn-lg text-white bg-blueaccent" type="submit" style="height: 5rem; width: 100%"><span><iconify-icon class="my-3" width="36" icon="ph:qr-code-bold"></iconify-icon></span></button>
+              </div>
+            </div>
+         
+        </div>
+    
+      </div>
+    </div>
+
+    
+    
+</div>
+
+
 @endsection
