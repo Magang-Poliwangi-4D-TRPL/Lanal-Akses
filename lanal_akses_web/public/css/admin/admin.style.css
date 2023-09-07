@@ -1,0 +1,70 @@
+:root {
+    --green-main: #4E6766;
+    --green-dark: #385655;
+    --blue-bg: #EDFEFF;
+    --blue-dark: #0D21A1;
+    --blue-main: #7EBFFF;
+    --blue-accent: #5786CA;
+    --white: #ffffff;
+  }
+
+.bg-greenmain {
+    background-color: var(--green-main) !important;
+}
+
+.bg-greendark {
+    background-color: var(--green-dark) !important;
+}
+
+.bg-bluedark {
+    background-color: var(--blue-dark) !important;
+}
+
+.bg-blue {
+    background-color: var(--blue-bg) !important;
+}
+
+.bg-bluemain {
+    background-color: var(--blue-main) !important;
+}
+
+.bg-blueaccent {
+    background-color: var(--blue-accent) !important;
+}
+
+
+.content-margin {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.nav-image{
+    width: 30px;
+    height: auto;
+}
+
+/* CSS Code for responsive tab design */
+@media only screen and (max-width: 765px) {
+    .nav-image{
+        width: 15px;
+        height: auto;
+    }
+    .nav-link{
+        width: 50px;
+    }
+  }
+
+/* CSS Code for responsive mobile design */
+@media only screen and (max-width: 600px) {
+    .nav-image{
+        width: 15px;
+        height: auto;
+    }
+    #navbar-list {
+        margin-top: 1.5rem;
+    }
+    .content-margin {
+        margin-top: 8rem;
+        margin-bottom: 5rem;
+    }
+  }
