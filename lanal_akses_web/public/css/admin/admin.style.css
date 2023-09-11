@@ -38,9 +38,17 @@
     margin-bottom: 5rem;
 }
 
+.content-wrap{
+    margin-left: 25rem;
+}
+
 .nav-image{
     width: 30px;
     height: auto;
+}
+
+footer {
+    margin-left: 3rem;
 }
 
 /* CSS Code for responsive tab design */
@@ -51,6 +59,12 @@
     }
     .nav-link{
         width: 50px;
+    }
+    .content-wrap{
+        margin-left: 5rem;
+    }
+    footer {
+        margin-left: 8rem;
     }
   }
 
@@ -66,5 +80,11 @@
     .content-margin {
         margin-top: 8rem;
         margin-bottom: 5rem;
+    }
+    .content-wrap{
+        margin-left: 0rem;
+    }
+    footer {
+        margin-left: 5rem;
     }
   }
