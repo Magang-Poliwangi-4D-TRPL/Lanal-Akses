@@ -48,7 +48,7 @@
 }
 
 footer {
-    margin-left: 3rem;
+    padding-left: 3rem;
 }
 
 /* CSS Code for responsive tab design */
@@ -64,7 +64,7 @@ footer {
         margin-left: 5rem;
     }
     footer {
-        margin-left: 8rem;
+        padding: 8rem;
     }
   }
 
@@ -85,6 +85,6 @@ footer {
         margin-left: 0rem;
     }
     footer {
-        margin-left: 5rem;
+        padding-left: 5rem;
     }
   }
