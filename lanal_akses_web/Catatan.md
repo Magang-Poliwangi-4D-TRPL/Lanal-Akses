@@ -4,6 +4,9 @@
 
     definisikan semua kebutuhan website disini, tulis berdasarkan fitur perhalaman
 
+### halaman tampilan UI website dan android:
+<a>https://www.figma.com/file/kKbj42KxYo4Xh9eJWaSiwK/Absensi-LANAL-Banyuwangi?type=design&node-id=1%3A318&mode=design&t=48KxVjoChwJERDt9-1</a>
+
 ## Database
 - ERD
 
@@ -31,13 +34,20 @@
 
 ## Layouting
 - navbar ✅
-- sidebar
+    - membuat tombol search di bagian navbar
+    - membuat avatar admin dan dropdown di avatar admin
+- sidebar ✅
+    - membuat active link icon dan tombol menggunakan laravel conditional formating
+    - membuat collapse sidebar menggunakan javascript 
+    - membuat sidebar responsive
 - footer ✅
-- wrap content
+    - membuat tampilan footer responsive
+    - membuat linked text di social media dan alamat
+- wrap content✅
 
 ### Halaman Dashboard
 | No    | Nama task                         |   Checkbox    |
-| :---  |    :----:                         |   ---:          |
+| :---  |    :----:                         |   ---:        |
 | 01.   | ~~Box Card informasi~~            |       ✅      |
 | 02.   | Generate Qr-Code                  |       ❌      |
 
