@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PersonilController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,5 @@ Route::get('/', function () {
 Route::get('/admin', function () {
     return view('admin.dashboard');
 });
+
+Route::get('/admin/personil', [PersonilController::class, 'index']);

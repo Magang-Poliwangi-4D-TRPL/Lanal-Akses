@@ -4,8 +4,7 @@
 
     definisikan semua kebutuhan website disini, tulis berdasarkan fitur perhalaman
 
-### halaman tampilan UI website dan android:
-<a>https://www.figma.com/file/kKbj42KxYo4Xh9eJWaSiwK/Absensi-LANAL-Banyuwangi?type=design&node-id=1%3A318&mode=design&t=48KxVjoChwJERDt9-1</a>
+halaman tampilan [UI website dan android](https://www.figma.com/file/kKbj42KxYo4Xh9eJWaSiwK/Absensi-LANAL-Banyuwangi?type=design&node-id=1%3A318&mode=design&t=48KxVjoChwJERDt9-1)
 
 ## Database
 - ERD
