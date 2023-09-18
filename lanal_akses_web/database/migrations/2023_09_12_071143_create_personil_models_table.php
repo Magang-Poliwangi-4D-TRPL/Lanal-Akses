@@ -16,16 +16,17 @@ class CreatePersonilModelsTable extends Migration
         Schema::create('personil', function (Blueprint $table) {
             $table->id();
             $table->string('nama_lengkap');
-            $table->string('nrp');
+            $table->string('nrp')->unique();
             $table->string('jabatan');
+            $table->string('jenis_kelamin');
             $table->string('pangkat_korps')->nullable();
             $table->string('pangkat_terakhir')->nullable();
             $table->string('tempat_dinas')->nullable();
             $table->string('tempat_armada')->nullable();
             $table->string('nomor_kta')->nullable();
-            $table->string('nomor_ktp')->nullable();
-            $table->string('nomor_asbri')->nullable();
-            $table->string('tempat_tanggalahir')->nullable();
+            $table->integer('nomor_ktp')->nullable();
+            $table->integer('nomor_asbri')->nullable();
+            $table->string('tempat_tanggallahir')->nullable();
             $table->string('agama_sukubangsa')->nullable();
             $table->string('golongan_darah')->nullable();
             $table->string('dikspesialisasi')->nullable();
