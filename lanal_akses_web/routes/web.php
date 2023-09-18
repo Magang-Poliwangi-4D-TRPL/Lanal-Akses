@@ -24,4 +24,5 @@ Route::get('/admin', function () {
     return view('admin.dashboard');
 });
 
-Route::get('/admin/personil', [PersonilController::class, 'index']);
+Route::get('/admin/personil/{page}', [PersonilController::class, 'index'])->name('admin.personil.index');
+Route::get('/admin/personil/show/{nrp}', [PersonilController::class, 'show'])->name('admin.personil.show');;
