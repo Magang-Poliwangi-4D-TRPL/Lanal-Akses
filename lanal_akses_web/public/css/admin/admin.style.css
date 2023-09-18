@@ -47,6 +47,22 @@
     height: auto;
 }
 
+.previous{
+    color: gray;
+}
+
+.next{
+    color: gray;
+}
+
+.previous:hover{
+    color: var(--blue-dark);
+}
+
+.next{
+    color: var(--blue-dark);
+}
+
 footer {
     padding-left: 3rem;
 }

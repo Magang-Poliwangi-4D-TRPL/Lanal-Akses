@@ -3,18 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\PersonilModel;
+use Illuminate\Http\Request;
 
 class PersonilController extends Controller
 {
     public function index($page) {
-        $perPage = 10; // Jumlah data per halaman
+            $perPage = 10; // Jumlah data per halaman
+            $totalPersonil = PersonilModel::count();
+            $totalPages = ceil($totalPersonil / $perPage);
 
-        // Menghitung offset berdasarkan halaman yang diminta
-        $offset = ($page - 1) * $perPage;
+            // Pastikan $page berada dalam rentang halaman yang valid
+            if ($page <= 0 || $page > $totalPages) {
+                return abort(404);
+            }
 
-        // Mengambil data dengan offset berdasarkan halaman
-        $personil = PersonilModel::skip($offset)->take($perPage)->get();
-        return view('admin.personil.index', compact('personil', 'page'));
+            // Hitung batasan angka navigasi
+            $maxNavLinks = 5;
+            $halfMaxLinks = floor($maxNavLinks / 2);
+            $firstNav = max(1, $page - $halfMaxLinks);
+            $lastNav = min($totalPages, $firstNav + $maxNavLinks - 1);
+    
+            // Menghitung offset berdasarkan halaman yang diminta
+            $offset = ($page - 1) * $perPage;
+    
+            // Mengambil data dengan offset berdasarkan halaman
+            $personil = PersonilModel::skip($offset)->take($perPage)->get();
+            return view('admin.personil.index', compact('personil', 'page', 'totalPages', 'firstNav', 'lastNav'));
+        
     }
 
     public function show($nrp) {
@@ -23,4 +38,45 @@ class PersonilController extends Controller
         // dd($personil);
         return view('admin.personil.show', compact('personil'));
     }
+
+    public function add()
+    {
+        return view('admin.personil.add');
+    }
+
+    public function store(Request $request){
+        // dd($request->all());
+        // Validasi input karyawan, misalnya nama, alamat, dll.
+        $validatedData = $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'nrp'    => 'required|unique:personil,nrp|max:255',
+            'jabatan'    => 'required|string|max:255',
+            'jenis_kelamin'    => 'required',
+            //Tambahkan validasi lain sesuai kebutuhan Anda.
+        ], [
+            'nama_lengkap.required' => 'Nama lengkap harus diisi.',
+            'nrp.required' => 'NRP harus diisi.',
+            'nrp.unique' => 'NRP sudah digunakan.',
+            'jabatan.required' => 'Jabatan harus diisi.',
+            'jenis_kelamin.required' => 'Jenis kelamin harus dipilih.',
+        ]);
+        
+        PersonilModel::create($validatedData);
+        // dd($validatedData);
+        return redirect()->route('admin.personil.index', ['page' => 1])->with('success', 'Data Personil berhasil ditambahkan.');
+    }
+
+    public function destroy($id){
+        $personil = PersonilModel::find($id);
+
+        if (!$personil) {
+            return abort(404);
+        }
+
+        $personil->delete();
+
+        return redirect()->route('admin.personil.index', ['page' => 1])
+            ->with('success', 'Data Personil berhasil dihapus.');
+    }
+
 }

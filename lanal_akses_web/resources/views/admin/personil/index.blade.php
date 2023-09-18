@@ -3,11 +3,27 @@
 @section('title-page', 'Admin | Data Personil')
 
 @section('content')
+    <style>
+        .active{
+            text-decoration: underline;
+            color: #0D21A1!important;
+        }
+        .pagination a{
+            color: gray;
+        }
+    </style>
     <div class="container">
         <h1 class="text-black my-4">Data Personil</h1>
         <div class="container bg-white border rounded p-5 mt-4">
+            <div class="d-flex justify-content-between"> <!-- Tambahkan class ini untuk menggeser tombol ke kanan -->
+                <a class="text-decoration-none" href="{{ route('admin.personil.add') }}">
+                    <button class="btn btn-blue btn-md text-white bg-blueaccent my-2">Tambah Personil<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></span></button>
+                </a>
+                <a class="text-decoration-none" href="#">
+                    <button class="btn btn-blue btn-md text-white bg-bluedark my-2">Cetak Data Personil<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
+                </a>
+            </div>
             <table class="table thead-light">
-                <p>halaman {{ $page }}</p>
                 <thead>
                     <tr class="bg-bluedark text-white text-bold">
                       <th scope="col" width="10%">no</th>
@@ -33,7 +49,11 @@
                                     <a class="text-decoration-none" href="{{ route('admin.personil.show', $nrpGanti) }}">
                                         <button class="btn btn-blue btn-sm text-white bg-bluemain m-2" >Lihat <span><iconify-icon icon="mdi:eye-outline"></iconify-icon></span></button>
                                     </a>
-                                    <button class="btn text-white btn-sm btn-danger m-2" >Hapus <span><iconify-icon icon="mingcute:delete-line"></iconify-icon></span></button>
+                                    <form action="{{ route('admin.personil.destroy', $data_personil->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                             
@@ -47,9 +67,19 @@
                   </tbody>
                   
             </table>
-            @if($personil->count() > 0)
-                <a href="{{ route('admin.personil.index', ['page' => $page + 1]) }}" class="btn btn-primary">Halaman Selanjutnya</a>
-            @endif
+            <div class="pagination">
+                @if ($page > 1)
+                    <a href="{{ route('admin.personil.index', ['page' => $page - 1]) }}" class="text-decoration-none mx-2 previous">&laquo; Sebelumnya</a>
+                @endif
+            
+                @for ($i = $firstNav; $i <= $lastNav; $i++)
+                    <a href="{{ route('admin.personil.index', ['page' => $i]) }}" class="text-decoration-none mx-2 {{ $page == $i ? 'active' : '' }}">{{ $i }}</a>
+                @endfor
+            
+                @if ($page < $totalPages)
+                    <a href="{{ route('admin.personil.index', ['page' => $page + 1]) }}" class="text-decoration-none mx-2 next">Selanjutnya &raquo;</a>
+                @endif
+            </div>
         </div>
     </div>
 @endsection

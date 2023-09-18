@@ -24,5 +24,11 @@ Route::get('/admin', function () {
     return view('admin.dashboard');
 });
 
-Route::get('/admin/personil/{page}', [PersonilController::class, 'index'])->name('admin.personil.index');
+Route::get('/admin/personil/{page}', [PersonilController::class, 'index'])
+->name('admin.personil.index')
+->where('page', '[1-9][0-9]*');
+Route::get('/admin/tambah-personil', [PersonilController::class, 'add'])->name('admin.personil.add');
+Route::post('/admin/personil/store', [PersonilController::class, 'store'])->name('admin.personil.store');
 Route::get('/admin/personil/show/{nrp}', [PersonilController::class, 'show'])->name('admin.personil.show');;
+Route::delete('/admin/personil/{id}', [PersonilController::class, 'destroy'])
+    ->name('admin.personil.destroy');
