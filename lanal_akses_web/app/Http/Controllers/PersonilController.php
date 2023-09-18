@@ -39,6 +39,19 @@ class PersonilController extends Controller
         return view('admin.personil.show', compact('personil'));
     }
 
+    public function search(Request $request) {
+    $perPage = 10; // Jumlah data per halaman
+    $query = $request->input('q');
+
+    // Query pencarian berdasarkan nama atau NRP
+    $personil = PersonilModel::where('nama_lengkap', 'like', '%' . $query . '%')
+        ->orWhere('nrp', 'like', '%' . $query . '%')
+        ->paginate($perPage);
+
+    return view('admin.personil.index', compact('personil'));
+}
+
+
     public function add()
     {
         return view('admin.personil.add');
