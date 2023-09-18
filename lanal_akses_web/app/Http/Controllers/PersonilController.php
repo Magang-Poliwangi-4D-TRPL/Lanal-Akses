@@ -40,16 +40,16 @@ class PersonilController extends Controller
     }
 
     public function search(Request $request) {
-    $perPage = 10; // Jumlah data per halaman
-    $query = $request->input('q');
+        $perPage = 100; // Jumlah data per halaman
+        $query = $request->input('q');
 
-    // Query pencarian berdasarkan nama atau NRP
-    $personil = PersonilModel::where('nama_lengkap', 'like', '%' . $query . '%')
-        ->orWhere('nrp', 'like', '%' . $query . '%')
-        ->paginate($perPage);
+        // Query pencarian berdasarkan nama atau NRP
+        $personil = PersonilModel::where('nama_lengkap', 'like', '%' . $query . '%')
+            ->orWhere('nrp', 'like', '%' . $query . '%')
+            ->paginate($perPage);
 
-    return view('admin.personil.index', compact('personil'));
-}
+        return view('admin.personil.search', compact('personil'));
+    }
 
 
     public function add()
