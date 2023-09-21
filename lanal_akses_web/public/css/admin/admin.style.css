@@ -32,10 +32,35 @@
     background-color: var(--blue-accent) !important;
 }
 
+.greenmain {
+    color: var(--green-main) !important;
+}
+
+.greendark {
+    color: var(--green-dark) !important;
+}
+
+.bluedark {
+    color: var(--blue-dark) !important;
+}
+
+.blue {
+    color: var(--blue-bg) !important;
+}
+
+.bluemain {
+    color: var(--blue-main) !important;
+}
+
+.blueaccent {
+    color: var(--blue-accent) !important;
+}
+
 
 .content-margin {
     margin-top: 5rem;
     margin-bottom: 5rem;
+    margin-left: 10rem;
 }
 
 .content-wrap{
@@ -47,8 +72,24 @@
     height: auto;
 }
 
+.previous{
+    color: gray;
+}
+
+.next{
+    color: gray;
+}
+
+.previous:hover{
+    color: var(--blue-dark);
+}
+
+.next{
+    color: var(--blue-dark);
+}
+
 footer {
-    margin-left: 3rem;
+    padding-left: 3rem;
 }
 
 /* CSS Code for responsive tab design */
@@ -64,7 +105,7 @@ footer {
         margin-left: 5rem;
     }
     footer {
-        margin-left: 8rem;
+        padding: 8rem;
     }
   }
 
@@ -80,11 +121,12 @@ footer {
     .content-margin {
         margin-top: 8rem;
         margin-bottom: 5rem;
+        margin-left: 1rem;
     }
     .content-wrap{
         margin-left: 0rem;
     }
     footer {
-        margin-left: 5rem;
+        padding-left: 5rem;
     }
   }

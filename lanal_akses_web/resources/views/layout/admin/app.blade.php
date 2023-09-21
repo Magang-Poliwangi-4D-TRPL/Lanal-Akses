@@ -21,8 +21,14 @@
     @extends('layout.admin.sidebar')
     
     <main class="content-margin content-wrap">
-      @extends('layout.admin.navbar')
-      @yield('content')
+      
+      @if (request()->is('/admin'))
+        @extends('layout.admin.navbar')
+        @yield('content')
+      @else
+        @yield('content')
+
+      @endif
     </main>
     @extends('layout.admin.footer')
 
