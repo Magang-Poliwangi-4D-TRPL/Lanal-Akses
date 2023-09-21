@@ -22,9 +22,9 @@
             <iconify-icon class="mr-3" icon="mdi:{{ (request()->is('admin/absensi')) ? 'clock' : 'clock-outline' }}" width="24"></iconify-icon>
             <span class="sidebar-text">Data Absensi</span>   
         </a>
-        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/tambah')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/tambah-user') }}">
-            <iconify-icon class="mr-3" icon="ic:{{ (request()->is('admin/tambah')) ? 'baseline-person-add' : 'baseline-person-add-alt' }}" width="24"></iconify-icon>
-            <span class="sidebar-text">Tambah User</span>    
+        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/users/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/users/1') }}">
+            <iconify-icon class="mr-3" icon="ic:{{ (request()->is('admin/users/*')) ? 'round-lock-person' : 'outline-lock-person' }}" width="24"></iconify-icon>
+            <span class="sidebar-text">Data Akun Admin</span>    
         </a>
         
     </ul>

@@ -63,7 +63,7 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Admin telah berhasil ditambahkan.');
+        return redirect()->route('admin.users.index',['page' => 1])->with('success', 'Admin telah berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -89,13 +89,13 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Admin telah berhasil diperbarui.');
+        return redirect()->route('admin.users.index', ['page' => 1])->with('success', 'Admin telah berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         $user = User::find($id);
         $user->delete();
-        return redirect()->route('users.index')->with('error', 'Admin telah berhasil dihapus.');
+        return redirect()->route('admin.users.index', ['page' => 1])->with('error', 'Admin telah berhasil dihapus.');
     }
 }
