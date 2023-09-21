@@ -10,6 +10,13 @@ class PersonilController extends Controller
     public function index($page) {
             $perPage = 10; // Jumlah data per halaman
             $totalPersonil = PersonilModel::count();
+            if ($totalPersonil == 0){
+                $personil = PersonilModel::all();
+                $totalPages = 0;
+                $firstNav = 1;
+                $lastNav = 1;
+                return view('admin.personil.index', compact('personil', 'page', 'totalPages', 'firstNav', 'lastNav'));
+            }
             $totalPages = ceil($totalPersonil / $perPage);
 
             // Pastikan $page berada dalam rentang halaman yang valid

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\AbsensiController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\PersonilController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +41,15 @@ Route::delete('/admin/personil/{id}', [PersonilController::class, 'destroy'])
 // Absensi
 Route::get('/admin/absensi/', [AbsensiController::class, 'index'])
 ->name('admin.absensi.index');
+
+//data User Admin
+Route::get('/admin/users/{page}', [UserController::class, 'index'])
+->name('admin.users.index')
+->where('page', '[1-9][0-9]*');
+Route::get('/admin/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/admin/users', [UserController::class, 'store'])->name('users.store');
+Route::get('/admin/users/{id}', [UserController::class, 'show'])->name('users.show');
+Route::get('/admin/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('/admin/users/{id}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/admin/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
