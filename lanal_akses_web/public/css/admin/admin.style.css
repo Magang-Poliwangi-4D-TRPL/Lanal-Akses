@@ -32,10 +32,35 @@
     background-color: var(--blue-accent) !important;
 }
 
+.greenmain {
+    color: var(--green-main) !important;
+}
+
+.greendark {
+    color: var(--green-dark) !important;
+}
+
+.bluedark {
+    color: var(--blue-dark) !important;
+}
+
+.blue {
+    color: var(--blue-bg) !important;
+}
+
+.bluemain {
+    color: var(--blue-main) !important;
+}
+
+.blueaccent {
+    color: var(--blue-accent) !important;
+}
+
 
 .content-margin {
     margin-top: 5rem;
     margin-bottom: 5rem;
+    margin-left: 10rem;
 }
 
 .content-wrap{
@@ -96,6 +121,7 @@ footer {
     .content-margin {
         margin-top: 8rem;
         margin-bottom: 5rem;
+        margin-left: 1rem;
     }
     .content-wrap{
         margin-left: 0rem;

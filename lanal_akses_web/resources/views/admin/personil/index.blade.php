@@ -15,12 +15,12 @@
     <div class="container">
         <h1 class="text-black my-4">Data Personil</h1>
         <div class="container bg-white border rounded p-5 mt-4">
-            <div class="d-flex justify-content-between"> <!-- Tambahkan class ini untuk menggeser tombol ke kanan -->
+            <div class="d-flex justify-content-between  my-3"> <!-- Tambahkan class ini untuk menggeser tombol ke kanan -->
                 <a class="text-decoration-none" href="{{ route('admin.personil.add') }}">
-                    <button class="btn btn-blue btn-md text-white bg-blueaccent my-2">Tambah Personil<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></span></button>
+                    <button class="btn btn-blue btn-md text-white bg-blueaccent">Tambah Personil<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></span></button>
                 </a>
                 <a class="text-decoration-none" href="#">
-                    <button class="btn btn-blue btn-md text-white bg-bluedark my-2">Cetak Data Personil<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
+                    <button class="btn btn-blue btn-md text-white bg-bluedark">Cetak Data Personil<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
                 </a>
             </div>
             <table class="table thead-light">
@@ -52,7 +52,7 @@
                                     <form action="{{ route('admin.personil.destroy', $data_personil->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus <span><iconify-icon icon="mingcute:delete-line"></iconify-icon></span></button>
                                     </form>
                                 </td>
                             </tr>

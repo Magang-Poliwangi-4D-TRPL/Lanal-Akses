@@ -35,8 +35,14 @@ class PersonilController extends Controller
     public function show($nrp) {
         $nrpGanti = str_replace('-', '/', $nrp);
         $personil = PersonilModel::where('nrp', $nrpGanti)->first();
-        // dd($personil);
-        return view('admin.personil.show', compact('personil'));
+
+        if($personil==null){
+            return abort(404);
+        } else {
+            // dd($personil);
+            return view('admin.personil.show', compact('personil'));
+
+        }
     }
 
     public function search(Request $request) {
