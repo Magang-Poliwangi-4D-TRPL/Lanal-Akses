@@ -18,8 +18,9 @@ class CreatePersonilModelsTable extends Migration
             $table->string('nama_lengkap');
             $table->string('nrp')->unique();
             $table->string('jabatan');
-            $table->string('jenis_kelamin');
-            $table->string('pangkat_korps')->nullable();
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('pangkat')->nullable();
+            $table->string('korps')->nullable();
             $table->string('pangkat_terakhir')->nullable();
             $table->string('tempat_dinas')->nullable();
             $table->string('tempat_armada')->nullable();
@@ -27,6 +28,7 @@ class CreatePersonilModelsTable extends Migration
             $table->integer('nomor_ktp')->nullable();
             $table->integer('nomor_asbri')->nullable();
             $table->string('tempat_tanggallahir')->nullable();
+            $table->string('tinggi_beratbadan')->nullable();
             $table->string('agama_sukubangsa')->nullable();
             $table->string('golongan_darah')->nullable();
             $table->string('dikspesialisasi')->nullable();
