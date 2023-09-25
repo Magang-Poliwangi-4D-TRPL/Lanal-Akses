@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AbsensiController;
+use App\Http\Controllers\Admin\PersonilController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\PersonilController;
 use Illuminate\Support\Facades\Route;
 
 
