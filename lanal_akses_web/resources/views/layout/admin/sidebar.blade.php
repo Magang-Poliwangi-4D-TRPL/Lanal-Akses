@@ -3,7 +3,7 @@
         <iconify-icon class="text-white" id="icon-menu" icon="material-symbols:menu" width="36"></iconify-icon>
         <iconify-icon class="text-white" id="icon-close" icon="material-symbols:close" width="36"></iconify-icon>
     </div>
-    <a href="{{ url('/') }}" id="sidebar-brand" class="text-large text-white text-uppercase mx-3"><img src="https://i.ibb.co/MR438ww/logo-no-bg.png" alt="logo-no-bg" border="0" width="30rem" height="auto" class="mr-2"><span id="sidebar-title">Lanal Akses</span> </a>
+    <a href="{{ url('/admin') }}" id="sidebar-brand" class="text-large text-white text-uppercase mx-3"><img src="https://i.ibb.co/MR438ww/logo-no-bg.png" alt="logo-no-bg" border="0" width="30rem" height="auto" class="mr-2"><span id="sidebar-title">Lanal Akses</span> </a>
 
     <ul id="sidebar-menu" class="my-5 p-0">
         <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin')) ? 'active-sidebar-item' : '' }}" href="{{  url('admin/') }}">
