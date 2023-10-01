@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AbsensiController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PersonilController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -23,9 +24,7 @@ Route::get('/', function () {
 
 // == controlller for all admin page ==
 
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-});
+Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::get('/admin/personil/{page}', [PersonilController::class, 'index'])
 ->name('admin.personil.index')
