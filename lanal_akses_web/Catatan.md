@@ -30,7 +30,8 @@ halaman tampilan [UI website dan android](https://www.figma.com/file/kKbj42KxYo4
 ### Halaman Cetak Riwayat Hidup
 
 ## Halaman Admin
-
+## Notifikasi
+    belum membuat notifikasi sukses membuat data, gagal membuat data, data tidak ditemukan, sukses menghapus data, sukses mengubah data, pencarian ditemukan, pencarian gagal ditemukan, gagal mengambil data, koneksi sambungan terputus, database error, kolom tidak ditemukan, tabel tidak ditemukan 
 ## Layouting
 - navbar ✅
     - membuat tombol search di bagian navbar
@@ -45,13 +46,54 @@ halaman tampilan [UI website dan android](https://www.figma.com/file/kKbj42KxYo4
 - wrap content✅
 
 ### Halaman Dashboard
-| No    | Nama task                         |   Checkbox    |
-| :---  |    :----:                         |   ---:        |
-| 01.   | ~~Box Card informasi~~            |       ✅      |
-| 02.   | Generate Qr-Code                  |       ❌      |
+Informasi seluruh data personil
+
+```php
+PersonilModel::all()
+```
+Informasi seluruh data pns
+
+```php
+// Belum Buat
+```
 
 
-### Halaman Absensi
 ### Halaman Personil
+#### Index Personil
+Tabel personil memiliki relasi dengan user untuk menampilkan avatar image dan username dan password personil.
+nrp pada tabel personil adalah unique.
+tabel personil memiliki relasi dengan pendidikan militer, pendidikan formal, kursus, tanggungan keluarga, data perlengkapan, data tanda jasa, data kepangkatan, riwayat tempat penugasan, data sanksi hukuman data istri dan data keluarga
+
+paginatiaon diatur dalam controller dengan mengambil 10 data perseluruh baris dalam tabel personil menggunakan perintah 
+    
+```php
+PersonilModel::skip($offset)->take($perPage)->get();
+```
+     
+dan navigasi diatur menggunakan logika if dengan variabel fisrtNav, lastNav, totalPage
+
+```php
+$totalPersonil = PersonilModel::count();
+$totalPages = ceil($totalPersonil / $perPage);
+
+// Hitung batasan angka navigasi
+$maxNavLinks = 5;
+$halfMaxLinks = floor($maxNavLinks / 2);
+$firstNav = max(1, $page - $halfMaxLinks);
+$lastNav = min($totalPages, $firstNav + $maxNavLinks - 1);
+```
+
+#### Show Personil
+special user role: Komandan, Paset
+- bisa mencetak RH dan data detail personil, 
+- bisa mengubah password dan username personil
+- bisa mengedit data lengkap personil
+- bisa mengubah foto personil
+- bisa menghapus data personil
+
+common user role: Paspotmar, Kaakun, Pasintel, Pasminlog, 
+- mencetak RH personil
+- melihat data personil tanpa melihat username dan password personil
+### Halaman Absensi
 ### Halaman PNS
 ### Halaman Admin Profile
