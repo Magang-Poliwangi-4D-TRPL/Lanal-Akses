@@ -38,6 +38,9 @@ class CreatePersonilModelsTable extends Migration
             $table->string('nomor_hp')->nullable();
             $table->string('status_rumah')->nullable();
             $table->timestamps();
+            // relasi dengan tabel pendidikan_formal
+            $table->unsignedBigInteger('pendidikan_formal_id')->nullable(); // Kolom foreign key
+            $table->foreign('pendidikan_formal_id')->references('id')->on('pendidikan_formal');
         });
     }
 
