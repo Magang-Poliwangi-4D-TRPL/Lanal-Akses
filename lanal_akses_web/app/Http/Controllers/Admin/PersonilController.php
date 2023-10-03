@@ -44,6 +44,8 @@ class PersonilController extends Controller
         $nrpGanti = str_replace('-', '/', $nrp);
         $personil = PersonilModel::where('nrp', $nrpGanti)->first();
 
+        // $pendidikanFormal = $personil->pendidikanFormal;
+
         if($personil==null){
             return abort(404);
         } else {

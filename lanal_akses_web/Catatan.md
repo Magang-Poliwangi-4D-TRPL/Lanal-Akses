@@ -95,5 +95,19 @@ common user role: Paspotmar, Kaakun, Pasintel, Pasminlog,
 - mencetak RH personil
 - melihat data personil tanpa melihat username dan password personil
 ### Halaman Absensi
+
 ### Halaman PNS
-### Halaman Admin Profile
+
+### Halaman Admin
+halaman admin untuk mengelola akses masuk ke tampilan semua controller dengan menggunakan login akun yang berbeda dengan akun personil. Admin disini memiliki beberapa role dan hak ases antara lain:
+
+#### komandan
+- membuat QRcode untuk absensi
+- mengedit profile admin
+- membuat, menghapus dan mengedit semua akun admin dan personil
+- mencetak RH dan data lengkap personil
+- mencari data personil
+- membuat, menghapus, mengedit dan melihat seluruh data personil
+- mengedit data lengkap personil
+- membuat, menghapus, mengedit dan melihat seluruh data pns
+- mengedit data lengkap pns

@@ -69,7 +69,14 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('admin.users.edit', compact('user'));
+        if($user==null){
+            return abort(404);
+        } else {
+            // dd($user);
+            return view('admin.users.edit', compact('user'));
+
+        }
+        
     }
 
     public function update(Request $request, $id)
@@ -82,14 +89,20 @@ class UserController extends Controller
         ]);
 
         $user = User ::find($id);
-        $user->update([
-            'nama_lengkap' => $request->nama_lengkap,
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'role' => $request->role,
-        ]);
+        if($user==null){
+            return abort(404);
+        } else {
+            // dd($user);
 
-        return redirect()->route('admin.users.index', ['page' => 1])->with('success', 'Admin telah berhasil diperbarui.');
+            $user->update([
+                'nama_lengkap' => $request->nama_lengkap,
+                'username' => $request->username,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
+    
+            return redirect()->route('admin.users.index', ['page' => 1])->with('success', 'Admin telah berhasil diperbarui.');
+        }
     }
 
     public function destroy($id)

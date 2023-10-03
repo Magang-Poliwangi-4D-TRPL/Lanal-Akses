@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label for="password">Password:</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" id="password" name="password">
+                                <input type="password" class="form-control" id="password" name="password" value="">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-secondary" id="show-password">
                                         <i class="far fa-eye text-light" id="eye-icon"></i>
@@ -67,7 +67,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <a href="{{ route('users.index') }}" class="btn btn-secondary">Kembali</a>
+                            <a href="{{ route('admin.users.index', ['page' => 1]) }}" class="btn btn-secondary">Kembali</a>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
@@ -76,4 +76,5 @@
         </div>
     </div>
 </div>
+<script src="{{ URL::asset('js/admin/visiblepassword.js'); }}"></script>
 @endsection

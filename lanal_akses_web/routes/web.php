@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AbsensiController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PendidikanFormalController;
 use App\Http\Controllers\Admin\PersonilController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::get('/', function () {
 
 Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+// Personil
 Route::get('/admin/personil/{page}', [PersonilController::class, 'index'])
 ->name('admin.personil.index')
 ->where('page', '[1-9][0-9]*');
@@ -35,6 +37,12 @@ Route::get('/admin/personil/show/{nrp}', [PersonilController::class, 'show'])->n
 Route::get('/admin/personil/search', [PersonilController::class, 'search'])->name('admin.personil.search');
 Route::delete('/admin/personil/{id}', [PersonilController::class, 'destroy'])
     ->name('admin.personil.destroy');
+
+// Personil -> PendidikanFormal
+Route::get('/admin/personil/show/{nrp}/pendidikan-formal', [PendidikanFormalController::class, 'index'])->name('admin.personil.pendidikanformal.index');
+Route::get('/admin/personil/show/{nrp}/pendidikan-formal/create', [PendidikanFormalController::class, 'create'])->name('admin.personil.pendidikanformal.create');
+Route::post('/admin/personil/show/{nrp}/pendidikan-formal', [PendidikanFormalController::class, 'store'])->name('admin.personil.pendidikanformal.store');
+Route::get('/admin/pendidikan-formal', [PendidikanFormalController::class, 'index2'])->name('admin.personil.pendidikanformal.index2');
 
 
 // Absensi
