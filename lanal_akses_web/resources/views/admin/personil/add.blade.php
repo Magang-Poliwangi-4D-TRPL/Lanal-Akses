@@ -5,6 +5,15 @@
 @section('content')
     <div class="container">
         <div class="container">
+          @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+          @endif
             <h1 class="text-bold">Tambah Data Personil</h1>
             <h4 class="mt-3">Tambahkan Data Personil Baru</h4>
 
