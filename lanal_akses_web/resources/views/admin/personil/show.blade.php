@@ -154,52 +154,106 @@
                                 <tr>
                                     <td class="bluemain">Pangkat/KORPS/NRP</td>
                                     <td class="bluemain">:</td>
-                                    <td>{{ $personil->pangkat_korps }} | {{ $personil->nrp }}</td>
+                                    <td>{{ $personil->pangkat }} {{ $personil->korps }} / {{ $personil->nrp }}</td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Pangkat Terakhir</td>
                                     <td class="bluemain">:</td>
-                                    <td>{{ $personil->pangkat_terakhir }}</td>
+                                    <td>
+                                        @empty($personil->pangkat_terakhir)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->pangkat_terakhir }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">TMT. Dinas</td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->tempat_dinas)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->tempat_dinas }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">TMT. Armada</td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->tempat_armada)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->tempat_armada }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Nomor KTA</td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->nomor_kta)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->nomor_kta }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Nomor KTP</td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->nomor_ktp)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->nomor_ktp }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Nomor ASBRI</td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->nomor_asbri)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->nomor_asbri }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Tempat, Tanggal Lahir</td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->tempat_tanggallahir)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->tempat_tanggallahir }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Agama/Suku Bangsa</td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->agama_sukubangsa)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->agama_sukubangsa }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Tinggi/Berat Badan</td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->tinggi_beratbadan)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->tinggi_beratbadan }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Jenis Kelamin</td>
@@ -209,27 +263,57 @@
                                 <tr>
                                     <td class="bluemain">Golongan Darah</td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->golongan_darah)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->golongan_darah }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">DIKSPESIALISASI</td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->dikspesialisasi)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->dikspesialisasi }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Nilai SAMATA/STAKES</td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->nilai_samata_stakes)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->nilai_samata_stakes }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Kecakapan Bahasa</td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->kecakapan_bahasa)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->kecakapan_bahasa }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Alamat Sekarang/no. Hp </td>
                                     <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                    <td>
+                                        @empty($personil->alamat_sekarang)
+                                            Tidak ada data
+                                        @else
+                                            <p>{{ $personil->alamat_sekarang }}/{{ $personil->nomor_hp }}</p>
+                                        @endempty
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -261,7 +345,15 @@
                     </table>
                 </div>
                 <div class="container ">
-                    <h3 class="py-3 judul-tabel">Pendidikan Formal</h3>
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <h3 class="py-3 judul-tabel">Pendidikan Formal</h3>
+                        @php
+                            $nrp = $personil->nrp;
+                            $nrpGanti = str_replace('/', '-', $nrp);
+                        @endphp
+                        <a href="{{ route('admin.personil.pendidikanformal.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Pendidikan Formal</a>
+                        
+                    </div>
                     <table class="table thead-light">
                         <thead>
                             <tr class="bg-blueaccent text-white text-bold">
@@ -269,14 +361,26 @@
                               <th scope="col" width="15%">Nama Pendidikan</th>
                               <th scope="col" width="10%">Lama Pendidikan</th>
                               <th scope="col" width="20%">Tahun Lulus</th>
-                              <th scope="col" width="15%">Keterangan    </th>
+                              <th scope="col" width="15%">Keterangan</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr class="border border-light">
-                                <td colspan="5">Tidak ada data.</td>
-                            </tr>
-                          </tbody>
+                            @empty($pendidikanFormal)
+                                <tr>
+                                    <td colspan="5">Tidak ada data.</td>
+                                </tr>
+                            @else
+                                @foreach ($pendidikanFormal as $data_pendidikan)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $data_pendidikan->nama_pendidikan }}</td>
+                                        <td>{{ $data_pendidikan->lama_pendidikan }}</td>
+                                        <td>{{ $data_pendidikan->tahun_lulus }}</td>
+                                        <td>{{ $data_pendidikan->keterangan }}</td>
+                                    </tr>
+                                @endforeach
+                            @endempty
+                        </tbody>
                     </table>
                 </div>
                 <div class="container ">
