@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PegawaiModel;
 use App\Models\PersonilModel;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -23,7 +24,13 @@ class DatabaseSeeder extends Seeder
             "nrp" => "26226/P",
             "jabatan" => "Simak/paur BMN",
             'jenis_kelamin' => 'L'
-
+        ]);
+        
+        PegawaiModel::create([
+            "nama_pegawai" => "Darwati, S.E",
+            "nip" => "19700105 199112 2 001",
+            "jabatan" => "Akun/Silta/KA",
+            'golongan' => 'Penata III/d'
         ]);
 
         User::create([

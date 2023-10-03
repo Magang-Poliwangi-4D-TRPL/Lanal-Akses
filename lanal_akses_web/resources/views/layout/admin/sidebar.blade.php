@@ -10,8 +10,8 @@
             <iconify-icon class="mr-3" icon="ic:{{ (request()->is('admin')) ? 'home' : 'outline-home' }}" href="{{  url('#') }}" width="24"></iconify-icon>
             <span class="sidebar-text">Dashboard</span>
         </a>
-        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/pns')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/pns') }}">
-            <iconify-icon class="mr-3" icon="material-symbols:{{ (request()->is('admin/pns')) ? 'group' : 'group-outline' }}" width="24"></iconify-icon>
+        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/pegawai/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/pegawai/1') }}">
+            <iconify-icon class="mr-3" icon="material-symbols:{{ (request()->is('admin/pegawai')) ? 'group' : 'group-outline' }}" width="24"></iconify-icon>
             <span class="sidebar-text">Data PNS</span>   
         </a>
         <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/personil/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/personil/1') }}">

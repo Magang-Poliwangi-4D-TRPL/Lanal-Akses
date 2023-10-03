@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AbsensiController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PegawaiController;
 use App\Http\Controllers\Admin\PendidikanFormalController;
 use App\Http\Controllers\Admin\PersonilController;
 use App\Http\Controllers\Admin\UserController;
@@ -59,4 +60,16 @@ Route::get('/admin/users/{id}', [UserController::class, 'show'])->name('users.sh
 Route::get('/admin/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/admin/users/{id}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/admin/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+// Data PNS
+Route::get('/admin/pegawai/{page}', [PegawaiController::class, 'index'])
+    ->name('admin.pegawai.index')
+    ->where('page', '[1-9][0-9]*');
+Route::get('/admin/tambah-pegawai', [PegawaiController::class, 'create'])
+    ->name('admin.pegawai.create'); // Ubah dari 'pegawai.create' menjadi 'admin.pegawai.create'
+Route::post('/admin/pegawai/store', [PegawaiController::class, 'store'])
+    ->name('admin.pegawai.store'); // Ubah dari 'pegawai.store' menjadi 'admin.pegawai.store'
+Route::delete('/admin/pegawai/{id}', [PegawaiController::class, 'destroy'])
+    ->name('admin.pegawai.destroy');
+
 
