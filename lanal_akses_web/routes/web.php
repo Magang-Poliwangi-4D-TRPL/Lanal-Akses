@@ -32,7 +32,7 @@ Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboa
 Route::get('/admin/personil/{page}', [PersonilController::class, 'index'])
 ->name('admin.personil.index')
 ->where('page', '[1-9][0-9]*');
-Route::get('/admin/tambah-personil', [PersonilController::class, 'add'])->name('admin.personil.add');
+Route::get('/admin/tambah-personil', [PersonilController::class, 'create'])->name('admin.personil.create');
 Route::post('/admin/personil/store', [PersonilController::class, 'store'])->name('admin.personil.store');
 Route::get('/admin/personil/show/{nrp}', [PersonilController::class, 'show'])->name('admin.personil.show');
 Route::get('/admin/personil/search', [PersonilController::class, 'search'])->name('admin.personil.search');

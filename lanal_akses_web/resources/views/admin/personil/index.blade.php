@@ -16,7 +16,7 @@
         <h1 class="text-black my-4">Data Personil</h1>
         <div class="container bg-white border rounded p-5 mt-4">
             <div class="d-flex justify-content-between  my-3"> <!-- Tambahkan class ini untuk menggeser tombol ke kanan -->
-                <a class="text-decoration-none" href="{{ route('admin.personil.add') }}">
+                <a class="text-decoration-none" href="{{ route('admin.personil.create') }}">
                     <button class="btn btn-blue btn-md text-white bg-blueaccent">Tambah Personil<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></span></button>
                 </a>
                 <a class="text-decoration-none" href="#">

@@ -68,9 +68,9 @@ class PersonilController extends Controller
     }
 
 
-    public function add()
+    public function create()
     {
-        return view('admin.personil.add');
+        return view('admin.personil.create');
     }
 
     public function store(Request $request){
