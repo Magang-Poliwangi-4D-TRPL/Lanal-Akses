@@ -11,15 +11,15 @@
             <span class="sidebar-text">Dashboard</span>
         </a>
         <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/pegawai/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/pegawai/1') }}">
-            <iconify-icon class="mr-3" icon="material-symbols:{{ (request()->is('admin/pegawai')) ? 'group' : 'group-outline' }}" width="24"></iconify-icon>
+            <iconify-icon class="mr-3" icon="material-symbols:{{ (request()->is('admin/pegawai/*')) ? 'group' : 'group-outline' }}" width="24"></iconify-icon>
             <span class="sidebar-text">Data PNS</span>   
         </a>
         <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/personil/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/personil/1') }}">
             <iconify-icon class="mr-3" icon="material-symbols:{{ (request()->is('admin/personil/*')) ? 'group' : 'group-outline' }}" width="24"></iconify-icon>
             <span class="sidebar-text">Data Personil</span>
         </a>
-        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/absensi')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/absensi') }}">
-            <iconify-icon class="mr-3" icon="mdi:{{ (request()->is('admin/absensi')) ? 'clock' : 'clock-outline' }}" width="24"></iconify-icon>
+        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/absensi/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/absensi') }}">
+            <iconify-icon class="mr-3" icon="mdi:{{ (request()->is('admin/absensi/*')) ? 'clock' : 'clock-outline' }}" width="24"></iconify-icon>
             <span class="sidebar-text">Data Absensi</span>   
         </a>
         <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/users/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/users/1') }}">
