@@ -19,7 +19,7 @@
         <div class="card-body ">
           <h5 class="card-title text-white">Jumlah Personil</h5>
           <p class="card-text mb-4 text-white">Jumlah seluruh personil :</p>
-          <h2 class="text-center text-white">{{ $pns }}</h2>
+          <h2 class="text-center text-white">{{ $pns->count() }}</h2>
           </div>
         </div>
      
@@ -48,7 +48,7 @@
                 <h5 class="card-title">Data PNS</h5>
                 <p class="card-text ">Total data PNS :</p>
                 <div class="container border-bottom mb-4 mt-2">
-                  <p class="text-muted text-center">{{ $pns }}</p>
+                  <p class="text-muted text-center">{{ $pns->count() }}</p>
                 </div>
                 <p class="text-subtitle">
                   Cetak Semua QR-Code 
