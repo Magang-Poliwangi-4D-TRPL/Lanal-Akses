@@ -16,6 +16,7 @@
                 @endphp
                 <form method="POST" action="{{ route('admin.personil.pendidikanformal.store', ['nrp' => $nrpGanti]) }}">
                     @csrf
+                    <input type="hidden" name="personil_id" value="{{ $personil->id }}">
                     <div class="form-group">
                       <label for="nama_pendidikan">Massukkan nama pendidikan baru</label>
                       <input type="text" class="form-control" id="nama_pendidikan" name="nama_pendidikan" required placeholder="Nama Pendidikan">
