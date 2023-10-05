@@ -27,15 +27,14 @@ class PendidikanFormalController extends Controller
     public function index($nrp) {
         $nrpGanti = str_replace('-', '/', $nrp);
         $personil = PersonilModel::where('nrp', $nrpGanti)->first();
-        $pendidikanFormal = $personil->pendidikan_formal_id;
-        // dd($pendidikanFormal);
         
-        if($personil==null){
+        if($personil == null){
             return abort(404);
         } else {
-            // dd($personil);
+            // Mengambil semua data PendidikanFormalModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $pendidikanFormal = PendidikanFormalModel::where('personil_id', $personil->id)->get();
+            
             return view('admin.personil.pendidikan-formal.index', compact('personil', 'pendidikanFormal'));
-
         }
 
     }
@@ -55,21 +54,23 @@ class PendidikanFormalController extends Controller
             'lama_pendidikan' => 'required|string|max:255',
             'tahun_lulus' => 'required|numeric',
             'keterangan' => 'nullable|string',
+            'personil_id' => 'required',
         ]);
-
+        
+        $nrpGanti = str_replace('-', '/', $nrp);
+        $personil = PersonilModel::where('nrp', $nrpGanti)->first();
+        
         // Simpan data pendidikan formal
         $pendidikanFormal = new PendidikanFormalModel([
             'nama_pendidikan' => $validatedData['nama_pendidikan'],
             'lama_pendidikan' => $validatedData['lama_pendidikan'],
             'tahun_lulus' => $validatedData['tahun_lulus'],
             'keterangan' => $validatedData['keterangan'],
+            'personil_id' => $validatedData['personil_id'],
         ]);
 
-        
         // Hubungkan dengan personil
-        $nrpGanti = str_replace('-', '/', $nrp);
-        $personil = PersonilModel::where('nrp', $nrpGanti)->first();
-        $personil->pendidikanFormal()->save($pendidikanFormal);
+        $pendidikanFormal->save();
 
         return redirect()->route('admin.personil.pendidikanformal.index', ['nrp' => $nrp])
             ->with('success', 'Data pendidikan formal berhasil ditambahkan.');
