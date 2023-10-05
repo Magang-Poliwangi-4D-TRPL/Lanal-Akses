@@ -10,10 +10,5 @@ class PersonilModel extends Model
     use HasFactory;
     protected $guarded = ['id'];
     protected $table = 'personil';
-
-    public function pendidikanFormal()
-    {
-        return $this->hasMany(PendidikanFormalModel::class);
-    }
 }
 

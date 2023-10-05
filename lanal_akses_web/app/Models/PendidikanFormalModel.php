@@ -12,6 +12,6 @@ class PendidikanFormalModel extends Model
     protected $table = 'pendidikan_formal';
 
     public function personil(){
-        return $this->belongsTo(PersonilModel::class);
+        return $this->belongsTo(PersonilModel::class, 'personil_id');
     }
 }
