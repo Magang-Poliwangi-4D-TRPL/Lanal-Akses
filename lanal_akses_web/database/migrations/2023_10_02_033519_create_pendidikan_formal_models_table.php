@@ -22,10 +22,7 @@ class CreatePendidikanFormalModelsTable extends Migration
             $table->timestamps();
 
             // Definisikan foreign key constraint
-            // $table->foreign('personil_id')->references('id')->on('personil')->onDelete('cascade');
-
-            // $table->unsignedBigInteger('personil_model_id');
-            // $table->foreign('personil_id')->references('id')->on('personil')->onDelete('cascade');
+            $table->foreignId('personil_id');
         });
     }
 
