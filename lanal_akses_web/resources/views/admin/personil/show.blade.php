@@ -365,7 +365,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            @empty($pendidikanFormal)
+                            @if ($pendidikanFormal->count()<=0)
                                 <tr>
                                     <td colspan="5">Tidak ada data.</td>
                                 </tr>
@@ -379,7 +379,7 @@
                                         <td>{{ $data_pendidikan->keterangan }}</td>
                                     </tr>
                                 @endforeach
-                            @endempty
+                            @endif
                         </tbody>
                     </table>
                 </div>
