@@ -11,7 +11,7 @@
         <div class="card-body ">
           <h5 class="card-title text-white">Absensi Hari ini</h5>
           <p class="card-text mb-4 text-white">Total data personil :</p>
-          <h2 class="text-center text-white">200</h2>
+          <h2 class="text-center text-white">{{ $personil->count() }}</h2>
         </div>
       </div>
       
@@ -19,7 +19,7 @@
         <div class="card-body ">
           <h5 class="card-title text-white">Jumlah Personil</h5>
           <p class="card-text mb-4 text-white">Jumlah seluruh personil :</p>
-          <h2 class="text-center text-white">200</h2>
+          <h2 class="text-center text-white">{{ $pns->count() }}</h2>
           </div>
         </div>
      
@@ -34,7 +34,7 @@
               <h5 class="card-title">Data Personil</h5>
               <p class="card-text ">Total data personil :</p>
               <div class="container border-bottom mb-4 mt-2">
-                <p class="text-muted text-center">200</p>
+                <p class="text-muted text-center">{{ $personil->count() }}</p>
               </div>
               <p class="text-subtitle">
                 Cetak Semua QR-Code 
@@ -48,7 +48,7 @@
                 <h5 class="card-title">Data PNS</h5>
                 <p class="card-text ">Total data PNS :</p>
                 <div class="container border-bottom mb-4 mt-2">
-                  <p class="text-muted text-center">200</p>
+                  <p class="text-muted text-center">{{ $pns->count() }}</p>
                 </div>
                 <p class="text-subtitle">
                   Cetak Semua QR-Code 

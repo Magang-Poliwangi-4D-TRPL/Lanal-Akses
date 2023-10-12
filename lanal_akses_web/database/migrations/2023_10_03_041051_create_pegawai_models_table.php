@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreatePegawaiModelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('pegawai', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_lengkap');
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->enum('role', ['komandan', 'pasintel', 'paspotmar', 'paset', 'lain-lain'])->default('paset');
-            $table->rememberToken();
+            $table->string('nip')->unique(); // Menambahkan konstrain unik pada kolom 'nip'
+            $table->string('nama_pegawai');
+            $table->string('jabatan');
+            $table->string('golongan');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('pegawai');
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\PendidikanFormalModel;
 use App\Models\PersonilModel;
 use Illuminate\Http\Request;
 
@@ -10,6 +12,13 @@ class PersonilController extends Controller
     public function index($page) {
             $perPage = 10; // Jumlah data per halaman
             $totalPersonil = PersonilModel::count();
+            if ($totalPersonil == 0){
+                $personil = PersonilModel::all();
+                $totalPages = 0;
+                $firstNav = 1;
+                $lastNav = 1;
+                return view('admin.personil.index', compact('personil', 'page', 'totalPages', 'firstNav', 'lastNav'));
+            }
             $totalPages = ceil($totalPersonil / $perPage);
 
             // Pastikan $page berada dalam rentang halaman yang valid
@@ -36,11 +45,20 @@ class PersonilController extends Controller
         $nrpGanti = str_replace('-', '/', $nrp);
         $personil = PersonilModel::where('nrp', $nrpGanti)->first();
 
+        // $pendidikanFormal = $personil->pendidikanFormal;
+
         if($personil==null){
             return abort(404);
         } else {
             // dd($personil);
-            return view('admin.personil.show', compact('personil'));
+            if($personil == null){
+                return abort(404);
+            } else {
+                // Mengambil semua data PendidikanFormalModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+                $pendidikanFormal = PendidikanFormalModel::where('personil_id', $personil->id)->get();
+                
+                return view('admin.personil.show', compact('personil', 'pendidikanFormal'));
+            }
 
         }
     }
@@ -58,9 +76,9 @@ class PersonilController extends Controller
     }
 
 
-    public function add()
+    public function create()
     {
-        return view('admin.personil.add');
+        return view('admin.personil.create');
     }
 
     public function store(Request $request){

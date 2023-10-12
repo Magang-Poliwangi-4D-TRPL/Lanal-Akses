@@ -3,28 +3,28 @@
         <iconify-icon class="text-white" id="icon-menu" icon="material-symbols:menu" width="36"></iconify-icon>
         <iconify-icon class="text-white" id="icon-close" icon="material-symbols:close" width="36"></iconify-icon>
     </div>
-    <a href="{{ url('/') }}" id="sidebar-brand" class="text-large text-white text-uppercase mx-3"><img src="https://i.ibb.co/MR438ww/logo-no-bg.png" alt="logo-no-bg" border="0" width="30rem" height="auto" class="mr-2"><span id="sidebar-title">Lanal Akses</span> </a>
+    <a href="{{ url('/admin') }}" id="sidebar-brand" class="text-large text-white text-uppercase mx-3"><img src="https://i.ibb.co/MR438ww/logo-no-bg.png" alt="logo-no-bg" border="0" width="30rem" height="auto" class="mr-2"><span id="sidebar-title">Lanal Akses</span> </a>
 
     <ul id="sidebar-menu" class="my-5 p-0">
         <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin')) ? 'active-sidebar-item' : '' }}" href="{{  url('admin/') }}">
             <iconify-icon class="mr-3" icon="ic:{{ (request()->is('admin')) ? 'home' : 'outline-home' }}" href="{{  url('#') }}" width="24"></iconify-icon>
             <span class="sidebar-text">Dashboard</span>
         </a>
-        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/pns')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/pns') }}">
-            <iconify-icon class="mr-3" icon="material-symbols:{{ (request()->is('admin/pns')) ? 'group' : 'group-outline' }}" width="24"></iconify-icon>
+        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/pegawai/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/pegawai/1') }}">
+            <iconify-icon class="mr-3" icon="material-symbols:{{ (request()->is('admin/pegawai/*')) ? 'group' : 'group-outline' }}" width="24"></iconify-icon>
             <span class="sidebar-text">Data PNS</span>   
         </a>
         <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/personil/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/personil/1') }}">
             <iconify-icon class="mr-3" icon="material-symbols:{{ (request()->is('admin/personil/*')) ? 'group' : 'group-outline' }}" width="24"></iconify-icon>
             <span class="sidebar-text">Data Personil</span>
         </a>
-        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/absensi')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/absensi') }}">
-            <iconify-icon class="mr-3" icon="mdi:{{ (request()->is('admin/absensi')) ? 'clock' : 'clock-outline' }}" width="24"></iconify-icon>
+        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/absensi/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/absensi') }}">
+            <iconify-icon class="mr-3" icon="mdi:{{ (request()->is('admin/absensi/*')) ? 'clock' : 'clock-outline' }}" width="24"></iconify-icon>
             <span class="sidebar-text">Data Absensi</span>   
         </a>
-        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/tambah')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/tambah-user') }}">
-            <iconify-icon class="mr-3" icon="ic:{{ (request()->is('admin/tambah')) ? 'baseline-person-add' : 'baseline-person-add-alt' }}" width="24"></iconify-icon>
-            <span class="sidebar-text">Tambah User</span>    
+        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/users/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/users/1') }}">
+            <iconify-icon class="mr-3" icon="ic:{{ (request()->is('admin/users/*')) ? 'round-lock-person' : 'outline-lock-person' }}" width="24"></iconify-icon>
+            <span class="sidebar-text">Data Akun Admin</span>    
         </a>
         
     </ul>

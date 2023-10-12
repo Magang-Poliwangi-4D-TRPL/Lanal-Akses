@@ -32,6 +32,10 @@
     background-color: var(--blue-accent) !important;
 }
 
+.bg-gray {
+    background-color: lightgray ;
+}
+
 .greenmain {
     color: var(--green-main) !important;
 }
@@ -86,6 +90,51 @@
 
 .next{
     color: var(--blue-dark);
+}
+
+/* POP-UP Notification */
+#notification-popup {
+    display: none;
+    position: fixed;
+    top: 70px;
+    /* Sesuaikan dengan ketinggian yang diinginkan */
+    right: 20px;
+    background-color: #4CAF50;
+    /* Warna hijau default */
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 9999;
+}
+
+#notification-popup.error-notification {
+    background-color: #FF5733;
+    /* Warna merah untuk notifikasi kesalahan */
+}
+
+.error-notification {
+    background-color: #FF5733;
+    /* Warna merah */
+    color: #fff;
+    /* Gaya lainnya seperti yang Anda inginkan */
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875rem;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+}
+
+.card-header-custom {
+    background-color: #4E6766;
+    /* Set the desired background color */
+    color: #fff;
+    /* Set the text color to white or any other suitable color */
+    font-weight: bold;
+    /* Make the text bold for better visibility */
 }
 
 footer {
