@@ -32,6 +32,10 @@
     background-color: var(--blue-accent) !important;
 }
 
+.bg-gray {
+    background-color: lightgray ;
+}
+
 .greenmain {
     color: var(--green-main) !important;
 }

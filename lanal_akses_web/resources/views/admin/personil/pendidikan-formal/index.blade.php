@@ -41,7 +41,7 @@
                             <td>{{ $data_pendidikan->keterangan }}</td>
                             <td>
                                 <a class="text-decoration-none" href="{{ route('admin.personil.pendidikanformal.edit', ['nrp' => $nrpGanti, 'pendidikanFormalId' => $data_pendidikan->id]) }}">
-                                    <button class="btn btn-blue btn-sm text-white bg-bluemain m-2" >Edit <span><iconify-icon icon="clarity:note-line"></iconify-icon></span></button>
+                                    <button class="btn btn-success btn-sm text-white  m-2" >Edit <span><iconify-icon icon="clarity:note-line"></iconify-icon></span></button>
                                 </a>
                                 <form action="{{ route('admin.personil.pendidikanformal.destroy', ['nrp' => $nrpGanti, 'pendidikanFormalId' => $data_pendidikan->id]) }}" method="POST" style="display: inline;">
                                     @csrf
@@ -59,7 +59,7 @@
                 $nrpGanti = str_replace('/', '-', $nrp);
             @endphp
             <a class="text-decoration-none" href="{{ route('admin.personil.show', $nrpGanti) }}">
-                <button class="btn btn-blue btn-sm text-white bg-bluedark m-2" >Kembali ke halaman sebelumnya<span><iconify-icon icon="mdi:back"></iconify-icon></span></button>
+                <button class="btn btn-blue btn-sm text-white bg-bluedark m-2" ><span><iconify-icon icon="ep:arrow-left"></iconify-icon></span>Kembali ke halaman sebelumnya</button>
             </a>
     </div>
 </div>

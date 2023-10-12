@@ -50,11 +50,13 @@ class PendidikanFormalController extends Controller
     {
         // Validasi data yang masuk
         $validatedData = $request->validate([
-            'nama_pendidikan' => 'required|string|max:255',
-            'lama_pendidikan' => 'required|string|max:255',
-            'tahun_lulus' => 'required|numeric',
+            'nama_pendidikan' => 'required|string|max:50',
+            'lama_pendidikan' => 'required|string|max:50',
+            'tahun_lulus' => 'required|numeric|regex:/^\d{4}$/',
             'keterangan' => 'nullable|string',
             'personil_id' => 'required',
+        ],[
+            'tahun_lulus.regex' => 'Format tahun yang anda masukkan salah'
         ]);
         
         $nrpGanti = str_replace('-', '/', $nrp);
@@ -99,10 +101,12 @@ class PendidikanFormalController extends Controller
     {
         // Validasi data yang masuk
         $validatedData = $request->validate([
-            'nama_pendidikan' => 'required|string|max:255',
-            'lama_pendidikan' => 'required|string|max:255',
-            'tahun_lulus' => 'required|numeric',
+            'nama_pendidikan' => 'required|string|max:50',
+            'lama_pendidikan' => 'required|string|max:50',
+            'tahun_lulus' => 'required|numeric|regex:/^\d{4}$/',
             'keterangan' => 'nullable|string',
+        ],[
+            'tahun_lulus.regex' => 'Format tahun yang anda masukkan salah'
         ]);
 
         $nrpGanti = str_replace('-', '/', $nrp);
