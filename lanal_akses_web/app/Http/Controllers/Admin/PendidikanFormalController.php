@@ -76,4 +76,81 @@ class PendidikanFormalController extends Controller
             ->with('success', 'Data pendidikan formal berhasil ditambahkan.');
     }
 
+    public function edit($nrp, $pendidikanFormalId)
+    {
+        $nrpGanti = str_replace('-', '/', $nrp);
+        $personil = PersonilModel::where('nrp', $nrpGanti)->first();
+
+        if ($personil == null) {
+            return abort(404);
+        }
+
+        $pendidikanFormal = PendidikanFormalModel::where('personil_id', $personil->id)
+            ->find($pendidikanFormalId);
+
+        if ($pendidikanFormal == null) {
+            return abort(404);
+        }
+
+        return view('admin.personil.pendidikan-formal.edit', compact('personil', 'pendidikanFormal'));
+    }
+
+    public function update(Request $request, $nrp, $pendidikanFormalId)
+    {
+        // Validasi data yang masuk
+        $validatedData = $request->validate([
+            'nama_pendidikan' => 'required|string|max:255',
+            'lama_pendidikan' => 'required|string|max:255',
+            'tahun_lulus' => 'required|numeric',
+            'keterangan' => 'nullable|string',
+        ]);
+
+        $nrpGanti = str_replace('-', '/', $nrp);
+        $personil = PersonilModel::where('nrp', $nrpGanti)->first();
+
+        if ($personil == null) {
+            return abort(404);
+        }
+
+        $pendidikanFormal = PendidikanFormalModel::where('personil_id', $personil->id)
+            ->find($pendidikanFormalId);
+
+        if ($pendidikanFormal == null) {
+            return abort(404);
+        }
+
+        // Update data PendidikanFormal
+        $pendidikanFormal->update([
+            'nama_pendidikan' => $validatedData['nama_pendidikan'],
+            'lama_pendidikan' => $validatedData['lama_pendidikan'],
+            'tahun_lulus' => $validatedData['tahun_lulus'],
+            'keterangan' => $validatedData['keterangan'],
+        ]);
+
+        return redirect()->route('admin.personil.pendidikanformal.index', ['nrp' => $nrp])->with('success', 'Data Pendidikan Formal berhasil diperbarui.');
+    }
+
+    public function destroy($nrp, $pendidikanFormalId)
+    {
+        $nrpGanti = str_replace('-', '/', $nrp);
+        $personil = PersonilModel::where('nrp', $nrpGanti)->first();
+
+        if ($personil == null) {
+            return abort(404);
+        }
+
+        $pendidikanFormal = PendidikanFormalModel::where('personil_id', $personil->id)
+            ->find($pendidikanFormalId);
+
+        if ($pendidikanFormal == null) {
+            return abort(404);
+        }
+
+        // Hapus data PendidikanFormal
+        $pendidikanFormal->delete();
+
+        return redirect()->route('admin.personil.pendidikanformal.index', ['nrp' => $nrp])
+            ->with('success', 'Data Pendidikan Formal berhasil dihapus.');
+    }
+
 }

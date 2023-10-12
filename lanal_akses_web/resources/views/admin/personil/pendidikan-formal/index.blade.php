@@ -27,7 +27,7 @@
                   </tr>
               </thead>
               <tbody>
-                @empty($pendidikanFormal)
+                @if($pendidikanFormal->count()<=0)
                     <tr>
                         <td colspan="5">Tidak ada data.</td>
                     </tr>
@@ -40,10 +40,10 @@
                             <td>{{ $data_pendidikan->tahun_lulus }}</td>
                             <td>{{ $data_pendidikan->keterangan }}</td>
                             <td>
-                                <a class="text-decoration-none" href="">
+                                <a class="text-decoration-none" href="{{ route('admin.personil.pendidikanformal.edit', ['nrp' => $nrpGanti, 'pendidikanFormalId' => $data_pendidikan->id]) }}">
                                     <button class="btn btn-blue btn-sm text-white bg-bluemain m-2" >Edit <span><iconify-icon icon="clarity:note-line"></iconify-icon></span></button>
                                 </a>
-                                <form action="" method="POST" style="display: inline;">
+                                <form action="{{ route('admin.personil.pendidikanformal.destroy', ['nrp' => $nrpGanti, 'pendidikanFormalId' => $data_pendidikan->id]) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus <span><iconify-icon icon="mingcute:delete-line"></iconify-icon></span></button>
@@ -51,7 +51,7 @@
                             </td>
                         </tr>
                     @endforeach
-                @endempty
+                @endif
             </tbody>
         </table>
         @php

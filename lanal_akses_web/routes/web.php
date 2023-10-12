@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PegawaiController;
 use App\Http\Controllers\Admin\PendidikanFormalController;
 use App\Http\Controllers\Admin\PersonilController;
 use App\Http\Controllers\Admin\UserController;
+use App\Models\PendidikanFormalModel;
 use Illuminate\Support\Facades\Route;
 
 
@@ -43,7 +44,16 @@ Route::delete('/admin/personil/{id}', [PersonilController::class, 'destroy'])
 Route::get('/admin/personil/show/{nrp}/pendidikan-formal', [PendidikanFormalController::class, 'index'])->name('admin.personil.pendidikanformal.index');
 Route::get('/admin/personil/show/{nrp}/pendidikan-formal/create', [PendidikanFormalController::class, 'create'])->name('admin.personil.pendidikanformal.create');
 Route::post('/admin/personil/show/{nrp}/pendidikan-formal', [PendidikanFormalController::class, 'store'])->name('admin.personil.pendidikanformal.store');
-Route::get('/admin/pendidikan-formal', [PendidikanFormalController::class, 'index2'])->name('admin.personil.pendidikanformal.index2');
+Route::get('/admin/personil/show/{nrp}/pendidikan-formal/{pendidikanFormalId}/edit', [PendidikanFormalController::class, 'edit'])->name('admin.personil.pendidikanformal.edit');
+Route::put('/admin/personil/show/{nrp}/pendidikan-formal/{pendidikanFormalId}', [PendidikanFormalController::class, 'update'])->name('admin.personil.pendidikanformal.update');
+Route::delete('/admin/personil/show/{nrp}/pendidikan-formal/{pendidikanFormalId}', [PendidikanFormalController::class, 'destroy'])
+->name('admin.personil.pendidikanformal.destroy');
+// Route::get('/admin/pendidikan-formal', [PendidikanFormalController::class, 'index2'])->name('admin.personil.pendidikanformal.index2');
+
+// Personil -> PendidikanMiliter
+Route::get('/admin/personil/show/{nrp}/pendidikan-militer', [PendidikanMiliterController::class, 'index'])->name('admin.personil.pendidikanmiliter.index');
+Route::get('/admin/personil/show/{nrp}/pendidikan-militer/create', [PendidikanMiliterController::class, 'create'])->name('admin.personil.pendidikanmiliter.create');
+Route::post('/admin/personil/show/{nrp}/pendidikan-militer', [PendidikanMiliterController::class, 'store'])->name('admin.personil.pendidikanmiliter.store');
 
 
 // Absensi
