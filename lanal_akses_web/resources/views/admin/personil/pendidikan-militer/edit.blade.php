@@ -28,7 +28,7 @@
                       @enderror
                     </div>
                     <div class="form-group">
-                      <label for="lama_pendidikan">Massukkan lama pendidikan pendidikanMiliterId baru</label>
+                      <label for="lama_pendidikan">Massukkan lama pendidikan militer baru</label>
                       <input type="text" class="form-control @error('lama_pendidikan') is-invalid @enderror" id="lama_pendidikan" name="lama_pendidikan" required placeholder="Lama Pendidikan (x tahun)" value="{{ $pendidikanMiliter->lama_pendidikan }}">
                       @error('lama_pendidikan')
                           <div class="invalid-feedback">

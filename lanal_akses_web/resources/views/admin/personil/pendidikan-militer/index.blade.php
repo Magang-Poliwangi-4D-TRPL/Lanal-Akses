@@ -18,12 +18,12 @@
         <table class="table thead-light">
             <thead>
                 <tr class="bg-blueaccent text-white text-bold">
-                    <th scope="col" width="10%">no</th>
+                    <th scope="col" width="5%">no</th>
                     <th scope="col" width="15%">Nama Pendidikan</th>
                     <th scope="col" width="10%">Lama Pendidikan</th>
-                    <th scope="col" width="20%">Tahun Lulus</th>
+                    <th scope="col" width="10%">Tahun Lulus</th>
                     <th scope="col" width="15%">Keterangan</th>
-                    <th scope="col" width="15%">Aksi</th>
+                    <th scope="col" width="20%">Aksi</th>
                   </tr>
               </thead>
               <tbody>
