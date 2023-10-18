@@ -27,12 +27,12 @@
                   </tr>
               </thead>
               <tbody>
-                @empty($pendidikanFormal)
+                @empty($pendidikanMiliter)
                     <tr>
                         <td colspan="5">Tidak ada data.</td>
                     </tr>
                 @else
-                    @foreach ($pendidikanFormal as $data_pendidikan)
+                    @foreach ($pendidikanMiliter as $data_pendidikan)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $data_pendidikan->nama_pendidikan }}</td>
