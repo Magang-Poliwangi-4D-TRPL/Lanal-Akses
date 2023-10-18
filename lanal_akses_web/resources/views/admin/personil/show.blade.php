@@ -326,7 +326,15 @@
                     </div>
                 </div>
                 <div class="container ">
-                    <h3 class="py-3 judul-tabel">Pendidikan Militer</h3>
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <h3 class="py-3 judul-tabel">Pendidikan Militer</h3>
+                        @php
+                            $nrp = $personil->nrp;
+                            $nrpGanti = str_replace('/', '-', $nrp);
+                        @endphp
+                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Pendidikan Militer</a>
+                        
+                    </div>
                     <table class="table thead-light">
                         <thead>
                             <tr class="bg-blueaccent text-white text-bold">
@@ -347,10 +355,6 @@
                 <div class="container ">
                     <div class="row d-flex justify-content-between align-items-center">
                         <h3 class="py-3 judul-tabel">Pendidikan Formal</h3>
-                        @php
-                            $nrp = $personil->nrp;
-                            $nrpGanti = str_replace('/', '-', $nrp);
-                        @endphp
                         <a href="{{ route('admin.personil.pendidikanformal.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Pendidikan Formal</a>
                         
                     </div>
@@ -384,7 +388,10 @@
                     </table>
                 </div>
                 <div class="container ">
-                    <h3 class="py-3 judul-tabel">Kursus</h3>
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <h3 class="py-3 judul-tabel">Kursus</h3>
+                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Kursus</a>
+                    </div>
                     <table class="table thead-light">
                         <thead>
                             <tr class="bg-blueaccent text-white text-bold">
@@ -408,7 +415,10 @@
                     </div>
                 </div>
                 <div class="container ">
-                    <h3 class="py-3 judul-tabel">Tanggungan Keluarga</h3>
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <h3 class="py-3 judul-tabel">Tanggungan Keluarga</h3>
+                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Tanggungan Keluarga</a>
+                    </div>
                     <table class="table thead-light">
                         <thead>
                             <tr class="bg-blueaccent text-white text-bold">
@@ -427,7 +437,10 @@
                     </table>
                 </div>
                 <div class="container ">
-                    <h3 class="py-3 judul-tabel">Perlengkapan</h3>
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <h3 class="py-3 judul-tabel">Perlengkapan</h3>
+                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Perlengkapan</a>
+                    </div>
                     <table class="table thead-light">
                         <thead>
                             <tr class="bg-blueaccent text-white text-bold">
@@ -445,7 +458,10 @@
                     </table>
                 </div>
                 <div class="container ">
-                    <h3 class="py-3 judul-tabel">Tanda jasa yang dimiliki/diperoleh</h3>
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <h3 class="py-3 judul-tabel">Tanda jasa yang dimiliki/diperoleh</h3>
+                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Tanda jasa</a>
+                    </div>
                     <table class="table thead-light">
                         <thead>
                             <tr class="bg-blueaccent text-white text-bold">
@@ -463,7 +479,10 @@
                     </table>
                 </div>
                 <div class="container ">
-                    <h3 class="py-3 judul-tabel">Data Kepangkatan</h3>
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <h3 class="py-3 judul-tabel">Data Kepangkatan</h3>
+                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Kepangkatan</a>
+                    </div>
                     <table class="table thead-light">
                         <thead>
                             <tr class="bg-blueaccent text-white text-bold">
@@ -482,7 +501,10 @@
                     </table>
                 </div>
                 <div class="container ">
-                    <h3 class="py-3 judul-tabel">Riwayat Penugasan/Penempatan</h3>
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <h3 class="py-3 judul-tabel">Riwayat Penugasan/Penempatan</h3>
+                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Riwayat Penugasan</a>
+                    </div>
                     <table class="table thead-light">
                         <thead>
                             <tr class="bg-blueaccent text-white text-bold border">
@@ -501,7 +523,10 @@
                     </table>
                 </div>
                 <div class="container ">
-                    <h3 class="py-3 judul-tabel">Sanksi Hukuman</h3>
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <h3 class="py-3 judul-tabel">Sanksi Hukuman</h3>
+                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Sanksi Hukuman</a>
+                    </div>
                     <table class="table thead-light">
                         <thead>
                             <tr class="bg-blueaccent text-white text-bold">
@@ -518,13 +543,17 @@
                           </tbody>
                     </table>
                 </div>
-                <div class="px-4 mb-4 mt-3"  style="border-bottom: 2px solid #0D21A1;border-top: 2px solid #0D21A1;">
+                <div class="px-4 mt-3"  style="border-bottom: 2px solid #0D21A1;border-top: 2px solid #0D21A1;">
                     <div class="row">
                         <h1 class="informasi-title bluedark py-3">Informasi Keluarga</h1>
                     </div>
                 </div>
                 <div class=" p-4">
                     <div class="container">
+                        <div class="row d-flex justify-content-between align-items-center mb-4">
+                            <p class="py-3">Informasi keluarga personil meliputi: Istri/Suami, Anak, Ayah/Ibu, Ayah/Ibu Mertua</p>
+                            <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Informasi Keluarga</a>
+                        </div>
                         <table class="table thead-light">
                             <thead>
                                 <tr class="text-black   ">
