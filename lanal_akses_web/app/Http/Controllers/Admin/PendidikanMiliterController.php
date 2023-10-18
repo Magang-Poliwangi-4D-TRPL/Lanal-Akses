@@ -60,6 +60,29 @@ class PendidikanMiliterController extends Controller
         $pendidikanMiliter->save();
 
         return redirect()->route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrp])
-            ->with('success', 'Data pendidikan formal berhasil ditambahkan.');
+            ->with('success', 'Data pendidikan militer berhasil ditambahkan.');
+    }
+
+    public function destroy($nrp, $pendidikanMiliterId)
+    {
+        $nrpGanti = str_replace('-', '/', $nrp);
+        $personil = PersonilModel::where('nrp', $nrpGanti)->first();
+
+        if ($personil == null) {
+            return abort(404);
+        }
+
+        $pendidikanMiliter = PendidikanMiliterModel::where('personil_id', $personil->id)
+            ->find($pendidikanMiliterId);
+
+        if ($pendidikanMiliter == null) {
+            return abort(404);
+        }
+
+        // Hapus data PendidikanMiliter
+        $pendidikanMiliter->delete();
+
+        return redirect()->route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrp])
+            ->with('success', 'Data Pendidikan Militer berhasil dihapus.');
     }
 }
