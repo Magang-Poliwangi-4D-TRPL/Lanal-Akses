@@ -40,7 +40,7 @@
                             <td>{{ $data_pendidikan->tahun_lulus }}</td>
                             <td>{{ $data_pendidikan->keterangan }}</td>
                             <td>
-                                <a class="text-decoration-none" href="">
+                                <a class="text-decoration-none" href="{{ route('admin.personil.pendidikanmiliter.edit', ['nrp' => $nrpGanti, 'pendidikanMiliterId' => $data_pendidikan->id]) }}">
                                     <button class="btn btn-blue btn-sm text-white bg-bluemain m-2" >Edit <span><iconify-icon icon="clarity:note-line"></iconify-icon></span></button>
                                 </a>
                                 <form action="{{ route('admin.personil.pendidikanmiliter.destroy', ['nrp' => $nrpGanti, 'pendidikanMiliterId' => $data_pendidikan->id]) }}" method="POST" style="display: inline;">

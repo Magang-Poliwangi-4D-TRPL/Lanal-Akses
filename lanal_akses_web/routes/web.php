@@ -54,7 +54,6 @@ Route::delete('/admin/personil/show/{nrp}/pendidikan-formal/{pendidikanFormalId}
 Route::get('/admin/personil/show/{nrp}/pendidikan-militer', [PendidikanMiliterController::class, 'index'])->name('admin.personil.pendidikanmiliter.index');
 Route::get('/admin/personil/show/{nrp}/pendidikan-militer/create', [PendidikanMiliterController::class, 'create'])->name('admin.personil.pendidikanmiliter.create');
 Route::post('/admin/personil/show/{nrp}/pendidikan-militer', [PendidikanMiliterController::class, 'store'])->name('admin.personil.pendidikanmiliter.store');
-Route::post('/admin/personil/show/{nrp}/pendidikan-militer', [PendidikanMiliterController::class, 'store'])->name('admin.personil.pendidikanmiliter.store');
 Route::get('/admin/personil/show/{nrp}/pendidikan-militer/{pendidikanMiliterId}/edit', [PendidikanMiliterController::class, 'edit'])->name('admin.personil.pendidikanmiliter.edit');
 Route::put('/admin/personil/show/{nrp}/pendidikan-militer/{pendidikanMiliterId}', [PendidikanMiliterController::class, 'update'])->name('admin.personil.pendidikanmiliter.update');
 Route::delete('/admin/personil/show/{nrp}/pendidikan-militer/{pendidikanMiliterId}', [PendidikanMiliterController::class, 'destroy'])
