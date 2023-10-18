@@ -346,10 +346,22 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr class="border border-light">
-                                <td colspan="5">Tidak ada data.</td>
-                            </tr>
-                          </tbody>
+                            @if ($pendidikanMiliter->count()<=0)
+                                <tr>
+                                    <td colspan="5">Tidak ada data.</td>
+                                </tr>
+                            @else
+                                @foreach ($pendidikanMiliter as $data_pendidikan)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $data_pendidikan->nama_pendidikan }}</td>
+                                        <td>{{ $data_pendidikan->lama_pendidikan }}</td>
+                                        <td>{{ $data_pendidikan->tahun_lulus }}</td>
+                                        <td>{{ $data_pendidikan->keterangan }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
                     </table>
                 </div>
                 <div class="container ">
