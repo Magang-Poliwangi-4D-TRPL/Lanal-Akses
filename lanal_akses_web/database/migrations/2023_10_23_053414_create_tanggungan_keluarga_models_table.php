@@ -13,9 +13,15 @@ class CreateTanggunganKeluargaModelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tanggungan_keluarga_models', function (Blueprint $table) {
+        Schema::create('tanggungan_keluarga', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_lengkap');
+            $table->string('tempat_tanggal_lahir');
+            $table->string('status_hubungan');
+            $table->string('keterangan');
             $table->timestamps();
+
+            $table->foreignId('personil_id');
         });
     }
 
@@ -26,6 +32,6 @@ class CreateTanggunganKeluargaModelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tanggungan_keluarga_models');
+        Schema::dropIfExists('tanggungan_keluarga');
     }
 }
