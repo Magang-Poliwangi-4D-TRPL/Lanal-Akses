@@ -120,6 +120,19 @@ class TanggunganKeluargaController extends Controller
         return redirect()->route('admin.personil.tanggungan-keluarga.index', ['nrp' => $nrp])->with('success', 'Data tanggungan keluarga personil berhasil diperbarui.');
     }
 
+    public function destroy($nrp, $tanggunganKeluargaId)
+    {
+        $nrpGanti = str_replace('-', '/', $nrp);
+        $personil = PersonilModel::where('nrp', $nrpGanti)->first();
+
+        if ($personil == null) {
+            return abort(404);
+        }
+
+        $tanggungan_keluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)
+            ->find($tanggunganKeluargaId);
+
+        if ($tanggungan_keluarga == null) {
             return abort(404);
         }
 
