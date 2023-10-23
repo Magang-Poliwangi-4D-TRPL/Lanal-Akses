@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\KursusModel;
 use App\Models\PendidikanFormalModel;
 use App\Models\PendidikanMiliterModel;
 use App\Models\PersonilModel;
@@ -61,7 +62,10 @@ class PersonilController extends Controller
                 // Mengambil semua data PendidikanMiliterModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
                 $pendidikanMiliter = PendidikanMiliterModel::where('personil_id', $personil->id)->get();
                 
-                return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter'));
+                // Mengambil semua data Kursus yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+                $kursus = KursusModel::where('personil_id', $personil->id)->get();
+                
+                return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus'));
             }
 
         }

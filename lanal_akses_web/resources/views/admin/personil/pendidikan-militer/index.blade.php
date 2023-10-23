@@ -27,7 +27,7 @@
                   </tr>
               </thead>
               <tbody>
-                @empty($pendidikanMiliter)
+                @if($pendidikanMiliter->count()<=0)
                     <tr>
                         <td colspan="5">Tidak ada data.</td>
                     </tr>
@@ -51,7 +51,7 @@
                             </td>
                         </tr>
                     @endforeach
-                @endempty
+                @endif
             </tbody>
         </table>
         @php

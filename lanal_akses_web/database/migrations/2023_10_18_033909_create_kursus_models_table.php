@@ -13,9 +13,16 @@ class CreateKursusModelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('kursus_models', function (Blueprint $table) {
+        Schema::create('kursus', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_kursus');
+            $table->string('lama_kursus');
+            $table->string('tempat_kursus');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
+
+            // Definisikan foreign key constraint
+            $table->foreignId('personil_id');
         });
     }
 
@@ -26,6 +33,6 @@ class CreateKursusModelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kursus_models');
+        Schema::dropIfExists('kursus');
     }
 }
