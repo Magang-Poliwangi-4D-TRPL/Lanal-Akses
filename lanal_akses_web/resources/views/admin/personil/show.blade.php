@@ -402,7 +402,7 @@
                 <div class="container ">
                     <div class="row d-flex justify-content-between align-items-center">
                         <h3 class="py-3 judul-tabel">Kursus</h3>
-                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Kursus</a>
+                        <a href="{{ route('admin.personil.kursus.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Kursus</a>
                     </div>
                     <table class="table thead-light">
                         <thead>
@@ -415,9 +415,21 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr class="border border-light">
+                            @if ($kursus->count()<=0)
+                            <tr>
                                 <td colspan="5">Tidak ada data.</td>
                             </tr>
+                            @else
+                                @foreach ($kursus as $data_kursus)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $data_kursus->nama_kursus }}</td>
+                                        <td>{{ $data_kursus->lama_kursus }}</td>
+                                        <td>{{ $data_kursus->tempat_kursus }}</td>
+                                        <td>{{ $data_kursus->keterangan }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                           </tbody>
                     </table>
                 </div>

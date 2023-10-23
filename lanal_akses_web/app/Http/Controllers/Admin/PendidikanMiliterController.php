@@ -46,6 +46,10 @@ class PendidikanMiliterController extends Controller
         
         $nrpGanti = str_replace('-', '/', $nrp);
         $personil = PersonilModel::where('nrp', $nrpGanti)->first();
+
+        if ($personil == null) {
+            return abort(404);
+        }
         
         // Simpan data pendidikan formal
         $pendidikanMiliter = new PendidikanMiliterModel([
