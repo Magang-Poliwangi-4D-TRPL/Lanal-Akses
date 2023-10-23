@@ -17,8 +17,8 @@ class CreateTanggunganKeluargaModelsTable extends Migration
             $table->id();
             $table->string('nama_lengkap');
             $table->string('tempat_tanggal_lahir');
-            $table->string('status_hubungan');
-            $table->string('keterangan');
+            $table->enum('status_hubungan', ['suami', 'istri', 'anak'])->default('anak');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
 
             $table->foreignId('personil_id');
