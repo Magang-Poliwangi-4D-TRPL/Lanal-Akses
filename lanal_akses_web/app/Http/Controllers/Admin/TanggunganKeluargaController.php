@@ -119,4 +119,14 @@ class TanggunganKeluargaController extends Controller
 
         return redirect()->route('admin.personil.tanggungan-keluarga.index', ['nrp' => $nrp])->with('success', 'Data tanggungan keluarga personil berhasil diperbarui.');
     }
+
+            return abort(404);
+        }
+
+        // Hapus data TanggunganKeluarga
+        $tanggungan_keluarga->delete();
+
+        return redirect()->route('admin.personil.tanggungan-keluarga.index', ['nrp' => $nrp])
+            ->with('success', 'Data tanggungan keluarga berhasil dihapus.');
+    }
 }

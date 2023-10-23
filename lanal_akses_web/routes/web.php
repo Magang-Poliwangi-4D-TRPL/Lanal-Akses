@@ -76,8 +76,8 @@ Route::get('/admin/personil/show/{nrp}/tanggungan-keluarga/create', [TanggunganK
 Route::post('/admin/personil/show/{nrp}/tanggungan-keluarga', [TanggunganKeluargaController::class, 'store'])->name('admin.personil.tanggungan-keluarga.store');
 Route::get('/admin/personil/show/{nrp}/tanggungan-keluarga/{tanggunganKeluargaId}/edit', [TanggunganKeluargaController::class, 'edit'])->name('admin.personil.tanggungan-keluarga.edit');
 Route::put('/admin/personil/show/{nrp}/tanggungan-keluarga/{tanggunganKeluargaId}', [TanggunganKeluargaController::class, 'update'])->name('admin.personil.tanggungan-keluarga.update');
-// Route::delete('/admin/personil/show/{nrp}/tanggungan-keluarga/{tanggunganKeluargaId}', [TanggunganKeluargaController::class, 'destroy'])
-// ->name('admin.personil.tanggungan-keluarga.destroy');
+Route::delete('/admin/personil/show/{nrp}/tanggungan-keluarga/{tanggunganKeluargaId}', [TanggunganKeluargaController::class, 'destroy'])
+->name('admin.personil.tanggungan-keluarga.destroy');
 
 
 // Absensi

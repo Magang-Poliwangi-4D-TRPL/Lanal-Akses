@@ -43,8 +43,7 @@
                                 <a class="text-decoration-none" href="{{ route('admin.personil.tanggungan-keluarga.edit', ['nrp' => $nrpGanti, 'tanggunganKeluargaId' => $data_tanggungan_keluarga->id]) }}">
                                     <button class="btn btn-blue btn-sm text-white bg-bluemain m-2" >Edit <span><iconify-icon icon="clarity:note-line"></iconify-icon></span></button>
                                 </a>
-                                {{-- {{ route('admin.personil.kursus.destroy', ['nrp' => $nrpGanti, 'tanggunganKeluargaId' => $data_tanggungan_keluarga->id]) }} --}}
-                                <form action="" method="POST" style="display: inline;">
+                                <form action="{{ route('admin.personil.tanggungan-keluarga.destroy', ['nrp' => $nrpGanti, 'tanggunganKeluargaId' => $data_tanggungan_keluarga->id]) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus <span><iconify-icon icon="mingcute:delete-line"></iconify-icon></span></button>
