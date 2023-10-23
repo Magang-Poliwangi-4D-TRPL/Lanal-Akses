@@ -13,9 +13,18 @@ class CreatePerlengkapanModelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('perlengkapan_models', function (Blueprint $table) {
+        Schema::create('perlengkapan', function (Blueprint $table) {
             $table->id();
+            $table->enum('baju', ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']);
+            $table->enum('celana', ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']);
+            $table->integer('no_sepatu');
+            $table->integer('no_topi');
+            $table->integer('no_mut');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
+
+            // Definisikan foreign key constraint
+            $table->foreignId('personil_id');
         });
     }
 
@@ -26,6 +35,6 @@ class CreatePerlengkapanModelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perlengkapan_models');
+        Schema::dropIfExists('perlengkapan');
     }
 }
