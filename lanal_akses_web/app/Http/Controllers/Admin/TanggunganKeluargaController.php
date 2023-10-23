@@ -64,4 +64,59 @@ class TanggunganKeluargaController extends Controller
         return redirect()->route('admin.personil.tanggungan-keluarga.index', ['nrp' => $nrp])
             ->with('success', 'Data tanggungan keluarga personil berhasil ditambahkan.');
     }
+
+    public function edit($nrp, $tanggunganKeluaragaId)
+    {
+        $nrpGanti = str_replace('-', '/', $nrp);
+        $personil = PersonilModel::where('nrp', $nrpGanti)->first();
+
+        if ($personil == null) {
+            return abort(404);
+        }
+
+        $tanggungan_keluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)
+            ->find($tanggunganKeluaragaId);
+
+        if ($tanggungan_keluarga == null) {
+            return abort(404);
+        }
+
+        return view('admin.personil.tanggungan-keluarga.edit', compact('personil', 'tanggungan_keluarga'));
+    }
+
+    public function update(Request $request, $nrp, $tanggunganKeluaragaId)
+    {
+        // Validasi data yang masuk
+        $validatedData = $request->validate([
+            'nama_lengkap' => 'required|string|max:25',
+            'tempat_tanggal_lahir' => 'required|string|max:50',
+            'status_hubungan' => 'required',
+            'keterangan' => 'nullable|string',
+            'personil_id' => 'required',
+        ],);
+
+        $nrpGanti = str_replace('-', '/', $nrp);
+        $personil = PersonilModel::where('nrp', $nrpGanti)->first();
+
+        if ($personil == null) {
+            return abort(404);
+        }
+
+        $tanggungan_keluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)
+            ->find($tanggunganKeluaragaId);
+
+        if ($tanggungan_keluarga == null) {
+            return abort(404);
+        }
+
+        // Update data tanggungan_keluarga
+        $tanggungan_keluarga->update([
+            'nama_lengkap' => $validatedData['nama_lengkap'],
+            'tempat_tanggal_lahir' => $validatedData['tempat_tanggal_lahir'],
+            'status_hubungan' => $validatedData['status_hubungan'],
+            'keterangan' => $validatedData['keterangan'],
+        ]);
+
+        return redirect()->route('admin.personil.tanggungan-keluarga.index', ['nrp' => $nrp])->with('success', 'Data tanggungan keluarga personil berhasil diperbarui.');
+    }
 }

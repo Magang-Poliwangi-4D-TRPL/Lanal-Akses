@@ -40,8 +40,7 @@
                             <td>{{ $data_tanggungan_keluarga->status_hubungan }}</td>
                             <td>{{ $data_tanggungan_keluarga->keterangan }}</td>
                             <td>
-                                {{-- {{ route('admin.personil.tanggungan-keluarga.edit', ['nrp' => $nrpGanti, 'tanggunganKeluargaId' => $data_tanggungan_keluarga->id]) }} --}}
-                                <a class="text-decoration-none" href="">
+                                <a class="text-decoration-none" href="{{ route('admin.personil.tanggungan-keluarga.edit', ['nrp' => $nrpGanti, 'tanggunganKeluargaId' => $data_tanggungan_keluarga->id]) }}">
                                     <button class="btn btn-blue btn-sm text-white bg-bluemain m-2" >Edit <span><iconify-icon icon="clarity:note-line"></iconify-icon></span></button>
                                 </a>
                                 {{-- {{ route('admin.personil.kursus.destroy', ['nrp' => $nrpGanti, 'tanggunganKeluargaId' => $data_tanggungan_keluarga->id]) }} --}}
