@@ -29,7 +29,7 @@
         
     </ul>
     
-    <button id="logout-button" class="btn btn-outline-light mt-4">Logout <iconify-icon class="ml-2" icon="ion:exit-outline" width="24"></iconify-icon></button>
+    <button id="logout-button" class="btn btn-outline-light ml-2 py-2 px-4 rounded-lg">Logout <iconify-icon class="align-middle" icon="ion:exit-outline" width="18"></iconify-icon></button>
 
 </div>
 

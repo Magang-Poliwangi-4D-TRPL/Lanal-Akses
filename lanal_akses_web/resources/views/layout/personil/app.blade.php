@@ -14,6 +14,31 @@
     <title>@yield('title-page')</title>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4E6766">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="https://i.ibb.co/MR438ww/logo-no-bg.png" alt="logo-no-bg" width="50" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto"> 
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url('/') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url('/absen') }}">Absen</a>
+                    </li>
+                    <li class="nav-item">
+                    <button id="logout-button" class="btn btn-outline-light ml-2 p-2 rounded-lg">Logout <iconify-icon class="align-middle" icon="ion:exit-outline" width="18"></iconify-icon></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
     
     @yield('content')
 

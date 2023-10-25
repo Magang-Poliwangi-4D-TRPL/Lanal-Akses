@@ -25,9 +25,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/personil', function () {
+    return view('personil.dashboard');
+});
+
+Route::get('personil/editprofile', function () {
+    return view('personil.editprofile');
+});
+
+
 // == controlller for all admin page ==
 
 Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
+
 
 // Personil
 Route::get('/admin/personil/{page}', [PersonilController::class, 'index'])
