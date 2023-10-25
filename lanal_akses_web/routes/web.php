@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DataKepangkatanController;
 use App\Http\Controllers\PerlengkapanController;
 use App\Http\Controllers\RiwayatPenugasanController;
+use App\Http\Controllers\SanksiHukumanController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -127,6 +128,15 @@ Route::get('/admin/personil/show/{nrp}/riwayat-penugasan/{riwayatKepangkatanId}/
 // Route::put('/admin/personil/show/{nrp}/riwayat-penugasan/{riwayatKepangkatanId}', [RiwayatPenugasanController::class, 'update'])->name('admin.personil.riwayat-penugasan.update');
 // Route::delete('/admin/personil/show/{nrp}/riwayat-penugasan/{riwayatKepangkatanId}', [RiwayatPenugasanController::class, 'destroy'])
 // ->name('admin.personil.riwayat-penugasan.destroy');
+
+// Personil -> sanksi-hukuman
+Route::get('/admin/personil/show/{nrp}/sanksi-hukuman', [SanksiHukumanController::class, 'index'])->name('admin.personil.sanksi-hukuman.index');
+Route::get('/admin/personil/show/{nrp}/sanksi-hukuman/create', [SanksiHukumanController::class, 'create'])->name('admin.personil.sanksi-hukuman.create');
+// Route::post('/admin/personil/show/{nrp}/sanksi-hukuman', [SanksiHukumanController::class, 'store'])->name('admin.personil.sanksi-hukuman.store');
+Route::get('/admin/personil/show/{nrp}/sanksi-hukuman/{sanksiHukumanId}/edit', [SanksiHukumanController::class, 'edit'])->name('admin.personil.sanksi-hukuman.edit');
+// Route::put('/admin/personil/show/{nrp}/sanksi-hukuman/{sanksiHukumanId}', [SanksiHukumanController::class, 'update'])->name('admin.personil.sanksi-hukuman.update');
+// Route::delete('/admin/personil/show/{nrp}/sanksi-hukuman/{sanksiHukumanId}', [SanksiHukumanController::class, 'destroy'])
+// ->name('admin.personil.sanksi-hukuman.destroy');
 
 
 // Absensi

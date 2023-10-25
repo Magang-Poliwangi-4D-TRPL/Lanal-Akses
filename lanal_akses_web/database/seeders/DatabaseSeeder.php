@@ -10,6 +10,7 @@ use App\Models\PendidikanMiliterModel;
 use App\Models\PerlengkapanModel;
 use App\Models\PersonilModel;
 use App\Models\RiwayatPenugasanModel;
+use App\Models\SanksiHukumanModel;
 use App\Models\TandaJasaModel;
 use App\Models\TanggunganKeluargaModel;
 use App\Models\User;
@@ -97,6 +98,13 @@ class DatabaseSeeder extends Seeder
             'tahun' => "2011-2022",
             'jabatan' => "PASET",
             'tempat' => "Mako Lanal Banyuwangi",
+            'keterangan' => null,
+            'personil_id' => 1,
+        ]);
+    
+        SanksiHukumanModel::create([
+            'nama_hukuman' => "Hukuman 1",
+            'tahun_hukuman' => "2023",
             'keterangan' => null,
             'personil_id' => 1,
         ]);
