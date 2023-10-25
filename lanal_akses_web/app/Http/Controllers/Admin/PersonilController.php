@@ -8,6 +8,7 @@ use App\Models\PendidikanFormalModel;
 use App\Models\PendidikanMiliterModel;
 use App\Models\PerlengkapanModel;
 use App\Models\PersonilModel;
+use App\Models\TandaJasaModel;
 use App\Models\TanggunganKeluargaModel;
 use Illuminate\Http\Request;
 
@@ -73,7 +74,10 @@ class PersonilController extends Controller
                 // Mengambil semua data Perlengkapan yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
                 $perlengkapan = PerlengkapanModel::where('personil_id', $personil->id)->get();
                 
-                return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggungan_keluarga', 'perlengkapan'));
+                // Mengambil semua data TandaJasa yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+                $tandaJasa = TandaJasaModel::where('personil_id', $personil->id)->get();
+                
+                return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggungan_keluarga', 'perlengkapan', 'tandaJasa'));
             }
 
         }

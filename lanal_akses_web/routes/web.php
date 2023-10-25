@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PegawaiController;
 use App\Http\Controllers\Admin\PendidikanFormalController;
 use App\Http\Controllers\Admin\PendidikanMiliterController;
 use App\Http\Controllers\Admin\PersonilController;
+use App\Http\Controllers\Admin\TandaJasaController;
 use App\Http\Controllers\Admin\TanggunganKeluargaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\PerlengkapanController;
@@ -61,7 +62,6 @@ Route::get('/admin/personil/show/{nrp}/pendidikan-formal/{pendidikanFormalId}/ed
 Route::put('/admin/personil/show/{nrp}/pendidikan-formal/{pendidikanFormalId}', [PendidikanFormalController::class, 'update'])->name('admin.personil.pendidikanformal.update');
 Route::delete('/admin/personil/show/{nrp}/pendidikan-formal/{pendidikanFormalId}', [PendidikanFormalController::class, 'destroy'])
 ->name('admin.personil.pendidikanformal.destroy');
-// Route::get('/admin/pendidikan-formal', [PendidikanFormalController::class, 'index2'])->name('admin.personil.pendidikanformal.index2');
 
 // Personil -> PendidikanMiliter
 Route::get('/admin/personil/show/{nrp}/pendidikan-militer', [PendidikanMiliterController::class, 'index'])->name('admin.personil.pendidikanmiliter.index');
@@ -98,6 +98,15 @@ Route::get('/admin/personil/show/{nrp}/perlengkapan/{perlengkapanId}/edit', [Per
 // Route::put('/admin/personil/show/{nrp}/perlengkapan/{perlengkapanId}', [PerlengkapanController::class, 'update'])->name('admin.personil.perlengkapan.update');
 Route::delete('/admin/personil/show/{nrp}/perlengkapan/{perlengkapanId}', [PerlengkapanController::class, 'destroy'])
 ->name('admin.personil.perlengkapan.destroy');
+
+// Personil -> tanda-jasa
+Route::get('/admin/personil/show/{nrp}/tanda-jasa', [TandaJasaController::class, 'index'])->name('admin.personil.tanda-jasa.index');
+Route::get('/admin/personil/show/{nrp}/tanda-jasa/create', [TandaJasaController::class, 'create'])->name('admin.personil.tanda-jasa.create');
+// Route::post('/admin/personil/show/{nrp}/tanda-jasa', [TandaJasaController::class, 'store'])->name('admin.personil.tanda-jasa.store');
+Route::get('/admin/personil/show/{nrp}/tanda-jasa/{tandaJasaId}/edit', [TandaJasaController::class, 'edit'])->name('admin.personil.tanda-jasa.edit');
+// Route::put('/admin/personil/show/{nrp}/tanda-jasa/{tanda-jasaId}', [TandaJasaController::class, 'update'])->name('admin.personil.tanda-jasa.update');
+// Route::delete('/admin/personil/show/{nrp}/tanda-jasa/{tanda-jasaId}', [TandaJasaController::class, 'destroy'])
+// ->name('admin.personil.perlengkapan.destroy');
 
 
 // Absensi

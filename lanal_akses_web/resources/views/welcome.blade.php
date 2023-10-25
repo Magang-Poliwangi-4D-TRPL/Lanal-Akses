@@ -9,7 +9,7 @@
 <nav class="navbar navbar-dark" style="background-color: #4E6766">
   <a class="navbar-brand" href="{{ url('/') }}"><img src="https://i.ibb.co/MR438ww/logo-no-bg.png" alt="logo-no-bg" width="30" height="30"></a>
   
-  <a href="{{ url('/admin') }}"><button class="btn btn-success my-2 my-sm-0" type="submit">Login</button></a>
+  <a href="{{ url('/admin') }}"><button class="btn btn-primary-1 my-2 my-sm-0" type="submit">Login</button></a>
   
 </nav>
 
@@ -21,7 +21,7 @@
                   <h1 class="fw-bold text-black title-dark mt-2 mb-3">SELAMAT DATANG DI WEBSITE</h1>
                   <h1 class="fw-bold text-black title-dark mt-2 mb-3">LANAL <span style="color: #E1BF36">AKSES</span></h1>
                   <p class="lead">LANAL AKSES merupakan Website absensi dan data personil pangkalan TNI Angkatan V - Pangakalan TNI Angakatan Laut Banyuwangi. </p>
-                  <a class="btn btn-primary btn-lg " href="#" role="button">Absen Sekarang <iconify-icon icon="mdi:clock" width="16"></iconify-icon></a>
+                  <a class="btn btn-primary-1 btn-lg " href="#" role="button">Absen Sekarang <iconify-icon icon="mdi:clock" width="16"></iconify-icon></a>
               </div>
           </div>
       </div>

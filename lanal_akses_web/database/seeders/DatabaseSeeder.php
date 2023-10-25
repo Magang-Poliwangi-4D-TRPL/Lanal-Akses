@@ -8,6 +8,7 @@ use App\Models\PendidikanFormalModel;
 use App\Models\PendidikanMiliterModel;
 use App\Models\PerlengkapanModel;
 use App\Models\PersonilModel;
+use App\Models\TandaJasaModel;
 use App\Models\TanggunganKeluargaModel;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -22,6 +23,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        // ==== Personil Feature ====
         PersonilModel::create([
             "nama_lengkap" => "Suhendra Kurniawan",
             "pangkat" => "Letda Laut",
@@ -72,6 +75,16 @@ class DatabaseSeeder extends Seeder
             'keterangan' => null,
             'personil_id' => 1,
         ]);
+    
+        TandaJasaModel::create([
+            'nama_tanda_jasa' => "SL XII",
+            'no_skep' => "KED/-/-/-",
+            'keterangan' => null,
+            'personil_id' => 1,
+        ]);
+
+
+        // ==== end of Personil Feature ====
         
         PegawaiModel::create([
             "nama_pegawai" => "Darwati, S.E",
