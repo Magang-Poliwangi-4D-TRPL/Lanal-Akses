@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DataKepangkatanModel;
 use App\Models\KursusModel;
 use App\Models\PegawaiModel;
 use App\Models\PendidikanFormalModel;
@@ -79,6 +80,14 @@ class DatabaseSeeder extends Seeder
         TandaJasaModel::create([
             'nama_tanda_jasa' => "SL XII",
             'no_skep' => "KED/-/-/-",
+            'keterangan' => null,
+            'personil_id' => 1,
+        ]);
+    
+        DataKepangkatanModel::create([
+            'pangkat' => "LETDA",
+            'no_skep' => "KED/-/-/-",
+            'tempat_pangkat' => "Mako Lanal Banyuwangi",
             'keterangan' => null,
             'personil_id' => 1,
         ]);

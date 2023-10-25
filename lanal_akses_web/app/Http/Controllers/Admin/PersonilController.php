@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataKepangkatanModel;
 use App\Models\KursusModel;
 use App\Models\PendidikanFormalModel;
 use App\Models\PendidikanMiliterModel;
@@ -77,7 +78,10 @@ class PersonilController extends Controller
                 // Mengambil semua data TandaJasa yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
                 $tandaJasa = TandaJasaModel::where('personil_id', $personil->id)->get();
                 
-                return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggungan_keluarga', 'perlengkapan', 'tandaJasa'));
+                // Mengambil semua data DataKepangkatanModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+                $dataKepangkatan = DataKepangkatanModel::where('personil_id', $personil->id)->get();
+                
+                return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggungan_keluarga', 'perlengkapan', 'tandaJasa', 'dataKepangkatan'));
             }
 
         }

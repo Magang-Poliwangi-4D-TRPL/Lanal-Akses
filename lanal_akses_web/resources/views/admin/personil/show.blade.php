@@ -550,7 +550,7 @@
                 <div class="container ">
                     <div class="row d-flex justify-content-between align-items-center">
                         <h3 class="py-3 judul-tabel">Data Kepangkatan</h3>
-                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Kepangkatan</a>
+                        <a href="{{ route('admin.personil.data-kepangkatan.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Kepangkatan</a>
                     </div>
                     <table class="table thead-light">
                         <thead>
@@ -563,9 +563,21 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr class="border border-light">
+                            @if ($dataKepangkatan->count()<=0)
+                            <tr>
                                 <td colspan="5">Tidak ada data.</td>
                             </tr>
+                            @else
+                                @foreach ($dataKepangkatan as $item_dataKepangkatan)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item_dataKepangkatan->pangkat }}</td>
+                                        <td>{{ $item_dataKepangkatan->no_skep }}</td>
+                                        <td>{{ $item_dataKepangkatan->tempat_pangkat }}</td>
+                                        <td>{{ $item_dataKepangkatan->keterangan }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                           </tbody>
                     </table>
                 </div>

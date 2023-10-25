@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PersonilController;
 use App\Http\Controllers\Admin\TandaJasaController;
 use App\Http\Controllers\Admin\TanggunganKeluargaController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DataKepangkatanController;
 use App\Http\Controllers\PerlengkapanController;
 use Illuminate\Support\Facades\Route;
 
@@ -106,7 +107,16 @@ Route::get('/admin/personil/show/{nrp}/tanda-jasa/create', [TandaJasaController:
 Route::get('/admin/personil/show/{nrp}/tanda-jasa/{tandaJasaId}/edit', [TandaJasaController::class, 'edit'])->name('admin.personil.tanda-jasa.edit');
 // Route::put('/admin/personil/show/{nrp}/tanda-jasa/{tanda-jasaId}', [TandaJasaController::class, 'update'])->name('admin.personil.tanda-jasa.update');
 // Route::delete('/admin/personil/show/{nrp}/tanda-jasa/{tanda-jasaId}', [TandaJasaController::class, 'destroy'])
-// ->name('admin.personil.perlengkapan.destroy');
+// ->name('admin.personil.tanda-jasa.destroy');
+
+// Personil -> data-kepangkatan
+Route::get('/admin/personil/show/{nrp}/data-kepangkatan', [DataKepangkatanController::class, 'index'])->name('admin.personil.data-kepangkatan.index');
+Route::get('/admin/personil/show/{nrp}/data-kepangkatan/create', [DataKepangkatanController::class, 'create'])->name('admin.personil.data-kepangkatan.create');
+// Route::post('/admin/personil/show/{nrp}/data-kepangkatan', [DataKepangkatanController::class, 'store'])->name('admin.personil.data-kepangkatan.store');
+Route::get('/admin/personil/show/{nrp}/data-kepangkatan/{dataKepangkatanId}/edit', [DataKepangkatanController::class, 'edit'])->name('admin.personil.data-kepangkatan.edit');
+// Route::put('/admin/personil/show/{nrp}/data-kepangkatan/{data-kepangkatanId}', [DataKepangkatanController::class, 'update'])->name('admin.personil.data-kepangkatan.update');
+// Route::delete('/admin/personil/show/{nrp}/data-kepangkatan/{data-kepangkatanId}', [DataKepangkatanController::class, 'destroy'])
+// ->name('admin.personil.data-kepangkatan.destroy');
 
 
 // Absensi
