@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PendidikanMiliterController;
 use App\Http\Controllers\Admin\PersonilController;
 use App\Http\Controllers\Admin\TanggunganKeluargaController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\PerlengkapanController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -88,6 +89,15 @@ Route::get('/admin/personil/show/{nrp}/tanggungan-keluarga/{tanggunganKeluargaId
 Route::put('/admin/personil/show/{nrp}/tanggungan-keluarga/{tanggunganKeluargaId}', [TanggunganKeluargaController::class, 'update'])->name('admin.personil.tanggungan-keluarga.update');
 Route::delete('/admin/personil/show/{nrp}/tanggungan-keluarga/{tanggunganKeluargaId}', [TanggunganKeluargaController::class, 'destroy'])
 ->name('admin.personil.tanggungan-keluarga.destroy');
+
+// Personil -> Perlengkapan
+Route::get('/admin/personil/show/{nrp}/perlengkapan', [PerlengkapanController::class, 'index'])->name('admin.personil.perlengkapan.index');
+Route::get('/admin/personil/show/{nrp}/perlengkapan/create', [PerlengkapanController::class, 'create'])->name('admin.personil.perlengkapan.create');
+Route::post('/admin/personil/show/{nrp}/perlengkapan', [PerlengkapanController::class, 'store'])->name('admin.personil.perlengkapan.store');
+Route::get('/admin/personil/show/{nrp}/perlengkapan/{perlengkapanId}/edit', [PerlengkapanController::class, 'edit'])->name('admin.personil.perlengkapan.edit');
+// Route::put('/admin/personil/show/{nrp}/perlengkapan/{perlengkapanId}', [PerlengkapanController::class, 'update'])->name('admin.personil.perlengkapan.update');
+Route::delete('/admin/personil/show/{nrp}/perlengkapan/{perlengkapanId}', [PerlengkapanController::class, 'destroy'])
+->name('admin.personil.perlengkapan.destroy');
 
 
 // Absensi

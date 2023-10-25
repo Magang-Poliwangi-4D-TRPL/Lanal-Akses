@@ -475,11 +475,12 @@
                 <div class="container ">
                     <div class="row d-flex justify-content-between align-items-center">
                         <h3 class="py-3 judul-tabel">Perlengkapan</h3>
-                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Perlengkapan</a>
+                        <a href="{{ route('admin.personil.perlengkapan.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Perlengkapan</a>
                     </div>
                     <table class="table thead-light">
                         <thead>
                             <tr class="bg-blueaccent text-white text-bold">
+                              <th scope="col" width="10%">no</th>
                               <th scope="col" width="10%">Baju/Celana</th>
                               <th scope="col" width="15%">No. Sepatu</th>
                               <th scope="col" width="10%">No. Topi/MUT</th>
@@ -487,9 +488,30 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr class="border border-light">
+                            @if ($perlengkapan->count()<=0)
+                            <tr>
                                 <td colspan="5">Tidak ada data.</td>
                             </tr>
+                            @else
+                                @foreach ($perlengkapan as $data_perlengkapan)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+
+                                        @if ( $data_perlengkapan->baju ===  $data_perlengkapan->celana )
+                                            <td>{{ $data_perlengkapan->baju }}</td>
+                                        @else
+                                        <td>{{ $data_perlengkapan->baju }} / {{ $data_perlengkapan->celana }}</td>
+                                        @endif
+                                        <td>{{ $data_perlengkapan->no_sepatu }}</td>
+                                        @if ( $data_perlengkapan->no_topi  ===  $data_perlengkapan->no_mut )
+                                            <td>{{ $data_perlengkapan->no_topi }}</td>
+                                        @else
+                                        <td>{{ $data_perlengkapan->no_topi }} / {{ $data_perlengkapan->no_mut }}</td>
+                                        @endif
+                                        <td>{{ $data_perlengkapan->keterangan }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                           </tbody>
                     </table>
                 </div>
