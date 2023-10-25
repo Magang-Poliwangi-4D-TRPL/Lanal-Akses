@@ -584,7 +584,7 @@
                 <div class="container ">
                     <div class="row d-flex justify-content-between align-items-center">
                         <h3 class="py-3 judul-tabel">Riwayat Penugasan/Penempatan</h3>
-                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Riwayat Penugasan</a>
+                        <a href="{{ route('admin.personil.riwayat-penugasan.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Riwayat Penugasan</a>
                     </div>
                     <table class="table thead-light">
                         <thead>
@@ -597,9 +597,21 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr class="border border-light">
+                            @if ($riwayatPenugasan->count()<=0)
+                            <tr>
                                 <td colspan="5">Tidak ada data.</td>
                             </tr>
+                            @else
+                                @foreach ($riwayatPenugasan as $item_riwayatPenugasan)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item_riwayatPenugasan->tahun }}</td>
+                                        <td>{{ $item_riwayatPenugasan->jabatan }}</td>
+                                        <td>{{ $item_riwayatPenugasan->tempat }}</td>
+                                        <td>{{ $item_riwayatPenugasan->keterangan }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                           </tbody>
                     </table>
                 </div>

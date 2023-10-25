@@ -9,6 +9,7 @@ use App\Models\PendidikanFormalModel;
 use App\Models\PendidikanMiliterModel;
 use App\Models\PerlengkapanModel;
 use App\Models\PersonilModel;
+use App\Models\RiwayatPenugasanModel;
 use App\Models\TandaJasaModel;
 use App\Models\TanggunganKeluargaModel;
 use App\Models\User;
@@ -88,6 +89,14 @@ class DatabaseSeeder extends Seeder
             'pangkat' => "LETDA",
             'no_skep' => "KED/-/-/-",
             'tempat_pangkat' => "Mako Lanal Banyuwangi",
+            'keterangan' => null,
+            'personil_id' => 1,
+        ]);
+    
+        RiwayatPenugasanModel::create([
+            'tahun' => "2011-2022",
+            'jabatan' => "PASET",
+            'tempat' => "Mako Lanal Banyuwangi",
             'keterangan' => null,
             'personil_id' => 1,
         ]);
