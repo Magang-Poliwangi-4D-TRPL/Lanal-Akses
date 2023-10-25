@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Admin\AbsensiController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KursusController;
 use App\Http\Controllers\Admin\PegawaiController;
 use App\Http\Controllers\Admin\PendidikanFormalController;
 use App\Http\Controllers\Admin\PendidikanMiliterController;
 use App\Http\Controllers\Admin\PersonilController;
+use App\Http\Controllers\Admin\TanggunganKeluargaController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +70,24 @@ Route::get('/admin/personil/show/{nrp}/pendidikan-militer/{pendidikanMiliterId}/
 Route::put('/admin/personil/show/{nrp}/pendidikan-militer/{pendidikanMiliterId}', [PendidikanMiliterController::class, 'update'])->name('admin.personil.pendidikanmiliter.update');
 Route::delete('/admin/personil/show/{nrp}/pendidikan-militer/{pendidikanMiliterId}', [PendidikanMiliterController::class, 'destroy'])
 ->name('admin.personil.pendidikanmiliter.destroy');
+
+// Personil -> Kursus
+Route::get('/admin/personil/show/{nrp}/kursus', [KursusController::class, 'index'])->name('admin.personil.kursus.index');
+Route::get('/admin/personil/show/{nrp}/kursus/create', [KursusController::class, 'create'])->name('admin.personil.kursus.create');
+Route::post('/admin/personil/show/{nrp}/kursus', [KursusController::class, 'store'])->name('admin.personil.kursus.store');
+Route::get('/admin/personil/show/{nrp}/kursus/{kursusId}/edit', [KursusController::class, 'edit'])->name('admin.personil.kursus.edit');
+Route::put('/admin/personil/show/{nrp}/kursus/{kursusId}', [KursusController::class, 'update'])->name('admin.personil.kursus.update');
+Route::delete('/admin/personil/show/{nrp}/kursus/{kursusId}', [KursusController::class, 'destroy'])
+->name('admin.personil.kursus.destroy');
+
+// Personil -> TanggunganKeluarga
+Route::get('/admin/personil/show/{nrp}/tanggungan-keluarga', [TanggunganKeluargaController::class, 'index'])->name('admin.personil.tanggungan-keluarga.index');
+Route::get('/admin/personil/show/{nrp}/tanggungan-keluarga/create', [TanggunganKeluargaController::class, 'create'])->name('admin.personil.tanggungan-keluarga.create');
+Route::post('/admin/personil/show/{nrp}/tanggungan-keluarga', [TanggunganKeluargaController::class, 'store'])->name('admin.personil.tanggungan-keluarga.store');
+Route::get('/admin/personil/show/{nrp}/tanggungan-keluarga/{tanggunganKeluargaId}/edit', [TanggunganKeluargaController::class, 'edit'])->name('admin.personil.tanggungan-keluarga.edit');
+Route::put('/admin/personil/show/{nrp}/tanggungan-keluarga/{tanggunganKeluargaId}', [TanggunganKeluargaController::class, 'update'])->name('admin.personil.tanggungan-keluarga.update');
+Route::delete('/admin/personil/show/{nrp}/tanggungan-keluarga/{tanggunganKeluargaId}', [TanggunganKeluargaController::class, 'destroy'])
+->name('admin.personil.tanggungan-keluarga.destroy');
 
 
 // Absensi
