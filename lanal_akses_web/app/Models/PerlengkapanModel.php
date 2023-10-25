@@ -9,6 +9,7 @@ class PerlengkapanModel extends Model
 {
     use HasFactory;
     protected $table = 'perlengkapan';
+    protected $guarded = ['id'];
 
     public function personil(){
         return $this->belongsTo(PersonilModel::class, 'personil_id');

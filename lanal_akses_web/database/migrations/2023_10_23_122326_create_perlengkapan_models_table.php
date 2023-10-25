@@ -15,8 +15,8 @@ class CreatePerlengkapanModelsTable extends Migration
     {
         Schema::create('perlengkapan', function (Blueprint $table) {
             $table->id();
-            $table->enum('baju', ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']);
-            $table->enum('celana', ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']);
+            $table->enum('baju', ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'])->default('L');
+            $table->enum('celana', ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'])->default('L');
             $table->integer('no_sepatu');
             $table->integer('no_topi');
             $table->integer('no_mut');

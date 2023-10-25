@@ -480,6 +480,7 @@
                     <table class="table thead-light">
                         <thead>
                             <tr class="bg-blueaccent text-white text-bold">
+                              <th scope="col" width="10%">no</th>
                               <th scope="col" width="10%">Baju/Celana</th>
                               <th scope="col" width="15%">No. Sepatu</th>
                               <th scope="col" width="10%">No. Topi/MUT</th>
@@ -495,7 +496,8 @@
                                 @foreach ($perlengkapan as $data_perlengkapan)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        @if ( $data_perlengkapan->baju ==  $data_perlengkapan->celana )
+
+                                        @if ( $data_perlengkapan->baju ===  $data_perlengkapan->celana )
                                             <td>{{ $data_perlengkapan->baju }}</td>
                                         @else
                                         <td>{{ $data_perlengkapan->baju }} / {{ $data_perlengkapan->celana }}</td>

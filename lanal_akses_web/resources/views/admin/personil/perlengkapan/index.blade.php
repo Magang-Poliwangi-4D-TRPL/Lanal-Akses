@@ -11,10 +11,12 @@
                 $nrp = $personil->nrp;
                 $nrpGanti = str_replace('/', '-', $nrp);
             @endphp
-            {{-- {{ route('admin.personil.perlengkapan.create', ['nrp' => $nrpGanti]) }} --}}
-            <a class="text-decoration-none" href="">
+            @if($perlengkapan->count()<=0)
+            
+            <a class="text-decoration-none" href="{{ route('admin.personil.perlengkapan.create', ['nrp' => $nrpGanti]) }}">
                 <button class="btn btn-blue btn-md text-white bg-blueaccent">Tambah Data Perlengkapan Personil<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></span></button>
             </a>
+            @endif
         </div>
         <table class="table thead-light">
             <thead>
@@ -45,12 +47,11 @@
                             <td>{{ $data_perlengkapan->no_mut }}</td>
                             <td>{{ $data_perlengkapan->keterangan }}</td>
                             <td>
-                                {{-- {{ route('admin.personil.perlengkapan.edit', ['nrp' => $nrpGanti, 'perlengkapanId' => $data_perlengkapan->id]) }} --}}
-                                <a class="text-decoration-none" href="">
+                                <a class="text-decoration-none" href="{{ route('admin.personil.perlengkapan.edit', ['nrp' => $nrpGanti, 'perlengkapanId' => $data_perlengkapan->id]) }}">
                                     <button class="btn btn-blue btn-sm text-white bg-bluemain m-2" >Edit <span><iconify-icon icon="clarity:note-line"></iconify-icon></span></button>
                                 </a>
-                                {{-- {{ route('admin.personil.perlengkapan.destroy', ['nrp' => $nrpGanti, 'perlengkapanId' => $data_perlengkapan->id]) }} --}}
-                                <form action="" method="POST" style="display: inline;">
+                                
+                                <form action="{{ route('admin.personil.perlengkapan.destroy', ['nrp' => $nrpGanti, 'perlengkapanId' => $data_perlengkapan->id]) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus <span><iconify-icon icon="mingcute:delete-line"></iconify-icon></span></button>
