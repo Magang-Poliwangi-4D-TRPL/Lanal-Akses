@@ -19,6 +19,9 @@ class CreatePegawaiModelsTable extends Migration
             $table->string('nama_pegawai');
             $table->string('jabatan');
             $table->string('golongan');
+            $table->string('email')->nullable();
+            $table->string('no_telepon')->nullable();
+            $table->string('alamat')->nullable();
             $table->timestamps();
         });
     }

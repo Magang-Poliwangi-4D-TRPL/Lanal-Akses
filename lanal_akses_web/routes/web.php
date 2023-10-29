@@ -158,11 +158,15 @@ Route::delete('/admin/users/{id}', [UserController::class, 'destroy'])->name('us
 Route::get('/admin/pegawai/{page}', [PegawaiController::class, 'index'])
     ->name('admin.pegawai.index')
     ->where('page', '[1-9][0-9]*');
+Route::get('/admin/pegawai/search', [PegawaiController::class, 'search'])->name('admin.pegawai.search');
 Route::get('/admin/tambah-pegawai', [PegawaiController::class, 'create'])
-    ->name('admin.pegawai.create'); // Ubah dari 'pegawai.create' menjadi 'admin.pegawai.create'
+    ->name('admin.pegawai.create'); 
 Route::post('/admin/pegawai/store', [PegawaiController::class, 'store'])
-    ->name('admin.pegawai.store'); // Ubah dari 'pegawai.store' menjadi 'admin.pegawai.store'
+    ->name('admin.pegawai.store'); 
 Route::delete('/admin/pegawai/{id}', [PegawaiController::class, 'destroy'])
     ->name('admin.pegawai.destroy');
+Route::get('/admin/pegawai/{nip}/show', [PegawaiController::class, 'show'])->name('admin.pegawai.show');
+Route::get('/admin/pegawai/{nip}/edit', [PegawaiController::class, 'edit'])->name('admin.pegawai.edit');
+Route::put('/admin/pegawai/{nip}', [PegawaiController::class, 'update'])->name('admin.pegawai.update');
 
 

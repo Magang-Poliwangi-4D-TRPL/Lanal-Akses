@@ -40,6 +40,37 @@ class PegawaiController extends Controller
     
     }
 
+    public function show($nip) {
+        $nipGanti = str_replace('-', ' ', $nip);
+        $pegawai = PegawaiModel::where('nip', $nipGanti)->first();
+
+        // $pendidikanFormal = $pegawai->pendidikanFormal;
+
+        if($pegawai==null){
+            return abort(404);
+        } else {
+            // dd($pegawai);
+            if($pegawai == null){
+                return abort(404);
+            } else {
+                return view('admin.pegawai.show', compact('pegawai'));
+            }
+
+        }
+    }
+
+    public function search(Request $request) {
+        $perPage = 100; // Jumlah data per halaman
+        $query = $request->input('q');
+
+        // Query pencarian berdasarkan nama atau NIP
+        $pegawai = PegawaiModel::where('nama_pegawai', 'like', '%' . $query . '%')
+            ->orWhere('nip', 'like', '%' . $query . '%')
+            ->paginate($perPage);
+
+        return view('admin.pegawai.search', compact('pegawai'));
+    }
+
     public function create()
     {
         return view('admin.pegawai.create');
@@ -62,8 +93,52 @@ class PegawaiController extends Controller
         
     }
 
-    public function destroy($id){
-        $pegawai = PegawaiModel::find($id);
+    public function edit($nip){
+        $nipGanti = str_replace('-', ' ', $nip);
+        $pegawai = PegawaiModel::where('nip', $nipGanti)->first();
+        // dd($pegawai);
+        if (!$pegawai) {
+            return abort(404);
+        }
+
+        return view('admin.pegawai.edit', compact('pegawai'));
+    }
+
+    public function update(Request $request, $nip)
+    {
+        $nipGanti = str_replace('-', ' ', $nip);
+        $pegawai = PegawaiModel::where('nip', $nipGanti)->first();
+        // Validasi data yang masuk
+        $validatedData = $request->validate([
+            'nama_pegawai' => 'required|string|max:50',
+            'jabatan' => 'required|string|max:50',
+            'golongan' => 'required|string|max:50',
+            'email' => 'nullable|email',
+            'no_telepon' => 'nullable',
+            'alamat' => 'nullable',
+        ],);
+
+        if ($pegawai == null) {
+            return abort(404);
+        }
+
+
+        // // Update data kursus
+        $pegawai->update([
+            'nama_pegawai' => $validatedData['nama_pegawai'],
+            'jabatan' => $validatedData['jabatan'],
+            'golongan' => $validatedData['golongan'],
+            'email' => $validatedData['email'],
+            'alamat' => $validatedData['alamat'],
+            'no_telepon' => $validatedData['no_telepon'],
+        ]);
+
+        return redirect()->route('admin.pegawai.show', ['nip' => $nip])->with('success', 'Data pegawai berhasil diperbarui.');
+    }
+
+    public function destroy($nip){
+        $nipGanti = str_replace('-', '/', $nip);
+        $pegawai = PegawaiModel::where('nip', $nipGanti)->first();
         // dd($pegawai);
         if (!$pegawai) {
             return abort(404);

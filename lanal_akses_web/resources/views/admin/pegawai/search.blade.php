@@ -1,26 +1,26 @@
 @extends('layout.admin.app')
 
-@section('title-page', 'Admin | Data Pegawai')
+@section('title-page', 'Admin | Data Personil')
 
 @section('content')
     <style>
-        .active {
+        .active{
             text-decoration: underline;
             color: #0D21A1!important;
         }
-        .pagination a {
+        .pagination a{
             color: gray;
         }
     </style>
     <div class="container">
-        <h1 class="text-black my-4">Data Pegawai Negeri Sipil</h1>
+        <h1 class="text-black my-4">Data Pegawai</h1>
         <div class="container bg-white border rounded p-5 mt-4">
-            <div class="d-flex justify-content-between my-3">
+            <div class="d-flex justify-content-between"> <!-- Tambahkan class ini untuk menggeser tombol ke kanan -->
                 <a class="text-decoration-none" href="{{ route('admin.pegawai.create') }}">
-                    <button class="btn btn-blue btn-md text-white bg-blueaccent">Tambah Data PNS<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></span></button>
+                    <button class="btn btn-blue btn-md text-white bg-blueaccent my-2">Tambah Pegawai<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></span></button>
                 </a>
                 <a class="text-decoration-none" href="#">
-                    <button class="btn btn-blue btn-md text-white bg-bluedark">Cetak Data PNS<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
+                    <button class="btn btn-blue btn-md text-white bg-bluedark my-2">Cetak Data Pegawai<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
                 </a>
             </div>
             <table class="table thead-light">
@@ -63,20 +63,10 @@
                     </tr>
                     @endif
                 </tbody>
+                  
             </table>
-            <div class="pagination">
-                @if ($page > 1)
-                    <a href="{{ route('admin.pegawai.index', ['page' => $page - 1]) }}" class="text-decoration-none mx-2 previous">&laquo; Sebelumnya</a>
-                @endif
-            
-                @for ($i = $firstNav; $i <= $lastNav; $i++)
-                    <a href="{{ route('admin.pegawai.index', ['page' => $i]) }}" class="text-decoration-none mx-2 {{ $page == $i ? 'active' : '' }}">{{ $i }}</a>
-                @endfor
-            
-                @if ($page < $totalPages)
-                    <a href="{{ route('admin.pegawai.index', ['page' => $page + 1]) }}" class="text-decoration-none mx-2 next">Selanjutnya &raquo;</a>
-                @endif
-            </div>
         </div>
     </div>
 @endsection
+
+
