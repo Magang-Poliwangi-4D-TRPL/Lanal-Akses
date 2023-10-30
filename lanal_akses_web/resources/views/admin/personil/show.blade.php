@@ -62,11 +62,11 @@
         width: 150px
     }
     
-    .jabatan {
+    .nama {
         font-size: 2.5rem
     }
 
-    .nama {
+    .jabatan {
         font-size: 1.8rem
     }
 
@@ -97,8 +97,8 @@
                 <div class="bg-white p-4 text-center col-12 ">
                     <img src="{{  URL::asset('images/admin/default-profile.jpg') }}" alt="default-profile" border="0" height="auto" class="rounded-circle image-profile">
 
-                    <h2 class="mt-3 bluedark text-left jabatan">{{ $personil->jabatan}}</h2>
-                    <h4 class="text-left nama">{{ $personil->nama_lengkap }}</h4>
+                    <h2 class="mt-3 bluedark text-left nama">{{ $personil->nama_lengkap}}</h2>
+                    <h4 class="text-left jabatan">{{ $personil->jabatan }}</h4>
                     <p class="text-left" style="color: grey; border-bottom: 2px solid #0D21A1;">{{ $personil->nrp }}</p>
                 </div>
                 <div class="bg-white p-4">
@@ -136,7 +136,7 @@
                 <div class=" p-4"  style="border-bottom: 2px solid #0D21A1;">
                     <div class="row d-flex justify-content-between align-items-center">
                         <h1 class="informasi-title bluedark pb-3 ">Informasi Pribadi</h1>
-                        <a href="#" class="btn btn-sm btn-outline-secondary">Edit Profil</a>
+                        <a href="{{ route('admin.personil.edit', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" class="btn btn-sm btn-outline-secondary">Edit Profil</a>
                         
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                                 <tr>
                                     <td class="bluemain">Pangkat/KORPS/NRP</td>
                                     <td class="bluemain">:</td>
-                                    <td>{{ $personil->pangkat }} {{ $personil->korps }} / {{ $personil->nrp }}</td>
+                                    <td>{{ $personil->pangkat }} / {{ $personil->korps }} / {{ $personil->nrp }}</td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Pangkat Terakhir</td>

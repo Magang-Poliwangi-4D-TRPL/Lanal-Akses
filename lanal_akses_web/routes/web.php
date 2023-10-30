@@ -53,6 +53,8 @@ Route::get('/admin/personil/{page}', [PersonilController::class, 'index'])
 Route::get('/admin/tambah-personil', [PersonilController::class, 'create'])->name('admin.personil.create');
 Route::post('/admin/personil/store', [PersonilController::class, 'store'])->name('admin.personil.store');
 Route::get('/admin/personil/show/{nrp}', [PersonilController::class, 'show'])->name('admin.personil.show');
+Route::get('/admin/personil/show/{nrp}/edit', [PersonilController::class, 'edit'])->name('admin.personil.edit');
+Route::put('/admin/personil/show/{nrp}/update', [PersonilController::class, 'update'])->name('admin.personil.update');
 Route::get('/admin/personil/search', [PersonilController::class, 'search'])->name('admin.personil.search');
 Route::delete('/admin/personil/{id}', [PersonilController::class, 'destroy'])
     ->name('admin.personil.destroy');

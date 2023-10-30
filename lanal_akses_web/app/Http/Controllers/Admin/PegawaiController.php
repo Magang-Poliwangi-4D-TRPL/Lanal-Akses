@@ -123,7 +123,7 @@ class PegawaiController extends Controller
         }
 
 
-        // // Update data kursus
+        // // Update data pegawai
         $pegawai->update([
             'nama_pegawai' => $validatedData['nama_pegawai'],
             'jabatan' => $validatedData['jabatan'],
