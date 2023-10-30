@@ -1,6 +1,6 @@
 @extends('layout.absensi.app')
 
-@section('title-page', 'Lanal Akses | Absensi')
+@section('title-page', 'Lanal Akses | Perizinan')
   
 @section('content')
     <style>
@@ -187,7 +187,7 @@
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="isian-col">
-                    <input type="text" placeholder="Nama">
+                    <input type="text" placeholder="Masukkan nama lengkap anda">
                 </div>
             </div>
             <div class="kolom">
@@ -195,25 +195,36 @@
                     <i class="fas fa-id-card"></i>
                 </div>
                 <div class="isian-col">
-                    <input type="text" placeholder="NRP">
+                    <input type="text" placeholder="Masukkkan NRP anda">
                 </div>
             </div>
-            <p>tidak wajib diisi (jika personil tidak berada di pangkalan)</p>
             <div class="kolom">
                 <div class="icon-col" style="background-color: #0D21A1;">
-                <i class="fas fa-file" style="color: white;"></i> 
+                    <i class="fas fa-clock"></i>
                 </div>
                 <div class="isian-col">
-                    <input type="text" placeholder="Keterangan Jaga"> 
+                    <input type="text" placeholder="Status kehadiran">
                 </div>
             </div>
 
+            <p>wajib diisi (jika personil tidak berada di pangkalan)</p>
+            <div class="kolom">
+            <div class="icon-col" style="background-color: #0D21A1;">
+                <i class="fas fa-file" style="color: white;"></i>
+            </div>
+            <div class="isian-col" style="position: relative;">
+                <input type="text" placeholder="Upload file">
+                <label for="fileInput" style="color: #0D21A1; position: absolute; top: 50%; right: 20px; transform: translateY(-50%); cursor: pointer;">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </label>
+                <input type="file" id="fileInput" style="display: none;" multiple>
+            </div>
+        </div>
+
+        <div id="selectedFiles" style="margin-top: 20px;"></div>
             <div class="button-container">
                 <button type="submit" name="hadir">
-                     Hadir  <i class="fas fa-check ml-2"></i>
-                </button>
-                <button type="submit" name="ajukan_perizinan" class="ajukan-button" style="background-color:#5786CA ;" >
-                     Ajukan Perizinan  <i class="far fa-file ml-2"></i>
+                    Kirim  <i class="fas fa-arrow-right ml-2"></i>
                 </button>
             </div>
         </div>
@@ -235,5 +246,21 @@
 
     updateTime();
     setInterval(updateTime, 1000);
+</script>
+
+<script>
+    document.getElementById('fileInput').addEventListener('change', function (e) {
+        const selectedFiles = e.target.files;
+        // Di sini, Anda dapat melakukan tindakan tambahan dengan file yang diunggah, seperti mengunggahnya ke server.
+        const selectedFilesContainer = document.getElementById('selectedFiles');
+        selectedFilesContainer.innerHTML = '';
+
+        for (let i = 0; i < selectedFiles.length; i++) {
+            const file = selectedFiles[i];
+            const fileItem = document.createElement('div');
+            fileItem.textContent = `File ${i + 1}: ${file.name}`;
+            selectedFilesContainer.appendChild(fileItem);
+        }
+    });
 </script>
 @endsection

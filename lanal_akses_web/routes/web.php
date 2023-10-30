@@ -47,6 +47,10 @@ Route::get('/personil/login', function () {
     return view('personil.login');
 });
 
+Route::get('/personil/perizinan', function () {
+    return view('personil.perizinan');
+});
+
 // == controlller for all admin page ==
 
 Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
