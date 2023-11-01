@@ -35,7 +35,8 @@ class DatabaseSeeder extends Seeder
             "nrp" => "26226/P",
             "jabatan" => "Simak/paur BMN",
             'jenis_kelamin' => 'L',
-            'tempat_tanggallahir' => 'BANGKALAN, 20-12-1989',
+            'tempat_lahir' => 'BANGKALAN',
+            'tanggal_lahir' => '20-12-1989',
         ]);
     
         PendidikanFormalModel::create([

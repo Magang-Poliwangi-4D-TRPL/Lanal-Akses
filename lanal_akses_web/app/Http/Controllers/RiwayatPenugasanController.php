@@ -16,9 +16,9 @@ class RiwayatPenugasanController extends Controller
             return abort(404);
         } else {
             // Mengambil semua data RiwayatPenugasanModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
-            $riwyatPenugasan = RiwayatPenugasanModel::where('personil_id', $personil->id)->get();
+            $riwayatPenugasan = RiwayatPenugasanModel::where('personil_id', $personil->id)->get();
             
-            return view('admin.personil.riwayat-penugasan.index', compact('personil', 'riwyatPenugasan'));
+            return view('admin.personil.riwayat-penugasan.index', compact('personil', 'riwayatPenugasan'));
         }
 
     }

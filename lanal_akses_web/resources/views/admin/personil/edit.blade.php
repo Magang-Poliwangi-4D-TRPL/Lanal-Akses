@@ -121,34 +121,21 @@
                           </div>
                       @enderror
                     </div>
-                    @php
-                      $tempat_tanggal_lahir = [];
-                      $tempat_lahir = '';
-                      $tanggal_lahir = '';
-                      if ($personil->tempat_tanggallahir == null) {
-                        $tempat_lahir = '';
-                        $tanggal_lahir = '';
-                      } else {
-                        $tempat_tanggal_lahir = explode(",", $personil->tempat_tanggallahir);
-                        $tempat_lahir = $tempat_tanggal_lahir[0];
-                        $tanggal_lahir = $tempat_tanggal_lahir[1];
-                      }
-                    @endphp
                     <div class="form-group row">
                       <label for="tempat_lahir" class="col-sm-2 col-form-label">Tempat Lahir</label>
                       <div class="col-sm-4">
-                          <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" value="{{ $tempat_lahir }}">
+                          <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" value="{{ $personil->tempat_lahir }}">
                       </div>
                       <label for="tanggal_lahir" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                       <div class="col-sm-4">
-                          <div class="input-group date" id="tanggal_lahir_picker" data-target-input="nearest">
-                              <input type="text" class="form-control datetimepicker-input" data-target="#tanggal_lahir_picker" name="tanggal_lahir" placeholder="Tanggal Lahir" value="{{ $tanggal_lahir }}">
-                              <div class="input-group-append" data-target="#tanggal_lahir_picker" data-toggle="datetimepicker">
+                          <div class="input-group date" id="datepicker">
+                              <input type="text" class="form-control" data-target="#datepicker" name="tanggal_lahir" placeholder="Tanggal Lahir" value="{{ $personil->tanggal_lahir }}">
+                              <div class="input-group-append" data-target="#datepicker" data-toggle="datetimepicker">
                                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                               </div>
                           </div>
                         </div>
-                  </div>
+                    </div>
                     <div class="form-group">
                       <label for="tinggi_beratbadan">Massukkan tinggi & berat badan personil baru</label>
                       <input type="text" class="form-control @error('tinggi_beratbadan') is-invalid @enderror" id="tinggi_beratbadan" name="tinggi_beratbadan"  placeholder="XX cm/XX kg" value="{{ $personil->tinggi_beratbadan }}">
@@ -258,5 +245,4 @@
         </div>
         
     </div>
-
 @endsection

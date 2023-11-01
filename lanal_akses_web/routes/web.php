@@ -126,9 +126,9 @@ Route::get('/admin/personil/show/{nrp}/data-kepangkatan/{dataKepangkatanId}/edit
 Route::get('/admin/personil/show/{nrp}/riwayat-penugasan', [RiwayatPenugasanController::class, 'index'])->name('admin.personil.riwayat-penugasan.index');
 Route::get('/admin/personil/show/{nrp}/riwayat-penugasan/create', [RiwayatPenugasanController::class, 'create'])->name('admin.personil.riwayat-penugasan.create');
 // Route::post('/admin/personil/show/{nrp}/riwayat-penugasan', [RiwayatPenugasanController::class, 'store'])->name('admin.personil.riwayat-penugasan.store');
-Route::get('/admin/personil/show/{nrp}/riwayat-penugasan/{riwayatKepangkatanId}/edit', [RiwayatPenugasanController::class, 'edit'])->name('admin.personil.riwayat-penugasan.edit');
-// Route::put('/admin/personil/show/{nrp}/riwayat-penugasan/{riwayatKepangkatanId}', [RiwayatPenugasanController::class, 'update'])->name('admin.personil.riwayat-penugasan.update');
-// Route::delete('/admin/personil/show/{nrp}/riwayat-penugasan/{riwayatKepangkatanId}', [RiwayatPenugasanController::class, 'destroy'])
+Route::get('/admin/personil/show/{nrp}/riwayat-penugasan/{riwayatPenugasanId}/edit', [RiwayatPenugasanController::class, 'edit'])->name('admin.personil.riwayat-penugasan.edit');
+// Route::put('/admin/personil/show/{nrp}/riwayat-penugasan/{riwayatPenugasanId}', [RiwayatPenugasanController::class, 'update'])->name('admin.personil.riwayat-penugasan.update');
+// Route::delete('/admin/personil/show/{nrp}/riwayat-penugasan/{riwayatPenugasanId}', [RiwayatPenugasanController::class, 'destroy'])
 // ->name('admin.personil.riwayat-penugasan.destroy');
 
 // Personil -> sanksi-hukuman

@@ -226,10 +226,10 @@
                                     <td class="bluemain">Tempat, Tanggal Lahir</td>
                                     <td class="bluemain">:</td>
                                     <td>
-                                        @empty($personil->tempat_tanggallahir)
+                                        @empty($personil->tempat_lahir)
                                             Tidak ada data
                                         @else
-                                            <p>{{ $personil->tempat_tanggallahir }}</p>
+                                            <p>{{ $personil->tempat_lahir . ', ' . $personil->tanggal_lahir}}</p>
                                         @endempty
                                     </td>
                                 </tr>
