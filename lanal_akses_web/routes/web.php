@@ -28,6 +28,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin/login/', function () {
+    return view('admin.login.login');
+});
+
 Route::get('/personil', function () {
     return view('personil.dashboard');
 });
@@ -36,6 +40,17 @@ Route::get('personil/editprofile', function () {
     return view('personil.editprofile');
 });
 
+Route::get('/personil/absensi', function () {
+    return view('personil.absensi');
+});
+
+Route::get('/personil/login', function () {
+    return view('personil.login');
+});
+
+Route::get('/personil/perizinan', function () {
+    return view('personil.perizinan');
+});
 
 // == controlller for all admin page ==
 
