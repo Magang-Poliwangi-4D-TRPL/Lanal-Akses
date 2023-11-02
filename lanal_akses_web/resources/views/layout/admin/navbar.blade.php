@@ -5,7 +5,14 @@
         <span class="navbar-toggler-icon"></span>
       </button>
         <div class="collapse navbar-collapse" id="navbar-list">
-          <form class="form-inline col-lg-10 col-md-8" action="{{ route('admin.personil.search', ['page']) }}" method="GET">
+          <form class="form-inline col-lg-10 col-md-8" action="
+          @if (request()->is('admin/personil/*'))
+            {{ route('admin.personil.search', ['page']) }} 
+          @elseif (request()->is('admin/pegawai/*'))
+            {{ route('admin.pegawai.search', ['page']) }}
+          @else
+          @endif
+          " method="GET">
             <input class="form-control mr-sm-2 col-lg-10 col-md-8" type="search" name="q" placeholder="Search" aria-label="Search" value="{{ request('q') }}">
             <button class="btn text-white bg-greenmain my-2 my-sm-0" type="submit">Search</button>
         </form>

@@ -62,11 +62,11 @@
         width: 150px
     }
     
-    .jabatan {
+    .nama {
         font-size: 2.5rem
     }
 
-    .nama {
+    .jabatan {
         font-size: 1.8rem
     }
 
@@ -97,8 +97,8 @@
                 <div class="bg-white p-4 text-center col-12 ">
                     <img src="{{  URL::asset('images/admin/default-profile.jpg') }}" alt="default-profile" border="0" height="auto" class="rounded-circle image-profile">
 
-                    <h2 class="mt-3 bluedark text-left jabatan">{{ $personil->jabatan}}</h2>
-                    <h4 class="text-left nama">{{ $personil->nama_lengkap }}</h4>
+                    <h2 class="mt-3 bluedark text-left nama">{{ $personil->nama_lengkap}}</h2>
+                    <h4 class="text-left jabatan">{{ $personil->jabatan }}</h4>
                     <p class="text-left" style="color: grey; border-bottom: 2px solid #0D21A1;">{{ $personil->nrp }}</p>
                 </div>
                 <div class="bg-white p-4">
@@ -136,7 +136,7 @@
                 <div class=" p-4"  style="border-bottom: 2px solid #0D21A1;">
                     <div class="row d-flex justify-content-between align-items-center">
                         <h1 class="informasi-title bluedark pb-3 ">Informasi Pribadi</h1>
-                        <a href="#" class="btn btn-sm btn-outline-secondary">Edit Profil</a>
+                        <a href="{{ route('admin.personil.edit', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" class="btn btn-sm btn-outline-secondary">Edit Profil</a>
                         
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                                 <tr>
                                     <td class="bluemain">Pangkat/KORPS/NRP</td>
                                     <td class="bluemain">:</td>
-                                    <td>{{ $personil->pangkat }} {{ $personil->korps }} / {{ $personil->nrp }}</td>
+                                    <td>{{ $personil->pangkat }} / {{ $personil->korps }} / {{ $personil->nrp }}</td>
                                 </tr>
                                 <tr>
                                     <td class="bluemain">Pangkat Terakhir</td>
@@ -226,10 +226,10 @@
                                     <td class="bluemain">Tempat, Tanggal Lahir</td>
                                     <td class="bluemain">:</td>
                                     <td>
-                                        @empty($personil->tempat_tanggallahir)
+                                        @empty($personil->tempat_lahir)
                                             Tidak ada data
                                         @else
-                                            <p>{{ $personil->tempat_tanggallahir }}</p>
+                                            <p>{{ $personil->tempat_lahir . ', ' . $personil->tanggal_lahir}}</p>
                                         @endempty
                                     </td>
                                 </tr>
@@ -518,7 +518,7 @@
                 <div class="container ">
                     <div class="row d-flex justify-content-between align-items-center">
                         <h3 class="py-3 judul-tabel">Tanda jasa yang dimiliki/diperoleh</h3>
-                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Tanda jasa</a>
+                        <a href="{{ route('admin.personil.tanda-jasa.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Tanda jasa</a>
                     </div>
                     <table class="table thead-light">
                         <thead>
@@ -530,16 +530,27 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr class="border border-light">
+                            @if ($tandaJasa->count()<=0)
+                            <tr>
                                 <td colspan="5">Tidak ada data.</td>
                             </tr>
+                            @else
+                                @foreach ($tandaJasa as $data_tandaJasa)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $data_tandaJasa->nama_tanda_jasa }}</td>
+                                        <td>{{ $data_tandaJasa->no_skep }}</td>
+                                        <td>{{ $data_tandaJasa->keterangan }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                           </tbody>
                     </table>
                 </div>
                 <div class="container ">
                     <div class="row d-flex justify-content-between align-items-center">
                         <h3 class="py-3 judul-tabel">Data Kepangkatan</h3>
-                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Kepangkatan</a>
+                        <a href="{{ route('admin.personil.data-kepangkatan.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Kepangkatan</a>
                     </div>
                     <table class="table thead-light">
                         <thead>
@@ -552,16 +563,28 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr class="border border-light">
+                            @if ($dataKepangkatan->count()<=0)
+                            <tr>
                                 <td colspan="5">Tidak ada data.</td>
                             </tr>
+                            @else
+                                @foreach ($dataKepangkatan as $item_dataKepangkatan)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item_dataKepangkatan->pangkat }}</td>
+                                        <td>{{ $item_dataKepangkatan->no_skep }}</td>
+                                        <td>{{ $item_dataKepangkatan->tempat_pangkat }}</td>
+                                        <td>{{ $item_dataKepangkatan->keterangan }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                           </tbody>
                     </table>
                 </div>
                 <div class="container ">
                     <div class="row d-flex justify-content-between align-items-center">
                         <h3 class="py-3 judul-tabel">Riwayat Penugasan/Penempatan</h3>
-                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Riwayat Penugasan</a>
+                        <a href="{{ route('admin.personil.riwayat-penugasan.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Riwayat Penugasan</a>
                     </div>
                     <table class="table thead-light">
                         <thead>
@@ -574,16 +597,28 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr class="border border-light">
+                            @if ($riwayatPenugasan->count()<=0)
+                            <tr>
                                 <td colspan="5">Tidak ada data.</td>
                             </tr>
+                            @else
+                                @foreach ($riwayatPenugasan as $item_riwayatPenugasan)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item_riwayatPenugasan->tahun }}</td>
+                                        <td>{{ $item_riwayatPenugasan->jabatan }}</td>
+                                        <td>{{ $item_riwayatPenugasan->tempat }}</td>
+                                        <td>{{ $item_riwayatPenugasan->keterangan }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                           </tbody>
                     </table>
                 </div>
                 <div class="container ">
                     <div class="row d-flex justify-content-between align-items-center">
                         <h3 class="py-3 judul-tabel">Sanksi Hukuman</h3>
-                        <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Sanksi Hukuman</a>
+                        <a href="{{ route('admin.personil.sanksi-hukuman.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Sanksi Hukuman</a>
                     </div>
                     <table class="table thead-light">
                         <thead>
@@ -595,9 +630,20 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr class="border border-light">
+                            @if ($sanksiHukuman->count()<=0)
+                            <tr>
                                 <td colspan="5">Tidak ada data.</td>
                             </tr>
+                            @else
+                                @foreach ($sanksiHukuman as $item_sanksiHukuman)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item_sanksiHukuman->nama_hukuman }}</td>
+                                        <td>{{ $item_sanksiHukuman->tahun_hukuman }}</td>
+                                        <td>{{ $item_sanksiHukuman->keterangan }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                           </tbody>
                     </table>
                 </div>

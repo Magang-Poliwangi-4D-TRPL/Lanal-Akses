@@ -2,12 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Models\DataKepangkatanModel;
 use App\Models\KursusModel;
 use App\Models\PegawaiModel;
 use App\Models\PendidikanFormalModel;
 use App\Models\PendidikanMiliterModel;
 use App\Models\PerlengkapanModel;
 use App\Models\PersonilModel;
+use App\Models\RiwayatPenugasanModel;
+use App\Models\SanksiHukumanModel;
+use App\Models\TandaJasaModel;
 use App\Models\TanggunganKeluargaModel;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -22,13 +26,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        // ==== Personil Feature ====
         PersonilModel::create([
             "nama_lengkap" => "Suhendra Kurniawan",
             "pangkat" => "Letda Laut",
             "korps" => "(KH)",
             "nrp" => "26226/P",
             "jabatan" => "Simak/paur BMN",
-            'jenis_kelamin' => 'L'
+            'jenis_kelamin' => 'L',
+            'tempat_lahir' => 'BANGKALAN',
+            'tanggal_lahir' => '20-12-1989',
         ]);
     
         PendidikanFormalModel::create([
@@ -72,6 +80,39 @@ class DatabaseSeeder extends Seeder
             'keterangan' => null,
             'personil_id' => 1,
         ]);
+    
+        TandaJasaModel::create([
+            'nama_tanda_jasa' => "SL XII",
+            'no_skep' => "KED/-/-/-",
+            'keterangan' => null,
+            'personil_id' => 1,
+        ]);
+    
+        DataKepangkatanModel::create([
+            'pangkat' => "LETDA",
+            'no_skep' => "KED/-/-/-",
+            'tempat_pangkat' => "Mako Lanal Banyuwangi",
+            'keterangan' => null,
+            'personil_id' => 1,
+        ]);
+    
+        RiwayatPenugasanModel::create([
+            'tahun' => "2011-2022",
+            'jabatan' => "PASET",
+            'tempat' => "Mako Lanal Banyuwangi",
+            'keterangan' => null,
+            'personil_id' => 1,
+        ]);
+    
+        SanksiHukumanModel::create([
+            'nama_hukuman' => "Hukuman 1",
+            'tahun_hukuman' => "2023",
+            'keterangan' => null,
+            'personil_id' => 1,
+        ]);
+
+
+        // ==== end of Personil Feature ====
         
         PegawaiModel::create([
             "nama_pegawai" => "Darwati, S.E",

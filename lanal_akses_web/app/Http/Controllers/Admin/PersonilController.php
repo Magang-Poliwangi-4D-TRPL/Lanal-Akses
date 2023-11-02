@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataKepangkatanModel;
 use App\Models\KursusModel;
 use App\Models\PendidikanFormalModel;
 use App\Models\PendidikanMiliterModel;
 use App\Models\PerlengkapanModel;
 use App\Models\PersonilModel;
+use App\Models\RiwayatPenugasanModel;
+use App\Models\SanksiHukumanModel;
+use App\Models\TandaJasaModel;
 use App\Models\TanggunganKeluargaModel;
 use Illuminate\Http\Request;
 
@@ -50,33 +54,40 @@ class PersonilController extends Controller
         $personil = PersonilModel::where('nrp', $nrpGanti)->first();
 
         // $pendidikanFormal = $personil->pendidikanFormal;
-
-        if($personil==null){
+        // dd($personil);
+        if($personil == null){
             return abort(404);
         } else {
-            // dd($personil);
-            if($personil == null){
-                return abort(404);
-            } else {
-                // Mengambil semua data PendidikanFormalModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
-                $pendidikanFormal = PendidikanFormalModel::where('personil_id', $personil->id)->get();
-                
-                // Mengambil semua data PendidikanMiliterModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
-                $pendidikanMiliter = PendidikanMiliterModel::where('personil_id', $personil->id)->get();
-                
-                // Mengambil semua data Kursus yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
-                $kursus = KursusModel::where('personil_id', $personil->id)->get();
-                
-                // Mengambil semua data TanggunganKeluarga yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
-                $tanggungan_keluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)->get();
-                
-                // Mengambil semua data Perlengkapan yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
-                $perlengkapan = PerlengkapanModel::where('personil_id', $personil->id)->get();
-                
-                return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggungan_keluarga', 'perlengkapan'));
-            }
-
+            // Mengambil semua data PendidikanFormalModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $pendidikanFormal = PendidikanFormalModel::where('personil_id', $personil->id)->get();
+            
+            // Mengambil semua data PendidikanMiliterModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $pendidikanMiliter = PendidikanMiliterModel::where('personil_id', $personil->id)->get();
+            
+            // Mengambil semua data Kursus yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $kursus = KursusModel::where('personil_id', $personil->id)->get();
+            
+            // Mengambil semua data TanggunganKeluarga yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $tanggungan_keluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)->get();
+            
+            // Mengambil semua data Perlengkapan yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $perlengkapan = PerlengkapanModel::where('personil_id', $personil->id)->get();
+            
+            // Mengambil semua data TandaJasa yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $tandaJasa = TandaJasaModel::where('personil_id', $personil->id)->get();
+            
+            // Mengambil semua data DataKepangkatanModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $dataKepangkatan = DataKepangkatanModel::where('personil_id', $personil->id)->get();
+            
+            // Mengambil semua data RiwayatPenugasanModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $riwayatPenugasan = RiwayatPenugasanModel::where('personil_id', $personil->id)->get();
+            
+            // Mengambil semua data SanksiHukumanModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $sanksiHukuman = SanksiHukumanModel::where('personil_id', $personil->id)->get();
+            
+            return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggungan_keluarga', 'perlengkapan', 'tandaJasa', 'dataKepangkatan', 'riwayatPenugasan', 'sanksiHukuman'));
         }
+
     }
 
     public function search(Request $request) {
@@ -117,6 +128,77 @@ class PersonilController extends Controller
         PersonilModel::create($validatedData);
         // dd($validatedData);
         return redirect()->route('admin.personil.index', ['page' => 1])->with('success', 'Data Personil berhasil ditambahkan.');
+    }
+
+    public function edit($nrp){
+        $personil = PersonilModel::where('nrp', str_replace('-', '/', $nrp))->first();
+
+        if ($personil == null) {
+            return abort(404, 'data personil tidak ditemukan');
+        } else {
+            return view('admin.personil.edit', compact('personil'));
+        }
+    }
+
+    public function update(Request $request, $nrp){
+        $nrpGanti = str_replace('-', '/', $nrp);
+        $personil = PersonilModel::where('nrp', $nrpGanti)->first();
+        // Validasi data yang masuk
+        $validatedData = $request->validate([
+            'nama_lengkap' => 'required|string|max:50',
+            'jabatan' => 'required|string|max:50',
+            'jenis_kelamin' => 'required',
+            'pangkat' => 'nullable|string|max:25',
+            'korps' => 'nullable',
+            'pangkat_terakhir' => 'nullable',
+            'tempat_dinas' => 'nullable',
+            'tempat_armada' => 'nullable',
+            'nomor_kta' => 'nullable|string|max:20',
+            'nomor_ktp' => 'nullable|integer',
+            'nomor_asbri' => 'nullable|string|max:8',
+            'tempat_lahir' => 'nullable',
+            'tanggal_lahir' => 'nullable',
+            'tinggi_beratbadan' => 'nullable',
+            'agama_sukubangsa' => 'nullable',
+            'golongan_darah' => 'nullable',
+            'dikspesialisasi' => 'nullable',
+            'nilai_samata_stakes' => 'nullable',
+            'kecakapan_bahasa' => 'nullable',
+            'alamat_sekarang' => 'nullable|string',
+            'nomor_hp' => 'nullable|string|',
+            'status_rumah' => 'nullable',
+        ],);
+
+        if ($personil == null) {
+            return abort(404);
+        }
+
+
+        // // Update data personil
+        $personil->update([
+            'nama_lengkap' => $validatedData['nama_lengkap'],
+            'jabatan' => $validatedData['jabatan'],
+            'jenis_kelamin' => $validatedData['jenis_kelamin'],
+            'pangkat' => $validatedData['pangkat'],
+            'korps' => $validatedData['korps'],
+            'pangkat_terakhir' => $validatedData['pangkat_terakhir'],
+            'tempat_dinas' => $validatedData['tempat_dinas'],
+            'nomor_kta' => $validatedData['nomor_kta'],
+            'nomor_ktp' => $validatedData['nomor_ktp'],
+            'nomor_asbri' => $validatedData['nomor_asbri'],
+            'tempat_lahir' => $validatedData['tempat_lahir'],
+            'tanggal_lahir' => $validatedData['tanggal_lahir'],
+            'tinggi_beratbadan' => $validatedData['tinggi_beratbadan'],
+            'agama_sukubangsa' => $validatedData['agama_sukubangsa'],
+            'golongan_darah' => $validatedData['golongan_darah'],
+            'dikspesialisasi' => $validatedData['dikspesialisasi'],
+            'nilai_samata_stakes' => $validatedData['nilai_samata_stakes'],
+            'kecakapan_bahasa' => $validatedData['kecakapan_bahasa'],
+            'alamat_sekarang' => $validatedData['alamat_sekarang'],
+            'status_rumah' => $validatedData['status_rumah'],
+        ]);
+
+        return redirect()->route('admin.personil.show', ['nrp' => $nrp])->with('success', 'Data personil berhasil diperbarui.');
     }
 
     public function destroy($id){

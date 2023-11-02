@@ -8,8 +8,10 @@ use App\Http\Controllers\Admin\PegawaiController;
 use App\Http\Controllers\Admin\PendidikanFormalController;
 use App\Http\Controllers\Admin\PendidikanMiliterController;
 use App\Http\Controllers\Admin\PersonilController;
+use App\Http\Controllers\Admin\TandaJasaController;
 use App\Http\Controllers\Admin\TanggunganKeluargaController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DataKepangkatanController;
 use App\Http\Controllers\PerlengkapanController;
 use App\Http\Controllers\Personil\PersonilController as PersonilPersonilController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +52,8 @@ Route::get('/admin/personil/{page}', [PersonilController::class, 'index'])
 Route::get('/admin/tambah-personil', [PersonilController::class, 'create'])->name('admin.personil.create');
 Route::post('/admin/personil/store', [PersonilController::class, 'store'])->name('admin.personil.store');
 Route::get('/admin/personil/show/{nrp}', [PersonilController::class, 'show'])->name('admin.personil.show');
+Route::get('/admin/personil/show/{nrp}/edit', [PersonilController::class, 'edit'])->name('admin.personil.edit');
+Route::put('/admin/personil/show/{nrp}/update', [PersonilController::class, 'update'])->name('admin.personil.update');
 Route::get('/admin/personil/search', [PersonilController::class, 'search'])->name('admin.personil.search');
 Route::delete('/admin/personil/{id}', [PersonilController::class, 'destroy'])
     ->name('admin.personil.destroy');
@@ -62,7 +66,6 @@ Route::get('/admin/personil/show/{nrp}/pendidikan-formal/{pendidikanFormalId}/ed
 Route::put('/admin/personil/show/{nrp}/pendidikan-formal/{pendidikanFormalId}', [PendidikanFormalController::class, 'update'])->name('admin.personil.pendidikanformal.update');
 Route::delete('/admin/personil/show/{nrp}/pendidikan-formal/{pendidikanFormalId}', [PendidikanFormalController::class, 'destroy'])
 ->name('admin.personil.pendidikanformal.destroy');
-// Route::get('/admin/pendidikan-formal', [PendidikanFormalController::class, 'index2'])->name('admin.personil.pendidikanformal.index2');
 
 // Personil -> PendidikanMiliter
 Route::get('/admin/personil/show/{nrp}/pendidikan-militer', [PendidikanMiliterController::class, 'index'])->name('admin.personil.pendidikanmiliter.index');
@@ -100,6 +103,42 @@ Route::get('/admin/personil/show/{nrp}/perlengkapan/{perlengkapanId}/edit', [Per
 Route::delete('/admin/personil/show/{nrp}/perlengkapan/{perlengkapanId}', [PerlengkapanController::class, 'destroy'])
 ->name('admin.personil.perlengkapan.destroy');
 
+// Personil -> tanda-jasa
+Route::get('/admin/personil/show/{nrp}/tanda-jasa', [TandaJasaController::class, 'index'])->name('admin.personil.tanda-jasa.index');
+Route::get('/admin/personil/show/{nrp}/tanda-jasa/create', [TandaJasaController::class, 'create'])->name('admin.personil.tanda-jasa.create');
+// Route::post('/admin/personil/show/{nrp}/tanda-jasa', [TandaJasaController::class, 'store'])->name('admin.personil.tanda-jasa.store');
+Route::get('/admin/personil/show/{nrp}/tanda-jasa/{tandaJasaId}/edit', [TandaJasaController::class, 'edit'])->name('admin.personil.tanda-jasa.edit');
+// Route::put('/admin/personil/show/{nrp}/tanda-jasa/{tanda-jasaId}', [TandaJasaController::class, 'update'])->name('admin.personil.tanda-jasa.update');
+// Route::delete('/admin/personil/show/{nrp}/tanda-jasa/{tanda-jasaId}', [TandaJasaController::class, 'destroy'])
+// ->name('admin.personil.tanda-jasa.destroy');
+
+// Personil -> data-kepangkatan
+Route::get('/admin/personil/show/{nrp}/data-kepangkatan', [DataKepangkatanController::class, 'index'])->name('admin.personil.data-kepangkatan.index');
+Route::get('/admin/personil/show/{nrp}/data-kepangkatan/create', [DataKepangkatanController::class, 'create'])->name('admin.personil.data-kepangkatan.create');
+// Route::post('/admin/personil/show/{nrp}/data-kepangkatan', [DataKepangkatanController::class, 'store'])->name('admin.personil.data-kepangkatan.store');
+Route::get('/admin/personil/show/{nrp}/data-kepangkatan/{dataKepangkatanId}/edit', [DataKepangkatanController::class, 'edit'])->name('admin.personil.data-kepangkatan.edit');
+// Route::put('/admin/personil/show/{nrp}/data-kepangkatan/{dataKepangkatanId}', [DataKepangkatanController::class, 'update'])->name('admin.personil.data-kepangkatan.update');
+// Route::delete('/admin/personil/show/{nrp}/data-kepangkatan/{dataKepangkatanId}', [DataKepangkatanController::class, 'destroy'])
+// ->name('admin.personil.data-kepangkatan.destroy');
+
+// Personil -> riwayat-penugasan
+Route::get('/admin/personil/show/{nrp}/riwayat-penugasan', [RiwayatPenugasanController::class, 'index'])->name('admin.personil.riwayat-penugasan.index');
+Route::get('/admin/personil/show/{nrp}/riwayat-penugasan/create', [RiwayatPenugasanController::class, 'create'])->name('admin.personil.riwayat-penugasan.create');
+// Route::post('/admin/personil/show/{nrp}/riwayat-penugasan', [RiwayatPenugasanController::class, 'store'])->name('admin.personil.riwayat-penugasan.store');
+Route::get('/admin/personil/show/{nrp}/riwayat-penugasan/{riwayatPenugasanId}/edit', [RiwayatPenugasanController::class, 'edit'])->name('admin.personil.riwayat-penugasan.edit');
+// Route::put('/admin/personil/show/{nrp}/riwayat-penugasan/{riwayatPenugasanId}', [RiwayatPenugasanController::class, 'update'])->name('admin.personil.riwayat-penugasan.update');
+// Route::delete('/admin/personil/show/{nrp}/riwayat-penugasan/{riwayatPenugasanId}', [RiwayatPenugasanController::class, 'destroy'])
+// ->name('admin.personil.riwayat-penugasan.destroy');
+
+// Personil -> sanksi-hukuman
+Route::get('/admin/personil/show/{nrp}/sanksi-hukuman', [SanksiHukumanController::class, 'index'])->name('admin.personil.sanksi-hukuman.index');
+Route::get('/admin/personil/show/{nrp}/sanksi-hukuman/create', [SanksiHukumanController::class, 'create'])->name('admin.personil.sanksi-hukuman.create');
+// Route::post('/admin/personil/show/{nrp}/sanksi-hukuman', [SanksiHukumanController::class, 'store'])->name('admin.personil.sanksi-hukuman.store');
+Route::get('/admin/personil/show/{nrp}/sanksi-hukuman/{sanksiHukumanId}/edit', [SanksiHukumanController::class, 'edit'])->name('admin.personil.sanksi-hukuman.edit');
+// Route::put('/admin/personil/show/{nrp}/sanksi-hukuman/{sanksiHukumanId}', [SanksiHukumanController::class, 'update'])->name('admin.personil.sanksi-hukuman.update');
+// Route::delete('/admin/personil/show/{nrp}/sanksi-hukuman/{sanksiHukumanId}', [SanksiHukumanController::class, 'destroy'])
+// ->name('admin.personil.sanksi-hukuman.destroy');
+
 
 // Absensi
 Route::get('/admin/absensi/', [AbsensiController::class, 'index'])
@@ -120,11 +159,15 @@ Route::delete('/admin/users/{id}', [UserController::class, 'destroy'])->name('us
 Route::get('/admin/pegawai/{page}', [PegawaiController::class, 'index'])
     ->name('admin.pegawai.index')
     ->where('page', '[1-9][0-9]*');
+Route::get('/admin/pegawai/search', [PegawaiController::class, 'search'])->name('admin.pegawai.search');
 Route::get('/admin/tambah-pegawai', [PegawaiController::class, 'create'])
-    ->name('admin.pegawai.create'); // Ubah dari 'pegawai.create' menjadi 'admin.pegawai.create'
+    ->name('admin.pegawai.create'); 
 Route::post('/admin/pegawai/store', [PegawaiController::class, 'store'])
-    ->name('admin.pegawai.store'); // Ubah dari 'pegawai.store' menjadi 'admin.pegawai.store'
+    ->name('admin.pegawai.store'); 
 Route::delete('/admin/pegawai/{id}', [PegawaiController::class, 'destroy'])
     ->name('admin.pegawai.destroy');
+Route::get('/admin/pegawai/{nip}/show', [PegawaiController::class, 'show'])->name('admin.pegawai.show');
+Route::get('/admin/pegawai/{nip}/edit', [PegawaiController::class, 'edit'])->name('admin.pegawai.edit');
+Route::put('/admin/pegawai/{nip}', [PegawaiController::class, 'update'])->name('admin.pegawai.update');
 
 
