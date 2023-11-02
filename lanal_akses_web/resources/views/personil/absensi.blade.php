@@ -176,7 +176,9 @@
         <div class="right-section">
             <div class="header">
                 <div class="left-header">
-                    <i class="fas fa-angle-left"></i> Kembali
+                    <a href="{{ route('personil.login') }}">
+                        <i class="fas fa-angle-left"></i> Kembali
+                    </a>
                 </div>
                 <div class="right-header" id="current-time"></div>
             </div>
@@ -213,7 +215,9 @@
                      Hadir  <i class="fas fa-check ml-2"></i>
                 </button>
                 <button type="submit" name="ajukan_perizinan" class="ajukan-button" style="background-color:#5786CA ;" >
-                     Ajukan Perizinan  <i class="far fa-file ml-2"></i>
+                    <a href="{{ route('personil.perizinan') }}">
+                        Ajukan Perizinan  <i class="far fa-file ml-2"></i>
+                    </a>
                 </button>
             </div>
         </div>

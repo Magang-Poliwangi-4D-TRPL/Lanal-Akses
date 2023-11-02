@@ -4,6 +4,11 @@
   
 @section('content')
     <style>
+
+        a:hover{
+            text-decoration: none;
+        }
+
         .container {
             display: flex;
             justify-content: center; /* Memusatkan secara horizontal */
@@ -120,7 +125,9 @@
         <div class="right-section">
             <div class="header">
                 <div class="left-header">
-                    <i class="fas fa-angle-left"></i> Kembali
+                    <a href="{{ route('personil.login') }}">
+                        <i class="fas fa-angle-left"></i> Kembali
+                    </a>
                 </div>
             </div>
             <h1>Masuk ke Akun Admin</h1>
@@ -143,9 +150,11 @@
             </div>
 
             <div class="button-container">
-                <button type="submit" name="masuk">
-                     Masuk  <i class="fas fa-arrow-right ml-2"></i>
-                </button>
+                <a class="container-fluid" href="{{ route('admin.dashboard') }}">
+                    <button type="submit" name="masuk">
+                         Masuk  <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </a>
             </div>
         </div>
     </div>

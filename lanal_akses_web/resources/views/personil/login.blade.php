@@ -5,6 +5,11 @@
 @section('content')
 
 <style>
+
+    a:hover{
+        text-decoration: none;
+    }
+
     .container {
         width: 966px;
         height: 556px;
@@ -244,15 +249,21 @@
         <div class="button-container">
             <div class="masuk-absen">
                 <button type="submit" name="masuk" class="masuk-button">
-                    Masuk <i class="fas fa-check ml-2"></i>
+                    <a class="text-decoration-none" href="{{ route('personil.dashboard') }}">
+                        Masuk <i class="fas fa-check ml-2"></i>
+                    </a>
                 </button>
                 <button type="submit" name="absen" class="absen-button">
-                    Absen <i class="fas fa-clock ml-2"></i>
+                    <a href="{{ route('personil.absensi') }}">
+                        Absen <i class="fas fa-clock ml-2"></i>
+                    </a>
                 </button>
             </div>
-            <button type="submit" name="masuk_sebagai_admin" class="admin-button" style="background-color: #5786CA;">
-                Masuk Sebagai Admin <i class="fas fa-lock ml-2"></i>
-            </button>
+            <a href="{{ route('admin.login') }}">
+                <button type="submit" name="masuk_sebagai_admin" class="admin-button" style="background-color: #5786CA;">
+                    Masuk Sebagai Admin <i class="fas fa-lock ml-2"></i>
+                </button>
+            </a>
         </div>
     </div>
 </div>

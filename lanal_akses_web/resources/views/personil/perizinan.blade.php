@@ -176,7 +176,9 @@
         <div class="right-section">
             <div class="header">
                 <div class="left-header">
-                    <i class="fas fa-angle-left"></i> Kembali
+                    <a href="{{ route('personil.absensi') }}">
+                        <i class="fas fa-angle-left"></i> Kembali
+                    </a>
                 </div>
                 <div class="right-header" id="current-time"></div>
             </div>

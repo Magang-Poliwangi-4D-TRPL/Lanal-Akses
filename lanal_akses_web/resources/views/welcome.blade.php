@@ -9,7 +9,7 @@
 <nav class="navbar navbar-dark" style="background-color: #4E6766">
   <a class="navbar-brand" href="{{ url('/') }}"><img src="https://i.ibb.co/MR438ww/logo-no-bg.png" alt="logo-no-bg" width="30" height="30"></a>
   
-  <a href="{{ url('/admin') }}"><button class="btn btn-success my-2 my-sm-0" type="submit">Login</button></a>
+  <a href="{{ route('personil.login') }}"><button class="btn btn-success my-2 my-sm-0" type="submit">Login</button></a>
   
 </nav>
 
