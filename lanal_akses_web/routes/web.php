@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AbsensiController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KursusController;
 use App\Http\Controllers\Admin\PegawaiController;
@@ -12,8 +13,7 @@ use App\Http\Controllers\Admin\TanggunganKeluargaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DataKepangkatanController;
 use App\Http\Controllers\PerlengkapanController;
-use App\Http\Controllers\RiwayatPenugasanController;
-use App\Http\Controllers\SanksiHukumanController;
+use App\Http\Controllers\Personil\PersonilController as PersonilPersonilController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,17 +32,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/personil', function () {
-    return view('personil.dashboard');
-});
-
-Route::get('personil/editprofile', function () {
-    return view('personil.editprofile');
-});
-
+// controller for all personil & public page 
+Route::get('/login', [PersonilPersonilController::class, 'login'])->name('personil.login');
+Route::get('/personil', [PersonilPersonilController::class, 'personilDashboard'])->name('personil.dashboard');
+Route::get('/personil/edit-profile', [PersonilPersonilController::class, 'edit'])->name('personil.edit');
+Route::get('/absensi', [PersonilPersonilController::class, 'absensi'])->name('personil.absensi');
+Route::get('/perizinan', [PersonilPersonilController::class, 'perizinan'])->name('personil.perizinan');
 
 // == controlller for all admin page ==
 
+Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 

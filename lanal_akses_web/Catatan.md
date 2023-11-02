@@ -111,3 +111,13 @@ halaman admin untuk mengelola akses masuk ke tampilan semua controller dengan me
 - mengedit data lengkap personil
 - membuat, menghapus, mengedit dan melihat seluruh data pns
 - mengedit data lengkap pns
+
+
+### personil
+- dashboard
+- edit data personil
+- login personil
+- absen personil
+
+### admin
+- login ke akun admin
