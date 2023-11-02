@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 // controller for all personil & public page 
 Route::get('/login', [PersonilPersonilController::class, 'login'])->name('personil.login');

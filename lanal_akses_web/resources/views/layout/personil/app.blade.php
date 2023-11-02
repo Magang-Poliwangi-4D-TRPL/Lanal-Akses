@@ -25,10 +25,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto"> 
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="{{ url('/') }}">Home</a>
+                        <a class="nav-link text-light" href="{{ route('welcome') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="{{ url('/absen') }}">Absen</a>
+                        <a class="nav-link text-light" href="{{ route('personil.absensi') }}">Absen</a>
                     </li>
                     <li class="nav-item">
                     <button id="logout-button" class="btn btn-outline-light ml-2 p-2 rounded-lg">Logout <iconify-icon class="align-middle" icon="ion:exit-outline" width="18"></iconify-icon></button>
