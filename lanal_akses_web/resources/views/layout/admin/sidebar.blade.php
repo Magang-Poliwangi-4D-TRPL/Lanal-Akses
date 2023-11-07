@@ -46,6 +46,7 @@
         $("#sidebar-icon").addClass("justify-content-center");
         $("#logout-button").text("");
         $("#logout-button").html('<iconify-icon icon="ion:exit-outline" width="24"></iconify-icon>');
+        $("#logout-button").removeClass("px-4");
         $("#sidebar-collapse").removeClass("p-4");
         $("#sidebar-collapse").addClass("p-2");
         $(".sidebar-item").css({
@@ -64,6 +65,7 @@
         $("#sidebar-icon").addClass("justify-content-end");
         $("#sidebar-icon").removeClass("justify-content-center");
         $("#logout-button").html('Logout <iconify-icon class="ml-2" icon="ion:exit-outline" width="24"></iconify-icon>');
+        $('#logout-button').addClass('px-4');
         $(".sidebar-item").css({
             "margin": "1rem 1rem 1rem 0",
         });
