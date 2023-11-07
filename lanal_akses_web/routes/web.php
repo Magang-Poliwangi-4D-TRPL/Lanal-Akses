@@ -11,8 +11,10 @@ use App\Http\Controllers\Admin\PersonilController;
 use App\Http\Controllers\Admin\TandaJasaController;
 use App\Http\Controllers\Admin\TanggunganKeluargaController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\DataKepangkatanController;
-use App\Http\Controllers\PerlengkapanController;
+use App\Http\Controllers\Admin\DataKepangkatanController;
+use App\Http\Controllers\Admin\PerlengkapanController;
+use App\Http\Controllers\Admin\RiwayatPenugasanController;
+use App\Http\Controllers\Admin\SanksiHukumanController;
 use App\Http\Controllers\Personil\PersonilController as PersonilPersonilController;
 use Illuminate\Support\Facades\Route;
 

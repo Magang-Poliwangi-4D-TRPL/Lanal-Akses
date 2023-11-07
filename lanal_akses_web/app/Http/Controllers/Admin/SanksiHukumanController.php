@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\PersonilModel;
 use App\Models\SanksiHukumanModel;
 use Illuminate\Http\Request;
