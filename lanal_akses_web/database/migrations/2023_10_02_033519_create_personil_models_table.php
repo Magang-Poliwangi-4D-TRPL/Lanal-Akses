@@ -38,6 +38,7 @@ class CreatePersonilModelsTable extends Migration
             $table->string('alamat_sekarang')->nullable();
             $table->string('nomor_hp')->nullable();
             $table->string('status_rumah')->nullable();
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }
