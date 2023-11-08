@@ -11,8 +11,6 @@
 - membuat fitur cetak semua data personil dengan format yang telah ditentukan
 ### terkait fitur personil dan pegawai
 - membuat edit foto personil dan pegawai
-- membuat fitur absen
-- membuat fitur perizinan yang bisa digunakan untuk upload file untuk bukti, file bisa lebih dari satu
 - memperbaiki kekurangan dari tabel yang berkaitan dengan tabel personil
     - perlengkapan
     - tanda jasa 
@@ -22,6 +20,8 @@
     - informasi keluarga
 
 ## khusus fitur absensi
+- membuat fitur absen
+- membuat fitur perizinan yang bisa digunakan untuk upload file untuk bukti, file bisa lebih dari satu
 - cetak absen hari ini, minggu ini, bulan ini
 - mengubah data absen
 - filter untuk tanggal absensi untuk dapat melihat riwayat absensi dan cetak absensi pada tanggal yang ditentukan oleh filter (log riwayat dapat disimpan selama 1 tahun)
