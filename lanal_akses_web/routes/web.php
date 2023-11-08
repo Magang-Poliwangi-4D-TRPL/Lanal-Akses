@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\TandaJasaController;
 use App\Http\Controllers\Admin\TanggunganKeluargaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DataKepangkatanController;
+use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PerlengkapanController;
 use App\Http\Controllers\Admin\RiwayatPenugasanController;
 use App\Http\Controllers\Admin\SanksiHukumanController;
@@ -59,6 +60,8 @@ Route::put('/admin/personil/show/{nrp}/update', [PersonilController::class, 'upd
 Route::get('/admin/personil/search', [PersonilController::class, 'search'])->name('admin.personil.search');
 Route::delete('/admin/personil/{id}', [PersonilController::class, 'destroy'])
     ->name('admin.personil.destroy');
+Route::post('/upload/{nrp}', [ImageController::class, 'upload'])->name('upload.image');
+Route::get('/upload/{nrp}', [ImageController::class, 'editGambar'])->name('gambar.personil');
 
 // Personil -> PendidikanFormal
 Route::get('/admin/personil/show/{nrp}/pendidikan-formal', [PendidikanFormalController::class, 'index'])->name('admin.personil.pendidikanformal.index');
