@@ -10,25 +10,32 @@ class ImageController extends Controller
 {
     public function upload($nrp, Request $request)
     {
+        // Validasi form untuk memeriksa apakah file gambar diunggah
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,jpg,png|max:2048', // Sesuaikan dengan kebutuhan Anda
+        ],[
+            'image.required' => 'Gambar belum terupload atau belum diisi',
+        ]);
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('public/images', $imageName);
 
             // Simpan informasi gambar di database jika diperlukan
-            // Misalnya, jika Anda ingin menghubungkan gambar dengan entitas "personil".
             $personil = PersonilModel::where('nrp', str_replace('-', '/', $nrp))->first();
-            if($personil == null){
+            if ($personil == null) {
                 return abort(404);
-            } else {// Gantilah dengan cara Anda mengambil entitas Personil
+            } else {
                 $personil->image_url = 'storage/images/' . $imageName;
                 $personil->save();
             }
             return redirect()->route('admin.personil.show', ['nrp' => $nrp])->with('success', 'Foto personil berhasil diperbarui.');
         }
 
-        return 'Tidak ada gambar yang diunggah.';
+        return redirect()->back()->with('error', 'Pilih file gambar terlebih dahulu.');
     }
+
 
     public function editGambar($nrp){
         $personil = PersonilModel::where('nrp', str_replace('-', '/', $nrp))->first();

@@ -114,32 +114,33 @@
                 </div>
                 <div class="bg-white p-4">
                     <p class="data-utama mb-0">Username</p>
-                    <div class="container m-0 rounded border-all">
-                        {{-- @empty($personil->nik)
-                            <p>_</p>
+                    <div class="container m-0 p-2 rounded border-all">
+                        @empty($personil->nomor_ktp)
+                            <p class='mb-0'>_</p>
                         @else
-                            <p>{{ $personil->nik }}</p>
-                        @endempty --}}
-                        <p>_</p>
-                    </div>
-                    <p class="data-utama mb-0">password</p>
-                    <div class="container m-0 rounded border-all">
-                        {{-- @empty($personil->tempat_tanggallahir)
-                            <p>_</p>
-                        @else
-                            <p>{{ $personil->tempat_tanggallahir }}</p>
-                        @endempty --}}
-                        <p>_</p>
-                    </div>
-                    <p class="data-utama mb-0">NIK</p>
-                    <div class="container m-0 rounded border-all">
-                        @empty($personil->nik)
-                            <p>_</p>
-                        @else
-                            <p>{{ $personil->nik }}</p>
+                            <p class="mb-0">{{ $personil->nomor_ktp }}</p>
                         @endempty
                     </div>
-                    
+                    <p class="data-utama mb-0">password</p>
+                    <div class="container m-0 p-2 rounded border-all">
+                        @empty($personil->nomor_ktp)
+                        <p class='mb-0'>_</p>
+                        @else
+                            <p class="mb-0">{{ $personil->nomor_ktp }}</p>
+                        @endempty
+                    </div>
+                    <p class="data-utama mb-0">NIK</p>
+                    <div class="container m-0 p-2 rounded border-all">
+                        @empty($personil->nomor_ktp)
+                            <p class='mb-0'>_</p>
+                        @else
+                            <p class="mb-0">{{ $personil->nomor_ktp }}</p>
+                        @endempty
+                    </div>
+                    <div class="d-flex align-items-center justify-content-end my-3">
+                        <!-- Tombol Edit Gambar -->
+                        <a href="{{ route('gambar.personil', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" class="btn btn-sm btn-outline-secondary">Edit Akun</a>
+                    </div>
                 </div>
             </div>
             <div class="col-md-7 mt-4 bg-white">
@@ -208,17 +209,6 @@
                                             Tidak ada data
                                         @else
                                             <p>{{ $personil->nomor_kta }}</p>
-                                        @endempty
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="bluemain">Nomor KTP</td>
-                                    <td class="bluemain">:</td>
-                                    <td>
-                                        @empty($personil->nomor_ktp)
-                                            Tidak ada data
-                                        @else
-                                            <p>{{ $personil->nomor_ktp }}</p>
                                         @endempty
                                     </td>
                                 </tr>

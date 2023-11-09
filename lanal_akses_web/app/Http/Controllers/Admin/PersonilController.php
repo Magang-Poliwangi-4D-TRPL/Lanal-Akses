@@ -59,11 +59,11 @@ class PersonilController extends Controller
         $imagePath = 'public/' . $personil->image_url;
         // dd(Storage::disk('local')->exists($imagePath));
         // return Storage::exists($imagePath)? 'true' : 'false';
-        if (Storage::disk('local')->exists($imagePath)) {
-            return "File gambar ditemukan";
-        } else {
-            return "File gambar tidak ditemukan";
-        }
+        // if (Storage::disk('local')->exists($imagePath)) {
+        //     return "File gambar ditemukan";
+        // } else {
+        //     return "File gambar tidak ditemukan";
+        // }
         if($personil == null){
             return abort(404);
         } else {
