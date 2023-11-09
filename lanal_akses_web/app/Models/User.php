@@ -42,4 +42,12 @@ class User extends Authenticatable
     protected $casts = [
         'role' => 'string',
     ];
+
+    public function personil(){
+        return $this->belongsTo(PersonilModel::class, 'personil_id');
+    }
+
+    public function pegawai(){
+        return $this->belongsTo(PegawaiModel::class, 'pegawai_id');
+    }
 }

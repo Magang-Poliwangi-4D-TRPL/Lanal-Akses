@@ -94,41 +94,53 @@
         <div class="row">
             <div class="col-md-5 mt-4">
                 <!-- Bagian Kiri -->
-                <div class="bg-white p-4 text-center col-12 ">
-                    <img src="{{  URL::asset('images/admin/default-profile.jpg') }}" alt="default-profile" border="0" height="auto" class="rounded-circle image-profile">
-
-                    <h2 class="mt-3 bluedark text-left nama">{{ $personil->nama_lengkap}}</h2>
+                <div class="bg-white p-4 text-center col-12 " style="color: grey; border-bottom: 2px solid #0D21A1;">
+                    <!-- Gambar Profil -->
+                    @empty($personil->image_url)
+                        <img src="{{  URL::asset('images/admin/default-profile.jpg') }}" alt="default-profile" border="0" height="auto" class="rounded-circle image-profile">
+                        
+                    @else
+                        <img src="{{ asset($personil->image_url) }}" alt="Profil {{ $personil->nama_lengkap }}" border="0" height="auto" class="rounded image-profile">
+                    @endempty
+                    <h2 class="mt-3 bluedark text-left nama">{{ $personil->nama_lengkap }}</h2>
                     <h4 class="text-left jabatan">{{ $personil->jabatan }}</h4>
-                    <p class="text-left" style="color: grey; border-bottom: 2px solid #0D21A1;">{{ $personil->nrp }}</p>
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        
+                        <p class="text-left" >{{ $personil->nrp }}</p>
+                        <!-- Tombol Edit Gambar -->
+                        <a href="{{ route('gambar.personil', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" class="btn btn-sm btn-outline-secondary">Edit Foto</a>
+                    </div>
+
                 </div>
                 <div class="bg-white p-4">
                     <p class="data-utama mb-0">Username</p>
-                    <div class="container m-0 rounded border-all">
-                        {{-- @empty($personil->nik)
-                            <p>_</p>
+                    <div class="container m-0 p-2 rounded border-all">
+                        @empty($personil->nomor_ktp)
+                            <p class='mb-0'>_</p>
                         @else
-                            <p>{{ $personil->nik }}</p>
-                        @endempty --}}
-                        <p>_</p>
-                    </div>
-                    <p class="data-utama mb-0">password</p>
-                    <div class="container m-0 rounded border-all">
-                        {{-- @empty($personil->tempat_tanggallahir)
-                            <p>_</p>
-                        @else
-                            <p>{{ $personil->tempat_tanggallahir }}</p>
-                        @endempty --}}
-                        <p>_</p>
-                    </div>
-                    <p class="data-utama mb-0">NIK</p>
-                    <div class="container m-0 rounded border-all">
-                        @empty($personil->nik)
-                            <p>_</p>
-                        @else
-                            <p>{{ $personil->nik }}</p>
+                            <p class="mb-0">{{ $personil->nomor_ktp }}</p>
                         @endempty
                     </div>
-                    
+                    <p class="data-utama mb-0">password</p>
+                    <div class="container m-0 p-2 rounded border-all">
+                        @empty($personil->nomor_ktp)
+                        <p class='mb-0'>_</p>
+                        @else
+                            <p class="mb-0">{{ $personil->nomor_ktp }}</p>
+                        @endempty
+                    </div>
+                    <p class="data-utama mb-0">NIK</p>
+                    <div class="container m-0 p-2 rounded border-all">
+                        @empty($personil->nomor_ktp)
+                            <p class='mb-0'>_</p>
+                        @else
+                            <p class="mb-0">{{ $personil->nomor_ktp }}</p>
+                        @endempty
+                    </div>
+                    <div class="d-flex align-items-center justify-content-end my-3">
+                        <!-- Tombol Edit Gambar -->
+                        <a href="{{ route('gambar.personil', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" class="btn btn-sm btn-outline-secondary">Edit Akun</a>
+                    </div>
                 </div>
             </div>
             <div class="col-md-7 mt-4 bg-white">
@@ -197,17 +209,6 @@
                                             Tidak ada data
                                         @else
                                             <p>{{ $personil->nomor_kta }}</p>
-                                        @endempty
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="bluemain">Nomor KTP</td>
-                                    <td class="bluemain">:</td>
-                                    <td>
-                                        @empty($personil->nomor_ktp)
-                                            Tidak ada data
-                                        @else
-                                            <p>{{ $personil->nomor_ktp }}</p>
                                         @endempty
                                     </td>
                                 </tr>

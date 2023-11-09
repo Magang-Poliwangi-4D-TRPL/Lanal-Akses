@@ -14,6 +14,7 @@ use App\Models\SanksiHukumanModel;
 use App\Models\TandaJasaModel;
 use App\Models\TanggunganKeluargaModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PersonilController extends Controller
 {
@@ -55,6 +56,14 @@ class PersonilController extends Controller
 
         // $pendidikanFormal = $personil->pendidikanFormal;
         // dd($personil);
+        $imagePath = 'public/' . $personil->image_url;
+        // dd(Storage::disk('local')->exists($imagePath));
+        // return Storage::exists($imagePath)? 'true' : 'false';
+        // if (Storage::disk('local')->exists($imagePath)) {
+        //     return "File gambar ditemukan";
+        // } else {
+        //     return "File gambar tidak ditemukan";
+        // }
         if($personil == null){
             return abort(404);
         } else {
