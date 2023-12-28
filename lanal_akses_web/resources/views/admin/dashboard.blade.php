@@ -9,16 +9,16 @@
     <div class="card-columns mx-auto">
       <div class="card bg-bluemain">
         <div class="card-body ">
-          <h5 class="card-title text-white">Absensi Hari ini</h5>
-          <p class="card-text mb-4 text-white">Total data personil :</p>
+          <h5 class="card-title text-white">ABSENSI HARI INI</h5>
+          <p class="card-text mb-4 text-white">Total Data Personel :</p>
           <h2 class="text-center text-white">{{ $personil->count() }}</h2>
         </div>
       </div>
       
       <div class="card bg-blueaccent ">
         <div class="card-body ">
-          <h5 class="card-title text-white">Jumlah Personil</h5>
-          <p class="card-text mb-4 text-white">Jumlah seluruh personil :</p>
+          <h5 class="card-title text-white">JUMLAH PERSONEL</h5>
+          <p class="card-text mb-4 text-white">Jumlah Seluruh Personel :</p>
           <h2 class="text-center text-white">{{ $pns->count() }}</h2>
           </div>
         </div>
@@ -26,13 +26,13 @@
     </div> 
     <div class="container bg-white mt-4 p-4" style=" padding-top: 3rem !important;">
         <h1 class="text-black">Hasilkan Qr-Code</h1>
-        <p class="muted-text">Cetak semua QR-Code berdasarkan kode unik PNS/Personil</p>
+        <p class="muted-text">Cetak semua QR-Code berdasarkan kode unik PNS/Personel</p>
 
         <div class="card-columns">
           <div class="card">
             <div class="card-body ">
-              <h5 class="card-title">Data Personil</h5>
-              <p class="card-text ">Total data personil :</p>
+              <h5 class="card-title">DATA PERSONEL</h5>
+              <p class="card-text ">Total data Personel :</p>
               <div class="container border-bottom mb-4 mt-2">
                 <p class="text-muted text-center">{{ $personil->count() }}</p>
               </div>
@@ -45,7 +45,7 @@
           
             <div class="card">
               <div class="card-body ">
-                <h5 class="card-title">Data PNS</h5>
+                <h5 class="card-title">DATA PNS</h5>
                 <p class="card-text ">Total data PNS :</p>
                 <div class="container border-bottom mb-4 mt-2">
                   <p class="text-muted text-center">{{ $pns->count() }}</p>

@@ -170,7 +170,7 @@
             <div class="icon"></div>
             <div class="text">
                 <h1>LANAL AKSES</h1>
-                <p style="color: white; font-size: 16px;">Website Absensi dan Data Personil  Pangkalan TNI Angkatan Laut V - Pangkalan TNI AL Banyuwangi</p>
+                <p style="color: white; font-size: 16px;">Website Absensi dan Data Personel  Pangkalan Utama TNI Angkatan Laut V - Pangkalan TNI AL Banyuwangi</p>
             </div>
         </div>
         <div class="right-section">
@@ -182,7 +182,7 @@
                 </div>
                 <div class="right-header" id="current-time"></div>
             </div>
-            <h1>Absensi Personil</h1>
+            <h1>Absensi Personel</h1>
             <p>Lakukan absensi dengan nama dan NRP</p>
             <div class="kolom">
                 <div class="icon-col" style="background-color: #0D21A1;">
@@ -209,7 +209,7 @@
                 </div>
             </div>
 
-            <p>wajib diisi (jika personil tidak berada di pangkalan)</p>
+            <p>wajib diisi (jika personel tidak berada di pangkalan)</p>
             <div class="kolom">
             <div class="icon-col" style="background-color: #0D21A1;">
                 <i class="fas fa-file" style="color: white;"></i>

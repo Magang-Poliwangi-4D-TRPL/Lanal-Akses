@@ -23,8 +23,8 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             // Definisikan foreign key constraint
-            $table->foreignId('personil_id');
-            $table->foreignId('pegawai_id');
+            $table->foreignId('personil_id')->nullable();
+            $table->foreignId('pegawai_id')->nullable();
         });
     }
 

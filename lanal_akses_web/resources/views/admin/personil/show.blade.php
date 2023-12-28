@@ -139,7 +139,7 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-end my-3">
                         <!-- Tombol Edit Gambar -->
-                        <a href="{{ route('gambar.personil', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" class="btn btn-sm btn-outline-secondary">Edit Akun</a>
+                        <a href="{{ route('admin.personil.akun.index', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" class="btn btn-sm btn-outline-secondary">Edit Akun</a>
                     </div>
                 </div>
             </div>

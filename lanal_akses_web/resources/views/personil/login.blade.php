@@ -219,7 +219,7 @@
         <div class="icon"></div>
         <div class="text">
             <h1>LANAL AKSES</h1>
-            <p style="color: white; font-size: 16px;">Website Absensi dan Data Personil  Pangkalan TNI Angkatan Laut V - Pangkalan TNI AL Banyuwangi</p>
+            <p style="color: white; font-size: 16px;">Website Absensi dan Data Personel  Pangkalan Utama TNI Angkatan Laut V - Pangkalan TNI AL Banyuwangi</p>
         </div>
     </div>
     <div class="right-section">
