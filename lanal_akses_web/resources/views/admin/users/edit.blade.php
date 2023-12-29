@@ -62,7 +62,7 @@
                                 <option value="pasintel" {{ old('role', $user->role) === 'pasintel' ? 'selected' : '' }}>Pasintel</option>
                                 <option value="paspotmar" {{ old('role', $user->role) === 'paspotmar' ? 'selected' : '' }}>Paspotmar</option>
                                 <option value="paset" {{ old('role', $user->role) === 'paset' ? 'selected' : '' }}>Paset</option>
-                                <option value="lain-lain" {{ old('role', $user->role) === 'lain-lain' ? 'selected' : '' }}>Lain-lain</option>
+                                <option value="personel" {{ old('role', $user->role) === 'personel' ? 'selected' : '' }}>personel</option>
                                 <!-- ... Bagian lain dari formulir ... -->
                             </select>
                         </div>

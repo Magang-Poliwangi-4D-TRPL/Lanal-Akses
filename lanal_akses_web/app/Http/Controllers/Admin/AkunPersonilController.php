@@ -75,4 +75,28 @@ class AkunPersonilController extends Controller
             return view('admin.personil.akun.edit', compact('personil', 'user'));
         }
     }
+
+    public function update(Request $request, $nrp, $akunId)
+    {
+        $request->validate([
+            'nama_lengkap' => 'required',
+            'password' => 'required',
+            'role' => 'required',
+        ]);
+
+        $personil = PersonilModel::where('nrp', str_replace('-', '/', $nrp))->first();
+        if ($personil == null) {
+            return abort(404, 'Personil Tidak Ditemukan');
+        } else {
+            $user = User::where('personil_id', $personil->id)->get();
+            $user[0]->update([
+                'nama_lengkap' => $request->nama_lengkap,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
+    
+            return redirect()->route('admin.personil.akun.index' ,['nrp'=>$nrp])->with('success', 'User personel berhasil diperbarui.');
+        }
+        
+    }
 }

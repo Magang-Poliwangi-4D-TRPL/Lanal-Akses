@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('nama_lengkap');
             $table->string('username')->unique();
             $table->string('password');
-            $table->enum('role', ['komandan', 'pasintel', 'paspotmar', 'paset', 'personil', 'pegawai'])->default('paset');
+            $table->enum('role', ['komandan', 'pasintel', 'paspotmar', 'paset', 'personel', 'pegawai'])->default('paset');
             $table->rememberToken();
             $table->timestamps();
 

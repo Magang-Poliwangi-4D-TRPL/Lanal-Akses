@@ -115,18 +115,18 @@
                 <div class="bg-white p-4">
                     <p class="data-utama mb-0">Username</p>
                     <div class="container m-0 p-2 rounded border-all">
-                        @empty($personil->nomor_ktp)
+                        @empty($user[0]->username)
                             <p class='mb-0'>_</p>
                         @else
-                            <p class="mb-0">{{ $personil->nomor_ktp }}</p>
+                            <p class="mb-0">{{ $user[0]->username }}</p>
                         @endempty
                     </div>
-                    <p class="data-utama mb-0">password</p>
+                    <p class="data-utama mb-0">role</p>
                     <div class="container m-0 p-2 rounded border-all">
-                        @empty($personil->nomor_ktp)
+                        @empty($user[0]->role)
                         <p class='mb-0'>_</p>
                         @else
-                            <p class="mb-0">{{ $personil->nomor_ktp }}</p>
+                            <p class="mb-0">{{ $user[0]->role }}</p>
                         @endempty
                     </div>
                     <p class="data-utama mb-0">NIK</p>

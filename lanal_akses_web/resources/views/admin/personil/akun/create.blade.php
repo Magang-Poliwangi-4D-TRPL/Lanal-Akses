@@ -35,17 +35,30 @@
                       @enderror
                     </div>
                     <div class="form-group">
-                      <label for="password">Massukkan password akun personil baru</label>
-                      <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" name="password" value="{{ $personil->nrp}}" placeholder="Password Akun">
-                      @error('password')
-                          <div class="invalid-feedback">
-                            {{ $message }}
+                      <label for="password">Password:</label>
+                      <div class="input-group">
+                          <input type="password" class="form-control" id="password" name="password" value="">
+                          <div class="input-group-append">
+                              <span class="input-group-text bg-secondary" id="show-password">
+                                  <i class="far fa-eye text-light" id="eye-icon"></i>
+                              </span>
                           </div>
-                      @enderror
-                    </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="password_confirmation">Konfirmasi Password:</label>
+                      <div class="input-group">
+                          <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                          <div class="input-group-append">
+                              <span class="input-group-text bg-secondary" id="show-password-confirmation">
+                                  <i class="far fa-eye text-light" id="eye-icon-confirmation"></i>
+                              </span>
+                          </div>
+                      </div>
+                  </div>
                     <div class="form-group">
                       <label for="role">Role personil baru</label>
-                      <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" value="personil" readonly=true placeholder="role Akun">
+                      <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" value="personel" readonly=true placeholder="role Akun">
                       @error('role')
                           <div class="invalid-feedback">
                             {{ $message }}
@@ -62,5 +75,6 @@
         </div>
         
     </div>
+    <script src="{{ URL::asset('js/admin/visiblepassword.js'); }}"></script>
 
 @endsection

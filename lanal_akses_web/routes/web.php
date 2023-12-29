@@ -150,7 +150,7 @@ Route::get('/admin/personil/show/{nrp}/akun', [AkunPersonilController::class, 'i
 Route::get('/admin/personil/show/{nrp}/akun/create', [AkunPersonilController::class, 'create'])->name('admin.personil.akun.create');
 Route::post('/admin/personil/show/{nrp}/akun', [AkunPersonilController::class, 'store'])->name('admin.personil.akun.store');
 Route::get('/admin/personil/show/{nrp}/akun/{akunId}/edit', [AkunPersonilController::class, 'edit'])->name('admin.personil.akun.edit');
-// Route::put('/admin/personil/show/{nrp}/akun/{akunId}', [AkunPersonilController::class, 'update'])->name('admin.personil.akun.update');
+Route::put('/admin/personil/show/{nrp}/akun/{akunId}/update', [AkunPersonilController::class, 'update'])->name('admin.personil.akun.update');
 // Route::delete('/admin/personil/show/{nrp}/akun/{akunId}', [AkunPersonilController::class, 'destroy'])
 // ->name('admin.personil.akun.destroy');
 
