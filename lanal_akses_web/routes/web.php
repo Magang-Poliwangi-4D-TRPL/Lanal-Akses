@@ -112,11 +112,11 @@ Route::delete('/admin/personil/show/{nrp}/perlengkapan/{perlengkapanId}', [Perle
 // Personil -> tanda-jasa
 Route::get('/admin/personil/show/{nrp}/tanda-jasa', [TandaJasaController::class, 'index'])->name('admin.personil.tanda-jasa.index');
 Route::get('/admin/personil/show/{nrp}/tanda-jasa/create', [TandaJasaController::class, 'create'])->name('admin.personil.tanda-jasa.create');
-// Route::post('/admin/personil/show/{nrp}/tanda-jasa', [TandaJasaController::class, 'store'])->name('admin.personil.tanda-jasa.store');
+Route::post('/admin/personil/show/{nrp}/tanda-jasa', [TandaJasaController::class, 'store'])->name('admin.personil.tanda-jasa.store');
 Route::get('/admin/personil/show/{nrp}/tanda-jasa/{tandaJasaId}/edit', [TandaJasaController::class, 'edit'])->name('admin.personil.tanda-jasa.edit');
-// Route::put('/admin/personil/show/{nrp}/tanda-jasa/{tanda-jasaId}', [TandaJasaController::class, 'update'])->name('admin.personil.tanda-jasa.update');
-// Route::delete('/admin/personil/show/{nrp}/tanda-jasa/{tanda-jasaId}', [TandaJasaController::class, 'destroy'])
-// ->name('admin.personil.tanda-jasa.destroy');
+Route::put('/admin/personil/show/{nrp}/tanda-jasa/{tandaJasaId}', [TandaJasaController::class, 'update'])->name('admin.personil.tanda-jasa.update');
+Route::delete('/admin/personil/show/{nrp}/tanda-jasa/{tandaJasaId}', [TandaJasaController::class, 'destroy'])
+->name('admin.personil.tanda-jasa.destroy');
 
 // Personil -> data-kepangkatan
 Route::get('/admin/personil/show/{nrp}/data-kepangkatan', [DataKepangkatanController::class, 'index'])->name('admin.personil.data-kepangkatan.index');

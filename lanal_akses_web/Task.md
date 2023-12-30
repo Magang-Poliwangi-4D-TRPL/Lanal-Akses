@@ -12,7 +12,6 @@
 ### terkait fitur personil dan pegawai
 - membuat edit foto personil dan pegawai
 - memperbaiki kekurangan dari tabel yang berkaitan dengan tabel personil
-    - perlengkapan
     - tanda jasa 
     - data kepangkatan
     - riwayat penugasan

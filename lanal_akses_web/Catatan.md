@@ -114,8 +114,8 @@ halaman admin untuk mengelola akses masuk ke tampilan semua controller dengan me
 
 
 ### personil
-- dashboard
-- edit data personil
+- dashboard 
+~~edit data personil~~
 - login personil
 - absen personil
 
