@@ -14,8 +14,9 @@
                 $nrp = $personil->nrp;
                 $nrpGanti = str_replace('/', '-', $nrp);
                 @endphp
-                <form method="POST" action="{{ route('admin.personil.perlengkapan.index', ['nrp' => $nrpGanti]) }}">
+                <form method="POST" action="{{ route('admin.personil.perlengkapan.update', ['nrp' => $nrpGanti, 'perlengkapanId' => $perlengkapan->id]) }}">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" name="personil_id" value="{{ $personil->id }}">
                     <div class="form-group row">
                         <label for="baju" class="col-sm-3 col-form-label">Pilih Ukuran Baju</label>
@@ -55,7 +56,7 @@
                     <div class="form-grup">
 
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="" id="sameValueCelana">
+                            <input class="form-check-input" type="checkbox" value="true" name="sameValueCelana" id="sameValueCelana">
                           <label class="form-check-label" for="sameValueCelana">
                             ukuran baju dan celana sama
                           </label>
@@ -122,11 +123,41 @@
                     </div>
                     
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="sameValueMUT">
+                        <input class="form-check-input" type="checkbox" value="true" id="sameValueMUT" name="sameValueMUT">
                         <label class="form-check-label" for="sameValueMUT">
                           Sama dengan ukuran Topi
                         </label>
                     </div> 
+                    
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var checkboxMut = document.getElementById("sameValueMUT");
+                            var noTopiField = document.getElementById("no_topi");
+                            var noMutField = document.getElementById("no_mut");
+                    
+                            // Tambahkan event listener ke checkboxMut
+                            checkboxMut.addEventListener("change", function () {
+                                if (checkboxMut.checked) {
+                                    // checkboxMut diisi, ubah field "celana" menjadi sama dengan "baju"
+                                    noMutField.value = noTopiField.value;
+                                    noMutField.disabled = true
+                                    // Tambahkan event listener ke field "baju" untuk mengikuti perubahan nilai
+                                    noTopiField.addEventListener("input", function () {
+                                        if (checkboxMut.checked) {
+                                            // Jika checkbox diisi, update nilai "celana" saat "baju" berubah
+                                            noMutField.value = noTopiField.value;
+                                        }
+                                    });
+                                } else {
+                                    // checkboxMut tidak diisi, kembalikan field "celana" ke kondisi normal
+                                    noMutField.disabled = false
+                                    noMutField.value = checkboxMut.value;
+                                }
+                            });
+                    
+                        });
+                    </script>
+
                     <div class="mt-3 form-group">
                       <label for="keterangan">Massukkan keterangan (opsional)</label>
                       <input type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan" placeholder="Keterangan" value="{{ old('keterangan')}}">
