@@ -20,16 +20,12 @@
                     </div>
                     @endif
 
-                    <form method="POST" action="{{ route('users.update', $user->id) }}">
+                    <form method="POST" action="{{ route('admin.personil.akun.update',['nrp' => str_replace('/', '-', $personil->nrp), 'akunId'=>$user[0]->id]) }}">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
                             <label for="nama_lengkap">Nama Lengkap:</label>
-                            <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap', $user->nama_lengkap) }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="username">Username:</label>
-                            <input type="text" class="form-control" id="username" name="username" value="{{ old('username', $user->username) }}" required>
+                            <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap', $user[0]->nama_lengkap) }}" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label>
@@ -55,19 +51,17 @@
                         </div>
                         <div class="form-group">
                             <label for="role">Role:</label>
-                            <select class="form-select" id="role" name="role" required>
+                            <select class="form-control" id="role" name="role" required>
                                 <!-- Opsi Role disini -->
-                                <!-- ... Bagian lain dari formulir ... -->
-                                <option value="komandan" {{ old('role', $user->role) === 'komandan' ? 'selected' : '' }}>Komandan</option>
-                                <option value="pasintel" {{ old('role', $user->role) === 'pasintel' ? 'selected' : '' }}>Pasintel</option>
-                                <option value="paspotmar" {{ old('role', $user->role) === 'paspotmar' ? 'selected' : '' }}>Paspotmar</option>
-                                <option value="paset" {{ old('role', $user->role) === 'paset' ? 'selected' : '' }}>Paset</option>
-                                <option value="personel" {{ old('role', $user->role) === 'personel' ? 'selected' : '' }}>personel</option>
-                                <!-- ... Bagian lain dari formulir ... -->
+                                <option value="komandan" {{ old('role', $user[0]->role) === 'komandan' ? 'selected' : '' }}>Komandan</option>
+                                <option value="pasintel" {{ old('role', $user[0]->role) === 'pasintel' ? 'selected' : '' }}>Pasintel</option>
+                                <option value="paspotmar" {{ old('role', $user[0]->role) === 'paspotmar' ? 'selected' : '' }}>Paspotmar</option>
+                                <option value="paset" {{ old('role', $user[0]->role) === 'paset' ? 'selected' : '' }}>Paset</option>
+                                <option value="personel" {{ old('role', $user[0]->role) === 'personel' ? 'selected' : '' }}>Personel</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <a href="{{ route('admin.users.index', ['page' => 1]) }}" class="btn btn-secondary">Kembali</a>
+                            <a href="{{ route('admin.personil.akun.index', str_replace('/', '-', $personil->nrp)) }}" class="btn btn-secondary">Kembali</a>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>

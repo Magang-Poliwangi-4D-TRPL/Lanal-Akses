@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AbsensiController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AkunPersonilController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KursusController;
 use App\Http\Controllers\Admin\PegawaiController;
@@ -143,6 +144,15 @@ Route::get('/admin/personil/show/{nrp}/sanksi-hukuman/{sanksiHukumanId}/edit', [
 // Route::put('/admin/personil/show/{nrp}/sanksi-hukuman/{sanksiHukumanId}', [SanksiHukumanController::class, 'update'])->name('admin.personil.sanksi-hukuman.update');
 // Route::delete('/admin/personil/show/{nrp}/sanksi-hukuman/{sanksiHukumanId}', [SanksiHukumanController::class, 'destroy'])
 // ->name('admin.personil.sanksi-hukuman.destroy');
+
+// Personil -> Akun
+Route::get('/admin/personil/show/{nrp}/akun', [AkunPersonilController::class, 'index'])->name('admin.personil.akun.index');
+Route::get('/admin/personil/show/{nrp}/akun/create', [AkunPersonilController::class, 'create'])->name('admin.personil.akun.create');
+Route::post('/admin/personil/show/{nrp}/akun', [AkunPersonilController::class, 'store'])->name('admin.personil.akun.store');
+Route::get('/admin/personil/show/{nrp}/akun/{akunId}/edit', [AkunPersonilController::class, 'edit'])->name('admin.personil.akun.edit');
+Route::put('/admin/personil/show/{nrp}/akun/{akunId}/update', [AkunPersonilController::class, 'update'])->name('admin.personil.akun.update');
+// Route::delete('/admin/personil/show/{nrp}/akun/{akunId}', [AkunPersonilController::class, 'destroy'])
+// ->name('admin.personil.akun.destroy');
 
 
 // Absensi

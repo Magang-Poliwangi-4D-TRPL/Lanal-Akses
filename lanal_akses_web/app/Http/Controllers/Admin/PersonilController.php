@@ -13,6 +13,7 @@ use App\Models\RiwayatPenugasanModel;
 use App\Models\SanksiHukumanModel;
 use App\Models\TandaJasaModel;
 use App\Models\TanggunganKeluargaModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -94,7 +95,10 @@ class PersonilController extends Controller
             // Mengambil semua data SanksiHukumanModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
             $sanksiHukuman = SanksiHukumanModel::where('personil_id', $personil->id)->get();
             
-            return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggungan_keluarga', 'perlengkapan', 'tandaJasa', 'dataKepangkatan', 'riwayatPenugasan', 'sanksiHukuman'));
+            // Mengambil semua data UserModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $user = User::where('personil_id', $personil->id)->get();
+            
+            return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggungan_keluarga', 'perlengkapan', 'tandaJasa', 'dataKepangkatan', 'riwayatPenugasan', 'sanksiHukuman', 'user'));
         }
 
     }

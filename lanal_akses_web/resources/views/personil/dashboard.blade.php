@@ -103,9 +103,6 @@
 <a id="print-rh-button" class="text-decoration-none" href="#">
     <button class="btn btn-blue btn-md text-white bg-blueaccent">Cetak Riwayat Hidup<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
 </a>
-<a id="print-button" class="text-decoration-none" href="#">
-    <button class="btn btn-blue btn-md text-white bg-bluedark">Cetak Data Lengkap<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
-</a>
 
 <div class="container-fluid">
         <div class="row">
@@ -115,10 +112,10 @@
                     <img src="images/admin/default-profile.jpg" alt="default-profile" border="0" height="auto" class="rounded-circle image-profile">
                     <h2 class="mt-3 bluedark text-left jabatan">Nama Jabatan</h2>
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="text-left nama">Nama Lengkap Personil</h4>
+                        <h4 class="text-left nama">Nama Lengkap Personel</h4>
                         <a href="#" class="btn btn-sm btn-outline-secondary">Edit Profil</a>
                     </div>
-                    <p class="text-left" style="color: grey; border-bottom: 2px solid #0D21A1;">NRP Personil</p>
+                    <p class="text-left" style="color: grey; border-bottom: 2px solid #0D21A1;">NRP Personel</p>
                 </div>
                 <div class="bg-white p-4">
                     <p class="data-utama mb-0">NIK</p>
@@ -157,7 +154,7 @@
                                 <tr class="text-black">
                                   <th scope="col" width="45%">Nama Lengkap</th>
                                   <th scope="col" width="10%">:</th>
-                                  <th scope="col" width="45%">Nama Lengkap Personil</th>
+                                  <th scope="col" width="45%">Nama Lengkap Personel</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -320,7 +317,7 @@
                     <div class="p-4">
                         <div class="container">
                             <div class="row d-flex justify-content-between align-items-center mb-4">
-                                <p class="py-3">Informasi keluarga personil meliputi: Istri/Suami, Anak, Ayah/Ibu, Ayah/Ibu Mertua</p>
+                                <p class="py-3">Informasi keluarga Personel meliputi: Istri/Suami, Anak, Ayah/Ibu, Ayah/Ibu Mertua</p>
                                 <a href="#" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Informasi Keluarga</a>
                             </div>
                             <table class="table thead-light">
