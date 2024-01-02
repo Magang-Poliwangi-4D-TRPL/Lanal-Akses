@@ -15,7 +15,7 @@
                 $nrpGanti = str_replace('/', '-', $nrp);
                 @endphp
                 {{-- {{ route('admin.personil.sanksi-hukuman.store', ['nrp' => $nrpGanti]) }} --}}
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('admin.personil.sanksi-hukuman.store', ['nrp' => $nrpGanti]) }}">
                     @csrf
                     <input type="hidden" name="personil_id" value="{{ $personil->id }}">
                     <div class="form-group">
