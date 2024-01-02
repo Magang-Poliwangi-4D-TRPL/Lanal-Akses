@@ -121,11 +121,11 @@ Route::delete('/admin/personil/show/{nrp}/tanda-jasa/{tandaJasaId}', [TandaJasaC
 // Personil -> data-kepangkatan
 Route::get('/admin/personil/show/{nrp}/data-kepangkatan', [DataKepangkatanController::class, 'index'])->name('admin.personil.data-kepangkatan.index');
 Route::get('/admin/personil/show/{nrp}/data-kepangkatan/create', [DataKepangkatanController::class, 'create'])->name('admin.personil.data-kepangkatan.create');
-// Route::post('/admin/personil/show/{nrp}/data-kepangkatan', [DataKepangkatanController::class, 'store'])->name('admin.personil.data-kepangkatan.store');
+Route::post('/admin/personil/show/{nrp}/data-kepangkatan', [DataKepangkatanController::class, 'store'])->name('admin.personil.data-kepangkatan.store');
 Route::get('/admin/personil/show/{nrp}/data-kepangkatan/{dataKepangkatanId}/edit', [DataKepangkatanController::class, 'edit'])->name('admin.personil.data-kepangkatan.edit');
-// Route::put('/admin/personil/show/{nrp}/data-kepangkatan/{dataKepangkatanId}', [DataKepangkatanController::class, 'update'])->name('admin.personil.data-kepangkatan.update');
-// Route::delete('/admin/personil/show/{nrp}/data-kepangkatan/{dataKepangkatanId}', [DataKepangkatanController::class, 'destroy'])
-// ->name('admin.personil.data-kepangkatan.destroy');
+Route::put('/admin/personil/show/{nrp}/data-kepangkatan/{dataKepangkatanId}', [DataKepangkatanController::class, 'update'])->name('admin.personil.data-kepangkatan.update');
+Route::delete('/admin/personil/show/{nrp}/data-kepangkatan/{dataKepangkatanId}', [DataKepangkatanController::class, 'destroy'])
+->name('admin.personil.data-kepangkatan.destroy');
 
 // Personil -> riwayat-penugasan
 Route::get('/admin/personil/show/{nrp}/riwayat-penugasan', [RiwayatPenugasanController::class, 'index'])->name('admin.personil.riwayat-penugasan.index');
