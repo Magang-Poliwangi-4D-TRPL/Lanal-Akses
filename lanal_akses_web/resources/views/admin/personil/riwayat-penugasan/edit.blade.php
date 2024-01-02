@@ -15,7 +15,7 @@
                 $nrpGanti = str_replace('/', '-', $nrp);
                 @endphp
                 {{-- {{ route('admin.personil.riwayat-penugasan.update', ['nrp' => $nrpGanti, 'riwayatPenugasanId' => $riwayatPenugasan->id]) }} --}}
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('admin.personil.riwayat-penugasan.update', ['nrp' => $nrpGanti, 'riwayatPenugasanId' => $riwayatPenugasan->id]) }}">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="personil_id" value="{{ $personil->id }}">
