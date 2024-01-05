@@ -62,8 +62,13 @@ Route::put('/admin/personil/show/{nrp}/update', [PersonilController::class, 'upd
 Route::get('/admin/personil/search', [PersonilController::class, 'search'])->name('admin.personil.search');
 Route::delete('/admin/personil/{id}', [PersonilController::class, 'destroy'])
     ->name('admin.personil.destroy');
+
+// Fitur Gambar
 Route::post('/upload/{nrp}', [ImageController::class, 'upload'])->name('upload.image');
 Route::get('/upload/{nrp}', [ImageController::class, 'editGambar'])->name('gambar.personil');
+
+// Fitur Cetak
+Route::get('/admin/personil/{nrp}/cetak-riwayat-hidup', [PersonilController::class, 'cetakRiwayatHidup'])->name('personil.cetak-riwayat-hidup');
 
 // Personil -> PendidikanFormal
 Route::get('/admin/personil/show/{nrp}/pendidikan-formal', [PendidikanFormalController::class, 'index'])->name('admin.personil.pendidikanformal.index');

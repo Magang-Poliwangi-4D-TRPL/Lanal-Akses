@@ -84,7 +84,7 @@
   }
 
 </style>
-<a id="print-rh-button" class="text-decoration-none" href="#">
+<a id="print-rh-button" class="text-decoration-none" href="{{ route('personil.cetak-riwayat-hidup', ['nrp' => str_replace('/', '-', $personil->nrp)]) }}">
     <button class="btn btn-blue btn-md text-white bg-blueaccent">Cetak Riwayat Hidup<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
 </a>
 <a id="print-button" class="text-decoration-none" href="#">
