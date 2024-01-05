@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\TanggunganKeluargaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DataKepangkatanController;
 use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Admin\InformasiKeluargaController;
 use App\Http\Controllers\Admin\PerlengkapanController;
 use App\Http\Controllers\Admin\RiwayatPenugasanController;
 use App\Http\Controllers\Admin\SanksiHukumanController;
@@ -154,6 +155,26 @@ Route::put('/admin/personil/show/{nrp}/akun/{akunId}/update', [AkunPersonilContr
 // Route::delete('/admin/personil/show/{nrp}/akun/{akunId}', [AkunPersonilController::class, 'destroy'])
 // ->name('admin.personil.akun.destroy');
 
+// Personil -> Informasi Keluarga
+Route::get('/admin/personil/show/{nrp}/informasi-keluarga', [InformasiKeluargaController::class, 'index'])->name('admin.personil.informasi-keluarga.index');
+    // Personil -> Informasi Keluarga
+    Route::get('/admin/personil/show/{nrp}/informasi-keluarga/create-informasi-pasangan', [InformasiKeluargaController::class, 'createInformasiPasangan'])->name('admin.personil.informasi-pasangan.create');
+    Route::post('/admin/personil/show/{nrp}/informasi-keluarga/create-informasi-pasangan', [InformasiKeluargaController::class, 'storeInformasiPasangan'])->name('admin.personil.informasi-pasangan.store');
+    Route::get('/admin/personil/show/{nrp}/informasi-keluarga/edit-informasi-pasangan/{informasiPasanganId}', [InformasiKeluargaController::class, 'editInformasiPasangan'])->name('admin.personil.informasi-pasangan.edit');
+    Route::put('/admin/personil/show/{nrp}/informasi-keluarga/edit-informasi-pasangan/{informasiPasanganId}', [InformasiKeluargaController::class, 'updateInformasiPasangan'])->name('admin.personil.informasi-pasangan.update');
+    Route::delete('/admin/personil/show/{nrp}/informasi-keluarga/delete-informasi-pasangan/{informasiPasanganId}', [InformasiKeluargaController::class, 'deleteInformasiPasangan'])->name('admin.personil.informasi-pasangan.delete');
+    // Personil -> Informasi Anak
+    Route::get('/admin/personil/show/{nrp}/informasi-keluarga/create-informasi-anak', [InformasiKeluargaController::class, 'createInformasiAnak'])->name('admin.personil.informasi-anak.create');
+    Route::post('/admin/personil/show/{nrp}/informasi-keluarga/create-informasi-anak', [InformasiKeluargaController::class, 'storeInformasiAnak'])->name('admin.personil.informasi-anak.store');
+    Route::get('/admin/personil/show/{nrp}/informasi-keluarga/edit-informasi-anak/{informasiAnakId}', [InformasiKeluargaController::class, 'editInformasiAnak'])->name('admin.personil.informasi-anak.edit');
+    Route::put('/admin/personil/show/{nrp}/informasi-keluarga/edit-informasi-anak/{informasiAnakId}', [InformasiKeluargaController::class, 'updateInformasiAnak'])->name('admin.personil.informasi-anak.update');
+    Route::delete('/admin/personil/show/{nrp}/informasi-keluarga/delete-informasi-anak/{informasiAnakId}', [InformasiKeluargaController::class, 'deleteInformasiAnak'])->name('admin.personil.informasi-anak.delete');
+    // Personil -> Informasi Orang Tua
+    Route::get('/admin/personil/show/{nrp}/informasi-keluarga/create-informasi-orang-tua', [InformasiKeluargaController::class, 'createInformasiOrangTua'])->name('admin.personil.informasi-orang-tua.create');
+    Route::post('/admin/personil/show/{nrp}/informasi-keluarga/create-informasi-orang-tua', [InformasiKeluargaController::class, 'storeInformasiOrangTua'])->name('admin.personil.informasi-orang-tua.store');
+    Route::get('/admin/personil/show/{nrp}/informasi-keluarga/edit-informasi-orang-tua/{informasiOrangTuaId}', [InformasiKeluargaController::class, 'editInformasiOrangTua'])->name('admin.personil.informasi-orang-tua.edit');
+    Route::put('/admin/personil/show/{nrp}/informasi-keluarga/edit-informasi-orang-tua/{informasiOrangTuaId}', [InformasiKeluargaController::class, 'updateInformasiOrangTua'])->name('admin.personil.informasi-orang-tua.update');
+    Route::delete('/admin/personil/show/{nrp}/informasi-keluarga/delete-informasi-orang-tua/{informasiOrangTuaId}', [InformasiKeluargaController::class, 'deleteInformasiOrangTua'])->name('admin.personil.informasi-orang-tua.delete');
 
 // Absensi
 Route::get('/admin/absensi/', [AbsensiController::class, 'index'])

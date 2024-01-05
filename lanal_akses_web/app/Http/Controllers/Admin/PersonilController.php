@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataKepangkatanModel;
+use App\Models\InformasiAnakModel;
+use App\Models\InformasiOrangTuaModel;
+use App\Models\InformasiPasanganModel;
 use App\Models\KursusModel;
 use App\Models\PendidikanFormalModel;
 use App\Models\PendidikanMiliterModel;
@@ -55,16 +58,6 @@ class PersonilController extends Controller
         $nrpGanti = str_replace('-', '/', $nrp);
         $personil = PersonilModel::where('nrp', $nrpGanti)->first();
 
-        // $pendidikanFormal = $personil->pendidikanFormal;
-        // dd($personil);
-        $imagePath = 'public/' . $personil->image_url;
-        // dd(Storage::disk('local')->exists($imagePath));
-        // return Storage::exists($imagePath)? 'true' : 'false';
-        // if (Storage::disk('local')->exists($imagePath)) {
-        //     return "File gambar ditemukan";
-        // } else {
-        //     return "File gambar tidak ditemukan";
-        // }
         if($personil == null){
             return abort(404);
         } else {
@@ -95,10 +88,21 @@ class PersonilController extends Controller
             // Mengambil semua data SanksiHukumanModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
             $sanksiHukuman = SanksiHukumanModel::where('personil_id', $personil->id)->get();
             
+            // Mengambil semua data InformasiPasangan yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $informasiPasangan = InformasiPasanganModel::where('personil_id', $personil->id)->get();
+            
+            
+            // Mengambil semua data informasiAnak yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $informasiAnak = InformasiAnakModel::where('personil_id', $personil->id)->get();
+            
+            
+            // Mengambil semua data informasiOrangTua yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $informasiOrangTua = InformasiOrangTuaModel::where('personil_id', $personil->id)->get();
+            
             // Mengambil semua data UserModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
             $user = User::where('personil_id', $personil->id)->get();
             
-            return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggungan_keluarga', 'perlengkapan', 'tandaJasa', 'dataKepangkatan', 'riwayatPenugasan', 'sanksiHukuman', 'user'));
+            return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggungan_keluarga', 'perlengkapan', 'tandaJasa', 'dataKepangkatan', 'riwayatPenugasan', 'sanksiHukuman', 'informasiPasangan', 'informasiAnak', 'informasiOrangTua', 'user'));
         }
 
     }
@@ -216,12 +220,82 @@ class PersonilController extends Controller
 
     public function destroy($id){
         $personil = PersonilModel::find($id);
-
-        if (!$personil) {
+        if($personil == null){
             return abort(404);
+        } else {
+            // Mengambil semua data PendidikanFormalModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $pendidikanFormal = PendidikanFormalModel::where('personil_id', $personil->id)->get();
+            if($pendidikanFormal->count()!=0){
+                foreach ($pendidikanFormal as $data){
+                    $data->delete();
+                }
+            } 
+            // Mengambil semua data pendidikanMiliterModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $pendidikanMiliter = pendidikanMiliterModel::where('personil_id', $personil->id)->get();
+            if($pendidikanMiliter->count()!=0){
+                foreach ($pendidikanMiliter as $data){
+                    $data->delete();
+                }
+            } 
+            // Mengambil semua data kursusModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $kursus = kursusModel::where('personil_id', $personil->id)->get();
+            if($kursus->count()!=0){
+                foreach ($kursus as $data){
+                    $data->delete();
+                }
+            } 
+            // Mengambil semua data tanggunganKeluargaModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $tanggunganKeluarga = tanggunganKeluargaModel::where('personil_id', $personil->id)->get();
+            if($tanggunganKeluarga->count()!=0){
+                foreach ($tanggunganKeluarga as $data){
+                    $data->delete();
+                }
+            } 
+            // Mengambil semua data perlengkapanModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $perlengkapan = perlengkapanModel::where('personil_id', $personil->id)->get();
+            if($perlengkapan->count()!=0){
+                foreach ($perlengkapan as $data){
+                    $data->delete();
+                }
+            } 
+            // Mengambil semua data tandaJasaModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $tandaJasa = tandaJasaModel::where('personil_id', $personil->id)->get();
+            if($tandaJasa->count()!=0){
+                foreach ($tandaJasa as $data){
+                    $data->delete();
+                }
+            } 
+            // Mengambil semua data dataKepangkatanModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $dataKepangkatan = dataKepangkatanModel::where('personil_id', $personil->id)->get();
+            if($dataKepangkatan->count()!=0){
+                foreach ($dataKepangkatan as $data){
+                    $data->delete();
+                }
+            } 
+            // Mengambil semua data riwayatPenugasanModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $riwayatPenugasan = riwayatPenugasanModel::where('personil_id', $personil->id)->get();
+            if($riwayatPenugasan->count()!=0){
+                foreach ($riwayatPenugasan as $data){
+                    $data->delete();
+                }
+            } 
+            // Mengambil semua data sanksiHukumanModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $sanksiHukuman = sanksiHukumanModel::where('personil_id', $personil->id)->get();
+            if($sanksiHukuman->count()!=0){
+                foreach ($sanksiHukuman as $data){
+                    $data->delete();
+                }
+            } 
+            // Mengambil semua data userModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $user = User::where('personil_id', $personil->id)->get();
+            if($user->count()!=0){
+                foreach ($user as $data){
+                    $data->delete();
+                }
+            } 
+            $personil->delete();
         }
 
-        $personil->delete();
 
         return redirect()->route('admin.personil.index', ['page' => 1])
             ->with('success', 'Data Personil berhasil dihapus.');
