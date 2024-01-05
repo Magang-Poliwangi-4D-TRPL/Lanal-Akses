@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataKepangkatanModel;
+use App\Models\InformasiAnakModel;
+use App\Models\InformasiOrangTuaModel;
+use App\Models\InformasiPasanganModel;
 use App\Models\KursusModel;
 use App\Models\PendidikanFormalModel;
 use App\Models\PendidikanMiliterModel;
@@ -85,10 +88,21 @@ class PersonilController extends Controller
             // Mengambil semua data SanksiHukumanModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
             $sanksiHukuman = SanksiHukumanModel::where('personil_id', $personil->id)->get();
             
+            // Mengambil semua data InformasiPasangan yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $informasiPasangan = InformasiPasanganModel::where('personil_id', $personil->id)->get();
+            
+            
+            // Mengambil semua data informasiAnak yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $informasiAnak = InformasiAnakModel::where('personil_id', $personil->id)->get();
+            
+            
+            // Mengambil semua data informasiOrangTua yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $informasiOrangTua = InformasiOrangTuaModel::where('personil_id', $personil->id)->get();
+            
             // Mengambil semua data UserModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
             $user = User::where('personil_id', $personil->id)->get();
             
-            return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggungan_keluarga', 'perlengkapan', 'tandaJasa', 'dataKepangkatan', 'riwayatPenugasan', 'sanksiHukuman', 'user'));
+            return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggungan_keluarga', 'perlengkapan', 'tandaJasa', 'dataKepangkatan', 'riwayatPenugasan', 'sanksiHukuman', 'informasiPasangan', 'informasiAnak', 'informasiOrangTua', 'user'));
         }
 
     }

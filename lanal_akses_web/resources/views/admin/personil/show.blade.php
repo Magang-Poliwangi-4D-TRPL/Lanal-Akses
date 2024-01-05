@@ -657,74 +657,294 @@
                     <div class="container">
                         <div class="row d-flex justify-content-between align-items-center mb-4">
                             <p class="py-3">Informasi keluarga personil meliputi: Istri/Suami, Anak, Ayah/Ibu, Ayah/Ibu Mertua</p>
-                            <a href="{{ route('admin.personil.pendidikanmiliter.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Informasi Keluarga</a>
+                            <a href="{{ route('admin.personil.informasi-keluarga.index', ['nrp' => $nrpGanti]) }}" class="btn btn-sm text-white btn-blue bg-bluedark">Kelola Informasi Keluarga</a>
+                        </div>
+                        @if($informasiPasangan->count()!=0)
+                        <div class="container align-items-center">
+                            <h4 class="text-black my-4" >Informasi Pasangan</h4>
                         </div>
                         <table class="table thead-light">
                             <thead>
                                 <tr class="text-black   ">
                                   <th scope="col" width="45%">Nama Lengkap</th>
                                   <th scope="col" width="10%">:</th>
-                                  <th scope="col" width="45%"></th>
+                                  <th scope="col" width="45%">
+                                    @empty($informasiPasangan[0]->nama_lengkap )
+                                        <div class="container m-0 px-4 py-2 ">
+                                            _
+                                        </div>
+                                    @else
+                                    <div class="container m-0 px-4 py-2 ">
+                                        {{ $informasiPasangan[0]->nama_lengkap}}
+                                    </div>
+                                    @endempty
+                                  </th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
-                                    <td class="bluemain">Tempat, Tanggal Lahir</td>
-                                    <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                  <td scope="col" width="45%">Tempat, Tanggal Lahir</td>
+                                  <td scope="col" width="10%">:</td>
+                                  <td scope="col" width="45%" >
+                                    @empty($informasiPasangan[0]->tempat_lahir )
+                                        <div class="container m-0 px-4 py-2 ">
+                                            _
+                                        </div>
+                                    @else
+                                        <div class="container m-0 px-4 py-2 ">
+                                            {{ $informasiPasangan[0]->tempat_lahir . ' ,' . $informasiPasangan[0]->tanggal_lahir}}
+                                        </div>
+                                    @endempty
+                                  </td>
                                 </tr>
                                 <tr>
-                                    <td class="bluemain">Agama/Suku Bangsa</td>
-                                    <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                  <td scope="col" width="45%">Agama/Suku Bangsa</td>
+                                  <td scope="col" width="10%">:</td>
+                                  <td scope="col" width="45%" >
+                                    @empty($informasiPasangan[0]->agama )
+                                        <div class="container m-0 px-4 py-2 ">
+                                            _
+                                        </div>
+                                    @else
+                                        <div class="container m-0 px-4 py-2 ">
+                                            {{ $informasiPasangan[0]->agama . '/' . $informasiPasangan[0]->suku_bangsa}}
+                                        </div>
+                                    @endempty
+                                  </td>
                                 </tr>
                                 <tr>
-                                    <td class="bluemain">Tinggi/Berat Badan</td>
-                                    <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                  <td scope="col" width="45%">Tinggi/Berat Badan</td>
+                                  <td scope="col" width="10%">:</td>
+                                  <td scope="col" width="45%" >
+                                    @empty($informasiPasangan[0]->tinggi_badan && $informasiPasangan[0]->berat_badan )
+                                        <div class="container m-0 px-4 py-2 ">
+                                            _
+                                        </div>
+                                    @else
+                                        <div class="container m-0 px-4 py-2 ">
+                                            {{ $informasiPasangan[0]->tinggi_badan . ' CM/' .  $informasiPasangan[0]->berat_badan . ' KG'}}
+                                        </div>
+                                    @endempty
+                                  </td>
                                 </tr>
                                 <tr>
-                                    <td class="bluemain">Golongan Darah</td>
-                                    <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                  <td scope="col" width="45%">Golongan Darah</td>
+                                  <td scope="col" width="10%">:</td>
+                                  <td scope="col" width="45%" >
+                                    @empty($informasiPasangan[0]->golongan_darah)
+                                        <div class="container m-0 px-4 py-2 ">
+                                            _
+                                        </div>
+                                    @else
+                                        <div class="container m-0 px-4 py-2 ">
+                                            {{ $informasiPasangan[0]->golongan_darah}}
+                                        </div>
+                                    @endempty
+                                  </td>
                                 </tr>
                                 <tr>
-                                    <td class="bluemain">Pekerjaan</td>
-                                    <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                  <td scope="col" width="45%">Pekerjaan</td>
+                                  <td scope="col" width="10%">:</td>
+                                  <td scope="col" width="45%" >
+                                    @empty($informasiPasangan[0]->pekerjaan)
+                                        <div class="container m-0 px-4 py-2 ">
+                                            _
+                                        </div>
+                                    @else
+                                        <div class="container m-0 px-4 py-2 ">
+                                            {{ $informasiPasangan[0]->pekerjaan}}
+                                        </div>
+                                    @endempty
+                                  </td>
                                 </tr>
                                 <tr>
-                                    <td class="bluemain">Alamat Sekarang</td>
-                                    <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                  <td scope="col" width="45%">Alamat Sekarang</td>
+                                  <td scope="col" width="10%">:</td>
+                                  <td scope="col" width="45%" >
+                                    @empty($informasiPasangan[0]->alamat_sekarang)
+                                        <div class="container m-0 px-4 py-2 ">
+                                            _
+                                        </div>
+                                    @else
+                                        <div class="container m-0 px-4 py-2 ">
+                                            {{ $informasiPasangan[0]->alamat_sekarang}}
+                                        </div>
+                                    @endempty
+                                  </td>
                                 </tr>
                                 <tr>
-                                    <td class="bluemain">Nomor KPI</td>
-                                    <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                  <td scope="col" width="45%">No. KPI</td>
+                                  <td scope="col" width="10%">:</td>
+                                  <td scope="col" width="45%" >
+                                    @empty($informasiPasangan[0]->nomor_kpi)
+                                        <div class="container m-0 px-4 py-2 ">
+                                            _
+                                        </div>
+                                    @else
+                                        <div class="container m-0 px-4 py-2 ">
+                                            {{ $informasiPasangan[0]->nomor_kpi}}
+                                        </div>
+                                    @endempty
+                                  </td>
                                 </tr>
                                 <tr>
-                                    <td class="bluemain">Tempat Nikah</td>
-                                    <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                  <td scope="col" width="45%">Tempat Nikah</td>
+                                  <td scope="col" width="10%">:</td>
+                                  <td scope="col" width="45%" >
+                                    @empty($informasiPasangan[0]->tempat_nikah)
+                                        <div class="container m-0 px-4 py-2 ">
+                                            _
+                                        </div>
+                                    @else
+                                        <div class="container m-0 px-4 py-2 ">
+                                            {{ $informasiPasangan[0]->tempat_nikah}}
+                                        </div>
+                                    @endempty
+                                  </td>
                                 </tr>
                                 <tr>
-                                    <td class="bluemain">Nomor Surat Nikah</td>
-                                    <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                  <td scope="col" width="45%">Nomor Surat Nikah</td>
+                                  <td scope="col" width="10%">:</td>
+                                  <td scope="col" width="45%" >
+                                    @empty($informasiPasangan[0]->nomor_surat_nikah)
+                                        <div class="container m-0 px-4 py-2 ">
+                                            _
+                                        </div>
+                                    @else
+                                        <div class="container m-0 px-4 py-2 ">
+                                            {{ $informasiPasangan[0]->nomor_surat_nikah}}
+                                        </div>
+                                    @endempty
+                                  </td>
                                 </tr>
                                 <tr>
-                                    <td class="bluemain">Nomor KTA JALASENASTRI</td>
-                                    <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
+                                  <td scope="col" width="45%">Nomor KTA JALASENASTRI</td>
+                                  <td scope="col" width="10%">:</td>
+                                  <td scope="col" width="45%" >
+                                    @empty($informasiPasangan[0]->nomor_kta_jalasenastri)
+                                        <div class="container m-0 px-4 py-2 ">
+                                            _
+                                        </div>
+                                    @else
+                                        <div class="container m-0 px-4 py-2 ">
+                                            {{ $informasiPasangan[0]->nomor_kta_jalasenastri}}
+                                        </div>
+                                    @endempty
+                                  </td>
                                 </tr>
-                                <tr>
-                                    <td class="bluemain">Nomor KTA JALASENASTRI</td>
-                                    <td class="bluemain">:</td>
-                                    <td>Tidak ada data.</td>
-                                </tr>
-                              </tbody>
+                            </tbody>
                         </table>
+                        @else
+                        <div class="container align-items-center">
+                            <h4 class="text-black my-4" >Belum ada data pasangan</h4>
+                        </div>
+                        @endif
+                        
+                        @if ($informasiAnak->count()!=0)
+                        <div class="container align-items-center border-bottom border-black">
+                            <h4 class="text-black my-4" >Informasi Anak</h4>
+                        </div>
+                        <div class="row justify-content-between">
+                            @foreach($informasiAnak as $dataInformasiAnak)
+                            <div class="col-sm-6 mt-4 py-4 border border-black rounded">
+                                <h4 class="text-black my-4" >{{ $dataInformasiAnak->nama_lengkap }}</h4>
+                                <table class="table thead-light">
+                                    <tbody>
+                                        <tr>
+                                        <td scope="col" width="45%">Tempat, Tanggal Lahir</td>
+                                        <td scope="col" width="10%">:</td>
+                                        <td scope="col" width="45%" >
+                                            @empty($dataInformasiAnak->tempat_lahir )
+                                                <div class="container m-0 px-4 py-2 rounded border-all">
+                                                    _
+                                                </div>
+                                            @else
+                                                <div class="container m-0 px-4 py-2 rounded border-all">
+                                                    {{ $dataInformasiAnak->tempat_lahir . ' ,' . $dataInformasiAnak->tanggal_lahir}}
+                                                </div>
+                                            @endempty
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <td scope="col" width="45%">Jenis Kelamin</td>
+                                        <td scope="col" width="10%">:</td>
+                                        <td scope="col" width="45%" >
+                                            @empty($dataInformasiAnak->jenis_kelamin )
+                                                <div class="container m-0 px-4 py-2 rounded border-all">
+                                                    _
+                                                </div>
+                                            @else
+                                                <div class="container m-0 px-4 py-2 rounded border-all">
+                                                    @if($dataInformasiAnak->jenis_kelamin == 'L')
+                                                        Laki-Laki
+                                                    @else
+                                                        Perempuan
+                                                    @endif
+                                                </div>
+                                            @endempty
+                                        </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            @endforeach
+                        </div>
+                        @else
+                        <div class="container align-items-center">
+                            <h4 class="text-black my-4" >Belum ada data anak</h4>
+                        </div>
+                        @endif
+
+                        @if ($informasiOrangTua->count()!=0)
+                        <div class="container align-items-center border-bottom border-black">
+                            <h4 class="text-black my-4" >Informasi Orang Tua</h4>
+                        </div>
+                        <div class="row justify-content-between">
+                            @foreach($informasiOrangTua as $dataInformasiOrangTua)
+                            <div class="col-sm-6 mt-4 py-4 border border-black rounded">
+                                <h4 class="text-black my-4" >{{ $dataInformasiOrangTua->nama_lengkap }}</h4>
+                                <table class="table thead-light">
+                                    <tbody>
+                                        <tr>
+                                          <td scope="col" width="45%">Agama</td>
+                                          <td scope="col" width="10%">:</td>
+                                          <td scope="col" width="45%" >
+                                            @empty($dataInformasiOrangTua->agama )
+                                                <div class="container m-0 px-4 py-2 rounded border-all">
+                                                    _
+                                                </div>
+                                            @else
+                                                <div class="container m-0 px-4 py-2 rounded border-all">
+                                                    {{ $dataInformasiOrangTua->agama }}
+                                                </div>
+                                            @endempty
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td scope="col" width="45%">Status Hubungan</td>
+                                          <td scope="col" width="10%">:</td>
+                                          <td scope="col" width="45%" >
+                                            @empty($dataInformasiOrangTua->status_hubungan )
+                                                <div class="container m-0 px-4 py-2 rounded border-all">
+                                                    _
+                                                </div>
+                                            @else
+                                                <div class="container m-0 px-4 py-2 rounded border-all">
+                                                    {{ $dataInformasiOrangTua->status_hubungan }}
+                                                </div>
+                                            @endempty
+                                          </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                            @endforeach
+                        @else
+                        <div class="container align-items-center">
+                            <h4 class="text-black my-4" >Belum ada data anak</h4>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

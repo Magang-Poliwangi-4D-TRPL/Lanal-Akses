@@ -27,8 +27,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
+        $this->call(PersonilSeeder::class);
+
         // ==== Personil Feature ====
-        PersonilModel::create([
+        $personil = PersonilModel::create([
             "nama_lengkap" => "Suhendra Kurniawan",
             "pangkat" => "Letda Laut",
             "korps" => "(KH)",
@@ -38,13 +40,16 @@ class DatabaseSeeder extends Seeder
             'tempat_lahir' => 'BANGKALAN',
             'tanggal_lahir' => '20-12-1989',
         ]);
+
+        $personil->save();
+        $personil = PersonilModel::where('nrp', '26226/P')->first();
     
         PendidikanFormalModel::create([
             "nama_pendidikan" => "SDN 1 Bangkalan",
             "lama_pendidikan" => "6 tahun",
             "tahun_lulus" => "2001",
             "keterangan" => "ijasah",
-            "personil_id" => 1,
+            "personil_id" => $personil->id,
         ]);
     
         PendidikanMiliterModel::create([
@@ -52,7 +57,7 @@ class DatabaseSeeder extends Seeder
             "lama_pendidikan" => "6 bulan",
             "tahun_lulus" => "2010",
             "keterangan" => "ijasah",
-            "personil_id" => 1,
+            "personil_id" => $personil->id,
         ]);
     
         KursusModel::create([
@@ -60,7 +65,7 @@ class DatabaseSeeder extends Seeder
             "tempat_kursus" => "LKPTCC Banyuwangi",
             "lama_kursus" => "4 bulan",
             "keterangan" => "sertifikat",
-            "personil_id" => 1,
+            "personil_id" => $personil->id,
         ]);
     
         TanggunganKeluargaModel::create([
@@ -68,7 +73,7 @@ class DatabaseSeeder extends Seeder
             "tempat_tanggal_lahir" => "Banyuwangi, 1 Januari 2016",
             "status_hubungan" => "anak",
             "keterangan" => "-",
-            "personil_id" => 1,
+            "personil_id" => $personil->id,
         ]);
     
         PerlengkapanModel::create([
@@ -78,14 +83,14 @@ class DatabaseSeeder extends Seeder
             'no_topi' => 36,
             'no_mut' => 38,
             'keterangan' => null,
-            'personil_id' => 1,
+            'personil_id' => $personil->id,
         ]);
     
         TandaJasaModel::create([
             'nama_tanda_jasa' => "SL XII",
             'no_skep' => "KED/-/-/-",
             'keterangan' => null,
-            'personil_id' => 1,
+            'personil_id' => $personil->id,
         ]);
     
         DataKepangkatanModel::create([
@@ -93,7 +98,7 @@ class DatabaseSeeder extends Seeder
             'no_skep' => "KED/-/-/-",
             'tempat_pangkat' => "Mako Lanal Banyuwangi",
             'keterangan' => null,
-            'personil_id' => 1,
+            'personil_id' => $personil->id,
         ]);
     
         RiwayatPenugasanModel::create([
@@ -101,14 +106,14 @@ class DatabaseSeeder extends Seeder
             'jabatan' => "PASET",
             'tempat' => "Mako Lanal Banyuwangi",
             'keterangan' => null,
-            'personil_id' => 1,
+            'personil_id' => $personil->id,
         ]);
     
         SanksiHukumanModel::create([
             'nama_hukuman' => "Hukuman 1",
             'tahun_hukuman' => "2023",
             'keterangan' => null,
-            'personil_id' => 1,
+            'personil_id' => $personil->id,
         ]);
 
 
@@ -119,13 +124,6 @@ class DatabaseSeeder extends Seeder
             "nip" => "19700105 199112 2 001",
             "jabatan" => "Akun/Silta/KA",
             'golongan' => 'Penata III/d'
-        ]);
-
-        User::create([
-            "nama_lengkap" => "Komandan Lanal BWI",
-            "username" => "komandanlanalbwi",
-            "password" => Hash::make('komandan123'),
-            "role" => "komandan",
         ]);
     }
 }

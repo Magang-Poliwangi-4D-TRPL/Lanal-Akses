@@ -55,13 +55,10 @@
                 @endif
             </tbody>
         </table>
-        @php
-                $nrp = $personil->nrp;
-                $nrpGanti = str_replace('/', '-', $nrp);
-            @endphp
-            <a class="text-decoration-none" href="{{ route('admin.personil.show', $nrpGanti) }}">
-                <button class="btn btn-blue btn-sm text-white bg-bluedark m-2" >Kembali ke halaman sebelumnya<span><iconify-icon icon="mdi:back"></iconify-icon></span></button>
-            </a>
+        
+        <a class="text-decoration-none" href="{{ route('admin.personil.show', $nrpGanti) }}">
+            <button class="btn btn-blue btn-sm text-white bg-bluedark m-2" >Kembali ke halaman sebelumnya<span><iconify-icon icon="mdi:back"></iconify-icon></span></button>
+        </a>
     </div>
 </div>
 @endsection
