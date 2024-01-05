@@ -36,7 +36,6 @@ class SekretarisSeeder extends Seeder
             'suku_bangsa' => 'Madura',
             'alamat_sekarang' => 'PERUM TNI AL B VII/3 RT 019 RW 007 KEL KEDUNGKENDO KEC CANDI SIDOARJO, JAWA
             TIMUR',
-            'image_url' => 'storage/images/1704467254.jpg',
         ]);
 
         $personil->save();
