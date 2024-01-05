@@ -238,10 +238,10 @@
                                     <td class="bluemain">Agama/Suku Bangsa</td>
                                     <td class="bluemain">:</td>
                                     <td>
-                                        @empty($personil->agama_sukubangsa)
+                                        @empty($personil->agama)
                                             Tidak ada data
                                         @else
-                                            <p>{{ $personil->agama_sukubangsa }}</p>
+                                            <p>{{ $personil->agama .'/'. $personil->suku_bangsa }}</p>
                                         @endempty
                                     </td>
                                 </tr>
@@ -249,10 +249,10 @@
                                     <td class="bluemain">Tinggi/Berat Badan</td>
                                     <td class="bluemain">:</td>
                                     <td>
-                                        @empty($personil->tinggi_beratbadan)
+                                        @empty($personil->tinggi_badan)
                                             Tidak ada data
                                         @else
-                                            <p>{{ $personil->tinggi_beratbadan }}</p>
+                                            <p>{{ $personil->tinggi_badan .  $personil->berat_badan}}</p>
                                         @endempty
                                     </td>
                                 </tr>

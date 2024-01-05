@@ -136,24 +136,53 @@
                           </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                      <label for="tinggi_beratbadan">Massukkan tinggi & berat badan personel baru</label>
-                      <input type="text" class="form-control @error('tinggi_beratbadan') is-invalid @enderror" id="tinggi_beratbadan" name="tinggi_beratbadan"  placeholder="XX cm/XX kg" value="{{ $personil->tinggi_beratbadan }}">
-                      @error('tinggi_beratbadan')
+                    <div class="form-group row">
+                      <label for="tinggi_badan" class="col-sm-2 col-form-label">Tinggi badan</label>
+                      <div class="col-sm-4">
+                          <input type="text" class="form-control" id="tinggi_badan" name="tinggi_badan" placeholder="00" value="{{ old('tinggi_badan', $personil->tinggi_badan) }}">
+                      </div>
+                      @error('tinggi_badan')
                           <div class="invalid-feedback">
-                            {{ $message }}
+                              {{ $message }}
                           </div>
                       @enderror
-                    </div>
-                    <div class="form-group">
-                      <label for="agama_sukubangsa">Massukkan agama & suku bangsa personel baru</label>
-                      <input type="text" class="form-control @error('agama_sukubangsa') is-invalid @enderror" id="agama_sukubangsa" name="agama_sukubangsa"  placeholder="agama/suku bangsa" value="{{ $personil->agama_sukubangsa }}">
-                      @error('agama_sukubangsa')
+                      <label for="berat_badan" class="col-sm-2 col-form-label">Berat badan</label>
+                      <div class="col-sm-4">
+                          <input type="text" class="form-control" id="berat_badan" name="berat_badan" placeholder="00" value="{{ old('berat_badan', $personil->berat_badan) }}">
+                      </div>
+                      @error('berat_badan')
                           <div class="invalid-feedback">
-                            {{ $message }}
+                              {{ $message }}
                           </div>
                       @enderror
-                    </div>
+                  </div>
+                    <div class="form-group row">
+                      <label for="agama" class="col-sm-2 col-form-label">Agama</label>
+                      <div class="col-sm-4">
+                          <select class="form-control  @error('agama') is-invalid @enderror" name="agama" id="agama">
+                              <option value="Islam" {{ old('agama', $personil->agama) === 'Islam' ? 'selected' : '' }}>Islam</option>
+                              <option value="Krsiten" {{ old('agama', $personil->agama) === 'Krsiten' ? 'selected' : '' }}>Krsiten</option>
+                              <option value="Katolik" {{ old('agama', $personil->agama) === 'Katolik' ? 'selected' : '' }}>Katolik</option>
+                              <option value="Hindu" {{ old('agama', $personil->agama) === 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                              <option value="Buddha" {{ old('agama', $personil->agama) === 'Buddha' ? 'selected' : '' }}>Buddha</option>
+                              <option value="Khonghucu" {{ old('agama', $personil->agama) === 'Khonghucu' ? 'selected' : '' }}>Khonghucu</option>
+                          </select>
+                          @error('agama')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+                      <label for="suku_bangsa" class="col-sm-2 col-form-label">Suku Bangsa</label>
+                      <div class="col-sm-4">
+                          <input type="text" class="form-control" id="suku_bangsa" name="suku_bangsa" placeholder="Suku Bangsa" value="{{ old('suku_bangsa', $personil->suku_bangsa) }}">
+                      </div>
+                      @error('suku_bangsa')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                      @enderror
+                  </div>
                     <div class="form-group row">
                       <label for="golongan_darah" class="col-sm-3 col-form-label">Golongan darah personel</label>
                       <div class="col-sm-3">

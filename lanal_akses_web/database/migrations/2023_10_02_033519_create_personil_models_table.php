@@ -29,8 +29,10 @@ class CreatePersonilModelsTable extends Migration
             $table->string('nomor_asbri')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->string('tanggal_lahir')->nullable();
-            $table->string('tinggi_beratbadan')->nullable();
-            $table->string('agama_sukubangsa')->nullable();
+            $table->string('tinggi_badan')->nullable();
+            $table->string('berat_badan')->nullable();
+            $table->string('agama')->nullable();
+            $table->string('suku_bangsa')->nullable();
             $table->string('golongan_darah')->nullable();
             $table->string('dikspesialisasi')->nullable();
             $table->string('nilai_samata_stakes')->nullable();
