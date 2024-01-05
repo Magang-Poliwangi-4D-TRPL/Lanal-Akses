@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
             'jenis_kelamin' => 'L',
             'tempat_lahir' => 'BANGKALAN',
             'tanggal_lahir' => '20-12-1989',
+            'image_url' => 'storage/images/1704467254.jpg',
         ]);
 
         $personil->save();
