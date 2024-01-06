@@ -193,6 +193,12 @@ Route::get('/admin/absensi/', [AbsensiController::class, 'index'])
 Route::get('/admin/users/{page}', [UserController::class, 'index'])
 ->name('admin.users.index')
 ->where('page', '[1-9][0-9]*');
+Route::get('/admin/users/akun-pegawai/{page}', [UserController::class, 'indexPegawai'])
+->name('admin.akun-pegawai.index')
+->where('page', '[1-9][0-9]*');
+Route::get('/admin/users/akun-admin/{page}', [UserController::class, 'indexAdmin'])
+->name('admin.akun-admin.index')
+->where('page', '[1-9][0-9]*');
 Route::get('/admin/users/create', [UserController::class, 'create'])->name('users.create');
 Route::post('/admin/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/admin/users/{id}', [UserController::class, 'show'])->name('users.show');

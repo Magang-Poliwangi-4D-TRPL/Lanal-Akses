@@ -137,8 +137,9 @@
                             <p class="mb-0">{{ $user[0]->nama_lengkap }}</p>
                         @endempty
                     </div>
-                    <div class="d-flex align-items-center justify-content-end my-3">
+                    <div class="d-flex align-items-center justify-content-between  my-3">
                         <!-- Tombol Edit Gambar -->
+                        <a href="{{ route('admin.personil.index', ['page' => 1]) }}" class="btn btn-secondary">Kembali</a>
                         <a href="{{ route('admin.personil.akun.index', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" class="btn btn-sm btn-outline-secondary">Edit Akun</a>
                     </div>
                 </div>
