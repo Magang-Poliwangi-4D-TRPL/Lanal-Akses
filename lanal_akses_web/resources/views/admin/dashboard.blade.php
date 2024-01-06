@@ -9,16 +9,16 @@
     <div class="card-columns mx-auto">
       <div class="card bg-bluemain">
         <div class="card-body ">
-          <h5 class="card-title text-white">ABSENSI HARI INI</h5>
-          <p class="card-text mb-4 text-white">Total Data Personel :</p>
+          <h5 class="card-title text-white">JUMLAH PERSONEL</h5>
+          <p class="card-text mb-4 text-white">Jumlah Data Personel :</p>
           <h2 class="text-center text-white">{{ $personil->count() }}</h2>
         </div>
       </div>
       
       <div class="card bg-blueaccent ">
         <div class="card-body ">
-          <h5 class="card-title text-white">JUMLAH PERSONEL</h5>
-          <p class="card-text mb-4 text-white">Jumlah Seluruh Personel :</p>
+          <h5 class="card-title text-white">JUMLAH PNS</h5>
+          <p class="card-text mb-4 text-white">Jumlah Seluruh PNS :</p>
           <h2 class="text-center text-white">{{ $pns->count() }}</h2>
           </div>
         </div>
