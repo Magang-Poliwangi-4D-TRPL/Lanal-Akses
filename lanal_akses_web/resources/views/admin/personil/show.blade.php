@@ -108,7 +108,7 @@
                         
                         <p class="text-left" >{{ $personil->nrp }}</p>
                         <!-- Tombol Edit Gambar -->
-                        <a href="{{ route('gambar.personil', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" class="btn btn-sm btn-outline-secondary">Edit Foto</a>
+                        <a href="{{ route('personil.edit-gambar', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" class="btn btn-sm btn-outline-secondary">Edit Foto</a>
                     </div>
 
                 </div>
@@ -129,12 +129,12 @@
                             <p class="mb-0">{{ $user[0]->role }}</p>
                         @endempty
                     </div>
-                    <p class="data-utama mb-0">NIK</p>
+                    <p class="data-utama mb-0">nama akun</p>
                     <div class="container m-0 p-2 rounded border-all">
-                        @empty($personil->nomor_ktp)
+                        @empty($user[0]->nama_lengkap)
                             <p class='mb-0'>_</p>
                         @else
-                            <p class="mb-0">{{ $personil->nomor_ktp }}</p>
+                            <p class="mb-0">{{ $user[0]->nama_lengkap }}</p>
                         @endempty
                     </div>
                     <div class="d-flex align-items-center justify-content-end my-3">

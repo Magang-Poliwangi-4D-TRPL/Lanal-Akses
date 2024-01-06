@@ -1,0 +1,93 @@
+[
+  {
+    "nama_pegawai": "Darwati, S.E",
+    "golongan": "Penata III/d",
+    "nip": "19700105 199112 2 001",
+    "jabatan": "Akun/Silta/KA",
+    "jenis_kelamin": "P"
+  },
+  {
+    "nama_pegawai": "Rusni, S.E",
+    "golongan": "Penda III/c",
+    "nip": "19790707 199903 2 002",
+    "jabatan": "Palaksa/Set/PA/PS",
+    "jenis_kelamin": "P"
+  },
+  {
+    "nama_pegawai": "Suhartono",
+    "golongan": "Penda Tk.I III/b",
+    "nip": "19681021 199303 1 001",
+    "jabatan": "Satang/Ur.Ang 2",
+    "jenis_kelamin": "L"
+  },
+  {
+    "nama_pegawai": "Niluh Sumiani",
+    "golongan": "Penda Tk.I III/b",
+    "nip": "19700428 199203 2 002",
+    "jabatan": "Sintel/UrTu",
+    "jenis_kelamin": "P"
+  },
+  {
+    "nama_pegawai": "I. Ketut Agus.S",
+    "golongan": "Penda Tk.I III/b",
+    "nip": "19760925 200312 1 003",
+    "jabatan": "Arsiparis Mahir",
+    "jenis_kelamin": "L"
+  },
+  {
+    "nama_pegawai": "Moh. Supingi",
+    "golongan": "Penda  III/a",
+    "nip": "19690512 199402 1 002",
+    "jabatan": "Ur Administrasi/Verifikasi",
+    "jenis_kelamin": "L"
+  },
+  {
+    "nama_pegawai": "Yayuk S,Amd.Keb",
+    "golongan": "Penda  III/a",
+    "nip": "19761216 199803 2 002",
+    "jabatan": "BP/Bidan",
+    "jenis_kelamin": "P"
+  },
+  {
+    "nama_pegawai": "Siti. C,Amd,Keb",
+    "golongan": "Penda  III/a",
+    "nip": "19760213 200112 2 003",
+    "jabatan": "BP/ Ur Lam",
+    "jenis_kelamin": "P"
+  },
+  {
+    "nama_pegawai": "Endang Triasih,S.E",
+    "golongan": "Penda  III/a",
+    "nip": "19750409 201410 2 002",
+    "jabatan": "Denpomal/Ur.Tu/PA/PS",
+    "jenis_kelamin": "P"
+  },
+  {
+    "nama_pegawai": "Siti Masita",
+    "golongan": "Pengt Tk I. II/d",
+    "nip": "19660608 199003 2 003",
+    "jabatan": "Sminlog/Ur.Evalaf",
+    "jenis_kelamin": "P"
+  },
+  {
+    "nama_pegawai": "Siti Salamah",
+    "golongan": "Pengt Tk I. II/d",
+    "nip": "19790807 200212 2 003",
+    "jabatan": "Sprogar/Si Lakgar/Ur Renpro",
+    "jenis_kelamin": "P"
+  },
+  {
+    "nama_pegawai": "Mistiani Rahayu",
+    "golongan": "Pengt Tk I. II/d",
+    "nip": "19691210 199803 2 003",
+    "jabatan": "Akun-PPSPM/Ur Verifikasi 4",
+    "jenis_kelamin": "P"
+  },
+  {
+    "nama_pegawai": "Sudarji",
+    "golongan": "Pengt TK.I II/a",
+    "nip": "19720310 200212 1 002",
+    "jabatan": "Sprogar/Ur Rengar",
+    "jenis_kelamin": "L"
+  }
+]

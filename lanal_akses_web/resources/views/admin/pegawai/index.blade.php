@@ -19,7 +19,7 @@
                 <a class="text-decoration-none" href="{{ route('admin.pegawai.create') }}">
                     <button class="btn btn-blue btn-md text-white bg-blueaccent">Tambah Data PNS<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></span></button>
                 </a>
-                <a class="text-decoration-none" href="#">
+                <a class="text-decoration-none" href="{{ route('admin.pegawai.cetak-data-pegawai') }}">
                     <button class="btn btn-blue btn-md text-white bg-bluedark">Cetak Data PNS<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
                 </a>
             </div>

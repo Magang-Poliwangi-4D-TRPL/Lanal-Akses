@@ -18,7 +18,9 @@ class CreatePegawaiModelsTable extends Migration
             $table->string('nip')->unique(); // Menambahkan konstrain unik pada kolom 'nip'
             $table->string('nama_pegawai');
             $table->string('jabatan');
+            $table->string('jenis_kelamin');
             $table->string('golongan');
+            $table->string('image_url')->nullable();
             $table->string('email')->nullable();
             $table->string('no_telepon')->nullable();
             $table->string('alamat')->nullable();

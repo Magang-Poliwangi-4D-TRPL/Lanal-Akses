@@ -19,9 +19,7 @@
                 <a class="text-decoration-none" href="{{ route('admin.personil.create') }}">
                     <button class="btn btn-blue btn-md text-white bg-blueaccent my-2">Tambah Personil<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></span></button>
                 </a>
-                <a class="text-decoration-none" href="#">
-                    <button class="btn btn-blue btn-md text-white bg-bluedark my-2">Cetak Data Personil<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
-                </a>
+                
             </div>
             <table class="table thead-light">
                 <thead>

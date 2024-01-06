@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AbsensiController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AkunPegawaiController;
 use App\Http\Controllers\Admin\AkunPersonilController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KursusController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Admin\TanggunganKeluargaController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DataKepangkatanController;
 use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Admin\ImagePegawaiController;
 use App\Http\Controllers\Admin\InformasiKeluargaController;
 use App\Http\Controllers\Admin\PerlengkapanController;
 use App\Http\Controllers\Admin\RiwayatPenugasanController;
@@ -64,8 +66,8 @@ Route::delete('/admin/personil/{id}', [PersonilController::class, 'destroy'])
     ->name('admin.personil.destroy');
 
 // Fitur Gambar
-Route::post('/upload/{nrp}', [ImageController::class, 'upload'])->name('upload.image');
-Route::get('/upload/{nrp}', [ImageController::class, 'editGambar'])->name('gambar.personil');
+Route::post('/personil/upload/{nrp}', [ImageController::class, 'upload'])->name('personil.upload.image');
+Route::get('/personil/upload/{nrp}', [ImageController::class, 'editGambar'])->name('personil.edit-gambar');
 
 // Fitur Cetak
 Route::get('/admin/personil/cetak-data-personil', [PersonilController::class, 'cetakDataPersonil'])->name('personil.cetak-data');
@@ -213,4 +215,19 @@ Route::get('/admin/pegawai/{nip}/show', [PegawaiController::class, 'show'])->nam
 Route::get('/admin/pegawai/{nip}/edit', [PegawaiController::class, 'edit'])->name('admin.pegawai.edit');
 Route::put('/admin/pegawai/{nip}', [PegawaiController::class, 'update'])->name('admin.pegawai.update');
 
+// Fitur Gambar
+Route::post('/pegawai/upload/{nip}', [ImagePegawaiController::class, 'upload'])->name('pegawai.upload.image');
+Route::get('/pegawai/upload/{nip}', [ImagePegawaiController::class, 'editGambar'])->name('pegawai.edit-gambar');
 
+// Fitur Cetak
+Route::get('/admin/pegawai/cetak-data-pegawai', [PegawaiController::class, 'cetakDataPegawai'])->name('admin.pegawai.cetak-data-pegawai');
+
+
+// Pegawai -> Akun
+Route::get('/admin/pegawai/show/{nip}/akun', [AkunPegawaiController::class, 'index'])->name('admin.pegawai.akun.index');
+Route::get('/admin/pegawai/show/{nip}/akun/create', [AkunPegawaiController::class, 'create'])->name('admin.pegawai.akun.create');
+Route::post('/admin/pegawai/show/{nip}/akun', [AkunPegawaiController::class, 'store'])->name('admin.pegawai.akun.store');
+Route::get('/admin/pegawai/show/{nip}/akun/{akunId}/edit', [AkunPegawaiController::class, 'edit'])->name('admin.pegawai.akun.edit');
+Route::put('/admin/pegawai/show/{nip}/akun/{akunId}/update', [AkunPegawaiController::class, 'update'])->name('admin.pegawai.akun.update');
+// Route::delete('/admin/pegawai/show/{nip}/akun/{akunId}', [AkunPegawaiController::class, 'destroy'])
+// ->name('admin.pegawai.akun.destroy');

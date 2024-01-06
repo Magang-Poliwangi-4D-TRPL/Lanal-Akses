@@ -88,33 +88,42 @@
         <div class="row">
                 <div class="col-md-5 mt-4">
                     <div class="bg-white p-4 text-center col-12 ">
-                        <img src="{{  URL::asset('images/admin/default-profile.jpg') }}" alt="default-profile" border="0" height="auto" class="rounded-circle image-profile">
-    
+                        @empty($pegawai->image_url)
+                            <img src="{{  URL::asset('images/admin/default-profile.jpg') }}" alt="default-profile" border="0" height="auto" class="rounded-circle image-profile">
+                        
+                        @else
+                            <img src="{{ asset($pegawai->image_url) }}" alt="Profil {{ $pegawai->nama_lengkap }}" border="0" height="auto" class="rounded image-profile">
+                        @endempty
                         <h2 class="mt-3 bluedark text-left jabatan">{{ $pegawai->jabatan}}</h2>
                         <h4 class="text-left nama">{{ $pegawai->nama_pegawai }}</h4>
-                        <p class="text-left" style="color: grey; border-bottom: 2px solid #0D21A1;">{{ $pegawai->nip }}</p>
+                        <div class="d-flex align-items-center justify-content-between mb-3" style="color: grey; border-bottom: 2px solid #0D21A1;">
+                            <p class="text-left" >{{ $pegawai->nip }}</p>
+                            <a href="{{ route('pegawai.edit-gambar', ['nip'=> str_replace(' ', '-', $pegawai->nip)]) }}" class="btn btn-sm btn-outline-secondary">Edit Foto</a>
+
+                        </div>
                     </div>
                     <div class="bg-white px-4 pb-4">
                         <p class="data-utama mb-0">Username</p>
-                        <div class="container m-0 rounded border-all">
-                            {{-- @empty($pegawai->nik)
-                                <p>_</p>
+                        <div class="container m-0 p-2 rounded border-all">
+                            @empty($user[0]->username)
+                                <p class="mb-0">_</p>
                             @else
-                                <p>{{ $pegawai->nik }}</p>
-                            @endempty --}}
-                            <p>_</p>
+                                <p class="mb-0">{{ $user[0]->username }}</p>
+                            @endempty
                         </div>
-                        <p class="data-utama mb-0">password</p>
-                        <div class="container m-0 rounded border-all">
-                            {{-- @empty($pegawai->tempat_tanggallahir)
-                                <p>_</p>
+                        <p class="data-utama mb-0">nama akun</p>
+                        <div class="container m-0 p-2  rounded border-all">
+                            @empty($user[0]->nama_lengkap)
+                                <p class="mb-0">_</p>
                             @else
-                                <p>{{ $pegawai->tempat_tanggallahir }}</p>
-                            @endempty --}}
-                            <p>_</p>
+                                <p class="mb-0">{{ $user[0]->nama_lengkap }}</p>
+                            @endempty
                         </div>
-                        
-                        <a href="{{ route('admin.pegawai.index', ['page' => 1]) }}" class="btn btn-primary-1 mt-3">Kembali</a>
+                        <div class="d-flex align-items-center justify-content-between my-3">
+                            <!-- Tombol Edit Gambar -->
+                            <a href="{{ route('admin.pegawai.index', ['page' => 1]) }}" class="btn btn-primary-1 mt-3">Kembali</a>
+                            <a href="{{ route('admin.pegawai.akun.index', ['nip'=> str_replace(' ', '-', $pegawai->nip)]) }}" class="btn btn-sm btn-outline-secondary">Edit Akun</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-7 mt-4 bg-white">
@@ -162,6 +171,17 @@
                                                 Tidak ada data
                                             @else
                                                 <p>{{ $pegawai->golongan }}</p>
+                                            @endempty
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bluemain">Jenis Kelamin</td>
+                                        <td class="bluemain">:</td>
+                                        <td>
+                                            @empty($pegawai->jenis_kelamin)
+                                                Tidak ada data
+                                            @else
+                                                <p>{{ $pegawai->jenis_kelamin == 'L'? 'Laki-Laki':'Perempuan' }}</p>
                                             @endempty
                                         </td>
                                     </tr>

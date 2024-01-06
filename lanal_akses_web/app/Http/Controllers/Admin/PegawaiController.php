@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PegawaiModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
@@ -53,7 +54,9 @@ class PegawaiController extends Controller
             if($pegawai == null){
                 return abort(404);
             } else {
-                return view('admin.pegawai.show', compact('pegawai'));
+                $user = User::where('pegawai_id', $pegawai->id)->get();
+                // dd($user);
+                return view('admin.pegawai.show', compact('pegawai', 'user'));
             }
 
         }
@@ -82,6 +85,7 @@ class PegawaiController extends Controller
             'nip' => 'required|unique:pegawai,nip|max:25',
             'nama_pegawai' => 'required|string',
             'jabatan' => 'required|string',
+            'jenis_kelamin' => 'required|string',
             'golongan' => 'required|string',
         ], [
             'nip.max' => 'NIP tidak sesuai format',
@@ -115,6 +119,7 @@ class PegawaiController extends Controller
             'golongan' => 'required|string|max:50',
             'email' => 'nullable|email',
             'no_telepon' => 'nullable',
+            'jenis_kelamin' => 'required',
             'alamat' => 'nullable',
         ],);
 
@@ -130,6 +135,7 @@ class PegawaiController extends Controller
             'golongan' => $validatedData['golongan'],
             'email' => $validatedData['email'],
             'alamat' => $validatedData['alamat'],
+            'jenis_kelamin' => $validatedData['jenis_kelamin'],
             'no_telepon' => $validatedData['no_telepon'],
         ]);
 
@@ -137,7 +143,7 @@ class PegawaiController extends Controller
     }
 
     public function destroy($nip){
-        $nipGanti = str_replace('-', '/', $nip);
+        $nipGanti = str_replace('-', ' ', $nip);
         $pegawai = PegawaiModel::where('nip', $nipGanti)->first();
         // dd($pegawai);
         if (!$pegawai) {
@@ -148,6 +154,12 @@ class PegawaiController extends Controller
 
         return redirect()->route('admin.pegawai.index', ['page' => 1])
             ->with('success', 'Data Pegawai berhasil dihapus.');
+    }
+
+    public function cetakDataPegawai(){
+        $pegawai = pegawaiModel::all();
+
+        return view('admin.pegawai.cetak.cetak-data-pegawai', compact('pegawai',));
     }
 
 }
