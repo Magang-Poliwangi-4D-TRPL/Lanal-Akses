@@ -13,7 +13,7 @@
         }
     </style>
     <div class="container">
-        <h1 class="text-black my-4">Data Akun Personel</h1>
+        <h1 class="text-black my-4">Data Akun {{ $title }}</h1>
         <div class="container bg-white border rounded p-5 mt-4">
             @if(request()->is('admin/users/akun-admin/*'))
                 <div class="d-flex justify-content-between  my-3">

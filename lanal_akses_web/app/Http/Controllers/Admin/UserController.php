@@ -18,7 +18,8 @@ class UserController extends Controller
             $totalPages = 0;
             $firstNav = 1;
             $lastNav = 1;
-            return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav'));
+            $title = 'Personel';
+            return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav', 'title'));
         }
         $totalPages = ceil($totalUser / $perPage);
 
@@ -38,7 +39,9 @@ class UserController extends Controller
 
         // Mengambil data dengan offset berdasarkan halaman
         $users = User::where('role', 'personel')->skip($offset)->take($perPage)->get();
-        return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav'));
+
+        $title = 'Personel';
+        return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav', 'title'));
 
     }
 
@@ -51,7 +54,8 @@ class UserController extends Controller
             $totalPages = 0;
             $firstNav = 1;
             $lastNav = 1;
-            return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav'));
+            $title = 'Pegawai';
+            return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav', 'title'));
         }
         $totalPages = ceil($totalUser / $perPage);
 
@@ -71,7 +75,9 @@ class UserController extends Controller
 
         // Mengambil data dengan offset berdasarkan halaman
         $users = User::where('role', 'pegawai')->skip($offset)->take($perPage)->get();
-        return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav'));
+
+        $title = 'Pegawai';
+        return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav', 'title'));
 
     }
 
@@ -84,7 +90,8 @@ class UserController extends Controller
             $totalPages = 0;
             $firstNav = 1;
             $lastNav = 1;
-            return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav'));
+            $title = 'Admin';
+            return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav', 'title'));
         }
         $totalPages = ceil($totalUser / $perPage);
 
@@ -102,9 +109,11 @@ class UserController extends Controller
         // Menghitung offset berdasarkan halaman yang diminta
         $offset = ($page - 1) * $perPage;
 
+        $title = 'Admin';
+
         // Mengambil data dengan offset berdasarkan halaman
         $users = User::where('role', 'komandan')->orWhere('role', 'paset')->orWhere('role', 'paspotmar')->orWhere('role', 'pasintel')->skip($offset)->take($perPage)->get();
-        return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav'));
+        return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav', 'title'));
 
     }
 

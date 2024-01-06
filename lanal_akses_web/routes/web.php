@@ -190,7 +190,7 @@ Route::get('/admin/absensi/', [AbsensiController::class, 'index'])
 ->name('admin.absensi.index');
 
 //data User Admin
-Route::get('/admin/users/{page}', [UserController::class, 'index'])
+Route::get('/admin/users/personil/{page}', [UserController::class, 'index'])
 ->name('admin.users.index')
 ->where('page', '[1-9][0-9]*');
 Route::get('/admin/users/akun-pegawai/{page}', [UserController::class, 'indexPegawai'])
