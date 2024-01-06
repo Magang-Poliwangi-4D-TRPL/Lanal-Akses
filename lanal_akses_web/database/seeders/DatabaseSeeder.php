@@ -34,12 +34,6 @@ class DatabaseSeeder extends Seeder
 
 
         // ==== end of Personil Feature ====
-        
-        PegawaiModel::create([
-            "nama_pegawai" => "Darwati, S.E",
-            "nip" => "19700105 199112 2 001",
-            "jabatan" => "Akun/Silta/KA",
-            'golongan' => 'Penata III/d'
-        ]);
+        $this->call(PegawaiSeeder::class);
     }
 }
