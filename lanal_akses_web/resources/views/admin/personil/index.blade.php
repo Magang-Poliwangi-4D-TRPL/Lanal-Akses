@@ -19,7 +19,7 @@
                 <a class="text-decoration-none" href="{{ route('admin.personil.create') }}">
                     <button class="btn btn-blue btn-md text-white bg-blueaccent">Tambah Personel<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></span></button>
                 </a>
-                <a class="text-decoration-none" href="#">
+                <a class="text-decoration-none" href="{{ route('personil.cetak-data') }}">
                     <button class="btn btn-blue btn-md text-white bg-bluedark">Cetak Data Personel<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
                 </a>
             </div>

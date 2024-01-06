@@ -68,7 +68,9 @@ Route::post('/upload/{nrp}', [ImageController::class, 'upload'])->name('upload.i
 Route::get('/upload/{nrp}', [ImageController::class, 'editGambar'])->name('gambar.personil');
 
 // Fitur Cetak
+Route::get('/admin/personil/cetak-data-personil', [PersonilController::class, 'cetakDataPersonil'])->name('personil.cetak-data');
 Route::get('/admin/personil/{nrp}/cetak-riwayat-hidup', [PersonilController::class, 'cetakRiwayatHidup'])->name('personil.cetak-riwayat-hidup');
+Route::get('/admin/personil/{nrp}/cetak-data-lengkap', [PersonilController::class, 'cetakDataLengkap'])->name('personil.cetak-data-lengkap');
 
 // Personil -> PendidikanFormal
 Route::get('/admin/personil/show/{nrp}/pendidikan-formal', [PendidikanFormalController::class, 'index'])->name('admin.personil.pendidikanformal.index');

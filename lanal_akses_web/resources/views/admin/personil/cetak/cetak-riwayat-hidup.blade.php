@@ -27,7 +27,7 @@
                 <td>:</td>
                 <th colspan="4">{{ $personil->nrp }}</th>
                 <th rowspan="7">
-                    @empty($personil->image)
+                    @empty($personil->image_url)
                         <img src="{{  URL::asset('images/admin/default-profile.jpg') }}" alt="default-profile" border="0" width="200" height="auto" class="rounded image-profile">
                     
                     @else
