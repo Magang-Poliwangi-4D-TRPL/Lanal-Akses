@@ -175,6 +175,17 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td class="bluemain">Jenis Kelamin</td>
+                                        <td class="bluemain">:</td>
+                                        <td>
+                                            @empty($pegawai->jenis_kelamin)
+                                                Tidak ada data
+                                            @else
+                                                <p>{{ $pegawai->jenis_kelamin == 'L'? 'Laki-Laki':'Perempuan' }}</p>
+                                            @endempty
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td class="bluemain">Email</td>
                                         <td class="bluemain">:</td>
                                         <td>

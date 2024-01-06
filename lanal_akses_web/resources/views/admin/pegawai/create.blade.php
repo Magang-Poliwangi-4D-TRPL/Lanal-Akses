@@ -37,6 +37,20 @@
                       <label for="golongan">Massukkan golongan pegawai baru</label>
                       <input type="text" class="form-control" id="golongan" name="golongan" required placeholder="Golongan Pegawai">
                     </div>
+                    <div class="form-group row">
+                      <label for="jenis_kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                      <div class="col-sm-4">
+                          <select class="form-control  @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" id="jenis_kelamin">
+                              <option value="L" {{ old('jenis_kelamin',) === 'L' ? 'selected' : '' }}>Laki-Laki</option>
+                              <option value="P" {{ old('jenis_kelamin',) === 'P' ? 'selected' : '' }}>Perempuan</option>
+                          </select>
+                          @error('jenis_kelamin')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+                  </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
                 
