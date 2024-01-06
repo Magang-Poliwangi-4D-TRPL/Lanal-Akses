@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-greenmain text-white">Edit Admin</div>
+                <div class="card-header bg-greenmain text-white">Edit Akun {{ $user->role }}</div>
 
                 <div class="card-body">
                     @if ($errors->any())
