@@ -219,6 +219,10 @@ Route::put('/admin/pegawai/{nip}', [PegawaiController::class, 'update'])->name('
 Route::post('/pegawai/upload/{nip}', [ImagePegawaiController::class, 'upload'])->name('pegawai.upload.image');
 Route::get('/pegawai/upload/{nip}', [ImagePegawaiController::class, 'editGambar'])->name('pegawai.edit-gambar');
 
+// Fitur Cetak
+Route::get('/admin/pegawai/cetak-data-pegawai', [PegawaiController::class, 'cetakDataPegawai'])->name('admin.pegawai.cetak-data-pegawai');
+
+
 // Pegawai -> Akun
 Route::get('/admin/pegawai/show/{nip}/akun', [AkunPegawaiController::class, 'index'])->name('admin.pegawai.akun.index');
 Route::get('/admin/pegawai/show/{nip}/akun/create', [AkunPegawaiController::class, 'create'])->name('admin.pegawai.akun.create');
