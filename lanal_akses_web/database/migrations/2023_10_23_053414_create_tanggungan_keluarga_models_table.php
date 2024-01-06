@@ -16,8 +16,10 @@ class CreateTanggunganKeluargaModelsTable extends Migration
         Schema::create('tanggungan_keluarga', function (Blueprint $table) {
             $table->id();
             $table->string('nama_lengkap');
-            $table->string('tempat_tanggal_lahir');
-            $table->enum('status_hubungan', ['suami', 'istri', 'anak'])->default('anak');
+            $table->string('tempat_lahir');
+            $table->string('tanggal_lahir');
+            $table->enum('status_hubungan', ['Suami', 'Istri', 'Anak'])->default('Anak');
+            $table->enum('jenis_kelamin', ['L', 'P'])->default('L')->nullable();
             $table->string('keterangan')->nullable();
             $table->timestamps();
 

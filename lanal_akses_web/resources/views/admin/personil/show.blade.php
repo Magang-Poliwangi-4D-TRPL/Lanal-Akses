@@ -84,10 +84,10 @@
   }
 
 </style>
-<a id="print-rh-button" class="text-decoration-none" href="#">
+<a id="print-rh-button" class="text-decoration-none" href="{{ route('personil.cetak-riwayat-hidup', ['nrp' => str_replace('/', '-', $personil->nrp)]) }}">
     <button class="btn btn-blue btn-md text-white bg-blueaccent">Cetak Riwayat Hidup<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
 </a>
-<a id="print-button" class="text-decoration-none" href="#">
+<a id="print-button" class="text-decoration-none" href="{{ route('personil.cetak-data-lengkap', ['nrp' => str_replace('/', '-', $personil->nrp)]) }}">
     <button class="btn btn-blue btn-md text-white bg-bluedark">Cetak Data Lengkap<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
 </a>
     <div class="container-fluid">
@@ -447,25 +447,27 @@
                     <table class="table thead-light">
                         <thead>
                             <tr class="bg-blueaccent text-white text-bold">
-                              <th scope="col" width="10%">no</th>
+                              <th scope="col" width="5%">no</th>
                               <th scope="col" width="15%">Nama Lengkap</th>
-                              <th scope="col" width="10%">Tempat, TL</th>
-                              <th scope="col" width="20%">Status Hub.</th>
+                              <th scope="col" width="10%">TGl LAHIR</th>
+                              <th scope="col" width="10%">TMT LAHIR</th>
+                              <th scope="col" width="20%">JENIS KELAMIN</th>
                               <th scope="col" width="15%">Keterangan    </th>
                             </tr>
                           </thead>
                           <tbody>
-                            @if ($tanggungan_keluarga->count()<=0)
+                            @if ($tanggunganKeluarga->count()<=0)
                             <tr>
                                 <td colspan="5">Tidak ada data.</td>
                             </tr>
                             @else
-                                @foreach ($tanggungan_keluarga as $data_tanggungan_keluarga)
+                                @foreach ($tanggunganKeluarga as $data_tanggungan_keluarga)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $data_tanggungan_keluarga->nama_lengkap }}</td>
-                                        <td>{{ $data_tanggungan_keluarga->tempat_tanggal_lahir }}</td>
-                                        <td>{{ $data_tanggungan_keluarga->status_hubungan }}</td>
+                                        <td>{{ $data_tanggungan_keluarga->tempat_lahir }}</td>
+                                        <td>{{ $data_tanggungan_keluarga->tanggal_lahir }}</td>
+                                        <td>{{ $data_tanggungan_keluarga->jenis_kelamin }}</td>
                                         <td>{{ $data_tanggungan_keluarga->keterangan }}</td>
                                     </tr>
                                 @endforeach

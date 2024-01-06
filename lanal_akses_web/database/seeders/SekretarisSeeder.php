@@ -28,7 +28,7 @@ class SekretarisSeeder extends Seeder
             "pangkat" => "Letda",
             "korps" => "KH",
             "nrp" => "26226/P",
-            "jabatan" => "KOARMADA II/LANTAMAL V SBY/LANAL BANYUWANGI/SMINLOG/UR BMN/PA",
+            "jabatan" => "PASET",
             'jenis_kelamin' => 'L',
             'tempat_lahir' => 'BANGKALAN',
             'tanggal_lahir' => '20-12-1989',
@@ -36,7 +36,6 @@ class SekretarisSeeder extends Seeder
             'suku_bangsa' => 'Madura',
             'alamat_sekarang' => 'PERUM TNI AL B VII/3 RT 019 RW 007 KEL KEDUNGKENDO KEC CANDI SIDOARJO, JAWA
             TIMUR',
-            'image_url' => 'storage/images/1704467254.jpg',
         ]);
 
         $personil->save();
@@ -89,8 +88,10 @@ class SekretarisSeeder extends Seeder
     
         TanggunganKeluargaModel::create([
             "nama_lengkap" => "Anak Suhendra Kurniawan",
-            "tempat_tanggal_lahir" => "Banyuwangi, 1 Januari 2016",
-            "status_hubungan" => "anak",
+            "tempat_lahir" => "Banyuwangi",
+            "tanggal_lahir" => "01-01-2016",
+            "jenis_kelamin" => "L",
+            "status_hubungan" => "Anak",
             "keterangan" => "-",
             "personil_id" => $personil->id,
         ]);

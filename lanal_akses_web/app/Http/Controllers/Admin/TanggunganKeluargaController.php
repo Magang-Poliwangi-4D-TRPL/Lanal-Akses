@@ -17,9 +17,9 @@ class TanggunganKeluargaController extends Controller
             return abort(404);
         } else {
             // Mengambil semua data TanggunganKeluargaModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
-            $tanggungan_keluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)->get();
+            $tanggunganKeluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)->get();
             
-            return view('admin.personil.tanggungan-keluarga.index', compact('personil', 'tanggungan_keluarga'));
+            return view('admin.personil.tanggungan-keluarga.index', compact('personil', 'tanggunganKeluarga'));
         }
 
     }
@@ -36,8 +36,10 @@ class TanggunganKeluargaController extends Controller
         // Validasi data yang masuk
         $validatedData = $request->validate([
             'nama_lengkap' => 'required|string|max:25',
-            'tempat_tanggal_lahir' => 'required|string|max:50',
+            'tempat_lahir' => 'required|string|max:50',
+            'tanggal_lahir' => 'required|string|max:50',
             'status_hubungan' => 'required',
+            'jenis_kelamin' => 'nullable',
             'keterangan' => 'nullable|string',
             'personil_id' => 'required',
         ],);
@@ -52,11 +54,20 @@ class TanggunganKeluargaController extends Controller
         // Simpan data pendidikan formal
         $tanggunganKeluaraga = new TanggunganKeluargaModel([
             'nama_lengkap' => $validatedData['nama_lengkap'],
-            'tempat_tanggal_lahir' => $validatedData['tempat_tanggal_lahir'],
+            'tempat_lahir' => $validatedData['tempat_lahir'],
+            'tanggal_lahir' => $validatedData['tanggal_lahir'],
             'status_hubungan' => $validatedData['status_hubungan'],
             'keterangan' => $validatedData['keterangan'],
             'personil_id' => $validatedData['personil_id'],
         ]);
+
+        if ($request->status_hubungan == 'Suami') {
+            $tanggunganKeluaraga->jenis_kelamin = 'L';
+        } elseif ($request->status_hubungan == 'Istri') {
+            $tanggunganKeluaraga->jenis_kelamin = 'P';
+        } else {
+            $tanggunganKeluaraga->jenis_kelamin = $request->jenis_kelamin;
+        }
 
         // Hubungkan dengan personil
         $tanggunganKeluaraga->save();
@@ -74,14 +85,14 @@ class TanggunganKeluargaController extends Controller
             return abort(404);
         }
 
-        $tanggungan_keluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)
+        $tanggunganKeluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)
             ->find($tanggunganKeluaragaId);
 
-        if ($tanggungan_keluarga == null) {
+        if ($tanggunganKeluarga == null) {
             return abort(404);
         }
 
-        return view('admin.personil.tanggungan-keluarga.edit', compact('personil', 'tanggungan_keluarga'));
+        return view('admin.personil.tanggungan-keluarga.edit', compact('personil', 'tanggunganKeluarga'));
     }
 
     public function update(Request $request, $nrp, $tanggunganKeluaragaId)
@@ -89,10 +100,11 @@ class TanggunganKeluargaController extends Controller
         // Validasi data yang masuk
         $validatedData = $request->validate([
             'nama_lengkap' => 'required|string|max:25',
-            'tempat_tanggal_lahir' => 'required|string|max:50',
+            'tempat_lahir' => 'required|string|max:50',
+            'tanggal_lahir' => 'required|string|max:50',
             'status_hubungan' => 'required',
+            'jenis_kelamin' => 'nullable',
             'keterangan' => 'nullable|string',
-            'personil_id' => 'required',
         ],);
 
         $nrpGanti = str_replace('-', '/', $nrp);
@@ -102,17 +114,32 @@ class TanggunganKeluargaController extends Controller
             return abort(404);
         }
 
-        $tanggungan_keluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)
+        $tanggunganKeluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)
             ->find($tanggunganKeluaragaId);
 
-        if ($tanggungan_keluarga == null) {
+        if ($tanggunganKeluarga == null) {
             return abort(404);
         }
 
-        // Update data tanggungan_keluarga
-        $tanggungan_keluarga->update([
+        if ($request->status_hubungan == 'Suami') {
+            $tanggunganKeluarga->update([
+                'jenis_kelamin' => 'L',
+            ]);
+        } elseif ($request->status_hubungan == 'Istri') {
+            $tanggunganKeluarga->update([
+                'jenis_kelamin' => 'P',
+            ]);
+        } else {
+            $tanggunganKeluarga->update([
+                'jenis_kelamin' => $request['jenis_kelamin'],
+            ]);
+        }
+
+        // Update data tanggunganKeluarga
+        $tanggunganKeluarga->update([
             'nama_lengkap' => $validatedData['nama_lengkap'],
-            'tempat_tanggal_lahir' => $validatedData['tempat_tanggal_lahir'],
+            'tempat_lahir' => $validatedData['tempat_lahir'],
+            'tanggal_lahir' => $validatedData['tanggal_lahir'],
             'status_hubungan' => $validatedData['status_hubungan'],
             'keterangan' => $validatedData['keterangan'],
         ]);
@@ -129,15 +156,15 @@ class TanggunganKeluargaController extends Controller
             return abort(404);
         }
 
-        $tanggungan_keluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)
+        $tanggunganKeluarga = TanggunganKeluargaModel::where('personil_id', $personil->id)
             ->find($tanggunganKeluargaId);
 
-        if ($tanggungan_keluarga == null) {
+        if ($tanggunganKeluarga == null) {
             return abort(404);
         }
 
         // Hapus data TanggunganKeluarga
-        $tanggungan_keluarga->delete();
+        $tanggunganKeluarga->delete();
 
         return redirect()->route('admin.personil.tanggungan-keluarga.index', ['nrp' => $nrp])
             ->with('success', 'Data tanggungan keluarga berhasil dihapus.');
