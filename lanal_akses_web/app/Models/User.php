@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'role',
         'personil_id',
+        'pegawai_id',
     ];
 
     /**

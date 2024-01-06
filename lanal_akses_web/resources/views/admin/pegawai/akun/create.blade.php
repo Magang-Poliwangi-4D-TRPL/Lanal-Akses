@@ -1,24 +1,24 @@
 @extends('layout.admin.app')
 
-@section('title-page', 'Personil | Buat Akun')
+@section('title-page', 'Pegawai | Buat Akun')
 
 @section('content')
     <div class="container">
         <div class="container">
-            <h1 class="text-bold">Membuat Akun Personil</h1>
+            <h1 class="text-bold">Membuat Akun Pegawai</h1>
 
             {{-- Form Start --}}
             <div class="container bg-white border rounded p-5 mt-4">
                 @php
-                $nrp = $personil->nrp;
-                $nrpGanti = str_replace('/', '-', $nrp);
+                $nip = $pegawai->nip;
+                $nipGanti = str_replace(' ', '-', $nip);
                 @endphp
-                <form method="POST" action="{{ route('admin.personil.akun.store', ['nrp' => str_replace('/', '-', $nrp)]) }}">
+                <form method="POST" action="{{ route('admin.pegawai.akun.store', ['nip' => str_replace(' ', '-', $nip)]) }}">
                     @csrf
-                    <input type="hidden" name="personil_id" value="{{ $personil->id }}">
+                    <input type="hidden" name="pegawai_id" value="{{ $pegawai->id }}">
                     <div class="form-group">
-                      <label for="nama_lengkap">Massukkan nama lengkap akun personil baru</label>
-                      <input type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" id="nama_lengkap" name="nama_lengkap" value="{{ $personil->nama_lengkap}}" placeholder="Nama Lengkap Akun" autofocus>
+                      <label for="nama_lengkap">Massukkan nama lengkap akun pegawai baru</label>
+                      <input type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" id="nama_lengkap" name="nama_lengkap" value="{{ $pegawai->nama_pegawai}}" placeholder="Nama Lengkap Akun" autofocus>
                       @error('nama_lengkap')
                           <div class="invalid-feedback">
                             {{ $message }}
@@ -26,8 +26,8 @@
                       @enderror
                     </div>
                     <div class="form-group">
-                      <label for="username">Massukkan username akun personil baru</label>
-                      <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ $personil->nrp}}" placeholder="Username Akun">
+                      <label for="username">Massukkan username akun pegawai baru</label>
+                      <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ $pegawai->nip}}" placeholder="Username Akun">
                       @error('username')
                           <div class="invalid-feedback">
                             {{ $message }}
@@ -57,8 +57,8 @@
                       </div>
                   </div>
                     <div class="form-group">
-                      <label for="role">Role personil baru</label>
-                      <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" value="personel" readonly=true placeholder="role Akun">
+                      <label for="role">Role pegawai baru</label>
+                      <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" value="pegawai" readonly=true placeholder="role Akun">
                       @error('role')
                           <div class="invalid-feedback">
                             {{ $message }}
@@ -66,7 +66,7 @@
                       @enderror
                     </div>
                     
-                    <a class="text-decoration-none btn btn-blue text-white bg-gray" href="{{ route('admin.personil.akun.index', str_replace('/', '-', $nrp)) }}">
+                    <a class="text-decoration-none btn btn-blue text-white bg-gray" href="{{ route('admin.pegawai.akun.index', str_replace(' ', '-', $nip)) }}">
                       <span><iconify-icon icon="ep:arrow-left"></iconify-icon></span>Kembali
                     </a>
                     <button type="submit" class="btn btn-primary">Submit</button>

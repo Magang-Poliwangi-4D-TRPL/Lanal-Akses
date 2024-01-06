@@ -104,25 +104,26 @@
                     </div>
                     <div class="bg-white px-4 pb-4">
                         <p class="data-utama mb-0">Username</p>
-                        <div class="container m-0 rounded border-all">
-                            {{-- @empty($pegawai->nik)
-                                <p>_</p>
+                        <div class="container m-0 p-2 rounded border-all">
+                            @empty($user[0]->username)
+                                <p class="mb-0">_</p>
                             @else
-                                <p>{{ $pegawai->nik }}</p>
-                            @endempty --}}
-                            <p>_</p>
+                                <p class="mb-0">{{ $user[0]->username }}</p>
+                            @endempty
                         </div>
-                        <p class="data-utama mb-0">password</p>
-                        <div class="container m-0 rounded border-all">
-                            {{-- @empty($pegawai->tempat_tanggallahir)
-                                <p>_</p>
+                        <p class="data-utama mb-0">nama akun</p>
+                        <div class="container m-0 p-2  rounded border-all">
+                            @empty($user[0]->nama_lengkap)
+                                <p class="mb-0">_</p>
                             @else
-                                <p>{{ $pegawai->tempat_tanggallahir }}</p>
-                            @endempty --}}
-                            <p>_</p>
+                                <p class="mb-0">{{ $user[0]->nama_lengkap }}</p>
+                            @endempty
                         </div>
-                        
-                        <a href="{{ route('admin.pegawai.index', ['page' => 1]) }}" class="btn btn-primary-1 mt-3">Kembali</a>
+                        <div class="d-flex align-items-center justify-content-between my-3">
+                            <!-- Tombol Edit Gambar -->
+                            <a href="{{ route('admin.pegawai.index', ['page' => 1]) }}" class="btn btn-primary-1 mt-3">Kembali</a>
+                            <a href="{{ route('admin.pegawai.akun.index', ['nip'=> str_replace(' ', '-', $pegawai->nip)]) }}" class="btn btn-sm btn-outline-secondary">Edit Akun</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-7 mt-4 bg-white">

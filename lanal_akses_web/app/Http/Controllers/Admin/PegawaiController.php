@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PegawaiModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
@@ -53,7 +54,9 @@ class PegawaiController extends Controller
             if($pegawai == null){
                 return abort(404);
             } else {
-                return view('admin.pegawai.show', compact('pegawai'));
+                $user = User::where('pegawai_id', $pegawai->id)->get();
+                // dd($user);
+                return view('admin.pegawai.show', compact('pegawai', 'user'));
             }
 
         }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AbsensiController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AkunPegawaiController;
 use App\Http\Controllers\Admin\AkunPersonilController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KursusController;
@@ -217,3 +218,12 @@ Route::put('/admin/pegawai/{nip}', [PegawaiController::class, 'update'])->name('
 // Fitur Gambar
 Route::post('/pegawai/upload/{nip}', [ImagePegawaiController::class, 'upload'])->name('pegawai.upload.image');
 Route::get('/pegawai/upload/{nip}', [ImagePegawaiController::class, 'editGambar'])->name('pegawai.edit-gambar');
+
+// Pegawai -> Akun
+Route::get('/admin/pegawai/show/{nip}/akun', [AkunPegawaiController::class, 'index'])->name('admin.pegawai.akun.index');
+Route::get('/admin/pegawai/show/{nip}/akun/create', [AkunPegawaiController::class, 'create'])->name('admin.pegawai.akun.create');
+Route::post('/admin/pegawai/show/{nip}/akun', [AkunPegawaiController::class, 'store'])->name('admin.pegawai.akun.store');
+Route::get('/admin/pegawai/show/{nip}/akun/{akunId}/edit', [AkunPegawaiController::class, 'edit'])->name('admin.pegawai.akun.edit');
+Route::put('/admin/pegawai/show/{nip}/akun/{akunId}/update', [AkunPegawaiController::class, 'update'])->name('admin.pegawai.akun.update');
+// Route::delete('/admin/pegawai/show/{nip}/akun/{akunId}', [AkunPegawaiController::class, 'destroy'])
+// ->name('admin.pegawai.akun.destroy');

@@ -76,7 +76,7 @@ class AkunPersonilController extends Controller
         }
     }
 
-    public function update(Request $request, $nrp, $akunId)
+    public function update(Request $request, $nrp)
     {
         $request->validate([
             'nama_lengkap' => 'required',
