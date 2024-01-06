@@ -42,10 +42,14 @@
                         <td>{{ $data_pegawai->nip }}</td>
                         <td>{{ $data_pegawai->jabatan }}</td>
                         <td>
-                            <a class="text-decoration-none" href="">
+                            @php
+                                $nip = $data_pegawai->nip;
+                                $nipGanti = str_replace(' ', '-', $nip);
+                            @endphp
+                            <a class="text-decoration-none" href="{{ route('admin.pegawai.show', $nipGanti) }}">
                                 <button class="btn btn-blue btn-sm text-white bg-bluemain m-2">Lihat <span><iconify-icon icon="mdi:eye-outline"></iconify-icon></span></button>
                             </a>
-                            <form action="{{ route('admin.pegawai.destroy', $data_pegawai->id) }}" method="POST" style="display: inline;">
+                            <form action="{{ route('admin.pegawai.destroy', $nipGanti) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus <span><iconify-icon icon="mingcute:delete-line"></iconify-icon></span></button>

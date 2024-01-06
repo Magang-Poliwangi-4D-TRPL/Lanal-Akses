@@ -25,11 +25,14 @@ class CreatePersonilModelsTable extends Migration
             $table->string('tempat_dinas')->nullable();
             $table->string('tempat_armada')->nullable();
             $table->string('nomor_kta')->nullable();
-            $table->integer('nomor_ktp')->nullable();
-            $table->integer('nomor_asbri')->nullable();
-            $table->string('tempat_tanggallahir')->nullable();
-            $table->string('tinggi_beratbadan')->nullable();
-            $table->string('agama_sukubangsa')->nullable();
+            $table->string('nomor_ktp')->nullable();
+            $table->string('nomor_asbri')->nullable();
+            $table->string('tempat_lahir')->nullable();
+            $table->string('tanggal_lahir')->nullable();
+            $table->string('tinggi_badan')->nullable();
+            $table->string('berat_badan')->nullable();
+            $table->string('agama')->nullable();
+            $table->string('suku_bangsa')->nullable();
             $table->string('golongan_darah')->nullable();
             $table->string('dikspesialisasi')->nullable();
             $table->string('nilai_samata_stakes')->nullable();
@@ -37,6 +40,7 @@ class CreatePersonilModelsTable extends Migration
             $table->string('alamat_sekarang')->nullable();
             $table->string('nomor_hp')->nullable();
             $table->string('status_rumah')->nullable();
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@
         </a>
         <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/personil/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/personil/1') }}">
             <iconify-icon class="mr-3" icon="material-symbols:{{ (request()->is('admin/personil/*')) ? 'group' : 'group-outline' }}" width="24"></iconify-icon>
-            <span class="sidebar-text">Data Personil</span>
+            <span class="sidebar-text">Data Personel</span>
         </a>
         <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/absensi/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/absensi') }}">
             <iconify-icon class="mr-3" icon="mdi:{{ (request()->is('admin/absensi/*')) ? 'clock' : 'clock-outline' }}" width="24"></iconify-icon>
@@ -29,7 +29,7 @@
         
     </ul>
     
-    <button id="logout-button" class="btn btn-outline-light mt-4">Logout <iconify-icon class="ml-2" icon="ion:exit-outline" width="24"></iconify-icon></button>
+    <button id="logout-button" class="btn btn-outline-light ml-2 py-2 px-4 rounded-lg">Logout <iconify-icon class="align-middle" icon="ion:exit-outline" width="18"></iconify-icon></button>
 
 </div>
 
@@ -46,6 +46,7 @@
         $("#sidebar-icon").addClass("justify-content-center");
         $("#logout-button").text("");
         $("#logout-button").html('<iconify-icon icon="ion:exit-outline" width="24"></iconify-icon>');
+        $("#logout-button").removeClass("px-4");
         $("#sidebar-collapse").removeClass("p-4");
         $("#sidebar-collapse").addClass("p-2");
         $(".sidebar-item").css({
@@ -64,6 +65,7 @@
         $("#sidebar-icon").addClass("justify-content-end");
         $("#sidebar-icon").removeClass("justify-content-center");
         $("#logout-button").html('Logout <iconify-icon class="ml-2" icon="ion:exit-outline" width="24"></iconify-icon>');
+        $('#logout-button').addClass('px-4');
         $(".sidebar-item").css({
             "margin": "1rem 1rem 1rem 0",
         });

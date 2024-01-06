@@ -62,6 +62,10 @@ class PendidikanFormalController extends Controller
         $nrpGanti = str_replace('-', '/', $nrp);
         $personil = PersonilModel::where('nrp', $nrpGanti)->first();
         
+        if ($personil == null) {
+            return abort(404);
+        }
+
         // Simpan data pendidikan formal
         $pendidikanFormal = new PendidikanFormalModel([
             'nama_pendidikan' => $validatedData['nama_pendidikan'],
