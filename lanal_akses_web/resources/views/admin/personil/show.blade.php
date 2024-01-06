@@ -108,7 +108,7 @@
                         
                         <p class="text-left" >{{ $personil->nrp }}</p>
                         <!-- Tombol Edit Gambar -->
-                        <a href="{{ route('gambar.personil', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" class="btn btn-sm btn-outline-secondary">Edit Foto</a>
+                        <a href="{{ route('personil.edit-gambar', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" class="btn btn-sm btn-outline-secondary">Edit Foto</a>
                     </div>
 
                 </div>

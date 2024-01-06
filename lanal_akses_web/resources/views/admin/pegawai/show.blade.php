@@ -88,11 +88,19 @@
         <div class="row">
                 <div class="col-md-5 mt-4">
                     <div class="bg-white p-4 text-center col-12 ">
-                        <img src="{{  URL::asset('images/admin/default-profile.jpg') }}" alt="default-profile" border="0" height="auto" class="rounded-circle image-profile">
-    
+                        @empty($pegawai->image_url)
+                            <img src="{{  URL::asset('images/admin/default-profile.jpg') }}" alt="default-profile" border="0" height="auto" class="rounded-circle image-profile">
+                        
+                        @else
+                            <img src="{{ asset($pegawai->image_url) }}" alt="Profil {{ $pegawai->nama_lengkap }}" border="0" height="auto" class="rounded image-profile">
+                        @endempty
                         <h2 class="mt-3 bluedark text-left jabatan">{{ $pegawai->jabatan}}</h2>
                         <h4 class="text-left nama">{{ $pegawai->nama_pegawai }}</h4>
-                        <p class="text-left" style="color: grey; border-bottom: 2px solid #0D21A1;">{{ $pegawai->nip }}</p>
+                        <div class="d-flex align-items-center justify-content-between mb-3" style="color: grey; border-bottom: 2px solid #0D21A1;">
+                            <p class="text-left" >{{ $pegawai->nip }}</p>
+                            <a href="{{ route('pegawai.edit-gambar', ['nip'=> str_replace(' ', '-', $pegawai->nip)]) }}" class="btn btn-sm btn-outline-secondary">Edit Foto</a>
+
+                        </div>
                     </div>
                     <div class="bg-white px-4 pb-4">
                         <p class="data-utama mb-0">Username</p>

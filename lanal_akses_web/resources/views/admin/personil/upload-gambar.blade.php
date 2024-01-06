@@ -8,7 +8,7 @@
         <h1 class="text-bold">Ganti/Upload Foto Personil</h1>
         <h4 class="mt-3">Ubah foto perseonil dengan ukuran/skala foto 4:3</h4>
             <div class="container bg-white border rounded p-5 mt-4">
-                <form action="{{ route('upload.image', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('personil.upload.image', ['nrp'=> str_replace('/', '-', $personil->nrp)]) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <p class="label">pilih foto dengan resolusi tinggi, format foto wajib jpg, jpeg atau png</p>
                     <div class="input-group mb-3">
