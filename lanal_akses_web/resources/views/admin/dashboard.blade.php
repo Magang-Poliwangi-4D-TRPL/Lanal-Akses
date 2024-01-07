@@ -21,9 +21,21 @@
           <p class="card-text mb-4 text-white">Jumlah Seluruh PNS :</p>
           <h2 class="text-center text-white">{{ $pns->count() }}</h2>
           </div>
-        </div>
-     
+      </div>
+      
     </div> 
+    
+    <div class="container-fluid py-4 px-0 my-4">
+      <a href="{{ route('admin.dashboard.create.all-user-personil') }}" class="btn-fluid btn-lg mr-2 bg-white border btn-light" style="border-width: 4px !important; border-color: #7EBFFF !important
+      ">Buat akun untuk seluruh personel<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></a>
+        
+        {{-- {{ route('admin.dashboard.create.all-user-pegawai') }} --}}
+      <a href="{{ route('admin.dashboard.create.all-user-pegawai') }}" class="btn-fluid btn-lg mr-2 bg-white border btn-light" style="border-width: 4px !important; border-color: #5786CA !important
+      ">Buat akun untuk seluruh pegawai<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></a>
+        
+      
+    </div>
+
     <div class="container bg-white mt-4 p-4" style=" padding-top: 3rem !important;">
         <h1 class="text-black">Hasilkan Qr-Code</h1>
         <p class="muted-text">Cetak semua QR-Code berdasarkan kode unik PNS/Personel</p>

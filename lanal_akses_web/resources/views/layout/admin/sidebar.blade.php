@@ -40,7 +40,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item" href="{{ route('admin.akun-admin.index', ['page' => 1]) }}">Data Akun Admin</a>
-              <a class="dropdown-item" href="{{ route('admin.users.index', ['page' => 1]) }}">Data Akun Personel</a>
+              <a class="dropdown-item" href="{{ route('admin.akun-personil.index', ['page' => 1]) }}">Data Akun Personel</a>
               <a class="dropdown-item" href="{{ route('admin.akun-pegawai.index', ['page' => 1]) }}">Data Akun Pegawai</a>
             </div>
           </div>

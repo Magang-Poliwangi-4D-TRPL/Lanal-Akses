@@ -18,6 +18,41 @@ class UserController extends Controller
             $totalPages = 0;
             $firstNav = 1;
             $lastNav = 1;
+            $title = 'All User';
+            return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav', 'title'));
+        }
+        $totalPages = ceil($totalUser / $perPage);
+
+        // Pastikan $page berada dalam rentang halaman yang valid
+        if ($page <= 0 || $page > $totalPages) {
+            return abort(404);
+        }
+
+        // Hitung batasan angka navigasi
+        $maxNavLinks = 5;
+        $halfMaxLinks = floor($maxNavLinks / 2);
+        $firstNav = max(1, $page - $halfMaxLinks);
+        $lastNav = min($totalPages, $firstNav + $maxNavLinks - 1);
+
+        // Menghitung offset berdasarkan halaman yang diminta
+        $offset = ($page - 1) * $perPage;
+
+        // Mengambil data dengan offset berdasarkan halaman
+        $users = User::skip($offset)->take($perPage)->get();
+
+        $title = 'All User';
+        return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav', 'title'));
+
+    }
+    public function indexPersonil ($page)
+    {
+        $perPage = 10; // Jumlah data per halaman
+        $totalUser = User::count();
+        if ($totalUser == 0){
+            $users = User::all();
+            $totalPages = 0;
+            $firstNav = 1;
+            $lastNav = 1;
             $title = 'Personel';
             return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav', 'title'));
         }

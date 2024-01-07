@@ -29,11 +29,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(PersonilSeeder::class);
 
-        // ==== Personil Feature ====
         $this->call(SekretarisSeeder::class);
 
-
-        // ==== end of Personil Feature ====
         $this->call(PegawaiSeeder::class);
     }
 }
