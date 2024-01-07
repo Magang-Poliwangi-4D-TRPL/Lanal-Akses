@@ -117,6 +117,18 @@ class UserController extends Controller
 
     }
 
+    public function search(Request $request) {
+        $perPage = 100; // Jumlah data per halaman
+        $query = $request->input('q');
+
+        // Query pencarian berdasarkan nama atau NRP
+        $users = User::where('nama_lengkap', 'like', '%' . $query . '%')
+            ->orWhere('username', 'like', '%' . $query . '%')
+            ->paginate($perPage);
+
+        return view('admin.users.search', compact('users', 'query'));
+    }
+
     public function create()
     {
         return view('admin.users.create');

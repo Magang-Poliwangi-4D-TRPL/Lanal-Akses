@@ -10,6 +10,8 @@
             {{ route('admin.personil.search', ['page']) }} 
           @elseif (request()->is('admin/pegawai/*'))
             {{ route('admin.pegawai.search', ['page']) }}
+          @elseif (request()->is('admin/users/*'))
+            {{ route('admin.users.search', ['page']) }}
           @else
           @endif
           " method="GET">
