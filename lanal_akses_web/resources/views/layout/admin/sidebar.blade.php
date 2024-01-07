@@ -1,3 +1,13 @@
+<style>
+    .sidebar:hover{
+   overflow-y: scroll;
+
+   .dropdown-menu{
+    position: inline !important;
+    left: 0 !important;
+   }
+}
+</style>
 <div id="sidebar-collapse" class="sidebar fixed-top top-0 bottom-0 bg-greenmain  p-4 " style="height: 100%">
     <div id="sidebar-icon" class="d-flex justify-content-end mb-4">
         <iconify-icon class="text-white" id="icon-menu" icon="material-symbols:menu" width="36"></iconify-icon>
@@ -22,10 +32,18 @@
             <iconify-icon class="mr-3" icon="mdi:{{ (request()->is('admin/absensi/*')) ? 'clock' : 'clock-outline' }}" width="24"></iconify-icon>
             <span class="sidebar-text">Data Absensi</span>   
         </a>
-        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/users/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/users/1') }}">
-            <iconify-icon class="mr-3" icon="ic:{{ (request()->is('admin/users/*')) ? 'round-lock-person' : 'outline-lock-person' }}" width="24"></iconify-icon>
-            <span class="sidebar-text">Data Akun Admin</span>    
-        </a>
+
+        <div class="dropdown show">
+            <a class="p-3 sidebar-item text-uppercase text-white rounded {{ request()->is('admin/users/*') ? 'active-sidebar-item' : '' }} dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <iconify-icon class="mr-3" icon="ic:{{ (request()->is('admin/users/*')) ? 'round-lock-person' : 'outline-lock-person' }}" width="24"></iconify-icon>
+            <span class="sidebar-text">Data Akun</span> 
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="{{ route('admin.akun-admin.index', ['page' => 1]) }}">Data Akun Admin</a>
+              <a class="dropdown-item" href="{{ route('admin.akun-personil.index', ['page' => 1]) }}">Data Akun Personel</a>
+              <a class="dropdown-item" href="{{ route('admin.akun-pegawai.index', ['page' => 1]) }}">Data Akun Pegawai</a>
+            </div>
+          </div>
         
     </ul>
     

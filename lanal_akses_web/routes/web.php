@@ -50,6 +50,8 @@ Route::get('/perizinan', [PersonilPersonilController::class, 'perizinan'])->name
 
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/create-all-user-pegawai', [DashboardController::class, 'createAllUserPegawai'])->name('admin.dashboard.create.all-user-pegawai');
+Route::get('/admin/create-all-user-personel', [DashboardController::class, 'createAllUserPersonil'])->name('admin.dashboard.create.all-user-personil');
 
 
 // Personil
@@ -190,9 +192,20 @@ Route::get('/admin/absensi/', [AbsensiController::class, 'index'])
 ->name('admin.absensi.index');
 
 //data User Admin
-Route::get('/admin/users/{page}', [UserController::class, 'index'])
+Route::get('/admin/users/all-user/{page}', [UserController::class, 'index'])
 ->name('admin.users.index')
 ->where('page', '[1-9][0-9]*');
+Route::get('/admin/users/personil/{page}', [UserController::class, 'indexPersonil'])
+->name('admin.akun-personil.index')
+->where('page', '[1-9][0-9]*');
+Route::get('/admin/users/pegawai/{page}', [UserController::class, 'indexPegawai'])
+->name('admin.akun-pegawai.index')
+->where('page', '[1-9][0-9]*');
+Route::get('/admin/users/admin/{page}', [UserController::class, 'indexAdmin'])
+->name('admin.akun-admin.index')
+->where('page', '[1-9][0-9]*');
+
+Route::get('/admin/users/search', [UserController::class, 'search'])->name('admin.users.search');
 Route::get('/admin/users/create', [UserController::class, 'create'])->name('users.create');
 Route::post('/admin/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/admin/users/{id}', [UserController::class, 'show'])->name('users.show');

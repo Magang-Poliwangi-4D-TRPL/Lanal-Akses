@@ -1,6 +1,6 @@
 @extends('layout.admin.app')
 
-@section('title-page', 'Admin | Data Akun Admin')
+@section('title-page', 'Admin | Data Akun Personel')
 
 @section('content')
     <style>
@@ -13,13 +13,16 @@
         }
     </style>
     <div class="container">
-        <h1 class="text-black my-4">Data Akun Admin</h1>
+        <h1 class="text-black my-4">Data Akun {{ $title }}</h1>
         <div class="container bg-white border rounded p-5 mt-4">
-            <div class="d-flex justify-content-between  my-3">
-                <a class="text-decoration-none" href="{{  route('users.create') }}">
-                    <button class="btn btn-blue btn-md text-white bg-blueaccent">Tambah Akun Admin<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></span></button>
-                </a>
-            </div>
+            @if(request()->is('admin/users/akun-admin/*'))
+                <div class="d-flex justify-content-between  my-3">
+                    <a class="text-decoration-none" href="{{  route('users.create') }}">
+                        <button class="btn btn-blue btn-md text-white bg-blueaccent">Tambah Akun Admin<span><iconify-icon class="ml-2" icon="ic:baseline-person-add-alt" width="16"></iconify-icon></span></button>
+                    </a>
+                </div>
+            @endif
+            <p>Jumlah total data: {{ $users->count() }}</p>
             <table class="table thead-light">
                 <thead>
                     <tr class="bg-bluedark text-white text-bold">
@@ -59,15 +62,33 @@
             </table>
             <div class="pagination">
                 @if ($page > 1)
-                    <a href="{{ route('admin.users.index', ['page' => $page - 1]) }}" class="text-decoration-none mx-2 previous">&laquo; Sebelumnya</a>
+                    @if (request()->is('admin/users/personil/*'))
+                        <a href="{{ route('admin.akun-personil.index', ['page' => $page - 1]) }}" class="text-decoration-none mx-2 previous">&laquo; Sebelumnya</a>
+                    @elseif(request()->is('admin/users/pegawai/*'))
+                        <a href="{{ route('admin.akun-pegawai.index', ['page' => $page - 1]) }}" class="text-decoration-none mx-2 previous">&laquo; Sebelumnya</a>
+                    @else
+                        <a href="{{ route('admin.akun-admin.index', ['page' => $page - 1]) }}" class="text-decoration-none mx-2 previous">&laquo; Sebelumnya</a>
+                    @endif
                 @endif
             
                 @for ($i = $firstNav; $i <= $lastNav; $i++)
-                    <a href="{{ route('admin.users.index', ['page' => $i]) }}" class="text-decoration-none mx-2 {{ $page == $i ? 'active' : '' }}">{{ $i }}</a>
+                    @if (request()->is('admin/users/personil/*'))
+                        <a href="{{ route('admin.akun-personil.index', ['page' => $i]) }}" class="text-decoration-none mx-2 {{ $page == $i ? 'active' : '' }}">{{ $i }}</a>
+                    @elseif(request()->is('admin/users/pegawai/*'))
+                        <a href="{{ route('admin.akun-pegawai.index', ['page' => $i]) }}" class="text-decoration-none mx-2 {{ $page == $i ? 'active' : '' }}">{{ $i }}</a>
+                    @else
+                        <a href="{{ route('admin.akun-admin.index', ['page' => $i]) }}" class="text-decoration-none mx-2 {{ $page == $i ? 'active' : '' }}">{{ $i }}</a>
+                    @endif
                 @endfor
             
                 @if ($page < $totalPages)
-                    <a href="{{ route('admin.users.index', ['page' => $page + 1]) }}" class="text-decoration-none mx-2 next">Selanjutnya &raquo;</a>
+                    @if (request()->is('admin/users/personil/*'))
+                        <a href="{{ route('admin.akun-personil.index', ['page' => $page + 1]) }}" class="text-decoration-none mx-2 next">Selanjutnya &raquo;</a>
+                    @elseif(request()->is('admin/users/pegawai/*'))
+                        <a href="{{ route('admin.akun-pegawai.index', ['page' => $page + 1]) }}" class="text-decoration-none mx-2 next">Selanjutnya &raquo;</a>
+                    @else
+                        <a href="{{ route('admin.akun-admin.index', ['page' => $page + 1]) }}" class="text-decoration-none mx-2 next">Selanjutnya &raquo;</a>
+                    @endif
                 @endif
             </div>
         </div>
