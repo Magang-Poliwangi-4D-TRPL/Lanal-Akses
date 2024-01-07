@@ -84,7 +84,7 @@
   }
 
 </style>
-<div class="container-fluid">
+<div class="container">
         <div class="row">
                 <div class="col-md-5 mt-4">
                     <div class="bg-white p-4 text-center col-12 ">

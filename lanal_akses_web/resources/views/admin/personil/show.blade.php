@@ -90,7 +90,7 @@
 <a id="print-button" class="text-decoration-none" href="{{ route('personil.cetak-data-lengkap', ['nrp' => str_replace('/', '-', $personil->nrp)]) }}">
     <button class="btn btn-blue btn-md text-white bg-bluedark">Cetak Data Lengkap<span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span></button>
 </a>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-5 mt-4">
                 <!-- Bagian Kiri -->
