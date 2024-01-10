@@ -188,8 +188,23 @@ Route::get('/admin/personil/show/{nrp}/informasi-keluarga', [InformasiKeluargaCo
     Route::delete('/admin/personil/show/{nrp}/informasi-keluarga/delete-informasi-orang-tua/{informasiOrangTuaId}', [InformasiKeluargaController::class, 'deleteInformasiOrangTua'])->name('admin.personil.informasi-orang-tua.delete');
 
 // Absensi
-Route::get('/admin/absensi/', [AbsensiController::class, 'index'])
+Route::get('/admin/absensi/index', [AbsensiController::class, 'index'])
 ->name('admin.absensi.index');
+Route::get('/admin/absensi/show/{tanggal_absensi}-{idAnggota}', [AbsensiController::class, 'show'])
+->name('admin.absensi.show');
+
+// Absensi -> filter
+Route::get('/admin/absensi/filter', [AbsensiController::class, 'filterAbsensi'])
+->name('admin.absensi.filter');
+Route::get('/admin/absensi/filter/index', [AbsensiController::class, 'indexFilterAbsensi'])
+->name('admin.absensi.filter.index');
+
+
+Route::get('/admin/absensi/tambah-data-jam-kerja', [AbsensiController::class, 'createJamKerja'])
+->name('admin.absensi.data-jam-kerja.create');
+
+// Absensi -> Cetak
+Route::get('/admin/absensi/{month}-{year}/cetak-presensi-bulanan', [AbsensiController::class, 'cetakPresensiBulanan'])->name('admin.absensi.cetak-presensi.bulanan');
 
 //data User Admin
 Route::get('/admin/users/all-user/{page}', [UserController::class, 'index'])

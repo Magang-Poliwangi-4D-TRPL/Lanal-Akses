@@ -9,166 +9,51 @@
         }
     </style>
     @php
-        $absensiPersonil = array(
-            [
-                "nama_lengkap" => "Suhendra Kurniawan",
-                "nrp" => "26266/P",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "hadir",
-            ],
-            [
-                "nama_lengkap" => "Indra Nusha R",
-                "nrp" => "16572/P",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "belum absen",
-            ],
-            [
-                "nama_lengkap" => "Rochmat Abdullah",
-                "nrp" => "17374/P",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "ijin",
-            ],
-            [
-                "nama_lengkap" => "Rianto, S.H",
-                "nrp" => "21037/P",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "terlambat",
-            ],
-            [
-                "nama_lengkap" => "Eko Meiyanto",
-                "nrp" => "21574/P",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "tidak hadir",
-            ],
-            [
-                "nama_lengkap" => "Suhendra Kurniawan",
-                "nrp" => "26266/P",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "hadir",
-            ],
-            [
-                "nama_lengkap" => "Indra Nusha R",
-                "nrp" => "16572/P",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "belum absen",
-            ],
-            [
-                "nama_lengkap" => "Rochmat Abdullah",
-                "nrp" => "17374/P",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "ijin",
-            ],
-            [
-                "nama_lengkap" => "Rianto, S.H",
-                "nrp" => "21037/P",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "terlambat",
-            ],
-            [
-                "nama_lengkap" => "Eko Meiyanto",
-                "nrp" => "21574/P",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "tidak hadir",
-            ],
-);
-
-        $absensiPegawai = array(
-            [
-                "nama_pegawai" => "Darwati, S.E",
-                "nip" => "19700105 199112 2 001",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "hadir",
-            ],
-            [
-                "nama_pegawai" => "Darwati, S.E",
-                "nip" => "19700105 199112 2 001",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "belum absen",
-            ],
-            [
-                "nama_pegawai" => "Suhartono",
-                "nip" => "19681021 199303 1 001",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "ijin",
-            ],
-            [
-                "nama_pegawai" => "Niluh Sumiani",
-                "nip" => "19700428 199203 2 002",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "terlambat",
-            ],
-            [
-                "nama_pegawai" => "Niluh Sumiani",
-                "nip" => "19700428 199203 2 002",
-                "tanggal_absensi" => "08-01-2024",
-                "jam_masuk" => "07:00:00",
-                "jam_pulang" => "16:00:00",
-                "status_kehadiran" => "tidak hadir",
-            ],
-);
-
-$date = '08-01-2024';
-
-        $statusKehadiranIcon = [
-            'check',
-            'xmark',
-            'clock',
-            'file',
-            'circle-exclamation',
-];
-        $statusKehadiran = [
-            'hadir',
-            'tidak hadir',
-            'terlambat',
-            'ijin',
-            'belum absen',
-];
-        $bgStatusKehadiran = [
-            'border-success',
-            'border-danger',
-            'border-warning',
-            'border-primary',
-            'border-secondary',
-];
-        $iconColor = [
-            'text-success',
-            'text-danger',
-            'text-warning',
-            'text-primary',
-            'text-secondary',
-];
+        $str_arr = explode ("/", $date);  
+        $day = $str_arr[0];
+        $month = $str_arr[1];
+        $year = $str_arr[2];
     @endphp
     <div class="container">
         <h2 class="text-black my-4 text-center" style="text-transform: uppercase">Presensi Personel & Pegawai LANAL Banyuwangi</h2>
         
+        <div class="container-fluid bg-white border rounded p-4 mt-4">
+            <h4 class="text-center">Informasi Jam Kerja</h4>
+            <div class="row container-fluid d-flex justify-content-around align-item-center mt-4">
+                <div class="col-md-2 p-2">
+                    <p class="m-0 p-0"><b>Jam Masuk Mulai</b></p>
+                </div>
+                <div class="col-md-4 rounded border p-2 border-outline-secondary">
+                    <p class="m-0 p-0">00:00</p>
+                </div>
+                <div class="col-md-2 p-2">
+                    <p class="m-0 p-0"><b>Jam Masuk Selesai</b></p>
+                </div>
+                <div class="col-md-4 rounded border p-2 border-outline-secondary">
+                    <p class="m-0 p-0">00:00</p>
+                </div>
+            </div>
+            <div class="row container-fluid d-flex justify-content-around align-item-center mt-3">
+                <div class="col-md-2 p-2">
+                    <p class="m-0 p-0"><b>Jam Pulang Mulai</b></p>
+                </div>
+                <div class="col-md-4 rounded border p-2 border-outline-secondary">
+                    <p class="m-0 p-0">00:00</p>
+                </div>
+                <div class="col-md-2 p-2">
+                    <p class="m-0 p-0"><b>Jam Pulang Selesai</b></p>
+                </div>
+                <div class="col-md-4 rounded border p-2 border-outline-secondary">
+                    <p class="m-0 p-0">00:00</p>
+                </div>
+            </div>
+            <div class="row container justify-content-end py-4 mt-3 border-top border-primary">
+                <div class="col-md-6 text-right">
+                    <a href="{{ route('admin.absensi.data-jam-kerja.create') }}" class="btn btn-primary">Tambah Jam Kerja Baru <i class="fa-solid fa-add"></i></a>
+
+                </div>
+            </div>
+        </div>
         <div class="container-fluid bg-white border rounded p-4 mt-4">
             <div class="row align-item-center justify-content-center">
                 <div class="col-lg-4">
@@ -182,8 +67,11 @@ $date = '08-01-2024';
                         <tr>
                             <th  class="text-info"><i class="fa-solid fa-clock"></i></i></th>
                             <th  class="text-info" style="text-transform: uppercase">Waktu</th>
-                            <th  class="text-info">:</th>
-                            <td><span id="waktu_sekarang"></span></td>
+                            <th colspan="3" class="text-info">:</th>
+                            
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="py-5"><h2 class="text-center" id="waktu_sekarang"></h2></td>
                         </tr>
                     </table>
                 </div>
@@ -195,7 +83,7 @@ $date = '08-01-2024';
                                 <div class="card-body">
                                     <h5 class="card-title text-white">Jumlah Absensi Personel Hari Ini</h5>
                                     <p class="card-text text-white">{{ count($absensiPersonil) }} / {{ '190' }}</p>
-                                    <a href="#" class="btn btn-outline-light">More info</a>
+                                    <a href="#data-presensi-personel" class="btn btn-outline-light">More info</a>
                                 </div>
                             </div>
                         </div>
@@ -203,8 +91,8 @@ $date = '08-01-2024';
                             <div class="card bg-greendark">
                                 <div class="card-body">
                                     <h5 class="card-title text-white">Jumlah Absensi Pegawai Hari Ini</h5>
-                                    <p class="card-text text-white">{{ count($absensiPersonil) }} / {{ '13' }}</p>
-                                    <a href="#" class="btn btn-outline-light">More info</a>
+                                    <p class="card-text text-white">{{ count($absensiPegawai) }} / {{ '13' }}</p>
+                                    <a href="#data-presensi-pegawai" class="btn btn-outline-light">More info</a>
                                 </div>
                             </div>
                         </div>
@@ -216,92 +104,13 @@ $date = '08-01-2024';
         </div>
         
         <div class="container-fluid bg-white border rounded p-4 mt-4 ">
-            <h4 style="text-transform: uppercase">Edit Jam kerja</h4>
-            <form method="POST" action="">
-                @csrf
-                <div class="form-group row">
-                    <label for="jam_masuk_mulai" class="col-sm-2 col-form-label">Jam Masuk Mulai</label>
-                    <div class="col-sm-4">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="jam_masuk_mulai" placeholder="00:00" value="{{ old('jam_masuk_mulai') }}">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
-                            </div>
-                        </div>
-                      </div>
-                      @error('jam_masuk_mulai')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                      @enderror
-                    <label for="jam_masuk_selesai" class="col-sm-2 col-form-label">Jam Masuk Selesai</label>
-                    <div class="col-sm-4">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="jam_masuk_selesai" placeholder="00:00" value="{{ old('jam_masuk_selesai') }}">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
-                            </div>
-                        </div>
-                      </div>
-                      @error('jam_masuk_selesai')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                      @enderror
-                </div>
-                <div class="form-group row">
-                    <label for="jam_pulang_mulai" class="col-sm-2 col-form-label">Jam Pulang Mulai</label>
-                    <div class="col-sm-4">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="jam_pulang_mulai" placeholder="00:00" value="{{ old('jam_pulang_mulai') }}">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
-                            </div>
-                        </div>
-                      </div>
-                      @error('jam_pulang_mulai')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                      @enderror
-                    <label for="jam_pulang_selesai" class="col-sm-2 col-form-label">Jam Pulang Selesai</label>
-                    <div class="col-sm-4">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="jam_pulang_selesai" placeholder="00:00" value="{{ old('jam_pulang_selesai') }}">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
-                            </div>
-                        </div>
-                      </div>
-                      @error('jam_pulang_selesai')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                      @enderror
-                </div>
-                <div class="form-group">
-                    <label for="keterangan_jam_kerja">Massukkan keterangan jam kerja</label>
-                    <input type="area" class="form-control @error('keterangan_jam_kerja') is-invalid @enderror" id="keterangan_jam_kerja" name="keterangan_jam_kerja" value="{{ old('keterangan_jam_kerja')}}" placeholder="keterangan" autofocus>
-                    @error('keterangan_jam_kerja')
-                        <div class="invalid-feedback">
-                          {{ $message }}
-                        </div>
-                    @enderror
-                  </div>
-                <div class="pt-4 border-top border-black text-right">
-                    <button type="submit" class="btn btn-md btn-primary" style="text-transform: capitalize">Tambah data jam kerja <i class="fa-solid fa-plus"></i></button>
-                </div>
-            </form>
-        </div>
-        
-        <div class="container-fluid bg-white border rounded p-4 mt-4 ">
             <div class="row">
                 <div class="col-md-3">
                     <h4 style="text-transform: uppercase">Rekap Data Presensi</h4>
                 </div>
                 <div class="col-md-9">
                     <div class="row justify-content-around">
-                        <a href="#" class="btn btn-success">Cetak Data Bulanan <i class="fa-solid fa-print"></i></a>
+                        <a href="{{ route('admin.absensi.cetak-presensi.bulanan', ['month' => $month, 'year'=> $year]) }}" class="btn btn-success">Cetak Data Bulanan <i class="fa-solid fa-print"></i></a>
                         <a class="btn btn-primary text-white dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-print"></i> Cetak Data Mingguan</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Minggu ke-1</a>
@@ -310,136 +119,264 @@ $date = '08-01-2024';
                             <a class="dropdown-item" href="#">Minggu ke-4</a>
                             <a class="dropdown-item" href="#">Minggu ke-5</a>
                         </div>
-                        <a href="#" class="btn btn-info">Cetak Data Harian <i class="fa-solid fa-print"></i></a>
+                        <a href="{{ route('admin.absensi.filter', ['date' => $date]) }}" class="btn btn-info">Cari dan Cetak Data Harian <i class="fa-solid fa-print"></i></a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="container-fluid bg-white border rounded p-4 mt-4 ">
+        <h4 class="text-black my-4 text-center" style="text-transform: uppercase">data presensi hari ini</h4>
+        {{-- DATA PRESENSI PERSONEL START  --}}
+        <div class="container-fluid bg-white border rounded p-4 mt-4 " id="data-presensi-personel" >
             <div class="row justify-content-between"> 
-                <div class="col-lg-8">
+                <div class="col-lg-4">
                     <h6 class="text-black" style="text-transform: uppercase">DATA Presensi Personel</h6>
                     <h6 class="text-black" style="text-transform: uppercase">{{ $date }}</h6>
                 </div>
+                <div class="col-lg-6 d-flex justify-content-end">
+                    <div  class="form-inline row container-fluid">
+                      <input class="form-control col-lg-10 col-md-8" id="searchPersonil" type="search" name="qPersonil" placeholder="Search" aria-label="Cari berdasarkan nama" value="{{ request('qPersonil') }}"> 
+                      <button disabled="true" class="btn text-white bg-bluedark my-2" type="submit"><i class="fa-solid fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="col-lg-2 d-flex py-2 justify-content-end align-item-center">
+                    <a href="{{ route('admin.absensi.filter') }}" class="btn btn-outline-secondary">
+                        filter data <i class="fa-solid fa-sliders"></i>
+                    </a>
+                </div>
             </div>
 
             <div class="container-fluid mt-4 p-0">
-                <table class="table ">
-                    <thead class="bg-bluedark rounded-top text-white" style="text-transform: uppercase">
-                        <tr>
-                            <th width="5%">No</th>
-                            <th width="20%">Nama Lengkap</th>
-                            <th width="5%">NRP</th>
-                            <th width="15%">tanggal absensi</th>
-                            <th width="15%">status kehadiran</th>
-                            <th width="10%">jam masuk</th>
-                            <th width="10%">jam pulang</th>
-                            <th width="10%">aksi</th>
-                        </tr>
-                    </thead>
-                    @if (count($absensiPersonil)!=0)
-                    @foreach ($absensiPersonil as $dataAbsensiPersonil)
-                        <tbody class="tbody">
+                <div class="container-fluid">
+                    <table class="table ">
+                        <thead class="bg-bluedark rounded-top text-white" style="text-transform: uppercase">
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $dataAbsensiPersonil['nama_lengkap'] }}</td>
-                                <td>{{ $dataAbsensiPersonil['nrp'] }}</td>
-                                <td>{{ $dataAbsensiPersonil['tanggal_absensi'] }}</td>
-                                <td class="text-center">
-                                    @foreach ($statusKehadiran as $item)
-                                        @if ($dataAbsensiPersonil['status_kehadiran'] == $item)
-                                        <div class="m-1 py-1 row justify-content-around align-items-center rounded border {{ $bgStatusKehadiran[$loop->iteration-1] }}">
-                                            <p class="px-0  m-0" style="">{{ $dataAbsensiPersonil['status_kehadiran']}}</p>
-                                            <i class="fa-solid fa-{{ $statusKehadiranIcon[$loop->iteration-1] }} {{ $iconColor[$loop->iteration-1] }} " style="font-size:10pt"></i>
-                                        </div>
-                                        @else
-                                            
-                                        @endif
-                                    @endforeach    
-                                </td>
-                                <td>{{ $dataAbsensiPersonil['jam_masuk'] }}</td>
-                                <td>{{ $dataAbsensiPersonil['jam_pulang'] }}</td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-primary">
-                                        lihat <li style="font-size:10pt" class="ml-1 fa-solid fa-eye"></li>
-                                    </a>
-                                </td>
+                                <th width="5%">No</th>
+                                <th width="20%">Nama Lengkap</th>
+                                <th width="5%">NRP</th>
+                                <th width="15%">tanggal absensi</th>
+                                <th width="15%">status kehadiran</th>
+                                <th width="10%">jam masuk</th>
+                                <th width="10%">jam pulang</th>
+                                <th width="10%">aksi</th>
                             </tr>
-                        </tbody>
-                    @endforeach    
-                    @else
-                        <tbody>
-                              <td colspan="8">Belum ada data absensi personil hari ini</td>  
-                        </tbody>
-                    @endif
-                </table>
+                        </thead>
+                    </table>
+                </div>
+                <div class="container" style="height: {{ count($absensiPersonil)<10 ? 'auto' : '600px' }}; overflow: auto;">
+                    <table class="table" id="dataTablePersonil">
+                        @if (count($absensiPersonil)!=0)
+                        @foreach ($absensiPersonil as $dataAbsensiPersonil)
+                            <tbody class="tbody">
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $dataAbsensiPersonil['nama_lengkap'] }}</td>
+                                    <td>{{ $dataAbsensiPersonil['nrp'] }}</td>
+                                    <td>{{ $dataAbsensiPersonil['tanggal_absensi'] }}</td>
+                                    <td class="text-center">
+                                        @foreach ($statusKehadiran as $item)
+                                            @if ($dataAbsensiPersonil['status_kehadiran'] == $item)
+                                            <div class="m-1 py-1 row justify-content-around align-items-center rounded border {{ $bgStatusKehadiran[$loop->iteration-1] }}">
+                                                <p class="px-0  m-0" style="">{{ $dataAbsensiPersonil['status_kehadiran']}}</p>
+                                                <i class="fa-solid fa-{{ $statusKehadiranIcon[$loop->iteration-1] }} {{ $iconColor[$loop->iteration-1] }} " style="font-size:10pt"></i>
+                                            </div>
+                                            @else
+                                                
+                                            @endif
+                                        @endforeach    
+                                    </td>
+                                    <td>{{ $dataAbsensiPersonil['jam_masuk'] }}</td>
+                                    <td>{{ $dataAbsensiPersonil['jam_pulang'] }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.absensi.show', ['tanggal_absensi' => $dataAbsensiPersonil['tanggal_absensi'], 'idAnggota' => $loop->iteration ]) }}" class="btn btn-outline-primary">
+                                            lihat <li style="font-size:10pt" class="ml-1 fa-solid fa-eye"></li>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        @endforeach    
+                        @else
+                            <tbody>
+                                  <td colspan="8">Belum ada data absensi personil hari ini</td>  
+                            </tbody>
+                        @endif
+                    </table>
+                    <!-- Tambahkan pesan jika hasil pencarian kosong -->
+                    <div id="emptyMessagePersonil" style="display: none;">
+                        <p>Data yang dicari kosong</p>
+                    </div>
+                </div>
+                    
+            </div>
+            <div class="pagination">
+                <div class="row container-fluid justify-content-end py-4">
+                    <div class="col-md-6 text-right">
+                        <a href="#" class="btn btn-primary">Cetak Data Hari ini <i class="fa-solid fa-print"></i></a>
+
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="container-fluid bg-white border rounded p-4 mt-4 ">
+        {{-- DATA PRESENSI PEGAWAI START  --}}
+        <div class="container-fluid bg-white border rounded p-4 mt-4 " id="data-presensi-pegawai" >
             <div class="row justify-content-between"> 
-                <div class="col-lg-8">
+                <div class="col-lg-4">
                     <h6 class="text-black" style="text-transform: uppercase">DATA Presensi Pegawai</h6>
                     <h6 class="text-black" style="text-transform: uppercase">{{ $date }}</h6>
                 </div>
-
+                <div class="col-lg-6 d-flex justify-content-end">
+                    <div  class="form-inline row container-fluid">
+                      <input class="form-control col-lg-10 col-md-8" id="searchPegawai" type="search" name="qPegawai" placeholder="Search" aria-label="Cari berdasarkan nama" value="{{ request('qPegawai') }}"> 
+                      <button disabled="true" class="btn text-white bg-bluedark my-2" type="submit"><i class="fa-solid fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="col-lg-2 d-flex py-2 justify-content-end align-item-center">
+                    <a href="{{ route('admin.absensi.filter') }}" class="btn btn-outline-secondary">
+                        filter data <i class="fa-solid fa-sliders"></i>
+                    </a>
+                </div>
             </div>
 
             <div class="container-fluid mt-4 p-0">
-                <table class="table ">
-                    <thead class="bg-bluedark rounded-top text-white" style="text-transform: uppercase">
-                        <tr>
-                            <th width="5%">No</th>
-                            <th width="15%">Nama Lengkap</th>
-                            <th width="10%">NIP</th>
-                            <th width="15%">tanggal absensi</th>
-                            <th width="15%">status kehadiran</th>
-                            <th width="10%">jam masuk</th>
-                            <th width="10%">jam pulang</th>
-                            <th width="10%">aksi</th>
-                        </tr>
-                    </thead>
-                    @if (count($absensiPegawai)!=0)
-                    @foreach ($absensiPegawai as $dataAbsensiPegawai)
-                        <tbody class="tbody">
+                <div class="container-fluid">
+                    <table class="table ">
+                        <thead class="bg-bluedark rounded-top text-white" style="text-transform: uppercase">
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $dataAbsensiPegawai['nama_pegawai'] }}</td>
-                                <td>{{ $dataAbsensiPegawai['nip'] }}</td>
-                                <td>{{ $dataAbsensiPegawai['tanggal_absensi'] }}</td>
-                                <td class="text-center">
-                                    @foreach ($statusKehadiran as $item)
-                                        @if ($dataAbsensiPegawai['status_kehadiran'] == $item)
-                                        <div class="m-1 py-1 row justify-content-around align-items-center rounded border {{ $bgStatusKehadiran[$loop->iteration-1] }}">
-                                            <p class="px-0  m-0" style="">{{ $dataAbsensiPegawai['status_kehadiran']}}</p>
-                                            <i class="fa-solid fa-{{ $statusKehadiranIcon[$loop->iteration-1] }} {{ $iconColor[$loop->iteration-1] }} " style="font-size:10pt"></i>
-                                        </div>
-                                        @else
-                                            
-                                        @endif
-                                    @endforeach    
-                                </td>
-                                <td>{{ $dataAbsensiPegawai['jam_masuk'] }}</td>
-                                <td>{{ $dataAbsensiPegawai['jam_pulang'] }}</td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-primary">
-                                        lihat <li style="font-size:10pt" class="ml-1 fa-solid fa-eye"></li>
-                                    </a>
-                                </td>
+                                <th width="5%">No</th>
+                                <th width="20%">Nama Lengkap</th>
+                                <th width="5%">NIP</th>
+                                <th width="15%">tanggal absensi</th>
+                                <th width="15%">status kehadiran</th>
+                                <th width="10%">jam masuk</th>
+                                <th width="10%">jam pulang</th>
+                                <th width="10%">aksi</th>
                             </tr>
-                        </tbody>
-                    @endforeach    
-                    @else
-                        <tbody>
-                              <td colspan="8">Belum ada data absensi personil hari ini</td>  
-                        </tbody>
-                    @endif
-                </table>
+                        </thead>
+                    </table>
+                </div>
+                <div class="container" style="height: {{ count($absensiPegawai)<10 ? 'auto' : '600px' }}; overflow: auto;">
+                    <table class="table" id="dataTablePegawai">
+                        @if (count($absensiPegawai)!=0)
+                        @foreach ($absensiPegawai as $dataAbsensiPegawai)
+                            <tbody class="tbody">
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $dataAbsensiPegawai['nama_pegawai'] }}</td>
+                                    <td>{{ $dataAbsensiPegawai['nip'] }}</td>
+                                    <td>{{ $dataAbsensiPegawai['tanggal_absensi'] }}</td>
+                                    <td class="text-center">
+                                        @foreach ($statusKehadiran as $item)
+                                            @if ($dataAbsensiPegawai['status_kehadiran'] == $item)
+                                            <div class="m-1 py-1 row justify-content-around align-items-center rounded border {{ $bgStatusKehadiran[$loop->iteration-1] }}">
+                                                <p class="px-0  m-0" style="">{{ $dataAbsensiPegawai['status_kehadiran']}}</p>
+                                                <i class="fa-solid fa-{{ $statusKehadiranIcon[$loop->iteration-1] }} {{ $iconColor[$loop->iteration-1] }} " style="font-size:10pt"></i>
+                                            </div>
+                                            @else
+                                                
+                                            @endif
+                                        @endforeach    
+                                    </td>
+                                    <td>{{ $dataAbsensiPegawai['jam_masuk'] }}</td>
+                                    <td>{{ $dataAbsensiPegawai['jam_pulang'] }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-outline-primary">
+                                            lihat <li style="font-size:10pt" class="ml-1 fa-solid fa-eye"></li>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        @endforeach    
+                        @else
+                            <tbody>
+                                  <td colspan="8">Belum ada data absensi Pegawai hari ini</td>  
+                            </tbody>
+                        @endif
+                    </table>
+                    <!-- Tambahkan pesan jika hasil pencarian kosong -->
+                    <div id="emptyMessagePegawai" style="display: none;">
+                        <p>Data yang dicari kosong</p>
+                    </div>
+                </div>
+                    
+            </div>
+            <div class="pagination">
+                <div class="row container-fluid justify-content-end py-4">
+                    <div class="col-md-6 text-right">
+                        <a href="#" class="btn btn-primary">Cetak Data Hari ini <i class="fa-solid fa-print"></i></a>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <script>
+    // Fungsi untuk melakukan pencarian data presensi personil
+    function cariDataPersonil() {
+        var input, filter, table, tr, td, i, txtValue, searchResult;
+        input = document.getElementById("searchPersonil");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("dataTablePersonil");
+        tr = table.getElementsByTagName("tr");
+        searchResult = false; // Menandakan apakah ada hasil pencarian atau tidak
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1]; // Ganti angka dengan indeks kolom yang ingin Anda cari (dimulai dari 0)
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    searchResult = true;
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+
+        // Menampilkan pesan jika hasil pencarian kosong
+        var emptyMessage = document.getElementById("emptyMessagePersonil");
+        if (!searchResult) {
+            emptyMessage.style.display = "block";
+        } else {
+            emptyMessage.style.display = "none";
+        }
+    }
+    // Fungsi untuk melakukan pencarian data presensi pegawai
+    function cariDataPegawai() {
+        var input, filter, table, tr, td, i, txtValue, searchResult;
+        input = document.getElementById("searchPegawai");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("dataTablePegawai");
+        tr = table.getElementsByTagName("tr");
+        searchResult = false; // Menandakan apakah ada hasil pencarian atau tidak
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1]; // Ganti angka dengan indeks kolom yang ingin Anda cari (dimulai dari 0)
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    searchResult = true;
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+
+        // Menampilkan pesan jika hasil pencarian kosong
+        var emptyMessage = document.getElementById("emptyMessagePegawai");
+        if (!searchResult) {
+            emptyMessage.style.display = "block";
+        } else {
+            emptyMessage.style.display = "none";
+        }
+    }
+
+    // Mendengarkan perubahan pada input pencarian
+    document.getElementById("searchPersonil").addEventListener("keyup", cariDataPersonil);
+    document.getElementById("searchPegawai").addEventListener("keyup", cariDataPegawai);
+
+
         function displayWaktu() {
             var waktu = new Date(); 
             const formatHari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
