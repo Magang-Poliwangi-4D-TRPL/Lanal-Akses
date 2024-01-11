@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\WaktuKerjaModel;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ class AbsensiController extends Controller
 {
     public function index()
     {
+        $informasiJamKerja = WaktuKerjaModel::all();
         $absensiPersonil = array(
             [
                 "nama_lengkap" => "Suhendra Kurniawan",
@@ -139,7 +141,7 @@ class AbsensiController extends Controller
             'text-secondary',
         ];
 
-        return view('admin.absensi.index', compact('absensiPersonil', 'absensiPegawai', 'date', 'statusKehadiranIcon', 'bgStatusKehadiran', 'iconColor', 'statusKehadiran'));
+        return view('admin.absensi.index', compact('absensiPersonil', 'absensiPegawai', 'date', 'statusKehadiranIcon', 'bgStatusKehadiran', 'iconColor', 'statusKehadiran', 'informasiJamKerja'));
     }
 
     public function show() {
@@ -224,15 +226,6 @@ class AbsensiController extends Controller
             ],
         );
         return view('admin.absensi.show', compact('riwayatAbsensiPersonil', 'statusKehadiranIcon', 'bgStatusKehadiran', 'iconColor', 'statusKehadiran'));
-    }
-
-
-    public function createJamKerja() {
-        return view('admin.absensi.jam-kerja.create');
-    }
-
-    public function editJamKerja() {
-        return view('admin.absensi.jam-kerja.edit');
     }
 
     public function filterAbsensi(){

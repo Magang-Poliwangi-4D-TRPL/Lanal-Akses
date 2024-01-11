@@ -8,13 +8,23 @@
     <div class="container">
         
         <h4 style="text-transform: uppercase">Tambah Jam kerja</h4>
-        <form method="POST" action="">
+        <p>Catatan: setiap tanda (<span class="text-danger">*</span>) pada form memiliki arti form tersbeut wajib diisi</p>
+        <form method="POST" action="{{ route('admin.absensi.data-jam-kerja.store') }}">
             @csrf
-            <div class="form-group row">
-                <label for="jam_masuk_mulai" class="col-sm-2 col-form-label">Jam Masuk Mulai</label>
+            <div class="form-group mt-4">
+                <label for="nama_waktu_kerja">Masukkan Judul/Nama Waktu Kerja <span class="text-danger">*</span></label>
+                <input type="text" class="form-control @error('nama_waktu_kerja') is-invalid @enderror" id="nama_waktu_kerja" name="nama_waktu_kerja" value="{{ old('nama_waktu_kerja')}}" placeholder="contoh: Informasi kerja seluruh personil & pegawai LANAL BWI" autofocus>
+                @error('nama_waktu_kerja')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group  mt-4 row">
+                <label for="jam_masuk_mulai" class="col-sm-2 col-form-label">Jam Masuk Mulai <span class="text-danger">*</span></label>
                 <div class="col-sm-4">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="jam_masuk_mulai" placeholder="00:00" value="{{ old('jam_masuk_mulai') }}">
+                        <input type="time" class="form-control" name="jam_masuk_mulai" placeholder="00:00" value="{{ old('jam_masuk_mulai') }}">
                         <div class="input-group-append">
                             <div class="input-group-text"><i class="fa fa-clock"></i></div>
                         </div>
@@ -25,10 +35,10 @@
                         {{ $message }}
                     </div>
                   @enderror
-                <label for="jam_masuk_selesai" class="col-sm-2 col-form-label">Jam Masuk Selesai</label>
+                <label for="jam_masuk_selesai" class="col-sm-2 col-form-label">Batas Jam Masuk <span class="text-danger">*</span></label>
                 <div class="col-sm-4">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="jam_masuk_selesai" placeholder="00:00" value="{{ old('jam_masuk_selesai') }}">
+                        <input type="time" class="form-control" name="jam_masuk_selesai" placeholder="00:00" value="{{ old('jam_masuk_selesai') }}">
                         <div class="input-group-append">
                             <div class="input-group-text"><i class="fa fa-clock"></i></div>
                         </div>
@@ -41,10 +51,10 @@
                   @enderror
             </div>
             <div class="form-group row">
-                <label for="jam_pulang_mulai" class="col-sm-2 col-form-label">Jam Pulang Mulai</label>
+                <label for="jam_pulang_mulai" class="col-sm-2 col-form-label">Jam Pulang Mulai <span class="text-danger">*</span></label>
                 <div class="col-sm-4">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="jam_pulang_mulai" placeholder="00:00" value="{{ old('jam_pulang_mulai') }}">
+                        <input type="time" class="form-control" name="jam_pulang_mulai" placeholder="00:00" value="{{ old('jam_pulang_mulai') }}">
                         <div class="input-group-append">
                             <div class="input-group-text"><i class="fa fa-clock"></i></div>
                         </div>
@@ -55,10 +65,10 @@
                         {{ $message }}
                     </div>
                   @enderror
-                <label for="jam_pulang_selesai" class="col-sm-2 col-form-label">Jam Pulang Selesai</label>
+                <label for="jam_pulang_selesai" class="col-sm-2 col-form-label">Batas Jam Pulang <span class="text-danger">*</span></label>
                 <div class="col-sm-4">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="jam_pulang_selesai" placeholder="00:00" value="{{ old('jam_pulang_selesai') }}">
+                        <input type="time" class="form-control" name="jam_pulang_selesai" placeholder="00:00" value="{{ old('jam_pulang_selesai') }}">
                         <div class="input-group-append">
                             <div class="input-group-text"><i class="fa fa-clock"></i></div>
                         </div>
@@ -70,10 +80,41 @@
                     </div>
                   @enderror
             </div>
-            <div class="form-group">
-                <label for="keterangan_jam_kerja">Massukkan keterangan jam kerja</label>
-                <input type="area" class="form-control @error('keterangan_jam_kerja') is-invalid @enderror" id="keterangan_jam_kerja" name="keterangan_jam_kerja" value="{{ old('keterangan_jam_kerja')}}" placeholder="keterangan" autofocus>
-                @error('keterangan_jam_kerja')
+            <h5 class="mt-4">Informasi Tambahan (tidak wajib diisi)</h5>
+            <div class="form-group row mt-4">
+                <label for="jam_istirahat_mulai" class="col-sm-2 col-form-label">Jam istirahat Mulai</label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input type="time" class="form-control" name="jam_istirahat_mulai" placeholder="00:00" value="{{ old('jam_istirahat_mulai') }}">
+                        <div class="input-group-append">
+                            <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                        </div>
+                    </div>
+                  </div>
+                  @error('jam_istirahat_mulai')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                  @enderror
+                <label for="jam_istirahat_selesai" class="col-sm-2 col-form-label">Batas Jam istirahat </label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input type="time" class="form-control" name="jam_istirahat_selesai" placeholder="00:00" value="{{ old('jam_istirahat_selesai') }}">
+                        <div class="input-group-append">
+                            <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                        </div>
+                    </div>
+                  </div>
+                  @error('jam_istirahat_selesai')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                  @enderror
+            </div>
+            <div class="form-group mt-4">
+                <label for="keterangan">Masukkan keterangan jam kerja</label>
+                <input type="area" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan" value="{{ old('keterangan')}}" placeholder="keterangan">
+                @error('keterangan')
                     <div class="invalid-feedback">
                       {{ $message }}
                     </div>

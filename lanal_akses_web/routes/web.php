@@ -20,7 +20,9 @@ use App\Http\Controllers\Admin\InformasiKeluargaController;
 use App\Http\Controllers\Admin\PerlengkapanController;
 use App\Http\Controllers\Admin\RiwayatPenugasanController;
 use App\Http\Controllers\Admin\SanksiHukumanController;
+use App\Http\Controllers\Admin\WaktuKerjaController;
 use App\Http\Controllers\Personil\PersonilController as PersonilPersonilController;
+use App\Models\WaktuKerjaModel;
 use Illuminate\Support\Facades\Route;
 
 
@@ -200,8 +202,14 @@ Route::get('/admin/absensi/filter/index', [AbsensiController::class, 'indexFilte
 ->name('admin.absensi.filter.index');
 
 
-Route::get('/admin/absensi/tambah-data-jam-kerja', [AbsensiController::class, 'createJamKerja'])
+Route::get('/admin/absensi/tambah-data-jam-kerja', [WaktuKerjaController::class, 'create'])
 ->name('admin.absensi.data-jam-kerja.create');
+Route::post('/admin/absensi/tambah-data-jam-kerja', [WaktuKerjaController::class, 'store'])
+->name('admin.absensi.data-jam-kerja.store');
+Route::get('/admin/absensi/edit-data-jam-kerja/{idWaktuKerja}', [WaktuKerjaController::class, 'edit'])
+->name('admin.absensi.data-jam-kerja.edit');
+Route::put('/admin/absensi/edit-data-jam-kerja/{idWaktuKerja}', [WaktuKerjaController::class, 'update'])
+->name('admin.absensi.data-jam-kerja.update');
 
 // Absensi -> Cetak
 Route::get('/admin/absensi/{month}-{year}/cetak-presensi-bulanan', [AbsensiController::class, 'cetakPresensiBulanan'])->name('admin.absensi.cetak-presensi.bulanan');

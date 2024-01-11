@@ -18,6 +18,7 @@
         <h2 class="text-black my-4 text-center" style="text-transform: uppercase">Presensi Personel & Pegawai LANAL Banyuwangi</h2>
         
         <div class="container-fluid bg-white border rounded p-4 mt-4">
+            @if ($informasiJamKerja->count()<=0)
             <h4 class="text-center">Informasi Jam Kerja</h4>
             <div class="row container-fluid d-flex justify-content-around align-item-center mt-4">
                 <div class="col-md-2 p-2">
@@ -47,12 +48,56 @@
                     <p class="m-0 p-0">00:00</p>
                 </div>
             </div>
+            @else
+            <h4 class="text-center text-uppercase">{{ $informasiJamKerja[0]->nama_waktu_kerja }}</h4>
+            <div class="row container-fluid d-flex justify-content-around align-item-center mt-4">
+                <div class="col-md-2 p-2">
+                    <p class="m-0 p-0"><b>Jam Masuk Mulai</b></p>
+                </div>
+                <div class="col-md-4 rounded border p-2 border-outline-secondary">
+                    <p class="m-0 p-0">{{ $informasiJamKerja[0]->jam_masuk_mulai }}</p>
+                </div>
+                <div class="col-md-2 p-2">
+                    <p class="m-0 p-0"><b>Batas Jam Masuk</b></p>
+                </div>
+                <div class="col-md-4 rounded border p-2 border-outline-secondary">
+                    <p class="m-0 p-0">{{ $informasiJamKerja[0]->jam_masuk_selesai }}</p>
+                </div>
+            </div>
+            <div class="row container-fluid d-flex justify-content-around align-item-center mt-3">
+                <div class="col-md-2 p-2">
+                    <p class="m-0 p-0"><b>Jam Pulang Mulai</b></p>
+                </div>
+                <div class="col-md-4 rounded border p-2 border-outline-secondary">
+                    <p class="m-0 p-0">{{ $informasiJamKerja[0]->jam_pulang_mulai }}</p>
+                </div>
+                <div class="col-md-2 p-2">
+                    <p class="m-0 p-0"><b>Batas Jam Pulang</b></p>
+                </div>
+                <div class="col-md-4 rounded border p-2 border-outline-secondary">
+                    <p class="m-0 p-0">{{ $informasiJamKerja[0]->jam_pulang_selesai }}</p>
+                </div>
+            </div>
+            <div class="container mt-4">
+                @empty ($informasiJamKerja[0]->keterangan)
+                @else
+                <p>{{ $informasiJamKerja[0]->keterangan }}</p>
+                @endEmpty
+            </div>
+            @endif
             <div class="row container justify-content-end py-4 mt-3 border-top border-primary">
                 <div class="col-md-6 text-right">
+                    @if ($informasiJamKerja->count()<=0)
                     <a href="{{ route('admin.absensi.data-jam-kerja.create') }}" class="btn btn-primary">Tambah Jam Kerja Baru <i class="fa-solid fa-add"></i></a>
+                    
+                    @else
+                    <a href="{{ route('admin.absensi.data-jam-kerja.edit', ['idWaktuKerja' => $informasiJamKerja[0]->id]) }}" class="btn btn-primary bg-bluedark">Edit Jam Kerja <i style="font-size: 10pt" class="ml-1 fa-solid fa-pencil"></i></a>
+                        
+                    @endif
 
                 </div>
             </div>
+            
         </div>
         <div class="container-fluid bg-white border rounded p-4 mt-4">
             <div class="row align-item-center justify-content-center">
