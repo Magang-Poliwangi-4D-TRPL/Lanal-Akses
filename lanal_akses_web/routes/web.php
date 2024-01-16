@@ -50,7 +50,8 @@ Route::get('/personel/edit-profile', [PersonilPersonilController::class, 'edit']
 // ABSENSI
 Route::get('/personel/absensi', [PublicController::class, 'absensiPersonil'])->name('personil.absensi');
 Route::post('/personel/absensi', [PublicController::class, 'absensiPersonilStore'])->name('personil.absensi.store');
-Route::get('/pegawai/absensi', [PublicController::class, 'pegawaiAbsensi'])->name('pegawai.absensi');
+Route::get('/pegawai/absensi', [PublicController::class, 'absensiPegawai'])->name('pegawai.absensi');
+Route::post('/pegawai/absensi', [PublicController::class, 'absensiPegawaiStore'])->name('pegawai.absensi.store');
 // Route::get('/perizinan', [PersonilPersonilController::class, 'perizinan'])->name('personil.perizinan');
 
 Route::get('/personel/absensi/success-absensi', [PublicController::class, 'absensiSuccess'])->name('absensi.success');

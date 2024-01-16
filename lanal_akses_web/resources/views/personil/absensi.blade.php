@@ -3,241 +3,153 @@
 @section('title-page', 'Lanal Akses | Absensi')
   
 @section('content')
-    <style>
-        .container {
-            width: 966px;
-            height: 556px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-        }
-
-        .left-section {
-            width: 433px;
-            height: 556px;
-            background: url('https://i.ibb.co/G9CdjRw/bglanal.jpg') no-repeat center center;
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border-top-left-radius: 4%;
-            border-bottom-left-radius: 4%;
-            position: relative;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(13, 33, 161, 0.8); /* Warna biru tua dengan opacity 0.8 */
-            border-top-left-radius: 4%;
-            border-bottom-left-radius: 4%;
-        }
-
-        .icon {
-            width: 137px;
-            height: 137px;
-            background: url('https://i.ibb.co/MR438ww/logo-no-bg.png') no-repeat center center;
-            position: relative;
-            margin: 20px 0; /* Menambahkan margin 20px atas dan bawah pada ikon */
-        }
-
-        .text {
-            text-align: center;
-            color: white; /* Warna teks Anda */
-            position: relative;
-            z-index: 1;
-            margin: 10px 0; /* Menambahkan margin 10px atas dan bawah */
-        }
-
-        .right-section {
-            width: 533px;
-            height: 556px;
-            background-color: #E5FFFF; /* Warna latar belakang pada right-section */
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start; /* Mengubah align-items menjadi flex-start */
-            align-items: flex-start; /* Mengubah justify-content menjadi flex-start */
-            border-top-right-radius: 4%;
-            border-bottom-right-radius: 4%;
-            padding: 20px 40px 20px 0; /* Padding bawah 20px dan padding kanan 40px */
-            padding-left: 40px; /* Padding kiri 40px */
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            padding: 10px;
-        }
-
-        .left-header {
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .right-header {
-            font-size: 14px;
-            color: #555;
-        }
-
-        h1 {
-            font-size: 24px;
-            margin: 10px 0;
-        }
-
-        p {
-            font-size: 14px;
-            color: #555;
-            margin: 0;
-        }
-
-        .kolom {
-            display: flex;
-            align-items: center;
-            margin: 10px 0;
-            border-radius: 4%;
-        }
-
-        .icon-col {
-            width: 57px;
-            height: 48px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-top-left-radius: 20%;
-            border-bottom-left-radius: 20%;
-        }
-
-        .icon-col i {
-            font-size: 16px;
-            color: #FFFFFF;
-        }
-
-        .isian-col {
-            width: 352px;
-            height: 48px;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-        }
-
-        input {
-            width: 100%;
-            height: 100%;
-            padding: 10px;
-            border: none;
-            outline: none;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-        }
-
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px 0;
-        }
-
-        .button-container button {
-            width: 409px;
-            height: 41px;
-            background-color: #0D21A1; /* Warna latar belakang */
-            color: white; /* Warna teks */
-            border: none;
-            border-radius: 10px;
-            margin: 6px 0;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 3px 3px 5px #888888; /* Efek drop shadow */
-        }
-
-        .button-container button i {
-            margin-right: 5px;
-        }
-    </style>
-
-    <div class="container">
-        <div class="left-section">
-            <div class="overlay"></div>
-            <div class="icon"></div>
-            <div class="text">
-                <h1>LANAL AKSES</h1>
-                <p style="color: white; font-size: 16px;">Website Absensi dan Data Personel  Pangkalan TNI Angkatan Laut V - Pangkalan TNI AL Banyuwangi</p>
-            </div>
-        </div>
-        <div class="right-section">
-            <div class="header">
-                <div class="left-header">
-                    <a href="{{ route('personil.login') }}">
-                        <i class="fas fa-angle-left"></i> Kembali
-                    </a>
-                </div>
-                <div class="right-header" id="current-time"></div>
-            </div>
-            <h1>Absensi Personel</h1>
-            <p>Lakukan absensi dengan nama dan NRP</p>
-            <div class="kolom">
-                <div class="icon-col" style="background-color: #0D21A1;">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="isian-col">
-                    <input type="text" placeholder="Nama">
+    <div class="container bg-white rounded p-4 my-5">
+        <div class="container-fluid row m-0 p-0">
+            <div class="col-lg-5 col-sm-6 m-0 p-0 bg-bluedark rounded" id="left-section">
+                <div class="image-container rounded">
+                    <!-- Background image goes here -->
+                    <div class="text-overlay">
+                        <h2>LANAL AKSES</h2>
+                        <p>Website informasi administrasi dan absensi seluruh anggota Lanal Banyuwangi</p>
+                    </div>
                 </div>
             </div>
-            <div class="kolom">
-                <div class="icon-col" style="background-color: #0D21A1;">
-                    <i class="fas fa-id-card"></i>
+            
+            <div class="col-lg-7 col-sm-6 py-5 px-5">
+                <div class="container rounded  border border-info  row justify-content-between align-item-center mb-3 p-2">
+                    <h5 class="p-0 m-0" id="current_time"></h5>
+                    <h5 class="p-0 m-0 " id="current_date"></h5>
                 </div>
-                <div class="isian-col">
-                    <input type="text" placeholder="NRP">
+                <div class="container-fluid mt-5 row justify-content-between ">
+                    <img class="col-md-6" src="{{ URL::asset('images/admin/absensi-illustrasi.png') }}" alt="https://storyset.com/illustration/confirmed-attendance/pana#385655FF&hide=&hide=complete" width="50%">
+                    <div class="col-md-6 row d-flex align-item-center">
+                        <h4 class="p-0 m-0 mt-5 text-uppercase"><b>Selamat Datang Personel!</b></h4>
+                        <p class="py-1 m-0 mb-5 ">Absen sekarang dengan menggunakan nama dan NRP anda</p>
+                    </div>
                 </div>
-            </div>
-            <p>tidak wajib diisi (jika personel tidak berada di pangkalan)</p>
-            <div class="kolom">
-                <div class="icon-col" style="background-color: #0D21A1;">
-                <i class="fas fa-file" style="color: white;"></i> 
-                </div>
-                <div class="isian-col">
-                    <input type="text" placeholder="Keterangan Jaga"> 
-                </div>
-            </div>
+                @if(session('message'))
+                    <div class="alert alert-warning">
+                        {{ session('message') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="form-absensi row justify-content-center mt-3">
+                    <div class="container-fluid">
+                        <form method="POST" action="{{ route('personil.absensi.store') }}">
+                            @csrf
+                            {{-- <p>{{ $waktu_kerja[0]->jam_masuk_mulai }}</p> --}}
+                            <input hidden type="text" class="form-control" name="tanggal_absensi" id="tanggal_absensi" value="{{ $date }}">
+                            <input hidden type="text" class="form-control" name="waktu_kerja_id" id="waktu_kerja_id" value="{{ $waktu_kerja[0]->id }}">
+                            <div class="form-group">
+                                <label for="nama_lengkap">Massukkan nama lengkap</label>
+                                <input type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap')}}" placeholder="Nama Lengkap" autofocus>
+                                @error('nama_lengkap')
+                                    <div class="invalid-feedback">
+                                      {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="nrp">Massukkan NRP anda</label>
+                                <input type="text" class="form-control @error('nrp') is-invalid @enderror" id="nrp" name="nrp" value="{{ old('nrp')}}" placeholder="NRP Anda">
+                                @error('nrp')
+                                    <div class="invalid-feedback">
+                                      {{ $message }}
+                                    </div>
+                                @enderror
+                              </div>
+                            <div class="form-group row">
+                                <label for="status_kehadiran" class="col-sm-5 col-form-label">Status Kehadiran</label>
+                                <div class="col-sm-7">
+                                    <div class="input-group">
+                                        <div class="input-group-text bg-greenmain text-white"><i class="fa-solid fa-pen-to-square"></i></div>
+                                        <select class="form-control  @error('status_kehadiran') is-invalid @enderror" name="status_kehadiran" id="status_kehadiran">
+                                            <option value="Hadir" {{ old('status_kehadiran') === "Hadir" ? 'selected' : '' }}>Hadir</option>
+                                            <option value="Ijin" {{ old('status_kehadiran') === "Ijin" ? 'selected' : '' }}>Ijin</option>
+                                        </select>
+                                    </div>
+                                    @error('status_kehadiran')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-text bg-greenmain text-white"><i class="fa-solid fa-location"></i></div>
+                                        <input readonly type="text" class="form-control @error('lokasi') is-invalid @enderror" id="lokasi" name="lokasi" value="{{ old('lokasi') }}" placeholder="Lokasi anda saat ini">
+                                        <button class="btn btn-success" type="button" onclick="getLocation()">Dapatkan Lokasi</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="keterangan">Keterangan (opsional)</label>
+                                <input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="Masukkan keterangan" value="{{ old('keterangan') }}">
+                                @error('keterangan')
+                                      <div class="invalid-feedback">
+                                          {{ $message }}
+                                      </div>
+                                @enderror
+                            </div>
+                            <div class="text-center mt-5">
+                                <button type="submit" class="btn btn-secondary btn-md btn-block bg-greendark">Absen Sekarang <i class="ml-2 fa fa-check"></i></button>
+                                <p class="mt-4 mb-0 subtitle">Apakah anda pegawai? <a href="{{ route('pegawai.absensi') }}">Klik disini untuk melakukan Presensi</a></p>
+                                <p class="mt-1 mb-0">atau</p>
+                                <a class="mt-1" href="{{ route('personil.login') }}"><i class="fa fa-arrow-left mr-2"></i> kembali ke halaman login</a>
+                            </div>
+                          </form>
 
-            <div class="button-container">
-                <button type="submit" name="hadir">
-                     Hadir  <i class="fas fa-check ml-2"></i>
-                </button>
-                <button type="submit" name="ajukan_perizinan" class="ajukan-button" style="background-color:#5786CA ;" >
-                    <a href="{{ route('personil.perizinan') }}">
-                        Ajukan Perizinan  <i class="far fa-file ml-2"></i>
-                    </a>
-                </button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
-<script>
-    const updateTime = () => {
-        const now = new Date();
-        const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-        const day = days[now.getDay()];
-        const date = now.getDate();
-        const month = now.getMonth() + 1;
-        const year = now.getFullYear();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
-        const seconds = now.getSeconds();
-        document.getElementById('current-time').innerText = `${day}, ${date < 10 ? '0' + date : date}/${month < 10 ? '0' + month : month}/${year} ${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-    }
+    <script>
+        function displayWaktu() {
+            var waktu = new Date(); 
+            var options = {timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            var jam = waktu.toLocaleTimeString('id-ID', options);
+            jam = jam.replace(/\./g, ' : ');
+            document.getElementById('current_time').innerText = jam;
 
-    updateTime();
-    setInterval(updateTime, 1000);
-</script>
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const day = days[waktu.getDay()];
+            const date = waktu.getDate();
+            const month = waktu.getMonth() + 1;
+            const year = waktu.getFullYear();
+                document.getElementById('current_date').innerText = `${day}, ${date < 10 ? '0' + date : date}-${month < 10 ? '0' + month : month}-${year}`;
+                
+                setTimeout(displayWaktu, 1000);
+        }
+        displayWaktu();
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                alert("Geolocation tidak didukung oleh browser ini.");
+            }
+        }
+
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Setel nilai input lokasi pada formulir
+            document.getElementById("lokasi").value = latitude + ',' + longitude;
+
+            // Tampilkan lokasi pada elemen kontainer
+            // document.getElementById("lokasi-value").innerHTML = "Lokasi: " + latitude + ', ' + longitude;
+        }
+    </script>
 @endsection

@@ -31,6 +31,15 @@
                 </div>
             </div>
         </div>
+        @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
         <div class="container">
             <form method="POST" action="{{ route('admin.absensi.update', ['idKehadiran' => $detailPresensiAnggota->id]) }}">
                 @csrf
@@ -39,7 +48,7 @@
                     <label for="jam_masuk" class="col-sm-3 col-form-label">Masukkan Jam Masuk Anggota <span class="text-danger">*</span></label>
                     <div class="col-sm-3">
                         <div class="input-group">
-                            <input type="time" class="form-control" name="jam_masuk" placeholder="00:00" value="{{ old('jam_masuk', $detailPresensiAnggota->jam_masuk) }}">
+                            <input type="time" class="form-control" name="jam_masuk" placeholder="00:00:00" value="{{ old('jam_masuk', $detailPresensiAnggota->jam_masuk) }}">
                             <div class="input-group-append">
                                 <div class="input-group-text"><i class="fa fa-clock"></i></div>
                             </div>
@@ -53,7 +62,7 @@
                     <label for="jam_pulang" class="col-sm-3 col-form-label">Masukkan Jam Pulang Anggota</label>
                     <div class="col-sm-3">
                         <div class="input-group">
-                            <input type="time" class="form-control" name="jam_pulang" placeholder="00:00" value="{{ old('jam_pulang', $detailPresensiAnggota->jam_pulang) }}">
+                            <input type="time" class="form-control" name="jam_pulang" placeholder="00:00:00" value="{{ old('jam_pulang', $detailPresensiAnggota->jam_pulang) }}">
                             <div class="input-group-append">
                                 <div class="input-group-text"><i class="fa fa-clock"></i></div>
                             </div>

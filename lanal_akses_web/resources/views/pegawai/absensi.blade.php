@@ -23,8 +23,8 @@
                 <div class="container-fluid mt-5 row justify-content-between ">
                     <img class="col-md-6" src="{{ URL::asset('images/admin/absensi-illustrasi.png') }}" alt="https://storyset.com/illustration/confirmed-attendance/pana#385655FF&hide=&hide=complete" width="50%">
                     <div class="col-md-6 row d-flex align-item-center">
-                        <h4 class="p-0 m-0 mt-5 text-uppercase"><b>Selamat Datang!</b></h4>
-                        <p class="py-1 m-0 mb-5 ">Absen sekarang dengan menggunakan nama dan NRP anda</p>
+                        <h4 class="p-0 m-0 mt-5 text-uppercase"><b>Selamat Datang Pegawai!</b></h4>
+                        <p class="py-1 m-0 mb-5 ">Absen sekarang dengan menggunakan nama dan NIP anda</p>
                     </div>
                 </div>
                 @if(session('message'))
@@ -43,7 +43,7 @@
                 @endif
                 <div class="form-absensi row justify-content-center mt-3">
                     <div class="container-fluid">
-                        <form method="POST" action="{{ route('personil.absensi.store') }}">
+                        <form method="POST" action="{{ route('pegawai.absensi.store') }}">
                             @csrf
                             {{-- <p>{{ $waktu_kerja[0]->jam_masuk_mulai }}</p> --}}
                             <input hidden type="text" class="form-control" name="tanggal_absensi" id="tanggal_absensi" value="{{ $date }}">
@@ -58,9 +58,9 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="nrp">Massukkan NRP anda</label>
-                                <input type="text" class="form-control @error('nrp') is-invalid @enderror" id="nrp" name="nrp" value="{{ old('nrp')}}" placeholder="NRP Anda">
-                                @error('nrp')
+                                <label for="nip">Massukkan NIP anda</label>
+                                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" value="{{ old('nip')}}" placeholder="NIP Anda">
+                                @error('nip')
                                     <div class="invalid-feedback">
                                       {{ $message }}
                                     </div>
@@ -103,7 +103,6 @@
                             </div>
                             <div class="text-center mt-5">
                                 <button type="submit" class="btn btn-secondary btn-md btn-block bg-greendark">Absen Sekarang <i class="ml-2 fa fa-check"></i></button>
-                                <p class="mt-4 mb-0 subtitle">Apakah anda pegawai? <a href="{{ url()->previous() }}">Klik disini untuk melakukan Presensi</a></p>
                                 <p class="mt-1 mb-0">atau</p>
                                 <a class="mt-1" href="{{ route('personil.login') }}"><i class="fa fa-arrow-left mr-2"></i> kembali ke halaman login</a>
                             </div>

@@ -124,8 +124,8 @@ class AbsensiController extends Controller
     public function update(Request $request, $idKehadiran)
     {
         $validatedData = $request->validate([
-            'jam_masuk' => 'required|date_format:H:i',
-            'jam_pulang' => 'nullable|date_format:H:i',
+            'jam_masuk' => 'required|',
+            'jam_pulang' => 'nullable|',
             'status_kehadiran' => 'required',
             'lokasi' => 'required',
             'keterangan' => 'nullable|max:255',
@@ -133,8 +133,6 @@ class AbsensiController extends Controller
             'jam_masuk.required' => 'Jam masuk harus diisi.',
             'lokasi.required' => 'Lokasi harus diisi.',
             'status_kehadiran.required' => 'Status kehadiran harus diisi.',
-            'jam_masuk.date_format' => 'Format waktu jam masuk harus sesuai dengan format jam dan menit (HH:MM).',
-            'jam_pulang.date_format' => 'Format waktu jam pulang harus sesuai dengan format jam dan menit (HH:MM).',
             'keterangan.max' => 'Keterangan tidak boleh melebih 255 karakter.'
         ]);
 

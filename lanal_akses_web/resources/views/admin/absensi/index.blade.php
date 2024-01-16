@@ -335,7 +335,7 @@
                     </table>
                 </div>
                 <div class="container" style="height: {{ count($absensiPegawai)<10 ? 'auto' : '600px' }}; overflow: auto;">
-                    <table class="table" id="dataTablePersonil">
+                    <table class="table" id="dataTablePegawai">
                         @if (count($absensiPegawai)!=0)
                         @foreach ($absensiPegawai as $dataAbsensiPegawai)
                             <tbody class="tbody">
@@ -373,7 +373,7 @@
                         @endif
                     </table>
                     <!-- Tambahkan pesan jika hasil pencarian kosong -->
-                    <div id="emptyMessagePegawau" style="display: none;">
+                    <div id="emptyMessagePegawai" style="display: none;">
                         <p>Data yang dicari kosong</p>
                     </div>
                 </div>
