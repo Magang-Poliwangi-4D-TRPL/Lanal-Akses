@@ -28,7 +28,7 @@
         </div>
 
         <div class="container-fluid mt-2">
-            <h6 class="text-center my-4" style="text-transform:uppercase;"><b>Data Perosnel </b></h6>
+            <h6 class="text-center my-4" style="text-transform:uppercase;"><b>Data Personel </b></h6>
             @if($personil->count()!=0)
                 <table class="container table border" style="border-width: medium !important; border-color: #000;">
                     <tr style="text-transform:uppercase; background-color:aliceblue">

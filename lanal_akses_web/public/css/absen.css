@@ -1,3 +1,100 @@
+:root {
+    --green-main: #4E6766;
+    --green-dark: #385655;
+    --blue-bg: #EDFEFF;
+    --blue-dark: #0D21A1;
+    --blue-main: #7EBFFF;
+    --blue-accent: #5786CA;
+    --white: #ffffff;
+  }
+
+.bg-greenmain {
+    background-color: var(--green-main) !important;
+}
+
+.bg-greendark {
+    background-color: var(--green-dark) !important;
+}
+
+.bg-bluedark {
+    background-color: var(--blue-dark) !important;
+}
+
+.bg-blue {
+    background-color: var(--blue-bg) !important;
+}
+
+.bg-bluemain {
+    background-color: var(--blue-main) !important;
+}
+
+.bg-blueaccent {
+    background-color: var(--blue-accent) !important;
+}
+
+.bg-gray {
+    background-color: lightgray ;
+}
+
+.greenmain {
+    color: var(--green-main) !important;
+}
+
+.greendark {
+    color: var(--green-dark) !important;
+}
+
+.bluedark {
+    color: var(--blue-dark) !important;
+}
+
+.blue {
+    color: var(--blue-bg) !important;
+}
+
+.bluemain {
+    color: var(--blue-main) !important;
+}
+
+.blueaccent {
+    color: var(--blue-accent) !important;
+}
+
 body {
-    background-color: #4E6766 !important;
+    background-color: var(--green-dark) !important;
+}
+
+#left-section {
+    position: relative;
+}
+
+.image-container {
+    position: relative;
+    background: url('../images/admin/bglanal.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--blue-dark); 
+    height: 100%; 
+    opacity: 0.5; 
+}
+
+.text-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    color: #ffffff; /* Set text color */
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5); /* Set background color with transparency */
+}
+
+.text-overlay h2 {
+    margin-bottom: 10px;
+    font-size: 24px; /* Set font size for the title */
+}
+
+.text-overlay p {
+    margin: 0;
+    font-size: 16px; /* Set font size for the caption */
 }
