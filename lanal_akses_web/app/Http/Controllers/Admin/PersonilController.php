@@ -7,6 +7,7 @@ use App\Models\DataKepangkatanModel;
 use App\Models\InformasiAnakModel;
 use App\Models\InformasiOrangTuaModel;
 use App\Models\InformasiPasanganModel;
+use App\Models\KehadiranModel;
 use App\Models\KursusModel;
 use App\Models\PendidikanFormalModel;
 use App\Models\PendidikanMiliterModel;
@@ -294,6 +295,13 @@ class PersonilController extends Controller
             $user = User::where('personil_id', $personil->id)->get();
             if($user->count()!=0){
                 foreach ($user as $data){
+                    $data->delete();
+                }
+            } 
+            // Mengambil semua data kehadiranModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
+            $kehadiran = KehadiranModel::where('personil_id', $personil->id)->get();
+            if($kehadiran->count()!=0){
+                foreach ($kehadiran as $data){
                     $data->delete();
                 }
             } 
