@@ -1,0 +1,277 @@
+@extends('layout.admin.app')
+
+@section('title-page', 'Admin | Edit Data PNS')
+
+@section('content')
+    <div class="container">
+        <div class="container">
+            <h1 class="text-bold">Edit Data Personel</h1>
+            <h4 class="mt-3">Ubah data personel, untuk setiap tanda bintang (*) pada kolom isian bermakna kolom tersebut wajib diisi</h4>
+
+            {{-- Form Start --}}
+            <div class="container bg-white border rounded p-5 mt-4">
+                @php
+                $nrp = $personil->nrp;
+                $nrpGanti = str_replace('/', '-', $nrp);
+                @endphp
+                <form method="POST" action="{{ route('admin.personil.update', ['nrp' => $nrpGanti]) }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                      <label for="nama_lengkap">Massukkan nama baru personel (*)</label>
+                      <input type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" id="nama_lengkap" name="nama_lengkap" required autofocus placeholder="Nama Lengkap Personil" value="{{ $personil->nama_lengkap }}">
+                      @error('nama_lengkap')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="jabatan">Massukkan jabatan baru personel(*)</label>
+                      <input type="text" class="form-control @error('jabatan') is-invalid @enderror" id="jabatan" name="jabatan" required placeholder="Jabatan pegawai" value="{{ $personil->jabatan }}">
+                      @error('jabatan')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group row">
+                      <label for="jenis_kelamin" class="col-sm-3 col-form-label">Jenis kelamin personel</label>
+                      <div class="col-sm-3">
+                          <select class="form-control  @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" id="jenis_kelamin">
+                              <option value="L" {{ old('jenis_kelamin', $personil->jenis_kelamin) === 'L' ? 'selected' : '' }}>Laki-Laki</option>
+                              <option value="P" {{ old('jenis_kelamin', $personil->jenis_kelamin) === 'P' ? 'selected' : '' }}>Perempuan</option>
+                          </select>
+                          @error('jenis_kelamin')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                      @enderror
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="pangkat">Massukkan pangkat personel baru</label>
+                      <input type="text" class="form-control @error('pangkat') is-invalid @enderror" id="pangkat" name="pangkat" placeholder="pangkat personil" value="{{ $personil->pangkat }}">
+                      @error('pangkat')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="korps">Massukkan korps personel baru</label>
+                      <input type="text" class="form-control @error('korps') is-invalid @enderror" id="korps" name="korps"  placeholder="format penulisan: (KORPS)" value="{{ $personil->korps }}">
+                      @error('korps')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="pangkat_terakhir">Massukkan pangkat terakhir personel baru</label>
+                      <input type="text" class="form-control @error('pangkat_terakhir') is-invalid @enderror" id="pangkat_terakhir" name="pangkat_terakhir"  placeholder="pangkat terakhir personil" value="{{ $personil->pangkat_terakhir }}">
+                      @error('pangkat_terakhir')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="tempat_armada">Massukkan tempat dinas personel baru</label>
+                      <input type="text" class="form-control @error('tempat_dinas') is-invalid @enderror" id="tempat_dinas" name="tempat_dinas"  placeholder="tempat dinas personil" value="{{ $personil->tempat_dinas }}">
+                      @error('tempat_dinas')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="tempat_armada">Massukkan tempat armada personel baru</label>
+                      <input type="text" class="form-control @error('tempat_armada') is-invalid @enderror" id="tempat_armada" name="tempat_armada"  placeholder="tempat armada personil" value="{{ $personil->tempat_armada }}">
+                      @error('tempat_armada')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="nomor_kta">Massukkan nomor KTA personel baru</label>
+                      <input type="text" class="form-control @error('nomor_kta') is-invalid @enderror" id="nomor_kta" name="nomor_kta"  placeholder="format penulisan: 000/AAA/AA/II/00/AAA" value="{{ $personil->nomor_kta }}">
+                      @error('nomor_kta')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="nomor_ktp">Massukkan nomor KTP personel baru</label>
+                      <input type="text" class="form-control @error('nomor_ktp') is-invalid @enderror" id="nomor_ktp" name="nomor_ktp"  placeholder="format penulisan: 000000000000000" value="{{ $personil->nomor_ktp }}">
+                      @error('nomor_ktp')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="nomor_asbri">Massukkan nomor ASBRI personel baru</label>
+                      <input type="text" class="form-control @error('nomor_asbri') is-invalid @enderror" id="nomor_asbri" name="nomor_asbri"  placeholder="format penulisan: CD-12345" value="{{ $personil->nomor_asbri }}">
+                      @error('nomor_asbri')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group row">
+                      <label for="tempat_lahir" class="col-sm-2 col-form-label">Tempat Lahir</label>
+                      <div class="col-sm-4">
+                          <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" value="{{ $personil->tempat_lahir }}">
+                      </div>
+                      <label for="tanggal_lahir" class="col-sm-2 col-form-label">Tanggal Lahir</label>
+                      <div class="col-sm-4">
+                          <div class="input-group date" id="datepicker">
+                              <input type="text" class="form-control" data-target="#datepicker" name="tanggal_lahir" placeholder="Tanggal Lahir" value="{{ $personil->tanggal_lahir }}">
+                              <div class="input-group-append" data-target="#datepicker" data-toggle="datetimepicker">
+                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="tinggi_badan" class="col-sm-2 col-form-label">Tinggi badan</label>
+                      <div class="col-sm-4">
+                          <input type="text" class="form-control" id="tinggi_badan" name="tinggi_badan" placeholder="00" value="{{ old('tinggi_badan', $personil->tinggi_badan) }}">
+                      </div>
+                      @error('tinggi_badan')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                      @enderror
+                      <label for="berat_badan" class="col-sm-2 col-form-label">Berat badan</label>
+                      <div class="col-sm-4">
+                          <input type="text" class="form-control" id="berat_badan" name="berat_badan" placeholder="00" value="{{ old('berat_badan', $personil->berat_badan) }}">
+                      </div>
+                      @error('berat_badan')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                      @enderror
+                  </div>
+                    <div class="form-group row">
+                      <label for="agama" class="col-sm-2 col-form-label">Agama</label>
+                      <div class="col-sm-4">
+                          <select class="form-control  @error('agama') is-invalid @enderror" name="agama" id="agama">
+                              <option value="Islam" {{ old('agama', $personil->agama) === 'Islam' ? 'selected' : '' }}>Islam</option>
+                              <option value="Krsiten" {{ old('agama', $personil->agama) === 'Krsiten' ? 'selected' : '' }}>Krsiten</option>
+                              <option value="Katolik" {{ old('agama', $personil->agama) === 'Katolik' ? 'selected' : '' }}>Katolik</option>
+                              <option value="Hindu" {{ old('agama', $personil->agama) === 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                              <option value="Buddha" {{ old('agama', $personil->agama) === 'Buddha' ? 'selected' : '' }}>Buddha</option>
+                              <option value="Khonghucu" {{ old('agama', $personil->agama) === 'Khonghucu' ? 'selected' : '' }}>Khonghucu</option>
+                          </select>
+                          @error('agama')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+                      <label for="suku_bangsa" class="col-sm-2 col-form-label">Suku Bangsa</label>
+                      <div class="col-sm-4">
+                          <input type="text" class="form-control" id="suku_bangsa" name="suku_bangsa" placeholder="Suku Bangsa" value="{{ old('suku_bangsa', $personil->suku_bangsa) }}">
+                      </div>
+                      @error('suku_bangsa')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                      @enderror
+                  </div>
+                    <div class="form-group row">
+                      <label for="golongan_darah" class="col-sm-3 col-form-label">Golongan darah personel</label>
+                      <div class="col-sm-3">
+                          <select class="form-control  @error('golongan_darah') is-invalid @enderror" name="golongan_darah" id="golongan_darah">
+                              <option value="A+" {{ old('golongan_darah', $personil->golongan_darah) === 'A+' ? 'selected' : '' }}>A+</option>
+                              <option value="B+" {{ old('golongan_darah', $personil->golongan_darah) === 'B+' ? 'selected' : '' }}>B+</option>
+                              <option value="AB+" {{ old('golongan_darah', $personil->golongan_darah) === 'AB+' ? 'selected' : '' }}>AB+</option>
+                              <option value="O+" {{ old('golongan_darah', $personil->golongan_darah) === 'O+' ? 'selected' : '' }}>O+</option>
+                              <option value="A-" {{ old('golongan_darah', $personil->golongan_darah) === 'A-' ? 'selected' : '' }}>A-</option>
+                              <option value="B-" {{ old('golongan_darah', $personil->golongan_darah) === 'B-' ? 'selected' : '' }}>B-</option>
+                              <option value="AB-" {{ old('golongan_darah', $personil->golongan_darah) === 'AB-' ? 'selected' : '' }}>AB-</option>
+                              <option value="O-" {{ old('golongan_darah', $personil->golongan_darah) === 'O-' ? 'selected' : '' }}>O-</option>
+                          </select>
+                          @error('golongan_darah')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                      @enderror
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="dikspesialisasi">Massukkan DIKSPESIALISASI personel baru</label>
+                      <input type="text" class="form-control @error('dikspesialisasi') is-invalid @enderror" id="dikspesialisasi" name="dikspesialisasi"  placeholder="0/00" value="{{ $personil->dikspesialisasi }}">
+                      @error('dikspesialisasi')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="nilai_samata_stakes">Massukkan nilai SAMATA/STAKES personel baru</label>
+                      <input type="text" class="form-control @error('nilai_samata_stakes') is-invalid @enderror" id="nilai_samata_stakes" name="nilai_samata_stakes"  placeholder="nilai SAMATA/nilai STAKES" value="{{ $personil->nilai_samata_stakes }}">
+                      @error('nilai_samata_stakes')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="kecakapan_bahasa">Kecakapan bahasa personel baru</label>
+                      <input type="text" class="form-control @error('kecakapan_bahasa') is-invalid @enderror" id="kecakapan_bahasa" name="kecakapan_bahasa"  placeholder="Pisahkan dengan koma (,) jika memiliki lebih dari satu. Contoh bahasa indonesia, bahasa inggris" value="{{ $personil->kecakapan_bahasa }}">
+                      @error('kecakapan_bahasa')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="alamat_sekarang">Masukkan alamat sekarang personel baru</label>
+                      <input type="text" class="form-control @error('alamat_sekarang') is-invalid @enderror" id="alamat_sekarang" name="alamat_sekarang"  placeholder="Alamat sekarang" value="{{ $personil->alamat_sekarang }}">
+                      @error('alamat_sekarang')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group">
+                      <label for="nomor_hp">Masukkan nomor telepon personel baru</label>
+                      <input type="text" class="form-control @error('nomor_hp') is-invalid @enderror" id="nomor_hp" name="nomor_hp"  placeholder="08 xxxx xxxx xx" value="{{ $personil->nomor_hp }}">
+                      @error('nomor_hp')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                    <div class="form-group row">
+                      <label for="status_rumah" class="col-sm-3 col-form-label">Status rumah personel</label>
+                      <div class="col-sm-4">
+                          <select class="form-control  @error('status_rumah') is-invalid @enderror" name="status_rumah" id="status_rumah">
+                              <option value="Sendiri" {{ old('status_rumah', $personil->status_rumah) === 'Sendiri' ? 'selected' : '' }}>Sendiri</option>
+                              <option value="Kontrak" {{ old('status_rumah', $personil->status_rumah) === 'Kontrak' ? 'selected' : '' }}>Kontrak</option>
+                              <option value="Numpang" {{ old('status_rumah', $personil->status_rumah) === 'Numpang' ? 'selected' : '' }}>Numpang</option>
+                              <option value="Rumdis" {{ old('status_rumah', $personil->status_rumah) === 'Rumdis' ? 'selected' : '' }}>Rumdis</option>
+                          </select>
+                          @error('status_rumah')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                      @enderror
+                      </div>
+                    </div>
+                    <a class="text-decoration-none btn btn-blue text-white bg-gray" href="{{ route('admin.personil.show', $nrpGanti) }}">
+                      <span><iconify-icon icon="ep:arrow-left"></iconify-icon></span>Kembali
+                    </a>
+                    <button type="submit" class="btn btn-primary">Update Data</button>
+                </form>
+                
+            </div>
+        </div>
+        
+    </div>
+@endsection

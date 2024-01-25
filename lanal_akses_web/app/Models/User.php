@@ -18,9 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'nama_lengkap',
+        'username',
         'password',
+        'role',
+        'personil_id',
+        'pegawai_id',
     ];
 
     /**
@@ -39,6 +42,14 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'role' => 'string',
     ];
+
+    public function personil(){
+        return $this->belongsTo(PersonilModel::class, 'personil_id');
+    }
+
+    public function pegawai(){
+        return $this->belongsTo(PegawaiModel::class, 'pegawai_id');
+    }
 }
