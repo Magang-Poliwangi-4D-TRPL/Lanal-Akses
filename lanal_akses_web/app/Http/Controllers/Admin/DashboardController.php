@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\PegawaiModel;
 use App\Models\PersonilModel;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
@@ -39,7 +38,6 @@ class DashboardController extends Controller
                     "nama_lengkap" => $value['nama_pegawai'],
                     "username" => $value['nip'],
                     "password" => Hash::make($value['nip']),
-                    "role" => 'pegawai',
                     'pegawai_id' => $value['id']
                 ]);
                 
@@ -73,7 +71,6 @@ class DashboardController extends Controller
                     "nama_lengkap" => $value['nama_pegawai'],
                     "username" => $value['nip'],
                     "password" => Hash::make($value['nip']),
-                    "role" => 'pegawai',
                     'pegawai_id' => $value['id']
                 ]);
             }
@@ -103,7 +100,6 @@ class DashboardController extends Controller
                     "nama_lengkap" => $value['nama_lengkap'],
                     "username" => $value['nrp'],
                     "password" => Hash::make($value['nrp']),
-                    "role" => 'personel',
                     'personil_id' => $value['id']
                 ]);
                 
@@ -135,7 +131,6 @@ class DashboardController extends Controller
                     "nama_lengkap" => $value['nama_lengkap'],
                     "username" => $value['nrp'],
                     "password" => Hash::make($value['nrp']),
-                    "role" => 'personel',
                     'personil_id' => $value['id']
                 ]);
             }
