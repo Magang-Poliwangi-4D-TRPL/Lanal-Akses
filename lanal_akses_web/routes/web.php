@@ -23,7 +23,6 @@ use App\Http\Controllers\Admin\SanksiHukumanController;
 use App\Http\Controllers\Admin\WaktuKerjaController;
 use App\Http\Controllers\Personil\PersonilController as PersonilPersonilController;
 use App\Http\Controllers\PublicController;
-use App\Models\WaktuKerjaModel;
 use Illuminate\Support\Facades\Route;
 
 
@@ -43,7 +42,8 @@ Route::get('/', function () {
 })->name('welcome');
 
 // controller for all personil & public page 
-Route::get('/login', [PersonilPersonilController::class, 'login'])->name('personil.login');
+Route::get('/login', [PersonilPersonilController::class, 'login'])->name('login');
+Route::post('/login', [PersonilPersonilController::class, 'loginPost'])->name('login.post');
 Route::get('/personel', [PersonilPersonilController::class, 'personilDashboard'])->name('personil.dashboard');
 Route::get('/personel/edit-profile', [PersonilPersonilController::class, 'edit'])->name('personil.edit');
 
