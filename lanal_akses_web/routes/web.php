@@ -20,7 +20,9 @@ use App\Http\Controllers\Admin\InformasiKeluargaController;
 use App\Http\Controllers\Admin\PerlengkapanController;
 use App\Http\Controllers\Admin\RiwayatPenugasanController;
 use App\Http\Controllers\Admin\SanksiHukumanController;
+use App\Http\Controllers\Admin\WaktuKerjaController;
 use App\Http\Controllers\Personil\PersonilController as PersonilPersonilController;
+use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -40,13 +42,23 @@ Route::get('/', function () {
 })->name('welcome');
 
 // controller for all personil & public page 
-Route::get('/login', [PersonilPersonilController::class, 'login'])->name('personil.login');
-Route::get('/personil', [PersonilPersonilController::class, 'personilDashboard'])->name('personil.dashboard');
-Route::get('/personil/edit-profile', [PersonilPersonilController::class, 'edit'])->name('personil.edit');
-Route::get('/absensi', [PersonilPersonilController::class, 'absensi'])->name('personil.absensi');
-Route::get('/perizinan', [PersonilPersonilController::class, 'perizinan'])->name('personil.perizinan');
+Route::get('/login', [PersonilPersonilController::class, 'login'])->name('login');
+Route::post('/login', [PersonilPersonilController::class, 'loginPost'])->name('login.post');
+Route::get('/personel', [PersonilPersonilController::class, 'personilDashboard'])->name('personil.dashboard');
+Route::get('/personel/edit-profile', [PersonilPersonilController::class, 'edit'])->name('personil.edit');
 
-// == controlller for all admin page ==
+// ABSENSI
+Route::get('/personel/absensi', [PublicController::class, 'absensiPersonil'])->name('personil.absensi');
+Route::post('/personel/absensi', [PublicController::class, 'absensiPersonilStore'])->name('personil.absensi.store');
+Route::get('/pegawai/absensi', [PublicController::class, 'absensiPegawai'])->name('pegawai.absensi');
+Route::post('/pegawai/absensi', [PublicController::class, 'absensiPegawaiStore'])->name('pegawai.absensi.store');
+// Route::get('/perizinan', [PersonilPersonilController::class, 'perizinan'])->name('personil.perizinan');
+
+Route::get('/personel/absensi/success-absensi', [PublicController::class, 'absensiSuccess'])->name('absensi.success');
+Route::get('/personel/absensi/success-absensi-masuk', [PublicController::class, 'absensiMasukSuccess'])->name('absensi.masuk.success');
+
+
+// == CONTROLLER FOR ALL ADMIN PAGE ==
 
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -190,21 +202,42 @@ Route::get('/admin/personil/show/{nrp}/informasi-keluarga', [InformasiKeluargaCo
 // Absensi
 Route::get('/admin/absensi/index', [AbsensiController::class, 'index'])
 ->name('admin.absensi.index');
-Route::get('/admin/absensi/show/{tanggal_absensi}-{idAnggota}', [AbsensiController::class, 'show'])
+Route::get('/admin/absensi/show/{tanggal_absensi}/{idAnggota}/{status_anggota}', [AbsensiController::class, 'show'])
 ->name('admin.absensi.show');
+Route::get('/admin/absensi/show/{idKehadiran}/edit', [AbsensiController::class, 'edit'])
+->name('admin.absensi.edit');
+Route::put('/admin/absensi/show/{idKehadiran}/edit', [AbsensiController::class, 'update'])
+->name('admin.absensi.update');
 
 // Absensi -> filter
 Route::get('/admin/absensi/filter', [AbsensiController::class, 'filterAbsensi'])
 ->name('admin.absensi.filter');
-Route::get('/admin/absensi/filter/index', [AbsensiController::class, 'indexFilterAbsensi'])
+Route::post('/admin/absensi/filter', [AbsensiController::class, 'filterAbsensiPost'])
+->name('admin.absensi.filter.cari');
+Route::get('/admin/absensi/filter/index/{date}', [AbsensiController::class, 'indexFilterAbsensi'])
 ->name('admin.absensi.filter.index');
 
 
-Route::get('/admin/absensi/tambah-data-jam-kerja', [AbsensiController::class, 'createJamKerja'])
+Route::get('/admin/absensi/tambah-data-jam-kerja', [WaktuKerjaController::class, 'create'])
 ->name('admin.absensi.data-jam-kerja.create');
+Route::post('/admin/absensi/tambah-data-jam-kerja', [WaktuKerjaController::class, 'store'])
+->name('admin.absensi.data-jam-kerja.store');
+Route::get('/admin/absensi/edit-data-jam-kerja/{idWaktuKerja}', [WaktuKerjaController::class, 'edit'])
+->name('admin.absensi.data-jam-kerja.edit');
+Route::put('/admin/absensi/edit-data-jam-kerja/{idWaktuKerja}', [WaktuKerjaController::class, 'update'])
+->name('admin.absensi.data-jam-kerja.update');
 
 // Absensi -> Cetak
 Route::get('/admin/absensi/{month}-{year}/cetak-presensi-bulanan', [AbsensiController::class, 'cetakPresensiBulanan'])->name('admin.absensi.cetak-presensi.bulanan');
+Route::get('/admin/absensi/{month}-{year}/cetak-presensi-bulanan', [AbsensiController::class, 'cetakPresensiBulanan'])->name('admin.absensi.cetak-presensi.bulanan');
+Route::get('/admin/absensi/{date}/cetak-presensi-harian', [AbsensiController::class, 'cetakPresensiHarian'])->name('admin.absensi.cetak-presensi.harian');
+
+// Absensi -> generate presensi
+Route::get('/admin/absensi/generate-presensi-personel-today/{date}', [AbsensiController::class, 'generatePresensiPersonelToday'])->name('admin.absensi.generate-presensi-personil-today');
+Route::get('/admin/absensi/generate-presensi-pegawai-today/{date}', [AbsensiController::class, 'generatePresensiPegawaiToday'])->name('admin.absensi.generate-presensi-pegawai-today');
+
+Route::get('/admin/absensi/rekap-data-kemarin', [AbsensiController::class, 'rekapDataYesterday'])->name('admin.absensi.rekap-data-kemarin');
+Route::get('/admin/absensi/hasilkan-data-absensi-besok', [AbsensiController::class, 'hasilkanDataAbsensiBesok'])->name('admin.absensi.hasilkan-data-absensi-besok');
 
 //data User Admin
 Route::get('/admin/users/all-user/{page}', [UserController::class, 'index'])

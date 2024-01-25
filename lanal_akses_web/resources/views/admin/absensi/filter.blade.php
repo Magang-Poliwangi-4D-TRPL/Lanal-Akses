@@ -8,22 +8,30 @@
     <div class="container">
         <div class="container-fluid mb-4 border-bottom border-black">
             <h4 class="m-0 py-4" style="text-transform: uppercase">Cari Data absensi berdasarkan tanggal absensi</h4>
-
+            @if(session('message'))
+                    <div class="alert alert-warning">
+                        {{ session('message') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
         </div>
-        <form action="{{ route('admin.absensi.filter.index') }}">
+        <form method="POST" action="{{ route('admin.absensi.filter.cari') }}">
             @csrf
             <div class="form-group">
                 <div class="input-group date" id="datepicker">
                     <label class="col-md-4" for="tanggal_absensi">Massukkan tanggal absensi</label>
-                    <input type="text" class="col-md-6 form-control" data-target="#datepicker" name="tanggal_absensi" placeholder="tanggal absensi" value="{{ old('tanggal_absensi') }}">
+                    <input type="text" class="col-md-6 form-control @error('nama_lengkap') is-invalid @enderror" id="tanggal_absensi" data-target="#datepicker" name="tanggal_absensi" placeholder="tanggal absensi" value="{{ old('tanggal_absensi') }}">
                     <div class="input-group-append col-md-2" data-target="#datepicker" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
-                    @error('tanggal_absensi')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
                 </div>
             </div>
             <div class="row justify-content-between  border-top border-black">

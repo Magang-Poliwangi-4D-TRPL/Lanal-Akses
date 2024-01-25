@@ -9,15 +9,16 @@
         }
     </style>
     @php
-        $str_arr = explode ("/", $date);  
-        $day = $str_arr[0];
+        $str_arr = explode ("-", $date);  
+        $day = $str_arr[2];
         $month = $str_arr[1];
-        $year = $str_arr[2];
+        $year = $str_arr[0];
     @endphp
     <div class="container">
         <h2 class="text-black my-4 text-center" style="text-transform: uppercase">Presensi Personel & Pegawai LANAL Banyuwangi</h2>
         
         <div class="container-fluid bg-white border rounded p-4 mt-4">
+            @if ($informasiJamKerja->count()<=0)
             <h4 class="text-center">Informasi Jam Kerja</h4>
             <div class="row container-fluid d-flex justify-content-around align-item-center mt-4">
                 <div class="col-md-2 p-2">
@@ -47,12 +48,56 @@
                     <p class="m-0 p-0">00:00</p>
                 </div>
             </div>
+            @else
+            <h4 class="text-center text-uppercase">{{ $informasiJamKerja[0]->nama_waktu_kerja }}</h4>
+            <div class="row container-fluid d-flex justify-content-around align-item-center mt-4">
+                <div class="col-md-2 p-2">
+                    <p class="m-0 p-0"><b>Jam Masuk Mulai</b></p>
+                </div>
+                <div class="col-md-4 rounded border p-2 border-outline-secondary">
+                    <p class="m-0 p-0">{{ $informasiJamKerja[0]->jam_masuk_mulai }}</p>
+                </div>
+                <div class="col-md-2 p-2">
+                    <p class="m-0 p-0"><b>Batas Jam Masuk</b></p>
+                </div>
+                <div class="col-md-4 rounded border p-2 border-outline-secondary">
+                    <p class="m-0 p-0">{{ $informasiJamKerja[0]->jam_masuk_selesai }}</p>
+                </div>
+            </div>
+            <div class="row container-fluid d-flex justify-content-around align-item-center mt-3">
+                <div class="col-md-2 p-2">
+                    <p class="m-0 p-0"><b>Jam Pulang Mulai</b></p>
+                </div>
+                <div class="col-md-4 rounded border p-2 border-outline-secondary">
+                    <p class="m-0 p-0">{{ $informasiJamKerja[0]->jam_pulang_mulai }}</p>
+                </div>
+                <div class="col-md-2 p-2">
+                    <p class="m-0 p-0"><b>Batas Jam Pulang</b></p>
+                </div>
+                <div class="col-md-4 rounded border p-2 border-outline-secondary">
+                    <p class="m-0 p-0">{{ $informasiJamKerja[0]->jam_pulang_selesai }}</p>
+                </div>
+            </div>
+            <div class="container mt-4">
+                @empty ($informasiJamKerja[0]->keterangan)
+                @else
+                <p>{{ $informasiJamKerja[0]->keterangan }}</p>
+                @endEmpty
+            </div>
+            @endif
             <div class="row container justify-content-end py-4 mt-3 border-top border-primary">
                 <div class="col-md-6 text-right">
+                    @if ($informasiJamKerja->count()<=0)
                     <a href="{{ route('admin.absensi.data-jam-kerja.create') }}" class="btn btn-primary">Tambah Jam Kerja Baru <i class="fa-solid fa-add"></i></a>
+                    
+                    @else
+                    <a href="{{ route('admin.absensi.data-jam-kerja.edit', ['idWaktuKerja' => $informasiJamKerja[0]->id]) }}" class="btn btn-primary bg-bluedark">Edit Jam Kerja <i style="font-size: 10pt" class="ml-1 fa-solid fa-pencil"></i></a>
+                        
+                    @endif
 
                 </div>
             </div>
+            
         </div>
         <div class="container-fluid bg-white border rounded p-4 mt-4">
             <div class="row align-item-center justify-content-center">
@@ -82,8 +127,8 @@
                             <div class="card bg-greenmain">
                                 <div class="card-body">
                                     <h5 class="card-title text-white">Jumlah Absensi Personel Hari Ini</h5>
-                                    <p class="card-text text-white">{{ count($absensiPersonil) }} / {{ '190' }}</p>
-                                    <a href="#data-presensi-personel" class="btn btn-outline-light">More info</a>
+                                    <p class="card-text text-white">{{ count($absensiPersonil)-count($countPresensiPersonilToday) }} / {{ count($absensiPersonil) }}</p>
+                                    <a href="{{ route('admin.absensi.generate-presensi-personil-today', ['date' => $date]) }}" class="btn btn-outline-light">Hasilkan data absensi Hari ini</a>
                                 </div>
                             </div>
                         </div>
@@ -91,8 +136,8 @@
                             <div class="card bg-greendark">
                                 <div class="card-body">
                                     <h5 class="card-title text-white">Jumlah Absensi Pegawai Hari Ini</h5>
-                                    <p class="card-text text-white">{{ count($absensiPegawai) }} / {{ '13' }}</p>
-                                    <a href="#data-presensi-pegawai" class="btn btn-outline-light">More info</a>
+                                    <p class="card-text text-white">{{ count($absensiPegawai)-count($countPresensiPegawaiToday) }} / {{ count($absensiPegawai) }}</p>
+                                    <a href="{{ route('admin.absensi.generate-presensi-pegawai-today', ['date' => $date]) }}" class="btn btn-outline-light">Hasilkan data absensi Hari ini</a>
                                 </div>
                             </div>
                         </div>
@@ -119,8 +164,41 @@
                             <a class="dropdown-item" href="#">Minggu ke-4</a>
                             <a class="dropdown-item" href="#">Minggu ke-5</a>
                         </div>
-                        <a href="{{ route('admin.absensi.filter', ['date' => $date]) }}" class="btn btn-info">Cari dan Cetak Data Harian <i class="fa-solid fa-print"></i></a>
+                        <a href="{{ route('admin.absensi.filter') }}" class="btn btn-info">Cari dan Cetak Data Harian <i class="fa-solid fa-print"></i></a>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-white border rounded p-4 mt-4">
+            <div class="container p-4 border-bottom border-black">
+                <h6>Keterangan :</h6>
+                <div class="container row justify-content-arround align-item-center">
+                        @foreach ($statusKehadiran as $item)
+                        <div class="col-md-6">
+                            <div class="row container-fluid justify-content-between">
+        
+                                <div class="my-1 py-1 col-md-4 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$loop->iteration-1] }}">
+                                    <p class="px-0  m-0" style="">{{ $item}}</p>
+                                    <i class="fa-solid fa-{{ $statusKehadiranIcon[$loop->iteration-1] }} {{ $iconColor[$loop->iteration-1] }} " style="font-size:10pt"></i>
+                                </div>
+                                <div class="col-md-8">
+                                    <p>: presensi berarti "{{ $item }}"</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        @endforeach
+                </div>
+            </div>
+            <div class="container mt-4 row">
+                <div class="col-md-6">
+                    <a href="{{ route('admin.absensi.rekap-data-kemarin') }}" class="btn btn-danger">Perbarui status kehadiran data kemarin <i class="fa-solid fa-gear"></i></a>
+                    <p class="mt-2">Tombol ini berfungsi untuk memperbarui data status kehadiran kemarin yang sebelumnya "Belum Absen" menjadi "Tidak Hadir"</p>
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ route('admin.absensi.hasilkan-data-absensi-besok') }}" class="btn btn-info">Hasilkan data absensi untuk besok <i class="fa-solid fa-file"></i></a>
+                    <p class="mt-2">Tombol ini berfungsi untuk membuat data absensi di hari besok supaya personel dan pegawai dapat melakukan absensi</p>
                 </div>
             </div>
         </div>
@@ -131,7 +209,7 @@
             <div class="row justify-content-between"> 
                 <div class="col-lg-4">
                     <h6 class="text-black" style="text-transform: uppercase">DATA Presensi Personel</h6>
-                    <h6 class="text-black" style="text-transform: uppercase">{{ $date }}</h6>
+                    <h6 class="text-black" style="text-transform: uppercase">{{ \Carbon\Carbon::parse($date)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY') }}</h6>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-end">
                     <div  class="form-inline row container-fluid">
@@ -169,15 +247,15 @@
                         @foreach ($absensiPersonil as $dataAbsensiPersonil)
                             <tbody class="tbody">
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $dataAbsensiPersonil['nama_lengkap'] }}</td>
-                                    <td>{{ $dataAbsensiPersonil['nrp'] }}</td>
-                                    <td>{{ $dataAbsensiPersonil['tanggal_absensi'] }}</td>
-                                    <td class="text-center">
+                                    <td width="5%">{{ $loop->iteration }}</td>
+                                    <td width="20%">{{ $dataAbsensiPersonil->personil->nama_lengkap }}</td>
+                                    <td width="5%">{{ $dataAbsensiPersonil->personil->nrp }}</td>
+                                    <td width="15%">{{ $dataAbsensiPersonil->tanggal_kehadiran }}</td>
+                                    <td width="15%" class="text-center">
                                         @foreach ($statusKehadiran as $item)
-                                            @if ($dataAbsensiPersonil['status_kehadiran'] == $item)
-                                            <div class="m-1 py-1 row justify-content-around align-items-center rounded border {{ $bgStatusKehadiran[$loop->iteration-1] }}">
-                                                <p class="px-0  m-0" style="">{{ $dataAbsensiPersonil['status_kehadiran']}}</p>
+                                            @if ($dataAbsensiPersonil->status_kehadiran == $item)
+                                            <div class="m-1 py-1 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$loop->iteration-1] }}">
+                                                <p class="px-0  m-0" style="">{{ $dataAbsensiPersonil->status_kehadiran}}</p>
                                                 <i class="fa-solid fa-{{ $statusKehadiranIcon[$loop->iteration-1] }} {{ $iconColor[$loop->iteration-1] }} " style="font-size:10pt"></i>
                                             </div>
                                             @else
@@ -185,10 +263,10 @@
                                             @endif
                                         @endforeach    
                                     </td>
-                                    <td>{{ $dataAbsensiPersonil['jam_masuk'] }}</td>
-                                    <td>{{ $dataAbsensiPersonil['jam_pulang'] }}</td>
-                                    <td>
-                                        <a href="{{ route('admin.absensi.show', ['tanggal_absensi' => $dataAbsensiPersonil['tanggal_absensi'], 'idAnggota' => $loop->iteration ]) }}" class="btn btn-outline-primary">
+                                    <td width="10%">{{ $dataAbsensiPersonil->jam_masuk == null? '-' : $dataAbsensiPersonil->jam_masuk }}</td>
+                                    <td width="10%">{{ $dataAbsensiPersonil->jam_pulang == null? '-' : $dataAbsensiPersonil->jam_pulang }}</td>
+                                    <td width="10%">
+                                        <a href="{{ route('admin.absensi.show', ['tanggal_absensi' => $dataAbsensiPersonil->tanggal_kehadiran, 'idAnggota' => $dataAbsensiPersonil->personil->id, 'status_anggota' => 'personel' ]) }}" class="btn btn-outline-primary">
                                             lihat <li style="font-size:10pt" class="ml-1 fa-solid fa-eye"></li>
                                         </a>
                                     </td>
@@ -210,8 +288,9 @@
             </div>
             <div class="pagination">
                 <div class="row container-fluid justify-content-end py-4">
+                    
                     <div class="col-md-6 text-right">
-                        <a href="#" class="btn btn-primary">Cetak Data Hari ini <i class="fa-solid fa-print"></i></a>
+                        <a href="{{ route('admin.absensi.cetak-presensi.harian', ['date' => $date]) }}" class="btn btn-primary">Cetak Data Hari ini <i class="fa-solid fa-print"></i></a>
 
                     </div>
                 </div>
@@ -223,7 +302,7 @@
             <div class="row justify-content-between"> 
                 <div class="col-lg-4">
                     <h6 class="text-black" style="text-transform: uppercase">DATA Presensi Pegawai</h6>
-                    <h6 class="text-black" style="text-transform: uppercase">{{ $date }}</h6>
+                    <h6 class="text-black" style="text-transform: uppercase">{{ \Carbon\Carbon::parse($date)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY') }}</h6>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-end">
                     <div  class="form-inline row container-fluid">
@@ -244,9 +323,9 @@
                         <thead class="bg-bluedark rounded-top text-white" style="text-transform: uppercase">
                             <tr>
                                 <th width="5%">No</th>
-                                <th width="20%">Nama Lengkap</th>
-                                <th width="5%">NIP</th>
-                                <th width="15%">tanggal absensi</th>
+                                <th width="10%">Nama Lengkap</th>
+                                <th width="15%">NIP</th>
+                                <th width="10%">tanggal absensi</th>
                                 <th width="15%">status kehadiran</th>
                                 <th width="10%">jam masuk</th>
                                 <th width="10%">jam pulang</th>
@@ -261,15 +340,15 @@
                         @foreach ($absensiPegawai as $dataAbsensiPegawai)
                             <tbody class="tbody">
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $dataAbsensiPegawai['nama_pegawai'] }}</td>
-                                    <td>{{ $dataAbsensiPegawai['nip'] }}</td>
-                                    <td>{{ $dataAbsensiPegawai['tanggal_absensi'] }}</td>
-                                    <td class="text-center">
+                                    <td width="5%">{{ $loop->iteration }}</td>
+                                    <td width="10%">{{ $dataAbsensiPegawai->pegawai->nama_pegawai }}</td>
+                                    <td width="15%">{{ $dataAbsensiPegawai->pegawai->nip }}</td>
+                                    <td width="10%">{{ $dataAbsensiPegawai->tanggal_kehadiran }}</td>
+                                    <td width="15%" class="text-center">
                                         @foreach ($statusKehadiran as $item)
-                                            @if ($dataAbsensiPegawai['status_kehadiran'] == $item)
-                                            <div class="m-1 py-1 row justify-content-around align-items-center rounded border {{ $bgStatusKehadiran[$loop->iteration-1] }}">
-                                                <p class="px-0  m-0" style="">{{ $dataAbsensiPegawai['status_kehadiran']}}</p>
+                                            @if ($dataAbsensiPegawai->status_kehadiran == $item)
+                                            <div class="m-1 py-1 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$loop->iteration-1] }}">
+                                                <p class="px-0  m-0" style="">{{ $dataAbsensiPegawai->status_kehadiran}}</p>
                                                 <i class="fa-solid fa-{{ $statusKehadiranIcon[$loop->iteration-1] }} {{ $iconColor[$loop->iteration-1] }} " style="font-size:10pt"></i>
                                             </div>
                                             @else
@@ -277,10 +356,10 @@
                                             @endif
                                         @endforeach    
                                     </td>
-                                    <td>{{ $dataAbsensiPegawai['jam_masuk'] }}</td>
-                                    <td>{{ $dataAbsensiPegawai['jam_pulang'] }}</td>
-                                    <td>
-                                        <a href="#" class="btn btn-outline-primary">
+                                    <td width="10%">{{ $dataAbsensiPegawai->jam_masuk == null? '-' : $dataAbsensiPegawai->jam_masuk }}</td>
+                                    <td width="10%">{{ $dataAbsensiPegawai->jam_pulang == null? '-' : $dataAbsensiPegawai->jam_pulang }}</td>
+                                    <td width="10%">
+                                        <a href="{{ route('admin.absensi.show', ['tanggal_absensi' => $dataAbsensiPegawai->tanggal_kehadiran, 'idAnggota' => $dataAbsensiPegawai->pegawai->id, 'status_anggota' => 'pegawai' ]) }}" class="btn btn-outline-primary">
                                             lihat <li style="font-size:10pt" class="ml-1 fa-solid fa-eye"></li>
                                         </a>
                                     </td>
@@ -289,7 +368,7 @@
                         @endforeach    
                         @else
                             <tbody>
-                                  <td colspan="8">Belum ada data absensi Pegawai hari ini</td>  
+                                  <td colspan="8">Belum ada data absensi pegawai hari ini</td>  
                             </tbody>
                         @endif
                     </table>
@@ -303,7 +382,7 @@
             <div class="pagination">
                 <div class="row container-fluid justify-content-end py-4">
                     <div class="col-md-6 text-right">
-                        <a href="#" class="btn btn-primary">Cetak Data Hari ini <i class="fa-solid fa-print"></i></a>
+                        <a href="{{ route('admin.absensi.cetak-presensi.harian', ['date' => $date]) }}" class="btn btn-primary">Cetak Data Hari ini <i class="fa-solid fa-print"></i></a>
 
                     </div>
                 </div>

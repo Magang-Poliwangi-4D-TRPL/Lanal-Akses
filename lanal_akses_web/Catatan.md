@@ -27,7 +27,7 @@ halaman tampilan [UI website dan android](https://www.figma.com/file/kKbj42KxYo4
 ### Halaman Profile
 ### Halaman Edit Profile
 ### Halaman Ubah password
-### Halaman Cetak Riwayat Hidup
+### Halaman Cetak Riwayat Hidup ✅
 
 ## Halaman Admin
 ## Notifikasi
@@ -83,7 +83,7 @@ $firstNav = max(1, $page - $halfMaxLinks);
 $lastNav = min($totalPages, $firstNav + $maxNavLinks - 1);
 ```
 
-#### Show Personil
+#### Show Personil ✅
 special user role: Komandan, Paset
 - bisa mencetak RH dan data detail personil, 
 - bisa mengubah password dan username personil
@@ -94,14 +94,14 @@ special user role: Komandan, Paset
 common user role: Paspotmar, Kaakun, Pasintel, Pasminlog, 
 - mencetak RH personil
 - melihat data personil tanpa melihat username dan password personil
-### Halaman Absensi
+### Halaman Absensi ✅
 
-### Halaman PNS
+### Halaman PNS ✅
 
-### Halaman Admin
+### Halaman Admin ✅
 halaman admin untuk mengelola akses masuk ke tampilan semua controller dengan menggunakan login akun yang berbeda dengan akun personil. Admin disini memiliki beberapa role dan hak ases antara lain:
 
-#### komandan
+#### komandan ✅
 - membuat QRcode untuk absensi
 - mengedit profile admin
 - membuat, menghapus dan mengedit semua akun admin dan personil
@@ -113,11 +113,11 @@ halaman admin untuk mengelola akses masuk ke tampilan semua controller dengan me
 - mengedit data lengkap pns
 
 
-### personil
+### personil ✅
 - dashboard 
 ~~edit data personil~~
 - login personil
 - absen personil
 
-### admin
+### admin ✅
 - login ke akun admin

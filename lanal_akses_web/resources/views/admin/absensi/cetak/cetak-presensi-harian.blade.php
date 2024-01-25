@@ -14,14 +14,6 @@
         th,td{
                 border: solid 1px darkgray !important;
             }
-
-        .text-uppercase{
-            text-transform: uppercase !important;
-        }
-
-        .text-capitalize{
-            text-transform: capitalize !important;
-        }
     </style>
 </head>
 <body>
@@ -30,12 +22,62 @@
             <div class="col-md-4">
                 <h6 class="text-uppercase">MARKAS BESAR TNI ANGKATAN LAUT<br><u> DINAS ADMINISTRASI PERSONEL</u></h6>
             </div>
+            <div class="col-md-8">
+                <h6 class="text-center text-danger"><u>RAHASIA</u></h6>
+            </div>
         </div>
-        <div class="container col-md-6  ">
-            
+        <div class="container col-md-6  mt-4">
+            <table>
+                <tr>
+                    <th>Tanggal Presensi</th>
+                    <th>:</th>
+                    <td>{{ $date }}</td>
+                </tr>
+                <tr>
+                    <th>Jenis Presensi</th>
+                    <th>:</th>
+                    <td>Presensi Harian</td>
+                </tr>
+            </table>
         </div>
     </div>
-
+    <div class="container-fluid mt-2">
+        <h6 class="text-left my-4" style="text-transform:uppercase;"><b>Data Presensi personel </b></h6>
+        @if($absensiPersonil->count()!=0)
+            <table class="container table border" style="border-width: medium !important; border-color: #000;">
+                <tr style="text-transform:uppercase; background-color:aliceblue">
+                    <th scope="col" width="5%">NO</th>
+                    <th scope="col" width="10%">Nama Lengkap</th>
+                    <th scope="col" width="5%">NRP</th>
+                    <th scope="col" width="10%">Tanggal Absensi</th>
+                    <th scope="col" width="10%">Status Kehadiran</th>
+                    <th scope="col" width="10%">Jam Masuk - Jam Pulang</th>
+                    <th scope="col" width="10%">Keterangan</th>
+                </tr>
+                    @foreach ($absensiPersonil as $item)
+                        <tr style="text-transform:uppercase;">
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->personil->nama_lengkap }}</td>
+                            <td>{{ $item->personil->nrp }}</td>
+                            <td>{{ $item->tanggal_kehadiran }}</td>
+                            <td>{{ $item->status_kehadiran }}</td>
+                            <td>{{ $item->jam_masuk == null? '-' : $item->jam_masuk }}{{ $item->jam_pulang == null? '' : '-'.$item->jam_pulang  }}</td>
+                            <td>{{ $item->keterangan == null? '-' : $item->keterangan }}</td>
+                        </tr>
+                    @endforeach
+            </table>
+        @else
+            <p class="text-medium">belum ada data personel</p>
+        @endif
+    </div>
+    <div class="container align-item-right">
+        <div class="col-md-4 text-right mt-4">
+            <p>Banyuwangi, {{ date("d M Y") }}</p>
+            <p class="mb-4">Yang Membuat</p>
+            <br>
+            <p class="mt-4">________________________</p>
+        </div>
+    </div>
     
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
