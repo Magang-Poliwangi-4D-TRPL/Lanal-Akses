@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\KehadiranModel;
 use App\Models\PegawaiModel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -148,6 +149,21 @@ class PegawaiController extends Controller
         // dd($pegawai);
         if (!$pegawai) {
             return abort(404);
+        } else {
+            // Mengambil semua data userModel yang memiliki pegawai_id yang sama dengan id pegawaiModel yang dicari
+            $user = User::where('pegawai_id', $pegawai->id)->get();
+            if($user->count()!=0){
+                foreach ($user as $data){
+                    $data->delete();
+                }
+            } 
+            // Mengambil semua data kehadiranModel yang memiliki pegawai_id yang sama dengan id pegawaiModel yang dicari
+            $kehadiran = KehadiranModel::where('pegawai_id', $pegawai->id)->get();
+            if($kehadiran->count()!=0){
+                foreach ($kehadiran as $data){
+                    $data->delete();
+                }
+            } 
         }
 
         $pegawai->delete();

@@ -28,7 +28,7 @@
             <iconify-icon class="mr-3" icon="material-symbols:{{ (request()->is('admin/personil/*')) ? 'group' : 'group-outline' }}" width="24"></iconify-icon>
             <span class="sidebar-text">Data Personel</span>
         </a>
-        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/absensi/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/absensi') }}">
+        <a class="p-3 sidebar-item text-uppercase text-white rounded {{ (request()->is('admin/absensi/*')) ? 'active-sidebar-item' : '' }}" href="{{  url('/admin/absensi/index') }}">
             <iconify-icon class="mr-3" icon="mdi:{{ (request()->is('admin/absensi/*')) ? 'clock' : 'clock-outline' }}" width="24"></iconify-icon>
             <span class="sidebar-text">Data Absensi</span>   
         </a>

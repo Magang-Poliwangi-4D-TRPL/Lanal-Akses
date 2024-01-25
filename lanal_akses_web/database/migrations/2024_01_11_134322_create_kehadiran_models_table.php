@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateKehadiranModelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,19 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('kehadiran', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_lengkap');
-            $table->string('username')->unique();
-            $table->string('email')->unique()->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->date('tanggal_kehadiran');
+            $table->string('status_kehadiran');
+            $table->time('jam_masuk')->nullable();
+            $table->time('jam_pulang')->nullable();
+            $table->string('keterangan')->nullable();
+            $table->string('lokasi')->nullable();
             $table->timestamps();
 
-            // Definisikan foreign key constraint
             $table->foreignId('personil_id')->nullable();
             $table->foreignId('pegawai_id')->nullable();
+            $table->foreignId('waktu_kerja_id')->nullable();
         });
     }
 
@@ -35,6 +36,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('kehadiran');
     }
 }

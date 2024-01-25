@@ -22,9 +22,9 @@
 - membuat fitur absen
 - membuat fitur perizinan yang bisa digunakan untuk upload file untuk bukti, file bisa lebih dari satu
 - cetak absen hari ini, minggu ini, bulan ini
-- mengubah data absen
-- filter untuk tanggal absensi untuk dapat melihat riwayat absensi dan cetak absensi pada tanggal yang ditentukan oleh filter (log riwayat dapat disimpan selama 1 tahun)
-- absen sebanyak 2 kali
+- mengubah data absen ✅
+- filter untuk tanggal absensi untuk dapat melihat riwayat absensi dan cetak absensi pada tanggal yang ditentukan oleh filter (log riwayat dapat disimpan selama 1 tahun) 
+- absen sebanyak 2 kali ✅
 - perizinan dan cuti harus dipisahkan
 - membuat fitur cetak qr-code supaya bisa scan untuk absensi
 
