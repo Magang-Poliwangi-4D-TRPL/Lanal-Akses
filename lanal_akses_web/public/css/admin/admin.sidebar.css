@@ -1,0 +1,52 @@
+:root {
+    --green-main: #4E6766;
+    --green-dark: #385655;
+    --blue-bg: #EDFEFF;
+    --blue-dark: #0D21A1;
+    --blue-main: #7EBFFF;
+    --blue-accent: #5786CA;
+    --white: #ffffff;
+  }
+
+div#sidebar-collapse {
+    box-shadow: 3px 0 25px -1px var(--green-main);
+    width: 25rem; 
+}
+
+#sidebar-brand{
+    text-decoration: none;
+}
+
+
+#sidebar-brand #sidebar-title{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+a.sidebar-item{
+    display: list-item;
+    list-style: none;
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    margin: 1rem 1rem 1rem 0;
+}
+a.sidebar-item:hover{
+    text-decoration: none;
+    background-color: var(--green-dark);
+}
+
+.active-sidebar-item{
+    background-color: var(--green-dark);
+}
+
+#icon-menu {
+    display: none;
+}
+
+/* CSS Code for responsive mobile design */
+@media only screen and (max-width: 390px) {
+    div#sidebar-collapse{
+        width: 20rem;
+    }
+  }

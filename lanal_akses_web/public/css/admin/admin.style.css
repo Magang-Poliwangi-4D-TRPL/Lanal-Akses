@@ -1,0 +1,181 @@
+:root {
+    --green-main: #4E6766;
+    --green-dark: #385655;
+    --blue-bg: #EDFEFF;
+    --blue-dark: #0D21A1;
+    --blue-main: #7EBFFF;
+    --blue-accent: #5786CA;
+    --white: #ffffff;
+  }
+
+.bg-greenmain {
+    background-color: var(--green-main) !important;
+}
+
+.bg-greendark {
+    background-color: var(--green-dark) !important;
+}
+
+.bg-bluedark {
+    background-color: var(--blue-dark) !important;
+}
+
+.bg-blue {
+    background-color: var(--blue-bg) !important;
+}
+
+.bg-bluemain {
+    background-color: var(--blue-main) !important;
+}
+
+.bg-blueaccent {
+    background-color: var(--blue-accent) !important;
+}
+
+.bg-gray {
+    background-color: lightgray ;
+}
+
+.greenmain {
+    color: var(--green-main) !important;
+}
+
+.greendark {
+    color: var(--green-dark) !important;
+}
+
+.bluedark {
+    color: var(--blue-dark) !important;
+}
+
+.blue {
+    color: var(--blue-bg) !important;
+}
+
+.bluemain {
+    color: var(--blue-main) !important;
+}
+
+.blueaccent {
+    color: var(--blue-accent) !important;
+}
+
+
+.content-margin {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    margin-left: 0;
+}
+
+.content-wrap{
+    margin-left: 15rem;
+}
+
+.nav-image{
+    width: 30px;
+    height: auto;
+}
+
+.previous{
+    color: gray;
+}
+
+.next{
+    color: gray;
+}
+
+.previous:hover{
+    color: var(--blue-dark);
+}
+
+.next{
+    color: var(--blue-dark);
+}
+
+/* POP-UP Notification */
+#notification-popup {
+    display: none;
+    position: fixed;
+    top: 70px;
+    /* Sesuaikan dengan ketinggian yang diinginkan */
+    right: 20px;
+    background-color: #4CAF50;
+    /* Warna hijau default */
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 9999;
+}
+
+#notification-popup.error-notification {
+    background-color: #FF5733;
+    /* Warna merah untuk notifikasi kesalahan */
+}
+
+.error-notification {
+    background-color: #FF5733;
+    /* Warna merah */
+    color: #fff;
+    /* Gaya lainnya seperti yang Anda inginkan */
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875rem;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+}
+
+.card-header-custom {
+    background-color: #4E6766;
+    /* Set the desired background color */
+    color: #fff;
+    /* Set the text color to white or any other suitable color */
+    font-weight: bold;
+    /* Make the text bold for better visibility */
+}
+
+footer {
+    padding-left: 3rem;
+}
+
+/* CSS Code for responsive tab design */
+@media only screen and (max-width: 765px) {
+    .nav-image{
+        width: 15px;
+        height: auto;
+    }
+    .nav-link{
+        width: 50px;
+    }
+    .content-wrap{
+        margin-left: 5rem;
+    }
+    footer {
+        padding: 8rem;
+    }
+  }
+
+/* CSS Code for responsive mobile design */
+@media only screen and (max-width: 600px) {
+    .nav-image{
+        width: 15px;
+        height: auto;
+    }
+    #navbar-list {
+        margin-top: 1.5rem;
+    }
+    .content-margin {
+        margin-top: 8rem;
+        margin-bottom: 5rem;
+        margin-left: 1rem;
+    }
+    .content-wrap{
+        margin-left: 0rem;
+    }
+    footer {
+        padding-left: 5rem;
+    }
+  }
