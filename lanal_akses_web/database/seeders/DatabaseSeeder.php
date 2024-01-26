@@ -34,6 +34,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(PegawaiSeeder::class);
 
+        $this->call(UserSeeder::class);
+
         WaktuKerjaModel::create([
             "nama_waktu_kerja" => 'Informasi jam kerja seluruh personil & pegawai LANAL BWI',
             "jam_masuk_mulai" => '07:00:00',

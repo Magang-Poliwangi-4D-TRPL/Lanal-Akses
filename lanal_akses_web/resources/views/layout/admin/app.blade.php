@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     {{-- file CSS lainnya --}}
-    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }} ">
+    <link rel="stylesheet" href="{{ URL::asset('css/public.css') }} ">
     <link rel="stylesheet" href="{{ URL::asset('css/admin/admin.style.css') }} ">
     <link rel="stylesheet" href="{{ URL::asset('css/admin/admin.sidebar.css') }} ">
     <link rel="stylesheet" href="{{ URL::asset('asset/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}">
@@ -29,15 +29,15 @@
     </div>
     
     @extends('layout.admin.sidebar')
+    @extends('layout.admin.navbar')
     
     <main class="content-margin content-wrap">
       
-        @extends('layout.admin.navbar')
         
         @yield('content')
     
     </main>
-    @extends('layout.admin.footer')
+    {{-- @extends('layout.admin.footer') --}}
 
 
     <!-- Icon -->

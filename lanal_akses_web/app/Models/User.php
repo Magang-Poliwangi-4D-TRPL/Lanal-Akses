@@ -20,8 +20,8 @@ class User extends Authenticatable
     protected $fillable = [
         'nama_lengkap',
         'username',
+        'email',
         'password',
-        'role',
         'personil_id',
         'pegawai_id',
     ];
@@ -34,15 +34,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'role' => 'string',
     ];
 
     public function personil(){

@@ -19,6 +19,7 @@
             <button {{ request()->is('admin/absensi/*') ? 'disabled' : '' }} class="btn text-white bg-greenmain my-2 my-sm-0" type="submit">Search</button>
         </form>
         
+        <div>{{ Auth::user()->nama_lengkap }}</div>
           <ul class="navbar-nav">
               <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -26,7 +27,10 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="#">Edit Profile</a>
-                <a class="dropdown-item" href="#">Log Out</a>
+                <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <button class="dropdown-item" type="submit">Log Out</button>
+                </form>
               </div>
             </li>   
           </ul>

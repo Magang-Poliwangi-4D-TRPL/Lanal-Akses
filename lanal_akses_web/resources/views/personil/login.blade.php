@@ -44,13 +44,13 @@
             <div class="form-absensi row justify-content-center mt-3">
                 <div class="container">
                     {{-- {{ route('login.post') }} --}}
-                    <form method="POST" action="{{ route('login.post') }}">
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <div class="input-group-text bg-bluedark text-white"><i class="fa-solid fa-user"></i></div>
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}" placeholder="Masukkan username anda">
+                                    <input type="text" class="form-control @error('input_type') is-invalid @enderror" id="input_type" name="input_type" value="{{ old('input_type') }}" placeholder="Masukkan username atau email anda">
                                 </div>
                             </div>
                         </div>

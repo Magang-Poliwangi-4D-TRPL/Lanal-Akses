@@ -1,7 +1,7 @@
 
 @extends('layout.public.app')
 
-@section('title-page', 'Lanal Akses | Home')
+@section('title-page', 'Lanal Akses | Dashboard')
   
 @section('content')
 
