@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -73,7 +74,7 @@ class UserController extends Controller
         $offset = ($page - 1) * $perPage;
 
         // Mengambil data dengan offset berdasarkan halaman
-        $users = User::where('role', 'personel')->skip($offset)->take($perPage)->get();
+        $users = User::role('personel')->skip($offset)->take($perPage)->get();
 
         $title = 'Personel';
         return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav', 'title'));
@@ -109,7 +110,7 @@ class UserController extends Controller
         $offset = ($page - 1) * $perPage;
 
         // Mengambil data dengan offset berdasarkan halaman
-        $users = User::where('role', 'pegawai')->skip($offset)->take($perPage)->get();
+        $users = User::role('pegawai')->skip($offset)->take($perPage)->get();
 
         $title = 'Pegawai';
         return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav', 'title'));
@@ -147,7 +148,17 @@ class UserController extends Controller
         $title = 'Admin';
 
         // Mengambil data dengan offset berdasarkan halaman
-        $users = User::where('role', 'komandan')->orWhere('role', 'paset')->orWhere('role', 'paspotmar')->orWhere('role', 'pasintel')->skip($offset)->take($perPage)->get();
+        if (auth()->user()->hasRole('admin')) {
+            # code...
+            $users = User::whereDoesntHave('roles', function ($query) {
+                $query->whereIn('name', ['personel', 'pegawai']);
+            })->skip($offset)->take($perPage)->get();
+        } else {
+            $users = User::whereDoesntHave('roles', function ($query) {
+                $query->whereIn('name', ['admin', 'personel', 'pegawai']);
+            })->skip($offset)->take($perPage)->get();
+
+        }
         return view('admin.users.index', compact('users', 'page', 'totalPages', 'firstNav', 'lastNav', 'title'));
 
     }
@@ -166,7 +177,13 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('admin.users.create');
+        if (auth()->user()->hasRole('admin')) {
+            # code...
+            $roles = Role::all();
+        } else {
+            $roles = Role::where('name', '!=', 'admin')->get();
+        }
+        return view('admin.users.create', compact('roles'));
     }
 
     public function store(Request $request)
@@ -178,12 +195,13 @@ class UserController extends Controller
             'role' => 'required',
         ]);
 
-        User ::create([
+        $user = User ::create([
             'nama_lengkap' => $request->nama_lengkap,
             'username' => $request->username,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
         ]);
+
+        $user->assignRole($request->role);
 
         return redirect()->route('admin.users.index',['page' => 1])->with('success', 'Admin telah berhasil ditambahkan.');
     }
@@ -191,11 +209,17 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+        if (auth()->user()->hasRole('admin')) {
+            # code...
+            $roles = Role::all();
+        } else {
+            $roles = Role::where('name', '!=', 'admin')->get();
+        }
         if($user==null){
             return abort(404);
         } else {
             // dd($user);
-            return view('admin.users.edit', compact('user'));
+            return view('admin.users.edit', compact('user', 'roles'));
 
         }
         
@@ -203,28 +227,65 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama_lengkap' => 'required',
-            'username' => 'required|unique:users,username,' . $id,
-            'password' => 'required',
+        $user = User::find($id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'User tidak ditemukan.');
+        }
+
+        $validateData = $request->validate([
+            'nama_lengkap' => 'required|string',
+            'username' => 'required|unique:users,username,' . $user->id,
+            'email' => 'nullable|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|min:6|confirmed',
             'role' => 'required',
+        ], [
+            'nama_lengkap.required' => 'Nama Lengkap harus diisi.',
+            'username.required' => 'Username harus diisi.',
+            'username.unique' => 'Username tidak dapat dipakai karena sudah digunakan.',
+            'email.email' => 'Email harus diisi dengan format yang benar.',
+            'email.unique' => 'Email tidak dapat dipakai karena sudah digunakan.',
+            'password.min' => 'Password minimal 6 karakter.',
+            'password.confirmed' => 'Password tidak sama, coba lagi!',
+            'role.required' => 'Username harus diisi.',
         ]);
 
-        $user = User ::find($id);
-        if($user==null){
-            return abort(404);
-        } else {
-            // dd($user);
-
+        if ($validateData['password'] == null) {
             $user->update([
-                'nama_lengkap' => $request->nama_lengkap,
-                'username' => $request->username,
-                'password' => Hash::make($request->password),
-                'role' => $request->role,
+                'nama_lengkap' => $validateData['nama_lengkap'],
+                'username' => $validateData['username'],
+                'email' => $validateData['email'],
             ]);
-    
-            return redirect()->route('admin.users.index', ['page' => 1])->with('success', 'Admin telah berhasil diperbarui.');
+        } else {
+            $user->update([
+                'nama_lengkap' => $validateData['nama_lengkap'],
+                'username' => $validateData['username'],
+                'email' => $validateData['email'],
+                'password' => Hash::make($validateData['password']),
+            ]);
         }
+
+        $requestedRole = $request->role;
+        
+        if ($user->getRoleNames()->first() == null) {
+            $role = Role::where('name', $requestedRole)->first();
+            $user->assignRole($role);
+        } else {
+            
+            if ($requestedRole !== $user->getRoleNames()->first()) {
+                // Hapus role lama dari user
+                $user->removeRole($user->getRoleNames()->first());
+        
+                // Tambahkan role baru ke user
+                $role = Role::where('name', $requestedRole)->first();
+        
+                if ($role) {
+                    $user->assignRole($role);
+                } else {
+                    return redirect()->back()->with('error', 'Role baru tidak valid.');
+                }
+            }
+        }
+        return redirect()->route('admin.users.index', ['page' => 1])->with('success', 'Admin telah berhasil diperbarui.');
     }
 
     public function destroy($id)

@@ -113,7 +113,7 @@
                     <h2 class="mt-3 bluedark text-left jabatan">Nama Jabatan</h2>
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="text-left nama">Nama Lengkap Personel</h4>
-                        <a href="#" class="btn btn-sm btn-outline-secondary">Edit Profil</a>
+                        <a href="{{ route('personil.edit') }}" class="btn btn-sm btn-outline-secondary">Edit Profil</a>
                     </div>
                     <p class="text-left" style="color: grey; border-bottom: 2px solid #0D21A1;">NRP Personel</p>
                 </div>

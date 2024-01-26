@@ -47,7 +47,7 @@
                         @empty($user->isNotEmpty())
                         <p class='mb-0'>_</p>
                         @else
-                        <p class="mb-0">{{ $user->first()->role }}</p>
+                        <p class="mb-0">{{ $user->first()->getRoleNames()->first() }}</p>
                         @endempty
                     </div>
                 </div>

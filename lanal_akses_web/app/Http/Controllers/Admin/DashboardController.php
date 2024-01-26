@@ -34,12 +34,14 @@ class DashboardController extends Controller
 
         if ($pegawaiHaveUser == null) {
             foreach ($pegawai as $key => $value) {
-                User::create([
+                $user = User::create([
                     "nama_lengkap" => $value['nama_pegawai'],
                     "username" => $value['nip'],
                     "password" => Hash::make($value['nip']),
                     'pegawai_id' => $value['id']
                 ]);
+
+                $user->assignRole('pegawai');
                 
             }
 
@@ -67,12 +69,16 @@ class DashboardController extends Controller
                 }
             }
             foreach ($pegawaiWithoutUser as $key => $value) {
-                User::create([
+                $user = User::create([
                     "nama_lengkap" => $value['nama_pegawai'],
                     "username" => $value['nip'],
                     "password" => Hash::make($value['nip']),
                     'pegawai_id' => $value['id']
                 ]);
+
+                
+
+                $user->assignRole('pegawai');
             }
 
             return redirect()->route('admin.akun-pegawai.index', ['page' => 1]);
@@ -96,13 +102,13 @@ class DashboardController extends Controller
 
         if ($personilHaveUser == null) {
             foreach ($personil as $key => $value) {
-                User::create([
+                $user = User::create([
                     "nama_lengkap" => $value['nama_lengkap'],
                     "username" => $value['nrp'],
                     "password" => Hash::make($value['nrp']),
                     'personil_id' => $value['id']
                 ]);
-                
+                $user->assignRole('personel');
             }
             return redirect()->route('admin.akun-personil.index', ['page' => 1]);
         } elseif ($personil->count() == count($personilHaveUser)){
@@ -127,12 +133,14 @@ class DashboardController extends Controller
                 }
             }
             foreach ($personilWithoutUser as $key => $value) {
-                User::create([
+                $user = User::create([
                     "nama_lengkap" => $value['nama_lengkap'],
                     "username" => $value['nrp'],
                     "password" => Hash::make($value['nrp']),
                     'personil_id' => $value['id']
                 ]);
+
+                $user->assignRole('personel');
             }
 
             return redirect()->route('admin.akun-personil.index', ['page' => 1]);

@@ -7,6 +7,7 @@ use App\Models\PersonilModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AkunPersonilController extends Controller
 {
@@ -24,11 +25,16 @@ class AkunPersonilController extends Controller
     
     public function create($nrp){
         $personil = PersonilModel::where('nrp', str_replace('-', '/', $nrp))->first();
-        
+        if (auth()->user()->hasRole('admin')) {
+            # code...
+            $roles = Role::all();
+        } else {
+            $roles = Role::where('name', '!=', 'admin')->get();
+        }
         if ($personil == null) {
             return abort(404);
         } else {            
-            return view('admin.personil.akun.create', compact('personil'));
+            return view('admin.personil.akun.create', compact('personil', 'roles'));
         }
     }
 
@@ -53,10 +59,10 @@ class AkunPersonilController extends Controller
             'nama_lengkap' => $validatedData['nama_lengkap'],
             'username' => $validatedData['username'],
             'password' => Hash::make($validatedData['password']),
-            'role' => $validatedData['role'],
             'personil_id' => $validatedData['personil_id'],
         ]);
 
+        $user->assignRole($validatedData['role']);
         // Hubungkan dengan personil
         $user->save();
 
@@ -66,13 +72,18 @@ class AkunPersonilController extends Controller
 
     public function edit($nrp){
         $personil = PersonilModel::where('nrp', str_replace('-', '/', $nrp))->first();
-        
+        if (auth()->user()->hasRole('admin')) {
+            # code...
+            $roles = Role::all();
+        } else {
+            $roles = Role::where('name', '!=', 'admin')->get();
+        }
         if ($personil == null) {
             return abort(404);
         } else {
             $user = User::where('personil_id', $personil->id)->get();
             
-            return view('admin.personil.akun.edit', compact('personil', 'user'));
+            return view('admin.personil.akun.edit', compact('personil', 'user', 'roles'));
         }
     }
 
@@ -92,9 +103,8 @@ class AkunPersonilController extends Controller
             $user[0]->update([
                 'nama_lengkap' => $request->nama_lengkap,
                 'password' => Hash::make($request->password),
-                'role' => $request->role,
             ]);
-    
+            $user[0]->assignRole($request->role);
             return redirect()->route('admin.personil.akun.index' ,['nrp'=>$nrp])->with('success', 'User personel berhasil diperbarui.');
         }
         

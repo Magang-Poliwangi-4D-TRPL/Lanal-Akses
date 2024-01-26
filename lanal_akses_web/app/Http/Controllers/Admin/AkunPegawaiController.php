@@ -7,6 +7,7 @@ use App\Models\PegawaiModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AkunPegawaiController extends Controller
 {
@@ -16,7 +17,7 @@ class AkunPegawaiController extends Controller
         if ($pegawai == null) {
             return abort(404);
         } else {
-            $user = User::where('pegawai_id', $pegawai->id)->get();
+            $user = User::where('pegawai_id', $pegawai->id)->get()->first();
             // dd($user);
             return view('admin.pegawai.akun.index', compact('pegawai', 'user'));
         }
@@ -24,12 +25,17 @@ class AkunPegawaiController extends Controller
     
     public function create($nip){
         $pegawai = PegawaiModel::where('nip', str_replace('-', ' ', $nip))->first();
-        
+        if (auth()->user()->hasRole('admin')) {
+            # code...
+            $roles = Role::all();
+        } else {
+            $roles = Role::where('name', '!=', 'admin')->get();
+        }
         if ($pegawai == null) {
             return abort(404);
         } else {
             
-            return view('admin.pegawai.akun.create', compact('pegawai'));
+            return view('admin.pegawai.akun.create', compact('pegawai', 'roles'));
         }
     }
 
@@ -54,9 +60,10 @@ class AkunPegawaiController extends Controller
             'nama_lengkap' => $validatedData['nama_lengkap'],
             'username' => $validatedData['username'],
             'password' => Hash::make($validatedData['password']),
-            'role' => $validatedData['role'],
             'pegawai_id' => $validatedData['pegawai_id'],
         ]);
+
+        $user->assignRole($validatedData['role']);
 
         // Hubungkan dengan pegawai
         $user->save();
@@ -68,13 +75,18 @@ class AkunPegawaiController extends Controller
     
     public function edit($nip, $akunId){
         $pegawai = PegawaiModel::where('nip', str_replace('-', ' ', $nip))->first();
-        
+        if (auth()->user()->hasRole('admin')) {
+            # code...
+            $roles = Role::all();
+        } else {
+            $roles = Role::where('name', '!=', 'admin')->get();
+        }
         if ($pegawai == null) {
             return abort(404);
         } else {
-            $user = User::where('pegawai_id', $pegawai->id)->get();
+            $user = User::where('pegawai_id', $pegawai->id)->get()->first();
             // dd($user);
-            return view('admin.pegawai.akun.edit', compact('pegawai', 'user'));
+            return view('admin.pegawai.akun.edit', compact('pegawai', 'user', 'roles'));
         }
     }
 
@@ -90,12 +102,13 @@ class AkunPegawaiController extends Controller
         if ($pegawai == null) {
             return abort(404, 'pegawai Tidak Ditemukan');
         } else {
-            $user = User::where('pegawai_id', $pegawai->id)->get();
-            $user[0]->update([
+            $user = User::where('pegawai_id', $pegawai->id)->get()->first();
+            $user->update([
                 'nama_lengkap' => $request->nama_lengkap,
                 'password' => Hash::make($request->password),
-                'role' => $request->role,
             ]);
+            $user->assignRole($request->role);
+
     
             return redirect()->route('admin.pegawai.akun.index' ,['nip'=>$nip])->with('success', 'User pegawai berhasil diperbarui.');
         }

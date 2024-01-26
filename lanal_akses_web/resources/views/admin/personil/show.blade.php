@@ -123,10 +123,10 @@
                     </div>
                     <p class="data-utama mb-0">role</p>
                     <div class="container m-0 p-2 rounded border-all">
-                        @empty($user[0]->role)
+                        @empty($user[0]->getRoleNames()->first())
                         <p class='mb-0'>_</p>
                         @else
-                            <p class="mb-0">{{ $user[0]->role }}</p>
+                            <p class="mb-0">{{ $user[0]->getRoleNames()->first() }}</p>
                         @endempty
                     </div>
                     <p class="data-utama mb-0">nama akun</p>

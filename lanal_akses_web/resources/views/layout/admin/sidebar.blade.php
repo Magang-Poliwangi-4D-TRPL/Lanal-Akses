@@ -42,6 +42,12 @@
               <a class="dropdown-item" href="{{ route('admin.akun-admin.index', ['page' => 1]) }}">Data Akun Admin</a>
               <a class="dropdown-item" href="{{ route('admin.akun-personil.index', ['page' => 1]) }}">Data Akun Personel</a>
               <a class="dropdown-item" href="{{ route('admin.akun-pegawai.index', ['page' => 1]) }}">Data Akun Pegawai</a>
+            @hasrole('admin|komandan')
+                <a class="dropdown-item" href="{{ route('admin.role.index') }}">Kelola Role</a>
+                <a class="dropdown-item" href="{{ route('admin.permission.index') }}">Kelola Permission</a>
+            @else
+
+            @endhasrole
             </div>
           </div>
         

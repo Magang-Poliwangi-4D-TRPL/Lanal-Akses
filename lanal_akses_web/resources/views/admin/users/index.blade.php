@@ -40,14 +40,9 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $user->nama_lengkap }}</td>
                             <td>{{ $user->username }}</td>
-                            <td>{{ $user->role }}</td>
+                            <td>{{ $user->getRoleNames()->first() }}</td>
                             <td>
                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Edit</a>
-                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">Hapus</button>
-                                </form>
                             </td>
                         </tr>
                         @endforeach

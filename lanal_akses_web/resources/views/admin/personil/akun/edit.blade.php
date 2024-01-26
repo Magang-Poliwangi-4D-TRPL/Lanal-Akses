@@ -51,14 +51,16 @@
                         </div>
                         <div class="form-group">
                             <label for="role">Role:</label>
-                            <select class="form-control" id="role" name="role" required>
-                                <!-- Opsi Role disini -->
-                                <option value="komandan" {{ old('role', $user[0]->role) === 'komandan' ? 'selected' : '' }}>Komandan</option>
-                                <option value="pasintel" {{ old('role', $user[0]->role) === 'pasintel' ? 'selected' : '' }}>Pasintel</option>
-                                <option value="paspotmar" {{ old('role', $user[0]->role) === 'paspotmar' ? 'selected' : '' }}>Paspotmar</option>
-                                <option value="paset" {{ old('role', $user[0]->role) === 'paset' ? 'selected' : '' }}>Paset</option>
-                                <option value="personel" {{ old('role', $user[0]->role) === 'personel' ? 'selected' : '' }}>Personel</option>
-                            </select>
+                            @if ($roles->count() > 0)
+                                <select class="form-control  @error('role') is-invalid @enderror" name="role" id="role">
+                                    @foreach ($roles as $role)
+                                    <option value="{{ $role->name }}" {{ old('role', $user[0]->getRoleNames()->first()) === $role->name ? 'selected' : '' }}>{{ $role->name }}</option>
+                                        
+                                    @endforeach
+                                </select>
+                                @else
+                                   <p>belum ada role</p> 
+                                @endif
                         </div>
                         <div class="form-group">
                             <a href="{{ route('admin.personil.akun.index', str_replace('/', '-', $personil->nrp)) }}" class="btn btn-secondary">Kembali</a>

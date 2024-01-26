@@ -32,6 +32,10 @@
                             <input type="text" class="form-control" id="username" name="username" value="{{ old('username', $user->username) }}" required>
                         </div>
                         <div class="form-group">
+                            <label for="email">Email: (Tidak wajib diisi)</label>
+                            <input type="text" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" >
+                        </div>
+                        <div class="form-group">
                             <label for="password">Password:</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="password" name="password" value="">
@@ -45,7 +49,7 @@
                         <div class="form-group">
                             <label for="password_confirmation">Konfirmasi Password:</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" >
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-secondary" id="show-password-confirmation">
                                         <i class="far fa-eye text-light" id="eye-icon-confirmation"></i>
@@ -53,18 +57,26 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="role">Role:</label>
-                            <select class="form-select" id="role" name="role" required>
-                                <!-- Opsi Role disini -->
-                                <!-- ... Bagian lain dari formulir ... -->
-                                <option value="komandan" {{ old('role', $user->role) === 'komandan' ? 'selected' : '' }}>Komandan</option>
-                                <option value="pasintel" {{ old('role', $user->role) === 'pasintel' ? 'selected' : '' }}>Pasintel</option>
-                                <option value="paspotmar" {{ old('role', $user->role) === 'paspotmar' ? 'selected' : '' }}>Paspotmar</option>
-                                <option value="paset" {{ old('role', $user->role) === 'paset' ? 'selected' : '' }}>Paset</option>
-                                <option value="personel" {{ old('role', $user->role) === 'personel' ? 'selected' : '' }}>personel</option>
-                                <!-- ... Bagian lain dari formulir ... -->
-                            </select>
+                        <div class="form-group row">
+                            <label for="role" class="col-sm-3 col-form-label">Role akun personel</label>
+                            <div class="col-sm-3">
+                                @if ($roles->count() > 0)
+                                <select class="form-control  @error('role') is-invalid @enderror" name="role" id="role">
+                                    @foreach ($roles as $role)
+                                    <option value="{{ $role->name }}" {{ old('role', $user->getRoleNames()->first()) === $role->name ? 'selected' : '' }}>{{ $role->name }}</option>
+                                        
+                                    @endforeach
+                                </select>
+                                @else
+                                   <p>belum ada role</p> 
+                                @endif
+                                @error('role')
+                                <div class="alert alert-danger" role="alert">
+                                    <p class="p-0 m-0">{{ $message }}</p>
+                                </div>
+                                @enderror
+                            </div>
+                            
                         </div>
                         <div class="form-group">
                             <a href="{{ route('admin.users.index', ['page' => 1]) }}" class="btn btn-secondary">Kembali</a>

@@ -20,12 +20,12 @@
                     </div>
                     @endif
 
-                    <form method="POST" action="{{ route('admin.pegawai.akun.update',['nip' => str_replace('-', ' ', $pegawai->nip), 'akunId'=>$user[0]->id]) }}">
+                    <form method="POST" action="{{ route('admin.pegawai.akun.update',['nip' => str_replace('-', ' ', $pegawai->nip), 'akunId'=>$user->id]) }}">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
                             <label for="nama_lengkap">Nama Lengkap:</label>
-                            <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap', $user[0]->nama_lengkap) }}" required>
+                            <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap', $user->nama_lengkap) }}" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label>
@@ -51,15 +51,16 @@
                         </div>
                         <div class="form-group">
                             <label for="role">Role:</label>
-                            <select class="form-control" id="role" name="role" required>
-                                <!-- Opsi Role disini -->
-                                <option value="komandan" {{ old('role', $user[0]->role) === 'komandan' ? 'selected' : '' }}>Komandan</option>
-                                <option value="pasintel" {{ old('role', $user[0]->role) === 'pasintel' ? 'selected' : '' }}>Pasintel</option>
-                                <option value="paspotmar" {{ old('role', $user[0]->role) === 'paspotmar' ? 'selected' : '' }}>Paspotmar</option>
-                                <option value="paset" {{ old('role', $user[0]->role) === 'paset' ? 'selected' : '' }}>Paset</option>
-                                <option value="personel" {{ old('role', $user[0]->role) === 'personel' ? 'selected' : '' }}>Personel</option>
-                                <option value="pegawai" {{ old('role', $user[0]->role) === 'pegawai' ? 'selected' : '' }}>Pegawai</option>
-                            </select>
+                            @if ($roles->count() > 0)
+                                <select class="form-control  @error('role') is-invalid @enderror" name="role" id="role">
+                                    @foreach ($roles as $role)
+                                    <option value="{{ $role->name }}" {{ old('role', $user->getRoleNames()->first()) === $role->name ? 'selected' : '' }}>{{ $role->name }}</option>
+                                        
+                                    @endforeach
+                                </select>
+                                @else
+                                   <p>belum ada role</p> 
+                                @endif
                         </div>
                         <div class="form-group">
                             <a href="{{ route('admin.pegawai.akun.index', str_replace('/', '-', $pegawai->nip)) }}" class="btn btn-secondary">Kembali</a>

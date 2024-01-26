@@ -32,7 +32,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('admin.dashboard');
+        if (auth()->user()->hasRole('personel|pegawai')) {
+            # code...
+            return redirect()->route('personil.dashboard');
+        } else {
+            # code...
+            return redirect()->route('admin.dashboard');
+        }
+        
     }
 
     /**

@@ -17,7 +17,9 @@ use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\ImagePegawaiController;
 use App\Http\Controllers\Admin\InformasiKeluargaController;
 use App\Http\Controllers\Admin\PerlengkapanController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RiwayatPenugasanController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SanksiHukumanController;
 use App\Http\Controllers\Admin\WaktuKerjaController;
 use App\Http\Controllers\Personil\PersonilController as PersonilPersonilController;
@@ -48,8 +50,11 @@ require __DIR__.'/auth.php';
 // controller for all personil & public page 
 Route::get('/public/login', [PersonilPersonilController::class, 'login'])->name('personil.login');
 Route::post('/public/login', [PersonilPersonilController::class, 'loginPost'])->name('login.post');
-Route::get('/personel', [PersonilPersonilController::class, 'personilDashboard'])->name('personil.dashboard');
-Route::get('/personel/edit-profile', [PersonilPersonilController::class, 'edit'])->name('personil.edit');
+Route::group(['middleware' => ['auth:web']], function () {
+
+    Route::get('/personel', [PersonilPersonilController::class, 'personilDashboard'])->name('personil.dashboard');
+    Route::get('/personel/edit-profile', [PersonilPersonilController::class, 'edit'])->name('personil.edit');
+});
 
 // ABSENSI
 Route::get('/personel/absensi', [PublicController::class, 'absensiPersonil'])->name('personil.absensi');
@@ -181,6 +186,24 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::put('/admin/personil/show/{nrp}/akun/{akunId}/update', [AkunPersonilController::class, 'update'])->name('admin.personil.akun.update');
     // Route::delete('/admin/personil/show/{nrp}/akun/{akunId}', [AkunPersonilController::class, 'destroy'])
     // ->name('admin.personil.akun.destroy');
+    Route::group(['middleware' => ['permission:can access all|manage role|manage permission']], function () {
+    });
+    Route::group(['middleware' => ['permission:can access all|manage role']], function () {
+        Route::get('admin/role', [RoleController::class, 'index'])->name('admin.role.index');
+        Route::get('admin/role/create', [RoleController::class, 'create'])->name('admin.role.create');
+        Route::post('admin/role/create', [RoleController::class, 'store'])->name('admin.role.store');
+        Route::get('admin/role/edit/{idRole}', [RoleController::class, 'edit'])->name('admin.role.edit');
+        Route::put('admin/role/edit/{idRole}', [RoleController::class, 'update'])->name('admin.role.update');
+        Route::delete('admin/role/{idRole}', [RoleController::class, 'destroy'])->name('admin.role.delete');
+    });
+    Route::group(['middleware' => ['permission:can access all|manage permission']], function () {
+        Route::get('admin/permission', [PermissionController::class, 'index'])->name('admin.permission.index');
+        Route::get('admin/permission/create', [PermissionController::class, 'create'])->name('admin.permission.create');
+        Route::post('admin/permission/create', [PermissionController::class, 'store'])->name('admin.permission.store');
+        Route::get('admin/permission/edit/{idPermission}', [PermissionController::class, 'edit'])->name('admin.permission.edit');
+        Route::put('admin/permission/edit/{idPermission}', [PermissionController::class, 'update'])->name('admin.permission.update');
+        Route::delete('admin/permission/{idPermission}', [PermissionController::class, 'destroy'])->name('admin.permission.delete');
+    });
 
     // Personil -> Informasi Keluarga
     Route::get('/admin/personil/show/{nrp}/informasi-keluarga', [InformasiKeluargaController::class, 'index'])->name('admin.personil.informasi-keluarga.index');
