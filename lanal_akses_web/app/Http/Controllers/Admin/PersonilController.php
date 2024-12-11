@@ -101,7 +101,7 @@ class PersonilController extends Controller
             $informasiOrangTua = InformasiOrangTuaModel::where('personil_id', $personil->id)->get();
             
             // Mengambil semua data UserModel yang memiliki personil_id yang sama dengan id PersonilModel yang dicari
-            $user = User::where('personil_id', $personil->id)->get();
+            $user = User::where('personil_id', $personil->id)->get()->first();
             
             return view('admin.personil.show', compact('personil', 'pendidikanFormal', 'pendidikanMiliter', 'kursus', 'tanggunganKeluarga', 'perlengkapan', 'tandaJasa', 'dataKepangkatan', 'riwayatPenugasan', 'sanksiHukuman', 'informasiPasangan', 'informasiAnak', 'informasiOrangTua', 'user'));
         }

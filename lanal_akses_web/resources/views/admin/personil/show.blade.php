@@ -115,26 +115,26 @@
                 <div class="bg-white p-4">
                     <p class="data-utama mb-0">Username</p>
                     <div class="container m-0 p-2 rounded border-all">
-                        @empty($user[0]->username)
+                        @empty($user->username)
                             <p class='mb-0'>_</p>
                         @else
-                            <p class="mb-0">{{ $user[0]->username }}</p>
+                            <p class="mb-0">{{ $user->username }}</p>
                         @endempty
                     </div>
                     <p class="data-utama mb-0">role</p>
                     <div class="container m-0 p-2 rounded border-all">
-                        @empty($user[0]->getRoleNames()->first())
+                        @empty($user)
                         <p class='mb-0'>_</p>
                         @else
-                            <p class="mb-0">{{ $user[0]->getRoleNames()->first() }}</p>
+                            <p class="mb-0">{{ $user->getRoleNames()->first() }}</p>
                         @endempty
                     </div>
                     <p class="data-utama mb-0">nama akun</p>
                     <div class="container m-0 p-2 rounded border-all">
-                        @empty($user[0]->nama_lengkap)
+                        @empty($user->nama_lengkap)
                             <p class='mb-0'>_</p>
                         @else
-                            <p class="mb-0">{{ $user[0]->nama_lengkap }}</p>
+                            <p class="mb-0">{{ $user->nama_lengkap }}</p>
                         @endempty
                     </div>
                     <div class="d-flex align-items-center justify-content-between  my-3">
@@ -672,13 +672,13 @@
                                   <th scope="col" width="45%">Nama Lengkap</th>
                                   <th scope="col" width="10%">:</th>
                                   <th scope="col" width="45%">
-                                    @empty($informasiPasangan[0]->nama_lengkap )
+                                    @empty($informasiPasangan->nama_lengkap )
                                         <div class="container m-0 px-4 py-2 ">
                                             _
                                         </div>
                                     @else
                                     <div class="container m-0 px-4 py-2 ">
-                                        {{ $informasiPasangan[0]->nama_lengkap}}
+                                        {{ $informasiPasangan->nama_lengkap}}
                                     </div>
                                     @endempty
                                   </th>
@@ -689,13 +689,13 @@
                                   <td scope="col" width="45%">Tempat, Tanggal Lahir</td>
                                   <td scope="col" width="10%">:</td>
                                   <td scope="col" width="45%" >
-                                    @empty($informasiPasangan[0]->tempat_lahir )
+                                    @empty($informasiPasangan->tempat_lahir )
                                         <div class="container m-0 px-4 py-2 ">
                                             _
                                         </div>
                                     @else
                                         <div class="container m-0 px-4 py-2 ">
-                                            {{ $informasiPasangan[0]->tempat_lahir . ' ,' . $informasiPasangan[0]->tanggal_lahir}}
+                                            {{ $informasiPasangan->tempat_lahir . ' ,' . $informasiPasangan->tanggal_lahir}}
                                         </div>
                                     @endempty
                                   </td>
@@ -704,13 +704,13 @@
                                   <td scope="col" width="45%">Agama/Suku Bangsa</td>
                                   <td scope="col" width="10%">:</td>
                                   <td scope="col" width="45%" >
-                                    @empty($informasiPasangan[0]->agama )
+                                    @empty($informasiPasangan->agama )
                                         <div class="container m-0 px-4 py-2 ">
                                             _
                                         </div>
                                     @else
                                         <div class="container m-0 px-4 py-2 ">
-                                            {{ $informasiPasangan[0]->agama . '/' . $informasiPasangan[0]->suku_bangsa}}
+                                            {{ $informasiPasangan->agama . '/' . $informasiPasangan->suku_bangsa}}
                                         </div>
                                     @endempty
                                   </td>
@@ -719,13 +719,13 @@
                                   <td scope="col" width="45%">Tinggi/Berat Badan</td>
                                   <td scope="col" width="10%">:</td>
                                   <td scope="col" width="45%" >
-                                    @empty($informasiPasangan[0]->tinggi_badan && $informasiPasangan[0]->berat_badan )
+                                    @empty($informasiPasangan->tinggi_badan && $informasiPasangan->berat_badan )
                                         <div class="container m-0 px-4 py-2 ">
                                             _
                                         </div>
                                     @else
                                         <div class="container m-0 px-4 py-2 ">
-                                            {{ $informasiPasangan[0]->tinggi_badan . ' CM/' .  $informasiPasangan[0]->berat_badan . ' KG'}}
+                                            {{ $informasiPasangan->tinggi_badan . ' CM/' .  $informasiPasangan->berat_badan . ' KG'}}
                                         </div>
                                     @endempty
                                   </td>
@@ -734,13 +734,13 @@
                                   <td scope="col" width="45%">Golongan Darah</td>
                                   <td scope="col" width="10%">:</td>
                                   <td scope="col" width="45%" >
-                                    @empty($informasiPasangan[0]->golongan_darah)
+                                    @empty($informasiPasangan->golongan_darah)
                                         <div class="container m-0 px-4 py-2 ">
                                             _
                                         </div>
                                     @else
                                         <div class="container m-0 px-4 py-2 ">
-                                            {{ $informasiPasangan[0]->golongan_darah}}
+                                            {{ $informasiPasangan->golongan_darah}}
                                         </div>
                                     @endempty
                                   </td>
@@ -749,13 +749,13 @@
                                   <td scope="col" width="45%">Pekerjaan</td>
                                   <td scope="col" width="10%">:</td>
                                   <td scope="col" width="45%" >
-                                    @empty($informasiPasangan[0]->pekerjaan)
+                                    @empty($informasiPasangan->pekerjaan)
                                         <div class="container m-0 px-4 py-2 ">
                                             _
                                         </div>
                                     @else
                                         <div class="container m-0 px-4 py-2 ">
-                                            {{ $informasiPasangan[0]->pekerjaan}}
+                                            {{ $informasiPasangan->pekerjaan}}
                                         </div>
                                     @endempty
                                   </td>
@@ -764,13 +764,13 @@
                                   <td scope="col" width="45%">Alamat Sekarang</td>
                                   <td scope="col" width="10%">:</td>
                                   <td scope="col" width="45%" >
-                                    @empty($informasiPasangan[0]->alamat_sekarang)
+                                    @empty($informasiPasangan->alamat_sekarang)
                                         <div class="container m-0 px-4 py-2 ">
                                             _
                                         </div>
                                     @else
                                         <div class="container m-0 px-4 py-2 ">
-                                            {{ $informasiPasangan[0]->alamat_sekarang}}
+                                            {{ $informasiPasangan->alamat_sekarang}}
                                         </div>
                                     @endempty
                                   </td>
@@ -779,13 +779,13 @@
                                   <td scope="col" width="45%">No. KPI</td>
                                   <td scope="col" width="10%">:</td>
                                   <td scope="col" width="45%" >
-                                    @empty($informasiPasangan[0]->nomor_kpi)
+                                    @empty($informasiPasangan->nomor_kpi)
                                         <div class="container m-0 px-4 py-2 ">
                                             _
                                         </div>
                                     @else
                                         <div class="container m-0 px-4 py-2 ">
-                                            {{ $informasiPasangan[0]->nomor_kpi}}
+                                            {{ $informasiPasangan->nomor_kpi}}
                                         </div>
                                     @endempty
                                   </td>
@@ -794,13 +794,13 @@
                                   <td scope="col" width="45%">Tempat Nikah</td>
                                   <td scope="col" width="10%">:</td>
                                   <td scope="col" width="45%" >
-                                    @empty($informasiPasangan[0]->tempat_nikah)
+                                    @empty($informasiPasangan->tempat_nikah)
                                         <div class="container m-0 px-4 py-2 ">
                                             _
                                         </div>
                                     @else
                                         <div class="container m-0 px-4 py-2 ">
-                                            {{ $informasiPasangan[0]->tempat_nikah}}
+                                            {{ $informasiPasangan->tempat_nikah}}
                                         </div>
                                     @endempty
                                   </td>
@@ -809,13 +809,13 @@
                                   <td scope="col" width="45%">Nomor Surat Nikah</td>
                                   <td scope="col" width="10%">:</td>
                                   <td scope="col" width="45%" >
-                                    @empty($informasiPasangan[0]->nomor_surat_nikah)
+                                    @empty($informasiPasangan->nomor_surat_nikah)
                                         <div class="container m-0 px-4 py-2 ">
                                             _
                                         </div>
                                     @else
                                         <div class="container m-0 px-4 py-2 ">
-                                            {{ $informasiPasangan[0]->nomor_surat_nikah}}
+                                            {{ $informasiPasangan->nomor_surat_nikah}}
                                         </div>
                                     @endempty
                                   </td>
@@ -824,13 +824,13 @@
                                   <td scope="col" width="45%">Nomor KTA JALASENASTRI</td>
                                   <td scope="col" width="10%">:</td>
                                   <td scope="col" width="45%" >
-                                    @empty($informasiPasangan[0]->nomor_kta_jalasenastri)
+                                    @empty($informasiPasangan->nomor_kta_jalasenastri)
                                         <div class="container m-0 px-4 py-2 ">
                                             _
                                         </div>
                                     @else
                                         <div class="container m-0 px-4 py-2 ">
-                                            {{ $informasiPasangan[0]->nomor_kta_jalasenastri}}
+                                            {{ $informasiPasangan->nomor_kta_jalasenastri}}
                                         </div>
                                     @endempty
                                   </td>

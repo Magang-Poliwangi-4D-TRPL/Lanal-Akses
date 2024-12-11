@@ -95,16 +95,27 @@ class AkunPersonilController extends Controller
             'role' => 'required',
         ]);
 
+        $requestedRole = $request->role;
+
         $personil = PersonilModel::where('nrp', str_replace('-', '/', $nrp))->first();
         if ($personil == null) {
             return abort(404, 'Personil Tidak Ditemukan');
         } else {
-            $user = User::where('personil_id', $personil->id)->get();
-            $user[0]->update([
+            $user = User::where('personil_id', $personil->id)->get()->first();
+            $user->update([
                 'nama_lengkap' => $request->nama_lengkap,
                 'password' => Hash::make($request->password),
             ]);
-            $user[0]->assignRole($request->role);
+            $user->removeRole($user->getRoleNames()->first());
+        
+            // Tambahkan role baru ke user
+            $role = Role::where('name', $requestedRole)->first();
+    
+            if ($role) {
+                $user->assignRole($role);
+            } else {
+                return redirect()->back()->with('error', 'Role baru tidak valid.');
+            }
             return redirect()->route('admin.personil.akun.index' ,['nrp'=>$nrp])->with('success', 'User personel berhasil diperbarui.');
         }
         

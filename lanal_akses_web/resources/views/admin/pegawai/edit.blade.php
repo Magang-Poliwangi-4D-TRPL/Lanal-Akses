@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group">
                       <label for="no_telepon">Massukkan nomor telepon pegawai baru</label>
-                      <input type="text" class="form-control @error('no_telepon') is-invalid @enderror" id="no_telepon" name="no_telepon" required placeholder="nomor telepon pegawai" value="{{ $pegawai->no_telepon }}">
+                      <input type="number" class="form-control @error('no_telepon') is-invalid @enderror" id="no_telepon" name="no_telepon" required placeholder="nomor telepon pegawai" value="{{ $pegawai->no_telepon }}">
                       @error('no_telepon')
                           <div class="invalid-feedback">
                             {{ $message }}

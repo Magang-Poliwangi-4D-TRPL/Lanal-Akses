@@ -25,11 +25,12 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="nama_lengkap">Nama Lengkap:</label>
-                            <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap', $user->nama_lengkap) }}" required>
+                            <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap', $user->nama_lengkap) }}" 
+                            >
                         </div>
                         <div class="form-group">
                             <label for="username">Username:</label>
-                            <input type="text" class="form-control" id="username" name="username" value="{{ old('username', $user->username) }}" required>
+                            <input type="text" class="form-control" id="username" name="username" value="{{ old('username', $user->username) }}" >
                         </div>
                         <div class="form-group">
                             <label for="email">Email: (Tidak wajib diisi)</label>

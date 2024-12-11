@@ -63,7 +63,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->permissions);
 
-        return redirect()->route('admin.role.permission.index')->with('success', 'Role berhasil dibuat.');
+        return redirect()->route('admin.role.index')->with('success', 'Role berhasil dibuat.');
     }
 
     public function edit($idRole)
@@ -71,7 +71,7 @@ class RoleController extends Controller
         $role = Role::find($idRole);
 
         if (!$role) {
-            return redirect()->route('admin.role.permission.index')->with('error', 'Role tidak ditemukan.');
+            return redirect()->route('admin.role.index')->with('error', 'Role tidak ditemukan.');
         }
         $permissions = new Permission();
         if (Auth::user()->hasRole('admin')) {
@@ -93,7 +93,7 @@ class RoleController extends Controller
             $permissions = Permission::where('name', '!=', 'can access all')->get();
         }
         if (!$role) {
-            return redirect()->route('admin.role.permission.index')->with('error', 'Role tidak ditemukan.');
+            return redirect()->route('admin.role.index')->with('error', 'Role tidak ditemukan.');
         }
 
         $request->validate([
@@ -113,7 +113,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->permissions);
 
-        return redirect()->route('admin.role.permission.index')->with('success', 'Role berhasil diupdate.');
+        return redirect()->route('admin.role.index')->with('success', 'Role berhasil diupdate.');
     }
 
     public function destroy($idRole)
@@ -121,11 +121,11 @@ class RoleController extends Controller
         $role = Role::find($idRole);
 
         if (!$role) {
-            return redirect()->route('admin.role.permission.index')->with('error', 'Role tidak ditemukan.');
+            return redirect()->route('admin.role.index')->with('error', 'Role tidak ditemukan.');
         }
 
         $role->delete();
 
-        return redirect()->route('admin.role.permission.index')->with('success', 'Role berhasil dihapus.');
+        return redirect()->route('admin.role.index')->with('success', 'Role berhasil dihapus.');
     }
 }

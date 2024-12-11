@@ -23,7 +23,10 @@ class SekretarisSeeder extends Seeder
      */
     public function run()
     {
-        $personil = PersonilModel::create([
+        $personil = PersonilModel::where('nrp', '26226/P')->first();
+
+        // dd($personil);
+        $personil->update([
             "nama_lengkap" => "Suhendra Kurniawan",
             "pangkat" => "Letda",
             "korps" => "KH",
@@ -39,7 +42,6 @@ class SekretarisSeeder extends Seeder
         ]);
 
         $personil->save();
-        $personil = PersonilModel::where('nrp', '26226/P')->first();
     
         PendidikanFormalModel::create([
             "nama_pendidikan" => "SDN 1 Bangkalan",

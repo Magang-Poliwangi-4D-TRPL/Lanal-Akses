@@ -7,6 +7,7 @@ use App\Models\KehadiranModel;
 use App\Models\PegawaiModel;
 use App\Models\PersonilModel;
 use App\Models\WaktuKerjaModel;
+use PDF;
 use Carbon\Carbon;
 use DateInterval;
 use DateTime;
@@ -30,6 +31,111 @@ class AbsensiController extends Controller
         // Convert the DateTime object to the timezone of Tallinn
         $datetime->setTimezone($tallinn_timezone);
         $date = $datetime->format('Y-m-d');
+
+        $absensiPersonil = KehadiranModel::where('tanggal_kehadiran', $date)->where('pegawai_id', null)->get();
+        $absensiPegawai = KehadiranModel::where('tanggal_kehadiran', $date)->where('personil_id', null)->get();
+        $countPresensiPersonilToday = KehadiranModel::where('tanggal_kehadiran', $date)->where('pegawai_id', null)->where('status_kehadiran', 'Belum Absen')->get();
+        $countPresensiPegawaiToday = KehadiranModel::where('tanggal_kehadiran', $date)->where('personil_id', null)->where('status_kehadiran', 'Belum Absen')->get();
+        
+        // Ambil data kehadiran dari satu bulan terakhir
+        $startDate = Carbon::now()->startOfMonth();
+        $endDate = Carbon::now()->endOfMonth();
+
+        $jumlahKehadiranPersonelBulanIni =  KehadiranModel::whereNotIn('status_kehadiran', ['Belum Absen'])
+                                                            ->whereBetween('tanggal_kehadiran', [$startDate, $endDate])->where('pegawai_id', null)
+                                                            ->count();
+        $jumlahKehadiranPegawaiBulanIni =  KehadiranModel::whereNotIn('status_kehadiran', ['Belum Absen'])
+                                                            ->whereBetween('tanggal_kehadiran', [$startDate, $endDate])->where('personil_id', null)
+                                                            ->count();
+
+        // Cek apakah ada data kehadiran personil
+        $personilPresensi = KehadiranModel::where('pegawai_id', null)
+            ->whereBetween('tanggal_kehadiran', [$startDate, $endDate])->exists();
+
+        // Cek apakah ada data kehadiran pegawai
+        $pegawaiPresensi = KehadiranModel::where('personil_id', null)
+            ->whereBetween('tanggal_kehadiran', [$startDate, $endDate])->exists();
+
+        
+            if (!$personilPresensi) {
+                $personilStatusCounts = null;
+            } else {
+                // Hitung jumlah kehadiran berdasarkan status
+                $personilhadir = KehadiranModel::where('status_kehadiran', 'Hadir')->where('pegawai_id', null)
+                                        ->whereBetween('tanggal_kehadiran', [$startDate, $endDate])
+                                        ->count();
+        
+                $personilterlambat = KehadiranModel::where('status_kehadiran', 'Terlambat')->where('pegawai_id', null)
+                                            ->whereBetween('tanggal_kehadiran', [$startDate, $endDate])
+                                            ->count();
+        
+                $personiltidakHadir = KehadiranModel::where('status_kehadiran', 'Tidak Hadir')->where('pegawai_id', null)
+                                             ->whereBetween('tanggal_kehadiran', [$startDate, $endDate])
+                                             ->count();
+        
+                // Tambahkan status lain jika ada
+                $personilCuti = KehadiranModel::whereNotIn('status_kehadiran', ['Hadir', 'Terlambat', 'Tidak Hadir', 'Belum Absen'])
+                                               ->whereBetween('tanggal_kehadiran', [$startDate, $endDate])->where('pegawai_id', null)
+                                               ->count();
+            
+                                               // Data untuk dikirim ke view
+                                               $personilStatusCounts = [
+                                                   'Hadir' => $personilhadir,
+                                                   'Terlambat' => $personilterlambat,
+                                                   'Tidak Hadir' => $personiltidakHadir,
+                                                   'Cuti' => $personilCuti
+                                               ];
+            }
+
+        if (!$pegawaiPresensi) {
+            $pegawaiStatusCounts = null;
+        } else {
+            // Hitung jumlah kehadiran berdasarkan status
+            $pegawaihadir = KehadiranModel::where('status_kehadiran', 'Hadir')->where('personil_id', null)
+            ->whereBetween('tanggal_kehadiran', [$startDate, $endDate])
+            ->count();
+
+                $pegawaiterlambat = KehadiranModel::where('status_kehadiran', 'Terlambat')->where('personil_id', null)
+                        ->whereBetween('tanggal_kehadiran', [$startDate, $endDate])
+                        ->count();
+
+                $pegawaitidakHadir = KehadiranModel::where('status_kehadiran', 'Tidak Hadir')->where('personil_id', null)
+                            ->whereBetween('tanggal_kehadiran', [$startDate, $endDate])
+                            ->count();
+
+                // Tambahkan status lain jika ada
+                $pegawaistatusLainnya = KehadiranModel::whereNotIn('status_kehadiran', ['Hadir', 'Terlambat', 'Tidak Hadir', 'Belum Absen'])
+                            ->whereBetween('tanggal_kehadiran', [$startDate, $endDate])->where('personil_id', null)
+                            ->count();
+                // Data untuk dikirim ke view
+                $pegawaiStatusCounts = [
+                'Hadir' => $pegawaihadir,
+                'Terlambat' => $pegawaiterlambat,
+                'Tidak Hadir' => $pegawaitidakHadir,
+                'Cuti' => $pegawaistatusLainnya
+                ];
+        }
+        
+
+
+        return view('admin.absensi.index', compact('date', 'informasiJamKerja', 'countPresensiPersonilToday', 'countPresensiPegawaiToday', 'absensiPersonil', 'absensiPegawai', 'personilStatusCounts', 'pegawaiStatusCounts', 'jumlahKehadiranPegawaiBulanIni', 'jumlahKehadiranPersonelBulanIni'));
+    }
+
+    public function dataPresensi()
+    {
+        $informasiJamKerja = WaktuKerjaModel::all();
+        
+        $utc_timezone = new DateTimeZone("UTC");
+        
+        $tallinn_timezone = new DateTimeZone("Asia/Jakarta");
+        
+        // Create a new DateTime object in the UTC format
+        
+        $datetime = new DateTime("now", $utc_timezone);
+        
+        // Convert the DateTime object to the timezone of Tallinn
+        $datetime->setTimezone($tallinn_timezone);
+        $date = $datetime->format('Y-m-d');
         
         $absensiPersonil = KehadiranModel::where('tanggal_kehadiran', $date)->where('pegawai_id', null)->get();
         $absensiPegawai = KehadiranModel::where('tanggal_kehadiran', $date)->where('personil_id', null)->get();
@@ -38,67 +144,75 @@ class AbsensiController extends Controller
         $countPresensiPegawaiToday = KehadiranModel::where('tanggal_kehadiran', $date)->where('personil_id', null)->where('status_kehadiran', 'Belum Absen')->get();
         // dd($absensiPersonil);
         $statusKehadiranIcon = [
-            'check',
-            'xmark',
-            'clock',
-            'file',
-            'circle-exclamation',
-        ];
-        $statusKehadiran = [
-            'Hadir',
-            'Tidak Hadir',
-            'Terlambat',
-            'Ijin',
-            'Belum Absen',
-        ];
-        $bgStatusKehadiran = [
-            'success',
-            'danger',
-            'warning',
-            'primary',
-            'secondary',
-        ];
-        $iconColor = [
-            'text-success',
-            'text-danger',
-            'text-warning',
-            'text-primary',
-            'text-secondary',
-        ];
+            'Hadir'=> 'check',
+             'Tidak Hadir'=> 'xmark',
+             'Terlambat'=>'clock',
+             'Cuti Sakit'=>'file',
+             'Cuti Tahunan'=>'file',
+             'Belum Absen'=> 'circle-exclamation',
+         ];
+         $statusKehadiran = [
+             'Hadir',
+             'Tidak Hadir',
+             'Terlambat',
+             'Cuti Sakit',
+             'Cuti Tahunan',
+             'Belum Absen',
+         ];
+         $bgStatusKehadiran = [
+            'Hadir'=>'success',
+            'Tidak Hadir'=> 'danger',
+            'Terlambat'=>'warning',
+            'Cuti Sakit'=>'primary',
+            'Cuti Tahunan'=>'primary',
+            'Belum Absen'=>'secondary',
+         ];
+         $iconColor = [
+            'Hadir'=>'text-success',
+            'Tidak Hadir'=>'text-danger',
+            'Terlambat'=>'text-warning',
+            'Cuti Sakit'=>'text-primary',
+            'Cuti Tahunan'=>'text-primary',
+            'Belum Absen'=>'text-secondary',
+         ];
 
-        return view('admin.absensi.index', compact('absensiPersonil', 'absensiPegawai', 'date', 'statusKehadiranIcon', 'bgStatusKehadiran', 'iconColor', 'statusKehadiran', 'informasiJamKerja', 'countPresensiPersonilToday', 'countPresensiPegawaiToday'));
+        return view('admin.absensi.data-presensi', compact('absensiPersonil', 'absensiPegawai', 'date', 'statusKehadiranIcon', 'bgStatusKehadiran', 'iconColor', 'statusKehadiran', 'informasiJamKerja', 'countPresensiPersonilToday', 'countPresensiPegawaiToday'));
     }
 
     public function show($tanggal_kehadiran, $idAnggota, $status_anggota) {
         
         $statusKehadiranIcon = [
-            'check',
-            'xmark',
-            'clock',
-            'file',
-            'circle-exclamation',
-        ];
-        $statusKehadiran = [
-            'Hadir',
-            'Tidak Hadir',
-            'Terlambat',
-            'Ijin',
-            'Belum Absen',
-        ];
-        $bgStatusKehadiran = [
-            'success',
-            'danger',
-            'warning',
-            'primary',
-            'secondary',
-        ];
-        $iconColor = [
-            'text-success',
-            'text-danger',
-            'text-warning',
-            'text-primary',
-            'text-secondary',
-        ];
+            'Hadir'=> 'check',
+             'Tidak Hadir'=> 'xmark',
+             'Terlambat'=>'clock',
+             'Cuti Sakit'=>'file',
+             'Cuti Tahunan'=>'file',
+             'Belum Absen'=> 'circle-exclamation',
+         ];
+         $statusKehadiran = [
+             'Hadir',
+             'Tidak Hadir',
+             'Terlambat',
+             'Cuti Sakit',
+             'Cuti Tahunan',
+             'Belum Absen',
+         ];
+         $bgStatusKehadiran = [
+             'Hadir'=>'success',
+            'Tidak Hadir'=> 'danger',
+             'Terlambat'=>'warning',
+             'Cuti Sakit'=>'primary',
+             'Cuti Tahunan'=>'primary',
+             'Belum Absen'=>'secondary',
+         ];
+         $iconColor = [
+            'Hadir'=>'text-success',
+            'Tidak Hadir'=>'text-danger',
+            'Terlambat'=>'text-warning',
+            'Cuti Sakit'=>'text-primary',
+            'Cuti Tahunan'=>'text-primary',
+            'Belum Absen'=>'text-secondary',
+         ];
 
         if ($status_anggota == 'personel') {
             $detailPresensiAnggota = KehadiranModel::where('tanggal_kehadiran', $tanggal_kehadiran)->where('personil_id', $idAnggota)->first();
@@ -124,13 +238,13 @@ class AbsensiController extends Controller
     public function update(Request $request, $idKehadiran)
     {
         $validatedData = $request->validate([
-            'jam_masuk' => 'required|',
+            'jam_masuk' => 'nullable|',
             'jam_pulang' => 'nullable|',
             'status_kehadiran' => 'required',
             'lokasi' => 'required',
             'keterangan' => 'nullable|max:255',
         ], [
-            'jam_masuk.required' => 'Jam masuk harus diisi.',
+            // 'jam_masuk.required' => 'Jam masuk harus diisi.',
             'lokasi.required' => 'Lokasi harus diisi.',
             'status_kehadiran.required' => 'Status kehadiran harus diisi.',
             'keterangan.max' => 'Keterangan tidak boleh melebih 255 karakter.'
@@ -164,7 +278,7 @@ class AbsensiController extends Controller
 
     public function filterAbsensiPost(Request $request){
         $validateData = $request->validate([
-            'tanggal_absensi' => 'required|date_format:d-m-Y'
+            'tanggal_absensi' => 'required|date_format:Y-m-d'
         ],[
             'tanggal_absensi.required' => 'Tanggal absensi harus diisi',
             'tanggal_absensi.date_format' => 'Tanggal absensi tidak sesuai dengan format: YYYY-MM-DD',
@@ -182,32 +296,36 @@ class AbsensiController extends Controller
         // dd($absensiPersonil);
         
         $statusKehadiranIcon = [
-            'check',
-            'xmark',
-            'clock',
-            'file',
-            'circle-exclamation',
+           'Hadir'=> 'check',
+            'Tidak Hadir'=> 'xmark',
+            'Terlambat'=>'clock',
+            'Cuti Sakit'=>'file',
+            'Cuti Tahunan'=>'file',
+            'Belum Absen'=> 'circle-exclamation',
         ];
         $statusKehadiran = [
             'Hadir',
             'Tidak Hadir',
             'Terlambat',
-            'Ijin',
+            'Cuti Sakit',
+            'Cuti Tahunan',
             'Belum Absen',
         ];
         $bgStatusKehadiran = [
-            'success',
-            'danger',
-            'warning',
-            'primary',
-            'secondary',
+            'Hadir'=>'success',
+           'Tidak Hadir'=> 'danger',
+            'Terlambat'=>'warning',
+            'Cuti Sakit'=>'primary',
+            'Cuti Tahunan'=>'primary',
+            'Belum Absen'=>'secondary',
         ];
         $iconColor = [
-            'text-success',
-            'text-danger',
-            'text-warning',
-            'text-primary',
-            'text-secondary',
+            'Hadir'=>'text-success',
+            'Tidak Hadir'=>'text-danger',
+            'Terlambat'=>'text-warning',
+            'Cuti Sakit'=>'text-primary',
+            'Cuti Tahunan'=>'text-primary',
+            'Belum Absen'=>'text-secondary',
         ];
 
         return view('admin.absensi.indexFilter', compact('absensiPersonil', 'absensiPegawai', 'date', 'statusKehadiranIcon', 'bgStatusKehadiran', 'iconColor', 'statusKehadiran'));
@@ -217,42 +335,64 @@ class AbsensiController extends Controller
         $time = strtotime($date);
         $date = date('Y-m-d', $time);
         $absensiPersonil = KehadiranModel::where('tanggal_kehadiran', $date)->where('pegawai_id', null)->get();
-
         $absensiPegawai = KehadiranModel::where('tanggal_kehadiran', $date)->where('personil_id', null)->get();
 
-        return view('admin.absensi.cetak.cetak-presensi-harian', compact('absensiPersonil', 'absensiPegawai', 'date', ));
+        // Render view ke PDF
+        $pdf = PDF::loadView('admin.absensi.cetak.cetak-presensi-harian', compact('absensiPersonil', 'absensiPegawai', 'date'))
+                ->setPaper('a4', 'potrait'); 
+
+        // Download atau tampilkan PDF
+        return $pdf->stream('rekap-presensi-harian-'.$date.'.pdf');
     }
 
-    public function cetakPresensiMingguan($date){
-        $time = strtotime($date);
-        $date = date('Y-m-d', $time);
-        $absensiPersonil = KehadiranModel::where('tanggal_kehadiran', $date)->where('pegawai_id', null)->get();
-
-        $absensiPegawai = KehadiranModel::where('tanggal_kehadiran', $date)->where('personil_id', null)->get();
-
-        return view('admin.absensi.cetak.cetak-presensi-mingguan', compact('absensiPersonil', 'absensiPegawai', 'date', ));
+    public function filterPresensiMingguan(){
+        return view('admin.absensi.filter-mingguan');
     }
 
-    public function cetakPresensiBulanan($int_month, $year){
-        $arr_bulan = [
-            1 => 'Januari',
-            2 => 'Februari',
-            3 => 'Maret',
-            4 => 'April',
-            5 => 'Mei',
-            6 => 'Juni',
-            7 => 'Juli',
-            8 => 'Agustus',
-            9 => 'September',
-            10 => 'Oktober',
-            11 => 'November',
-            12 => 'Desember'
-        ];
+    public function cetakPresensiMingguan(Request $request) {
+        $validateData = $request->validate([
+            'startDate' => 'required|date_format:Y-m-d',
+        ],[
+            'startDate.required' => 'Tanggal mulai presensi harus diisi',
+            'startDate.date_format' => 'Tanggal mulai presensi tidak sesuai dengan format: YYYY-MM-DD',
+        ]);
+        $startDate = Carbon::parse( $validateData["startDate"]);
+        $endDate = Carbon::parse( $validateData["startDate"])->subDay(6);
 
-        $month = $arr_bulan[(int)$int_month];
-
-        return view('admin.absensi.cetak.cetak-presensi-bulanan', compact('month', 'year'));
+        // Ambil data kehadiran personel dan pegawai berdasarkan rentang tanggal
+        $absensiPersonil = KehadiranModel::whereBetween('tanggal_kehadiran', [$endDate, $startDate])
+            ->where('pegawai_id', null)
+            ->get();
+    
+        $absensiPegawai = KehadiranModel::whereBetween('tanggal_kehadiran', [$endDate, $startDate])
+            ->where('personil_id', null)
+            ->get();
+    
+        // Mengirim data ke view dengan format PDF menggunakan DomPDF
+        $pdf = PDF::loadView('admin.absensi.cetak.cetak-presensi-mingguan', compact('absensiPersonil', 'absensiPegawai', 'startDate', 'endDate'))->setPaper('a4', 'potrait');
+        return $pdf->stream('rekap-presensi-mingguan.pdf');
     }
+    
+    
+    public function cetakPresensiBulanan(){
+        $startDate = Carbon::now()->startOfMonth();
+        $endDate = Carbon::now()->endOfMonth();
+        $jumlahHari = $startDate->daysInMonth;
+    
+        // Ambil data kehadiran personel dan pegawai berdasarkan rentang tanggal
+        $absensiPersonil = KehadiranModel::whereBetween('tanggal_kehadiran', [$startDate, $endDate])
+            ->where('pegawai_id', null)
+            ->get();
+    
+        $absensiPegawai = KehadiranModel::whereBetween('tanggal_kehadiran', [$startDate, $endDate])
+            ->where('personil_id', null)
+            ->get();
+    
+        // Mengirim data ke view dengan format PDF menggunakan DomPDF
+        $pdf = PDF::loadView('admin.absensi.cetak.cetak-presensi-bulanan', compact('absensiPersonil', 'absensiPegawai', 'startDate', 'endDate', 'jumlahHari'))->setPaper('a4', 'landscape');
+        return $pdf->stream('rekap-presensi-bulanan.pdf');
+    }
+    
 
     public function generatePresensiPersonelToday($date)
     {

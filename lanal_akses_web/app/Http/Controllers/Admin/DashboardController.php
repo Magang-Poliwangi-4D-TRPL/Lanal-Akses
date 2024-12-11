@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\KehadiranModel;
 use App\Models\PegawaiModel;
+use App\Models\PengajuanCutiModel;
 use App\Models\PersonilModel;
 use App\Models\User;
+use Carbon\Carbon;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
@@ -13,8 +18,29 @@ class DashboardController extends Controller
     public function index(){
         $personil = PersonilModel::all();
         $pns = PegawaiModel::all();
+        $admin = User::whereDoesntHave('roles', function ($query) {
+            $query->whereIn('name', ['personel', 'pegawai']);
+        })->get();
 
-        return view('admin.dashboard', compact('personil', 'pns'));
+        // Kehadiran 
+        $utc_timezone = new DateTimeZone("UTC");
+        $tallinn_timezone = new DateTimeZone("Asia/Jakarta");
+        $datetime = new DateTime("now", $utc_timezone);
+        $datetime->setTimezone($tallinn_timezone);
+        $date = $datetime->format('Y-m-d');
+
+
+        $absensiPersonil = KehadiranModel::where('tanggal_kehadiran', $date)->where('pegawai_id', null)->get();
+        $absensiPegawai = KehadiranModel::where('tanggal_kehadiran', $date)->where('personil_id', null)->get();
+        $countPresensiPersonilToday = KehadiranModel::where('tanggal_kehadiran', $date)->where('pegawai_id', null)->where('status_kehadiran', 'Belum Absen')->get();
+        $countPresensiPegawaiToday = KehadiranModel::where('tanggal_kehadiran', $date)->where('personil_id', null)->where('status_kehadiran', 'Belum Absen')->get();
+        
+        // Pengajuan Cuti
+        $startDate = Carbon::now()->startOfMonth();
+        $endDate = Carbon::now()->endOfMonth();
+        $pengajuanCuti = PengajuanCutiModel::whereBetween('tanggal_mulai_cuti', [$startDate, $endDate])->get();
+
+        return view('admin.dashboard', compact('personil', 'pns', 'admin' ,'absensiPersonil', 'absensiPegawai', 'countPresensiPersonilToday', 'countPresensiPegawaiToday', 'pengajuanCuti'));
 
     }
 

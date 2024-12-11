@@ -65,7 +65,7 @@
                         </div>
                         <div class="text-center mt-3">
                             <button type="submit" class="btn btn-secondary btn-md btn-block bg-bluedark">Login <i class="ml-2 fa fa-right-to-bracket"></i></button>
-                            <p class="mt-4 mb-0 subtitle">Apakah anda ingin melakukan presensi? <a href="{{ route('personil.absensi') }}">Klik disini untuk melakukan Presensi</a></p>
+                            {{-- <p class="mt-4 mb-0 subtitle">Apakah anda ingin melakukan presensi? <a href="{{ route('personil.absensi') }}">Klik disini untuk melakukan Presensi</a></p> --}}
                         </div>
                     </form>
                 </div>

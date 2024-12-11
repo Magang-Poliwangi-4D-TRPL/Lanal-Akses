@@ -27,20 +27,24 @@
                         <p class="py-1 m-0 mb-5 ">Absen sekarang dengan menggunakan nama dan NRP anda</p>
                     </div>
                 </div>
-                @if(session('message'))
-                    <div class="alert alert-warning">
-                        {{ session('message') }}
-                    </div>
-                @endif
-                @if ($errors->any())
+                @if (session('alert'))
                     <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                        {{ session('alert') }}
                     </div>
                 @endif
+
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('warning'))
+                    <div class="alert alert-warning">
+                        {{ session('warning') }}
+                    </div>
+                @endif
+
                 <div class="form-absensi row justify-content-center mt-3">
                     <div class="container-fluid">
                         <form method="POST" action="{{ route('personil.absensi.store') }}">
@@ -48,6 +52,7 @@
                             {{-- <p>{{ $waktu_kerja[0]->jam_masuk_mulai }}</p> --}}
                             <input hidden type="text" class="form-control" name="tanggal_absensi" id="tanggal_absensi" value="{{ $date }}">
                             <input hidden type="text" class="form-control" name="waktu_kerja_id" id="waktu_kerja_id" value="{{ $waktu_kerja[0]->id }}">
+                            <input hidden type="text" class="form-control" name="jam_masuk" id="jam_masuk" value="">
                             <div class="form-group">
                                 <label for="nama_lengkap">Massukkan nama lengkap</label>
                                 <input type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap')}}" placeholder="Nama Lengkap" autofocus>
@@ -116,6 +121,26 @@
         </div>
     </div>
     <script>
+        function getCurrentTimeWIB() {
+            // Buat objek Date saat ini
+            var currentDate = new Date();
+
+            // Hitung selisih waktu dari UTC ke WIB (WIB = UTC + 7)
+            var timezoneOffsetWIB = 7 * 60; // 7 jam dalam menit
+
+            // Hitung waktu UTC + 7 untuk WIB
+            var currentTimeWIB = new Date(currentDate.getTime() + (timezoneOffsetWIB * 60000));
+
+            // Format jam dan menit menjadi 2 digit
+            var hours = String(currentTimeWIB.getUTCHours()).padStart(2, '0');
+            var minutes = String(currentTimeWIB.getUTCMinutes()).padStart(2, '0');
+
+            // Gabungkan ke format jam:menit
+            return hours + ':' + minutes;
+        }
+
+        // Set value dari input hidden dengan ID 'jam_masuk'
+        document.getElementById('jam_masuk').value = getCurrentTimeWIB();
         function displayWaktu() {
             var waktu = new Date(); 
             var options = {timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };

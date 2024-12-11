@@ -12,8 +12,17 @@
     <link rel="shortcut icon" href="https://i.ibb.co/MR438ww/logo-no-bg.png" type="image/x-icon">
 
     <title>Cetak Riwayat Hidup</title>
+    <style>
+        @media print {
+            /* Styling khusus saat halaman dicetak */
+            .no-print {
+                display: none; /* Elemen yang tidak ingin ditampilkan saat dicetak */
+            }
+        }
+    </style>
 </head>
 <body>
+    <button class="no-print" onclick="window.print()">Cetak</button>
     <div class="container-fluid py-4">
         <div class="container row">
             <div class="col-md-4">

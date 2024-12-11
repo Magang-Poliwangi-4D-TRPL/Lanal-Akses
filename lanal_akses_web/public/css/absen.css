@@ -98,3 +98,9 @@ body {
     margin: 0;
     font-size: 16px; /* Set font size for the caption */
 }
+
+@media only screen and (max-width: 600px) {
+    #left-section {
+        display: none;
+    }
+}

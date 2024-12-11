@@ -119,7 +119,7 @@ class PegawaiController extends Controller
             'jabatan' => 'required|string|max:50',
             'golongan' => 'required|string|max:50',
             'email' => 'nullable|email',
-            'no_telepon' => 'nullable',
+            'no_telepon' => 'required|regex:/^08[0-9]{10,13}$/',
             'jenis_kelamin' => 'required',
             'alamat' => 'nullable',
         ],);

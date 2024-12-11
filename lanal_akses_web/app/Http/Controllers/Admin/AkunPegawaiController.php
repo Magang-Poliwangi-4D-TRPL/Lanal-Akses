@@ -98,6 +98,8 @@ class AkunPegawaiController extends Controller
             'role' => 'required',
         ]);
 
+        $requestedRole = $request->role;
+
         $pegawai = pegawaiModel::where('nip', str_replace('-', ' ', $nip))->first();
         if ($pegawai == null) {
             return abort(404, 'pegawai Tidak Ditemukan');
@@ -107,7 +109,16 @@ class AkunPegawaiController extends Controller
                 'nama_lengkap' => $request->nama_lengkap,
                 'password' => Hash::make($request->password),
             ]);
-            $user->assignRole($request->role);
+            $user->removeRole($user->getRoleNames()->first());
+        
+            // Tambahkan role baru ke user
+            $role = Role::where('name', $requestedRole)->first();
+    
+            if ($role) {
+                $user->assignRole($role);
+            } else {
+                return redirect()->back()->with('error', 'Role baru tidak valid.');
+            }
 
     
             return redirect()->route('admin.pegawai.akun.index' ,['nip'=>$nip])->with('success', 'User pegawai berhasil diperbarui.');

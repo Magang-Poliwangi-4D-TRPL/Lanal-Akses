@@ -34,8 +34,14 @@ class UserSeeder extends Seeder
             $role_personel = Role::create(['name' => 'personel']);
             $role_pegawai = Role::create(['name' => 'pegawai']);
             $role_komandan = Role::create(['name' => 'komandan']);
+            $role_pasmin = Role::create(['name' => 'palaksa']);
+            $role_pasmin = Role::create(['name' => 'pasminlog']);
+            $role_pasmin = Role::create(['name' => 'pasintel']);
+            $role_pasmin = Role::create(['name' => 'dan kal rjw']);
+            $role_pasmin = Role::create(['name' => 'dandenpomal']);
+            $role_pasmin = Role::create(['name' => 'pasprograr']);
+            $role_pasmin = Role::create(['name' => 'paspotmar']);
             $role_paset = Role::create(['name' => 'paset']);
-            $role_pasmin = Role::create(['name' => 'pasmin']);
             $role_kaakun = Role::create(['name' => 'kaakun']);
     
             $manage_personel_permission = Permission::create(['name' =>'manage personel']);

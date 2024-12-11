@@ -13,7 +13,7 @@
                     <h3 class="mt-1">Data Presensi {{ \Carbon\Carbon::parse($date)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY') }}</h3>
                 </div>
                 <div class="col-md-2 d-flex justify-content-end">
-                    <a href="{{ route('admin.absensi.cetak-presensi.harian', ['date' => $date]) }}" class="btn btn-primary btn-lg bg-bluedark">Cetak Data Presensi <li style="font-size:10pt" class="mr-1 fa-solid fa-print"></li></a>
+                    <a target="_blank" href="{{ route('admin.absensi.cetak-presensi.harian', ['date' => $date]) }}" class="btn btn-primary btn-lg bg-bluedark">Cetak Data Presensi <li style="font-size:10pt" class="mr-1 fa-solid fa-print"></li></a>
                 </div>
             </div>
         </div>
@@ -65,9 +65,9 @@
                                     <td width="15%" class="text-center">
                                         @foreach ($statusKehadiran as $item)
                                             @if ($dataAbsensiPersonil->status_kehadiran == $item)
-                                            <div class="m-1 py-1 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$loop->iteration-1] }}">
+                                            <div class="m-1 py-1 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$dataAbsensiPersonil->status_kehadiran] }}">
                                                 <p class="px-0  m-0" style="">{{ $dataAbsensiPersonil->status_kehadiran}}</p>
-                                                <i class="fa-solid fa-{{ $statusKehadiranIcon[$loop->iteration-1] }} {{ $iconColor[$loop->iteration-1] }} " style="font-size:10pt"></i>
+                                                <i class="fa-solid fa-{{ $statusKehadiranIcon[$dataAbsensiPersonil->status_kehadiran] }} {{ $iconColor[$dataAbsensiPersonil->status_kehadiran] }} " style="font-size:10pt"></i>
                                             </div>
                                             @else
                                                 
@@ -145,9 +145,9 @@
                                     <td width="15%" class="text-center">
                                         @foreach ($statusKehadiran as $item)
                                             @if ($dataAbsensiPegawai->status_kehadiran == $item)
-                                            <div class="m-1 py-1 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$loop->iteration-1] }}">
+                                            <div class="m-1 py-1 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$dataAbsensiPegawai->status_kehadiran] }}">
                                                 <p class="px-0  m-0" style="">{{ $dataAbsensiPegawai->status_kehadiran}}</p>
-                                                <i class="fa-solid fa-{{ $statusKehadiranIcon[$loop->iteration-1] }} {{ $iconColor[$loop->iteration-1] }} " style="font-size:10pt"></i>
+                                                <i class="fa-solid fa-{{ $statusKehadiranIcon[$dataAbsensiPegawai->status_kehadiran] }} {{ $iconColor[$dataAbsensiPegawai->status_kehadiran] }} " style="font-size:10pt"></i>
                                             </div>
                                             @else
                                                 

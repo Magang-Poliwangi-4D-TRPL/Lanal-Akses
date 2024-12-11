@@ -26,9 +26,9 @@
         <form method="POST" action="{{ route('admin.absensi.filter.cari') }}">
             @csrf
             <div class="form-group">
-                <div class="input-group date" id="datepicker">
+                <div class="input-group date">
                     <label class="col-md-4" for="tanggal_absensi">Massukkan tanggal absensi</label>
-                    <input type="text" class="col-md-6 form-control @error('nama_lengkap') is-invalid @enderror" id="tanggal_absensi" data-target="#datepicker" name="tanggal_absensi" placeholder="tanggal absensi" value="{{ old('tanggal_absensi') }}">
+                    <input type="date" class="col-md-6 form-control @error('tanggal_absensi') is-invalid @enderror" id="tanggal_absensi datepicker" name="tanggal_absensi" placeholder="tanggal absensi" value="{{ old('tanggal_absensi') }}">
                     <div class="input-group-append col-md-2" data-target="#datepicker" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>

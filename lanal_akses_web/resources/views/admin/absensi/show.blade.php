@@ -36,7 +36,7 @@
                 <div class="col-md-6">
                     @foreach ($statusKehadiran as $item)
                     @if ($item == $detailPresensiAnggota->status_kehadiran)
-                        <p class="btn btn-{{ $bgStatusKehadiran[$loop->iteration-1] }} text-uppercase py-3 px-4">{{ $detailPresensiAnggota->status_kehadiran }}</p>
+                        <p class="btn btn-{{ $bgStatusKehadiran[$item] }} text-uppercase py-3 px-4">{{ $detailPresensiAnggota->status_kehadiran }}</p>
                     @endif
                     @endforeach
                 </div>
@@ -121,16 +121,11 @@
                                     <td width="20%">{{ $datariwayatPresensiAnggota->personil_id == null? $datariwayatPresensiAnggota->pegawai->nama_pegawai : $datariwayatPresensiAnggota->personil->nama_lengkap }}</td>
                                     <td width="15%">{{ $datariwayatPresensiAnggota->tanggal_kehadiran }}</td>
                                     <td width="15%" class="text-center">
-                                        @foreach ($statusKehadiran as $item)
-                                        @if ($datariwayatPresensiAnggota->status_kehadiran == $item)
-                                        <div class="m-1 py-1 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$loop->iteration-1] }}">
-                                            <p class="px-0  m-0" style="">{{ $item}}</p>
-                                            <i class="fa-solid fa-{{ $statusKehadiranIcon[$loop->iteration-1] }} {{ $iconColor[$loop->iteration-1] }} " style="font-size:10pt"></i>
+                                        <div class="m-1 py-1 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$datariwayatPresensiAnggota->status_kehadiran] }}">
+                                            <p class="px-0  m-0" style="">{{ $datariwayatPresensiAnggota->status_kehadiran}}</p>
+                                            <i class="fa-solid fa-{{ $statusKehadiranIcon[$datariwayatPresensiAnggota->status_kehadiran] }} {{ $iconColor[$datariwayatPresensiAnggota->status_kehadiran] }} " style="font-size:10pt"></i>
                                         </div>
-                                        @else
-                                        
-                                        @endif
-                                        @endforeach    
+                                         
                                     </td>
                                     <td width="10%">{{ $datariwayatPresensiAnggota->jam_masuk == null? '-' : $datariwayatPresensiAnggota->jam_masuk }}</td>
                                     <td width="10%">{{ $datariwayatPresensiAnggota->jam_pulang == null? '-' : $datariwayatPresensiAnggota->jam_pulang}}</td>
