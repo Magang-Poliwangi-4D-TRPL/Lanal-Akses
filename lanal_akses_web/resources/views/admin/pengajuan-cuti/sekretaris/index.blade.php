@@ -29,7 +29,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Personil</th>
+                                <th>Nama Anggota</th>
+                                <th>No. Identitas</th>
                                 <th>Tanggal Mulai</th>
                                 <th>Tanggal Selesai</th>
                                 <th>Status</th>
@@ -40,7 +41,20 @@
                             @forelse($pengajuanMenunggu as $pengajuan)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $pengajuan->personil->nama_lengkap }}</td>
+                                    <td>
+                                        @empty($pengajuan->dataCutiPersonel->personil->nama_lengkap)
+                                        {{ $pengajuan->dataCutiPegawai->pegawai->nama_pegawai }}
+                                        @else
+                                        {{ $pengajuan->dataCutiPersonel->personil->nama_lengkap  }}
+                                        @endempty
+                                    </td>
+                                    <td>
+                                        @empty($pengajuan->dataCutiPersonel->personil->nrp)
+                                        {{ $pengajuan->dataCutiPegawai->pegawai->nip }}
+                                        @else
+                                        {{ $pengajuan->dataCutiPersonel->personil->nrp  }}
+                                        @endempty
+                                    </td>
                                     <td>{{ $pengajuan->tanggal_mulai_cuti }}</td>
                                     <td>{{ $pengajuan->tanggal_selesai_cuti }}</td>
 
@@ -88,7 +102,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Personil</th>
+                                <th>Nama Anggota</th>
+                                <th>No. Identitas</th>
                                 <th>Tanggal Mulai</th>
                                 <th>Tanggal Selesai</th>
                                 <th>Respon Anda</th>
@@ -100,7 +115,20 @@
                             @forelse($pengajuanSelesai as $pengajuan)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $pengajuan->personil->nama_lengkap }}</td>
+                                    <td>
+                                        @empty($pengajuan->dataCutiPersonel->personil->nama_lengkap)
+                                        {{ $pengajuan->dataCutiPegawai->pegawai->nama_pegawai }}
+                                        @else
+                                        {{ $pengajuan->dataCutiPersonel->personil->nama_lengkap  }}
+                                        @endempty
+                                    </td>
+                                    <td>
+                                        @empty($pengajuan->dataCutiPersonel->personil->nrp)
+                                        {{ $pengajuan->dataCutiPegawai->pegawai->nip }}
+                                        @else
+                                        {{ $pengajuan->dataCutiPersonel->personil->nrp  }}
+                                        @endempty
+                                    </td>
                                     <td>{{ $pengajuan->tanggal_mulai_cuti }}</td>
                                     <td>{{ $pengajuan->tanggal_selesai_cuti }}</td>
                                     @php

@@ -29,17 +29,12 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-
         $request->session()->regenerate();
-
         if (auth()->user()->hasRole('personel|pegawai')) {
-            # code...
             return redirect()->route('personil.dashboard');
         } else {
-            # code...
             return redirect()->route('admin.dashboard');
         }
-        
     }
 
     /**

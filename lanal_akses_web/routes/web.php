@@ -84,6 +84,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/personel/pengajuan-cuti/riwayat-pengajuan-cuti/create', [PersonilPengajuanCutiController::class, 'create'])->name('personil.pengajuan-cuti.create');
     Route::post('/personel/pengajuan-cuti/riwayat-pengajuan-cuti/store', [PersonilPengajuanCutiController::class, 'store'])->name('personil.pengajuan-cuti.store');
     Route::get('/personel/pengajuan-cuti/riwayat-pengajuan-cuti/{id}', [PersonilPengajuanCutiController::class, 'show'])->name('personil.pengajuan-cuti.detail');
+    Route::get('/personel/pengajuan-cuti/cetak-surat-cuti/{id}', [PersonilPengajuanCutiController::class, 'cetak_surat_cuti'])->name('personil.pengajuan-cuti.cetak-surat-cuti');
 
     // Personil -> PendidikanFormal
     Route::get('/personel/{nrp}/pendidikan-formal', [PersonilPendidikanFormalController::class, 'index'])->name('personel.pendidikanformal.index');
@@ -206,7 +207,7 @@ Route::get('/personel/absensi/success-absensi-masuk', [PublicController::class, 
 
 
 // == CONTROLLER FOR ALL ADMIN PAGE ==
-Route::group(['middleware' => ['auth:web', 'permission:can access all|manage personel|manage pegawai|read personel|read pegawai']], function () {
+Route::group(['middleware' => ['auth:web', 'role:pasmin|kaakun|paspotmar|palaksa|pasintel|kasatkom|pasprogar|danposal|komandan|paset|admin']], function () {
     Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
 
     Route::middleware(['role:komandan|paset|admin|pasmin|kaakun|paspotmar|palaksa|pasintel|kasatkom|pasprogar|danposal'])->group(function () {
@@ -326,10 +327,7 @@ Route::group(['middleware' => ['auth:web', 'permission:can access all|manage per
     Route::post('/admin/personil/show/{nrp}/akun', [AkunPersonilController::class, 'store'])->name('admin.personil.akun.store');
     Route::get('/admin/personil/show/{nrp}/akun/{akunId}/edit', [AkunPersonilController::class, 'edit'])->name('admin.personil.akun.edit');
     Route::put('/admin/personil/show/{nrp}/akun/{akunId}/update', [AkunPersonilController::class, 'update'])->name('admin.personil.akun.update');
-    // Route::delete('/admin/personil/show/{nrp}/akun/{akunId}', [AkunPersonilController::class, 'destroy'])
-    // ->name('admin.personil.akun.destroy');
-    Route::group(['middleware' => ['permission:can access all|manage role|manage permission']], function () {
-    });
+    
     Route::group(['middleware' => ['permission:can access all|manage role']], function () {
         Route::get('admin/role', [RoleController::class, 'index'])->name('admin.role.index');
         Route::get('admin/role/create', [RoleController::class, 'create'])->name('admin.role.create');
@@ -346,6 +344,8 @@ Route::group(['middleware' => ['auth:web', 'permission:can access all|manage per
         Route::put('admin/permission/edit/{idPermission}', [PermissionController::class, 'update'])->name('admin.permission.update');
         Route::delete('admin/permission/{idPermission}', [PermissionController::class, 'destroy'])->name('admin.permission.delete');
     });
+    // Route::delete('/admin/personil/show/{nrp}/akun/{akunId}', [AkunPersonilController::class, 'destroy'])
+    // ->name('admin.personil.akun.destroy');
 
     // Personil -> Informasi Keluarga
     Route::get('/admin/personil/show/{nrp}/informasi-keluarga', [InformasiKeluargaController::class, 'index'])->name('admin.personil.informasi-keluarga.index');
@@ -473,9 +473,12 @@ Route::group(['middleware' => ['auth:web', 'permission:can access all|manage per
    
     Route::group(['middleware' => ['permission:can access all', 'role:admin|komandan']], function () {
         Route::get('admin/pengajuan-cuti', [PengajuanCutiController::class, 'index'])->name('admin.surat-cuti.index');
-        Route::get('admin/pengajuan-cuti/show/{id}', [PengajuanCutiController::class, 'show'])->name('admin.surat-cuti.show');
         // Route::get('/admin/pengajuan-cuti/buat', [PengajuanCutiController::class, 'tambah'])->name('admin.surat-cuti.tambah');
         
+        Route::put('admin/pengajuan-cuti/edit/{id}', [PengajuanCutiController::class, 'update'])->name('admin.surat-cuti.update');
+        Route::get('admin/pengajuan-cuti/edit/{id}', [PengajuanCutiController::class, 'edit'])->name('admin.surat-cuti.edit');
+        
+        Route::get('admin/pengajuan-cuti/show/{id}', [PengajuanCutiController::class, 'show'])->name('admin.surat-cuti.show');
         Route::post('admin/pengajuan-cuti', [PengajuanCutiController::class, 'store'])->name('admin.surat-cuti.store');
         Route::get('admin/pengajuan-cuti/create', [PengajuanCutiController::class, 'tambah'])->name('admin.surat-cuti.create');
 

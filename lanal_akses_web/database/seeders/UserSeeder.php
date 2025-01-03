@@ -44,6 +44,8 @@ class UserSeeder extends Seeder
             $role_paset = Role::create(['name' => 'paset']);
             $role_kaakun = Role::create(['name' => 'kaakun']);
     
+            $manage_role_permission = Permission::create(['name' =>'manage role']);
+            $manage_permission_permission = Permission::create(['name' =>'manage permission']);
             $manage_personel_permission = Permission::create(['name' =>'manage personel']);
             $manage_pegawai_permission = Permission::create(['name' =>'manage pegawai']);
             $read_personel_permission = Permission::create(['name' =>'read personel']);

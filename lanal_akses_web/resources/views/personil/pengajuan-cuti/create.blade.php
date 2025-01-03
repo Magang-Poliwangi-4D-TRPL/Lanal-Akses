@@ -5,6 +5,29 @@
 @section('content')
 <div class="container">
     <div class="bg-white mb-5 overflow-hidden shadow-sm sm:rounded-lg">
+        @if (Session::get('alert'))
+            <div class="alert alert-danger">
+                {{ Session::get('alert') }}
+            </div>
+        @endif
+    
+        @if (Session::get('success'))
+            <div class="alert alert-success">
+                {{ Session::get('success') }}
+            </div>
+        @endif
+    
+        @if (Session::get('warning'))
+            <div class="alert alert-warning">
+                {{ Session::get('warning') }}
+            </div>
+        @endif
+    
+        @if (Session::get('error'))
+            <div class="alert alert-danger">
+                {{ Session::get('error') }}
+            </div>
+        @endif
         <div class="container py-4">
             <form method="POST" action="{{ route('personil.pengajuan-cuti.store') }}">
                 @csrf

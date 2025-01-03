@@ -53,17 +53,16 @@
             <h4 class="h4">Profil Anggota</h4>
             <div class="row justify-content-start">
                 <div class="col-md-2 ">
-                    @empty($suratPengajuan->personil->image_url)
+                    @empty($suratPengajuan->dataCutiPersonel->personil->image_url)
                         <img src="{{  URL::asset('images/admin/default-profile.jpg') }}" alt="default-profile" border="0" height="auto" class="rounded-circle image-profile">
                         
                     @else
-                        <img src="{{ asset($suratPengajuan->personil->image_url) }}" alt="Profil {{ $suratPengajuan->personil->nama_lengkap }}" border="0" height="auto" class="rounded image-profile">
+                        <img src="{{ asset($suratPengajuan->dataCutiPersonel->personil->image_url) }}" alt="Profil {{ $suratPengajuan->dataCutiPersonel->personil->nama_lengkap }}" border="0" height="auto" class="rounded image-profile">
                     @endempty
                 </div>
-                <div class="col-md-8 align-item-start ">
-                    <h4><b>{{ $suratPengajuan->personil->nama_lengkap }}</b></h4>
-                    <p class="text-secondary">{{ $suratPengajuan->personil->nrp }}</p>
-                    <a class="btn btn-sm btn-light" href="{{ route('admin.personil.show', $suratPengajuan->personil->nrp) }}" target="_blank" rel="noopener noreferrer">Lihat Profil Anggota</a>
+                <div class="col-md-8 align-item-center my-auto ">
+                    <h4><b>{{ $suratPengajuan->dataCutiPersonel->personil->nama_lengkap }}</b></h4>
+                    <p class="text-secondary">{{ $suratPengajuan->dataCutiPersonel->personil->nrp }}</p>
                 </div>
             </div>
             <h5 class="h5 text-secondary mt-4">Detail Surat Pengajuan Cuti</h5>

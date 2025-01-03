@@ -16,7 +16,6 @@ class CreatePengajuanCutiModelsTable extends Migration
         Schema::create('pengajuan_cuti', function (Blueprint $table) {
             $table->id();
             $table->string('nomor_surat')->nullable();
-            $table->foreignId('personil_id');
             $table->date('tanggal_mulai_cuti');
             $table->date('tanggal_selesai_cuti');
             $table->foreignId('cuti_id');

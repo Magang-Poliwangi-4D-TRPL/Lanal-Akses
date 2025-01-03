@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CutiModel;
+use App\Models\DataCutiPegawaiModel;
 use App\Models\DataCutiPersonelModel;
+use App\Models\KehadiranModel;
+use App\Models\PegawaiModel;
 use App\Models\PengajuanCutiModel;
 use App\Models\PersonilModel;
 use App\Models\ResponCutiModel;
 use App\Models\SisaCutiModel;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -41,6 +45,7 @@ class PengajuanCutiController extends Controller
     public function tambah(){
         // Mengambil hanya kolom 'id', 'nama', dan 'nrp' untuk personil
     $personilList = PersonilModel::select('id', 'nama_lengkap', 'nrp')->get();
+    $pegawaiList = PegawaiModel::select('id', 'nama_pegawai', 'nip')->get();
 
     // Mengambil semua role, lalu mengecualikan role 'PersonilModel' dan 'pegawai'
     $excludedRoles = ['personel', 'pegawai', 'admin'];
@@ -58,13 +63,14 @@ class PengajuanCutiController extends Controller
 
     $dataCuti = CutiModel::all();
 
-    return view('admin.pengajuan-cuti.tambah', compact('personilList', 'atasanList', 'dataCuti'));
+    return view('admin.pengajuan-cuti.tambah', compact('personilList','pegawaiList', 'atasanList', 'dataCuti'));
     }
 
     public function store(Request $request){
         // Validasi input
         $request->validate([
-            'personil_id' => 'required|exists:personil,id',
+            'personil_id' => 'nullable|exists:personil,id',
+            'pegawai_id' => 'nullable|exists:pegawai,id',
             'tanggal_mulai_cuti' => 'required|date|after_or_equal:today',
             'tanggal_selesai_cuti' => 'required|date|after_or_equal:tanggal_mulai_cuti',
             'atasan_id' => 'required|exists:personil,id',
@@ -76,6 +82,12 @@ class PengajuanCutiController extends Controller
             'tanggal_mulai_cuti.after_or_equal' => 'Tanggal mulai cuti tidak boleh sebelum hari ini!',
             'tanggal_selesai_cuti.after_or_equal' => 'Tanggal selesai cuti tidak boleh sebelum tanggal mulai cuti!',
         ]);
+
+        
+        if (!$request->personil_id && !$request->pegawai_id) {
+            return redirect()->back()->with('alert', 'Harap pilih personil atau pegawai!');
+        } 
+    
 
         $jenisCuti = CutiModel::where('kode_cuti', $request->jenis_cuti)->first();
         $jumlahHariYangDiambil = $this->calculateDays($request->tanggal_mulai_cuti, $request->tanggal_selesai_cuti);
@@ -91,7 +103,6 @@ class PengajuanCutiController extends Controller
         // dd($request);
     
         // Ambil data personil dan jenis cuti terkait
-        $personil = PersonilModel::find($request->personil_id);
         $komandan = PersonilModel::whereHas('user', function($query) {
             $query->role('komandan');
         })->first();
@@ -104,7 +115,6 @@ class PengajuanCutiController extends Controller
 
         // Simpan pengajuan cuti
         $pengajuanCuti = new PengajuanCutiModel();
-        $pengajuanCuti->personil_id = $request->personil_id;
         $pengajuanCuti->tanggal_mulai_cuti = $request->tanggal_mulai_cuti;
         $pengajuanCuti->tanggal_selesai_cuti = $request->tanggal_selesai_cuti;
         $pengajuanCuti->cuti_id = $jenisCuti->id;
@@ -131,15 +141,25 @@ class PengajuanCutiController extends Controller
             'status_komandan' => 'Menunggu Persetujuan',
         ]);
 
-        
-        $dataCutiPersonel = DataCutiPersonelModel::create([
-            "personil_id" => $request->personil_id,
-            "cuti_id" => $jenisCuti->id,
-            "pengajuan_cuti_id" => $pengajuanCuti->id,
-            'tanggal_mulai' => $request->tanggal_mulai_cuti,
-            'tanggal_selesai' => $request->tanggal_selesai_cuti,
-            'jumlah_hari' => $jumlahHariYangDiambil,
-        ]);
+        if ($request->personil_id != null) {
+            $dataCutiPersonel = DataCutiPersonelModel::create([
+                "personil_id" => $request->personil_id,
+                "cuti_id" => $jenisCuti->id,
+                "pengajuan_cuti_id" => $pengajuanCuti->id,
+                'tanggal_mulai' => $request->tanggal_mulai_cuti,
+                'tanggal_selesai' => $request->tanggal_selesai_cuti,
+                'jumlah_hari' => $jumlahHariYangDiambil,
+            ]);
+        } elseif ($request->pegawai_id != null) {
+            $dataCutiPegawai = DataCutiPegawaiModel::create([
+                "pegawai_id" => $request->pegawai_id,
+                "cuti_id" => $jenisCuti->id,
+                "pengajuan_cuti_id" => $pengajuanCuti->id,
+                'tanggal_mulai' => $request->tanggal_mulai_cuti,
+                'tanggal_selesai' => $request->tanggal_selesai_cuti,
+                'jumlah_hari' => $jumlahHariYangDiambil,
+            ]);
+        } 
     
         return redirect()->route('admin.surat-cuti.index')->with('success', 'Pengajuan cuti berhasil dibuat.');
     }
@@ -155,6 +175,29 @@ class PengajuanCutiController extends Controller
         }
 
         return view('admin.pengajuan-cuti.show', compact('suratPengajuan'));
+    }
+
+    public function edit($id) {
+        $suratPengajuan = PengajuanCutiModel::find($id);
+        if ($suratPengajuan == null) {
+            return abort('404', 'Surat cuti tidak ditemukan');
+        }
+
+        $excludedRoles = ['personel', 'pegawai', 'admin'];
+        $roles = Role::whereNotIn('name', $excludedRoles)->pluck('name');
+        // Mengambil personil yang memiliki user dengan role selain 'personil' dan 'pegawai'
+        $atasanList = User::with('personil')
+        ->whereHas('roles', function ($query) use ($excludedRoles) {
+            $query->whereNotIn('name', $excludedRoles);
+        })
+        ->whereNotNull('personil_id') // Hanya user yang memiliki relasi dengan personil
+        ->join('personil', 'users.personil_id', '=', 'personil.id')
+        ->select('personil.id as id', 'personil.nama_lengkap', 'personil.nrp')
+        ->get();
+
+        
+        $dataCuti = CutiModel::all();
+        return view('admin.pengajuan-cuti.edit', compact('suratPengajuan', 'atasanList', 'dataCuti'));
     }
 
 
@@ -226,9 +269,6 @@ class PengajuanCutiController extends Controller
         } elseif($request->status_atasan == "Ditolak") {
             $responCuti->update([
                 'status_atasan' => $request->status_atasan,
-                'status_palaksa' => $request->status_atasan,
-                'status_sekretaris' => $request->status_atasan,
-                'status_komandan' => $request->status_atasan,
                 'keterangan_atasan' => $request->keterangan_atasan
             ]);
     
@@ -305,8 +345,6 @@ class PengajuanCutiController extends Controller
         } elseif($request->status_palaksa == "Ditolak") {
             $responCuti->update([
                 'status_palaksa' => $request->status_palaksa,
-                'status_sekretaris' => $request->status_palaksa,
-                'status_komandan' => $request->status_palaksa,
                 'keterangan_palaksa' => $request->keterangan_palaksa
             ]);
     
@@ -371,41 +409,86 @@ class PengajuanCutiController extends Controller
 
         $responCuti = ResponCutiModel::where('pengajuan_cuti_id', $id)->get()->first();
 
-        if ($request->status_sekretaris == "Disetujui") {
-            $responCuti->update([
-                'status_sekretaris' => $request->status_sekretaris,
-                'keterangan_sekretaris' => $request->keterangan_sekretaris
-            ]);
-
-            if ($request->nomor_surat != null) {
-                # code...
-                $suratPengajuan->update([
-                    'status' => "Disetujui Sekretaris",
-                    'nomor_surat' => $request->nomor_surat,
+        if ($responCuti->atasan_id == $responCuti->sekretaris_id) {
+            // dd('ya atasan dan sekretaris sama');
+            
+            if ($request->status_sekretaris == "Disetujui") {
+                $responCuti->update([
+                    'status_atasan' => $request->status_sekretaris,
+                    'keterangan_atasan' => $request->keterangan_sekretaris,
+                    'status_sekretaris' => $request->status_sekretaris,
+                    'keterangan_sekretaris' => $request->keterangan_sekretaris
                 ]);
+    
+                if ($request->nomor_surat != null) {
+                    
+                    $suratPengajuan->update([
+                        'status' => "Disetujui Sekretaris",
+                        'nomor_surat' => $request->nomor_surat,
+                    ]);
+                } else {
+                    $suratPengajuan->update([
+                        'status' => "Disetujui Sekretaris",
+                    ]);
+                }
+        
+                return redirect()->route('admin.surat-cuti.sekretaris.index')->with('success', 'Respon anda berhasil direkam.');
+            } elseif($request->status_sekretaris == "Ditolak") {
+                $responCuti->update([
+                    'status_sekretaris' => $request->status_sekretaris,
+                    'status_komandan' => $request->status_sekretaris,
+                    'keterangan_sekretaris' => $request->keterangan_sekretaris
+                ]);
+        
+                $suratPengajuan->update([
+                    'status' => "Ditolak",
+                    'keterangan' => $suratPengajuan->keterangan . "\n pesan sekretaris:" . $request->keterangan_sekretaris
+                ]);
+        
+                return redirect()->route('admin.surat-cuti.sekretaris.index')->with('success', 'Respon anda berhasil direkam.');
             } else {
-                $suratPengajuan->update([
-                    'status' => "Disetujui Sekretaris",
-                ]);
+                return redirect()->route('admin.surat-cuti.sekretaris.index')->with('error', 'Maaf sepertinya terdapat kesalahan pada respon anda');
             }
-    
-            return redirect()->route('admin.surat-cuti.sekretaris.index')->with('success', 'Respon anda berhasil direkam.');
-        } elseif($request->status_sekretaris == "Ditolak") {
-            $responCuti->update([
-                'status_sekretaris' => $request->status_sekretaris,
-                'status_komandan' => $request->status_sekretaris,
-                'keterangan_sekretaris' => $request->keterangan_sekretaris
-            ]);
-    
-            $suratPengajuan->update([
-                'status' => "Ditolak",
-                'keterangan' => $suratPengajuan->keterangan . "\n pesan sekretaris:" . $request->keterangan_sekretaris
-            ]);
-    
-            return redirect()->route('admin.surat-cuti.sekretaris.index')->with('success', 'Respon anda berhasil direkam.');
         } else {
-            return redirect()->route('admin.surat-cuti.sekretaris.index')->with('error', 'Maaf sepertinya terdapat kesalahan pada respon anda');
+            // dd('tidak, atasan dan sekretaris tidak sama');
+            if ($request->status_sekretaris == "Disetujui") {
+                $responCuti->update([
+                    'status_sekretaris' => $request->status_sekretaris,
+                    'keterangan_sekretaris' => $request->keterangan_sekretaris
+                ]);
+    
+                if ($request->nomor_surat != null) {
+                    
+                    $suratPengajuan->update([
+                        'status' => "Disetujui Sekretaris",
+                        'nomor_surat' => $request->nomor_surat,
+                    ]);
+                } else {
+                    $suratPengajuan->update([
+                        'status' => "Disetujui Sekretaris",
+                    ]);
+                }
+        
+                return redirect()->route('admin.surat-cuti.sekretaris.index')->with('success', 'Respon anda berhasil direkam.');
+            } elseif($request->status_sekretaris == "Ditolak") {
+                $responCuti->update([
+                    'status_sekretaris' => $request->status_sekretaris,
+                    'status_komandan' => $request->status_sekretaris,
+                    'keterangan_sekretaris' => $request->keterangan_sekretaris
+                ]);
+        
+                $suratPengajuan->update([
+                    'status' => "Ditolak",
+                    'keterangan' => $suratPengajuan->keterangan . "\n pesan sekretaris:" . $request->keterangan_sekretaris
+                ]);
+        
+                return redirect()->route('admin.surat-cuti.sekretaris.index')->with('success', 'Respon anda berhasil direkam.');
+            } else {
+                return redirect()->route('admin.surat-cuti.sekretaris.index')->with('error', 'Maaf sepertinya terdapat kesalahan pada respon anda');
+            }
         }
+        
+
         
     }
 
@@ -428,8 +511,7 @@ class PengajuanCutiController extends Controller
 
         $suratPengajuan->update([
             'nomor_surat' => $request->nomor_surat,
-        ]);
-
+        ]);   
 
         return redirect()->route('admin.surat-cuti.sekretaris.index')->with('success', 'Berhasil memperbarui nomor surat cuti.');
     }
@@ -477,8 +559,75 @@ class PengajuanCutiController extends Controller
         }
 
         $responCuti = ResponCutiModel::where('pengajuan_cuti_id', $id)->get()->first();
-
+        $dataAnggota = null;
+        $dataKehadiranAnggota = null;
+        if ($suratPengajuan->dataCutiPersonel != null) {
+            $dataAnggota = PersonilModel::find($suratPengajuan->dataCutiPersonel->personil_id);
+            $dataKehadiranAnggota = KehadiranModel::whereBetween('tanggal_kehadiran',[$suratPengajuan->tanggal_mulai_cuti, $suratPengajuan->tanggal_selesai_cuti])->where('personil_id', $dataAnggota->id)->get();
+        } elseif ($suratPengajuan->dataCutiPegawai != null) {
+            $dataAnggota = PersonilModel::find($suratPengajuan->dataCutiPegawai->pegawai_id);
+            $dataKehadiranAnggota = KehadiranModel::whereBetween('tanggal_kehadiran',[$suratPengajuan->tanggal_mulai_cuti, $suratPengajuan->tanggal_selesai_cuti])->where('pegawai_id', $dataAnggota->id)->get();
+        } else {
+            return redirect()->route('admin.surat-cuti.komandan.index')->with('error', 'Data kehadiran anggota gagal dibuat karena terdapat kesalahan sistem!');
+        }
+        
         if ($request->status_komandan == "Disetujui") {
+            
+            $jumlahHariYangDiambil = $this->calculateDays($suratPengajuan->tanggal_mulai_cuti, $suratPengajuan->tanggal_selesai_cuti);
+            if ($dataKehadiranAnggota->count() == $jumlahHariYangDiambil) {
+                for ($i=0; $i < $jumlahHariYangDiambil; $i++) { 
+                    $kehadiran = $dataKehadiranAnggota[$i];
+                    // dd($kehadiran);
+                    $kehadiran->update([
+                        'status_kehadiran' => $suratPengajuan->cuti->nama_cuti,
+                    ]);
+                }
+            } elseif ($dataKehadiranAnggota->count() == null) {
+                for ($i=0; $i < $jumlahHariYangDiambil; $i++) { 
+                    if ($suratPengajuan->dataCutiPersonel != null) {
+                    
+                        KehadiranModel::create([
+                            'status_kehadiran' => $suratPengajuan->cuti->nama_cuti,
+                            'tanggal_kehadiran' => Carbon::parse($suratPengajuan->tanggal_mulai_cuti)->addDays($i),
+                            'personil_id' => $dataAnggota->id,        
+                        ]);
+                    } elseif ($suratPengajuan->dataCutiPegawai != null) {
+                        KehadiranModel::create([
+                            'status_kehadiran' => $suratPengajuan->cuti->nama_cuti,
+                            'tanggal_kehadiran' => Carbon::parse($suratPengajuan->tanggal_mulai_cuti)->addDays($i),
+                            'pegawai_id' => $dataAnggota->id,        
+                        ]);
+                    
+                    }
+                }
+            } elseif ($dataKehadiranAnggota->count() != $jumlahHariYangDiambil) {
+                for ($i=0; $i < $jumlahHariYangDiambil; $i++) { 
+                    if ($i < $dataKehadiranAnggota->count()) {
+                        $kehadiran = $dataKehadiranAnggota[$i];
+                        $kehadiran->update([
+                            'status_kehadiran' => $suratPengajuan->cuti->nama_cuti,
+                        ]);
+                    } else {
+                        if ($suratPengajuan->dataCutiPersonel != null) {
+                    
+                            KehadiranModel::create([
+                                'status_kehadiran' => $suratPengajuan->cuti->nama_cuti,
+                                'tanggal_kehadiran' => Carbon::parse($suratPengajuan->tanggal_mulai_cuti)->addDays($i),
+                                'personil_id' => $dataAnggota->id,        
+                            ]);
+                        } elseif ($suratPengajuan->dataCutiPegawai != null) {
+                            KehadiranModel::create([
+                                'status_kehadiran' => $suratPengajuan->cuti->nama_cuti,
+                                'tanggal_kehadiran' => Carbon::parse($suratPengajuan->tanggal_mulai_cuti)->addDays($i),
+                                'pegawai_id' => $dataAnggota->id,        
+                            ]);
+                        
+                        }
+                    }
+                }
+            }
+            
+
             $responCuti->update([
                 'status_komandan' => $request->status_komandan,
                 'keterangan_komandan' => $request->keterangan_komandan
@@ -487,7 +636,6 @@ class PengajuanCutiController extends Controller
             $suratPengajuan->update([
                 'status' => "Disetujui Komandan",
             ]);
-    
             return redirect()->route('admin.surat-cuti.komandan.index')->with('success', 'Respon anda berhasil direkam.');
         } elseif($request->status_komandan == "Ditolak") {
             $responCuti->update([

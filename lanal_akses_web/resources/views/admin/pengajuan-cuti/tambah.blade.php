@@ -34,16 +34,45 @@
             <form method="POST" action="{{ route('admin.surat-cuti.store') }}">
                 @csrf
 
+                <!-- Radio Button for Selecting Personil or Pegawai -->
+                <div class="form-group">
+                    <label>Pilih Jenis Pengajuan</label><br>
+                    <div>
+                        <input type="radio" id="selectPersonil" name="type" value="personil" checked>
+                        <label for="selectPersonil">Personil</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="selectPegawai" name="type" value="pegawai">
+                        <label for="selectPegawai">Pegawai</label>
+                    </div>
+                </div>
+
                 <!-- Pilih Personil -->
                 <div class="form-group">
                     <label for="personil_id">Pilih Personil</label>
-                    <select class="form-control select2 @error('personil_id') is-invalid @enderror" id="personil_id" name="personil_id" required>
+                    <select class="form-control select2 @error('personil_id') is-invalid @enderror" id="personil_id" name="personil_id" >
                         <option value="">Cari dan pilih personil</option>
                         @foreach($personilList as $personil)
                             <option class="text-black" value="{{ $personil->id }}" {{ old('personil_id') == $personil->id ? 'selected' : '' }}>{{ $personil->nama_lengkap }}</option>
                         @endforeach
                     </select>
                     @error('personil_id')
+                    <div class="alert alert-danger" role="alert">
+                        <p class="p-0 m-0">{{ $message }}</p>
+                    </div>
+                    @enderror
+                </div>
+
+                <!-- Pilih Pegawai -->
+                <div class="form-group">
+                    <label for="pegawai_id">Pilih Pegawai</label>
+                    <select class="form-control select2 @error('pegawai_id') is-invalid @enderror" id="pegawai_id" name="pegawai_id" >
+                        <option value="">Cari dan pilih pegawai</option>
+                        @foreach($pegawaiList as $pegawai)
+                            <option class="text-black" value="{{ $pegawai->id }}" {{ old('pegawai_id') == $pegawai->id ? 'selected' : '' }}>{{ $pegawai->nama_pegawai }}</option>
+                        @endforeach
+                    </select>
+                    @error('pegawai_id')
                     <div class="alert alert-danger" role="alert">
                         <p class="p-0 m-0">{{ $message }}</p>
                     </div>
@@ -156,4 +185,31 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const personilRadio = document.getElementById('selectPersonil');
+        const pegawaiRadio = document.getElementById('selectPegawai');
+        const personilField = document.getElementById('personil_id');
+        const pegawaiField = document.getElementById('pegawai_id');
+
+        function toggleFields() {
+            if (personilRadio.checked) {
+                personilField.disabled = false;
+                pegawaiField.disabled = true;
+            } else if (pegawaiRadio.checked) {
+                personilField.disabled = true;
+                pegawaiField.disabled = false;
+            }
+        }
+
+        // Attach event listeners to radio buttons
+        personilRadio.addEventListener('change', toggleFields);
+        pegawaiRadio.addEventListener('change', toggleFields);
+
+        // Initialize fields on page load
+        toggleFields();
+    });
+</script>
+
 @endsection

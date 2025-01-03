@@ -21,9 +21,14 @@ class PengajuanCutiModel extends Model
         return $this->belongsTo(CutiModel::class, 'cuti_id');
     }
 
-    public function data_cuti_personel()
+    public function dataCutiPersonel()
     {
-        return $this->belongsTo(DataCutiPersonelModel::class, 'pengajuan_cuti_id');
+        return $this->hasOne(DataCutiPersonelModel::class, 'pengajuan_cuti_id');
+    }
+
+    public function dataCutiPegawai()
+    {
+        return $this->hasOne(DataCutiPegawaiModel::class, 'pengajuan_cuti_id');
     }
 
     public function responCuti()

@@ -26,7 +26,11 @@
 
                 <!-- Nomor Surat -->
                 <div class="form-group">
-                    <h4>Edit Nomor Surat untuk Pengajuan Cuti {{ $suratPengajuan->personil->nama_lengkap }}</h4>
+                    @empty($suratPengajuan->dataCutiPersonel->id)
+                    <h4>Edit Nomor Surat untuk Pengajuan Cuti {{ $suratPengajuan->dataCutiPegawai->pegawai->nama_pegawai }}</h4>
+                    @else
+                    <h4>Edit Nomor Surat untuk Pengajuan Cuti {{ $suratPengajuan->dataCutipersonel->personil->nama_lengkap }}</h4>
+                    @endempty
                     <label for="nomor_surat">Nomor Surat (--/--/--)</label>
                     <input class="form-control @error('nomor_surat') is-invalid @enderror" id="nomor_surat" name="nomor_surat" placeholder="Masukkan Nomor Surat" value="{{ old('name', $suratPengajuan->nomor_surat) }}">
                     @error('nomor_surat')
@@ -38,7 +42,7 @@
             
                 <div class="row justify-content-between">
                     <div class="col-md-6">
-                        <a href="{{ route('dashboard') }}" class="btn btn-light"><i class="bi bi-arrow-left"></i> Kembali</a>
+                        <a href="{{ route('admin.surat-cuti.sekretaris.index') }}" class="btn btn-light"><i class="bi bi-arrow-left"></i> Kembali</a>
                     </div>
                     <div class="col-md-6 text-right">
                         <button type="submit" class="btn btn-primary">Submit <i class="bi bi-check-circle"></i></button>

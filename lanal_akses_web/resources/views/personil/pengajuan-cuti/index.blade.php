@@ -27,6 +27,11 @@
                 {{ Session::get('warning') }}
             </div>
         @endif
+        @if (Session::get('error'))
+            <div class="alert alert-danger">
+                {{ Session::get('error') }}
+            </div>
+        @endif
             <div class="row">
                 <div class="col-md-6">
     
@@ -37,7 +42,7 @@
                 </div>
             </div>
             <div class="row mt-3 py-3">
-                @empty ($pengajuan_saat_ini->alasan_cuti)
+                @empty ($pengajuan_saat_ini->id)
                     <div class="col-md-8 rounded bg-light p-4">  
                         <p class="my-auto">Belum ada pengajuan saat ini</p>
                     </div>
@@ -45,7 +50,7 @@
                     <div class="col-md-8 rounded bg-light p-4"> 
                         <div class="row">
                             <div class="col-md-6 p-0 my-auto">
-                                <h4 class="text-uppercase">CUTI {{ $pengajuan_saat_ini->jenis_cuti }}</h4>
+                                <h4 class="text-uppercase">{{ $pengajuan_saat_ini->cuti->nama_cuti }}</h4>
                                 <p class="text-secondary">{{ $pengajuan_saat_ini->tanggal_mulai_cuti ." s/d ". $pengajuan_saat_ini->tanggal_selesai_cuti }}</p>
                             </div>
                             <div class="col-md-4 text-center my-auto p-0">
@@ -83,7 +88,7 @@
                     @empty ($pengajuan_saat_ini)
                         
                         @if ($pengajuan_saat_ini->responCuti->status_komandan == "Disetujui")
-                        <div class="col-md-4 text-right my-auto"><button href="" class="btn btn-success"><span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span> Cetak Surat Cuti</button></div>
+                        <div class="col-md-4 text-right my-auto"><button href="{{ route('personil.pengajuan-cuti.cetak-surat-cuti', ['id' => $pengajuan_saat_ini->id]) }}" class="btn btn-success" target="_blank"><span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span> Cetak Surat Cuti</button></div>
                         
                         @else
                         <div class="col-md-4 text-right my-auto"><button disabled href="" class="btn btn-secondary"><span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span> Cetak Surat Cuti</button></div>
@@ -108,7 +113,7 @@
                         <div class="col-md-8 rounded bg-light p-4"> 
                             <div class="row">
                                 <div class="col-md-6 p-0 my-auto">
-                                    <h4 class="text-uppercase">CUTI {{ $pengajuan->jenis_cuti }}</h4>
+                                    <h4 class="text-uppercase">{{ $pengajuan->cuti->nama_cuti }}</h4>
                                     <p class="text-secondary">{{ $pengajuan->tanggal_mulai_cuti ." s/d ". $pengajuan->tanggal_selesai_cuti }}</p>
                                 </div>
                                 <div class="col-md-4 text-center my-auto p-0">
@@ -144,7 +149,7 @@
                             </div>
                         </div>
                         @if ($pengajuan->status != "Ditolak")
-                            <div class="col-md-4 text-right my-auto"><button href="" class="btn btn-success"><span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span> Cetak Surat Cuti</button></div>
+                            <div class="col-md-4 text-right my-auto"><a href="{{ route('personil.pengajuan-cuti.cetak-surat-cuti', ['id' => $pengajuan->id]) }}" class="btn btn-success" target="_blank"><span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span> Cetak Surat Cuti</a></div>
                             
                             @else
                             <div class="col-md-4 text-right my-auto"><button disabled href="" class="btn btn-secondary"><span><iconify-icon class="ml-2" icon="material-symbols:print-outline" width="16"></iconify-icon></span> Cetak Surat Cuti</button></div>
@@ -180,35 +185,6 @@
             </tbody>
         </table>
         
-        {{-- <div class="card bg-white">
-            <div class="card-body p-4">
-                @foreach ($dataCuti as $cuti)
-                    <div class="mb-3">
-                        <h6 class="text-uppercase">{{ $cuti->nama_cuti }}</h6>
-                        <div class="mb-2">
-                            <span class="badge badge-info">Batas: {{ $cuti->jumlah_hari_cuti }} hari</span>
-                            <span class="badge badge-warning">Digunakan: {{ $cuti->total_hari_diambil }} hari</span>
-                        </div>
-                        <div class="progress" style="height: 10px;">
-                            @php
-                                $percentage = ($cuti->jumlah_hari_cuti > 0) ? ($cuti->total_hari_diambil / $cuti->jumlah_hari_cuti) * 100 : 0;
-                            @endphp
-                            <div class="progress-bar 
-                                @if($percentage < 50) bg-success 
-                                @elseif($percentage < 75) bg-warning 
-                                @else bg-danger @endif"
-                                role="progressbar" 
-                                style="width: {{ $percentage }}%;" 
-                                aria-valuenow="{{ $percentage }}" 
-                                aria-valuemin="0" 
-                                aria-valuemax="100"></div>
-                        </div>
-                        <p class="mt-2">Sisa Hari: <strong>{{ $cuti->sisa_hari_cuti }}</strong> hari</p>
-                    </div>
-                    <hr>
-                @endforeach
-            </div>
-        </div> --}}
     </div>
 </div>
 <script>

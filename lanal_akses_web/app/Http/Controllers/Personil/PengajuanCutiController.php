@@ -10,8 +10,7 @@ use App\Models\PersonilModel;
 use App\Models\ResponCutiModel;
 use App\Models\SisaCutiModel;
 use Carbon\Carbon;
-use DateTime;
-use DateTimeZone;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -20,25 +19,31 @@ class PengajuanCutiController extends Controller
 {
     public function index() {
         $personelId = auth()->user()->personil->id;
+        $currentYear = date('Y');
         // Pengajuan cuti yang statusnya masih menunggu persetujuan di tahap manapun
-        $pengajuan_saat_ini = PengajuanCutiModel::where('personil_id', $personelId)->whereHas('responCuti', function ($query) {
+        $pengajuan_saat_ini = PengajuanCutiModel::whereHas('dataCutiPersonel', function ($query) use ($personelId){
+            $query->where('personil_id', $personelId);
+        })->whereHas('responCuti', function ($query) {
             $query->where('status_komandan', 'Menunggu Persetujuan');
         })->orderBy('created_at', 'DESC')->first();
-
-        // Pengajuan cuti yang sudah selesai (disetujui atau ditolak oleh komandan)
-        $riwayat_pengajuan_cuti = PengajuanCutiModel::where('personil_id', $personelId)->whereHas('responCuti', function ($query) {
+        $riwayat_pengajuan_cuti = PengajuanCutiModel::whereHas('dataCutiPersonel', function ($query) use ($personelId){
+            $query->where('personil_id', $personelId);
+        })
+        ->whereHas('responCuti', function ($query) {
             $query->where('status_komandan', 'disetujui')
                   ->orWhere('status_atasan', 'ditolak')
                   ->orWhere('status_palaksa', 'ditolak')
                   ->orWhere('status_sekretaris', 'ditolak')
                   ->orWhere('status_komandan', 'ditolak');
-        })->orderBy('created_at', 'DESC')->get();
+            })
+        ->orderBy('created_at', 'DESC')->get();
 
         
         $dataCuti = DB::table('cuti')
-        ->leftJoin('data_cuti_personel', function ($join) use ($personelId) {
+        ->leftJoin('data_cuti_personel', function ($join) use ($personelId, $currentYear) {
             $join->on('cuti.id', '=', 'data_cuti_personel.cuti_id')
-                ->where('data_cuti_personel.personil_id', '=', $personelId);
+                ->where('data_cuti_personel.personil_id', '=', $personelId)
+                ->whereYear('data_cuti_personel.created_at', '=', $currentYear);
         })
         ->select(
             'cuti.nama_cuti',
@@ -56,6 +61,7 @@ class PengajuanCutiController extends Controller
 
     public function create(){
         $personelId = auth()->user()->personil->id;
+        $currentYear = date('Y');
         $excludedRoles = ['personel', 'pegawai'];
         $roles = Role::whereNotIn('name', $excludedRoles)->pluck('name');
         // Mengambil personil yang memiliki user dengan role selain 'personil' dan 'pegawai'
@@ -63,9 +69,10 @@ class PengajuanCutiController extends Controller
             $query->role($roles);
         })->select('id', 'nama_lengkap', 'nrp')->get();
         $dataCuti = DB::table('cuti')
-        ->leftJoin('data_cuti_personel', function ($join) use ($personelId) {
+        ->leftJoin('data_cuti_personel', function ($join) use ($personelId, $currentYear) {
             $join->on('cuti.id', '=', 'data_cuti_personel.cuti_id')
-                ->where('data_cuti_personel.personil_id', '=', $personelId);
+                ->where('data_cuti_personel.personil_id', '=', $personelId)
+                ->whereYear('data_cuti_personel.created_at', '=', $currentYear);
         })
         ->select(
             'cuti.nama_cuti',
@@ -86,15 +93,48 @@ class PengajuanCutiController extends Controller
             'tanggal_mulai_cuti' => 'required|date|after_or_equal:today',
             'tanggal_selesai_cuti' => 'required|date|after_or_equal:tanggal_mulai_cuti',
             'atasan_id' => 'required|exists:personil,id',
-            'jenis_cuti' => 'required|string|max:255',
+            'jenis_cuti' => 'required',
             'alasan_cuti' => 'nullable|string|max:500',
             'no_telepon' => 'required|string|max:20',
             'alamat_cuti' => 'nullable|string|max:255',
+        ], [
+            'tanggal_mulai_cuti.after_or_equal' => 'Tanggal mulai cuti tidak boleh sebelum hari ini!',
+            'tanggal_selesai_cuti.after_or_equal' => 'Tanggal selesai cuti tidak boleh sebelum tanggal mulai cuti!',
         ]);
 
         
         // Ambil data personil dan sisa cuti terkait
-        $personil = PersonilModel::find($request->personil_id);
+        // Ambil data jenis cuti
+        $jenisCuti = CutiModel::where('kode_cuti', $request->jenis_cuti)->first();
+        if ($jenisCuti == null) {
+            return redirect()->back()->with('error', 'Data jenis cuti tidak ditemukan!');
+        }
+
+        // Hitung jumlah hari yang diajukan
+        $jumlahHariYangDiambil = $this->calculateDays($request->tanggal_mulai_cuti, $request->tanggal_selesai_cuti);
+
+        // Ambil total hari cuti yang sudah digunakan untuk jenis cuti ini
+        $totalHariYangSudahDiambil = DataCutiPersonelModel::where('personil_id', $request->personil_id)
+            ->where('cuti_id', $jenisCuti->id)
+            ->whereHas('pengajuan_cuti', function ($query) {
+                $query->where('status', 'Disetujui Komandan');
+            })
+            ->sum('jumlah_hari');
+
+        // Hitung sisa hari yang bisa diambil
+        $sisaHariYangBisaDiambil = $jenisCuti->jumlah_hari_cuti - $totalHariYangSudahDiambil;
+        
+        // Validasi apakah jumlah hari yang diajukan melebihi batas sisa hari cuti
+        if ($jumlahHariYangDiambil > $sisaHariYangBisaDiambil) {
+            
+            return redirect()->back()->with('error', 
+                "Jumlah hari yang diambil melebihi batas jumlah hari cuti yang dipilih! \n" .
+                "Jumlah hari yang diambil: " . $jumlahHariYangDiambil . "\n" .
+                "Batas hari yang diperbolehkan: " . $totalHariYangSudahDiambil
+            );
+        }
+
+
         $komandan = PersonilModel::whereHas('user', function($query) {
             $query->role('komandan');
         })->first();
@@ -106,28 +146,12 @@ class PengajuanCutiController extends Controller
         })->first();
         $sisaCuti = SisaCutiModel::where('personil_id', $request->personil_id)->first();
     
-        // Jenis cuti yang tidak mengurangi sisa cuti tahunan
-        $jenisCutiTanpaPengurangan = ['melahirkan', 'ibadah haji', 'dinas lama', 'hamil'];
-    
-        // Cek apakah cuti mengurangi sisa cuti tahunan atau tidak
-        if (!in_array($request->jenis_cuti, $jenisCutiTanpaPengurangan)) {
-            // Jenis cuti mengurangi sisa cuti tahunan, cek apakah sisa cuti cukup
-            if ($sisaCuti && ($sisaCuti->sisa_cuti - $this->calculateDays($request->tanggal_mulai_cuti, $request->tanggal_selesai_cuti)) < 0) {
-                return redirect()->back()->withErrors(['message' => 'Sisa cuti tidak mencukupi.']);
-            }
-    
-            // Update sisa cuti jika jenis cuti mengurangi sisa cuti tahunan
-            $sisaCuti->update([
-                'sisa_cuti' => $sisaCuti->sisa_cuti - $this->calculateDays($request->tanggal_mulai_cuti, $request->tanggal_selesai_cuti)
-            ]);
-        }
     
         // Simpan pengajuan cuti
         $pengajuanCuti = new PengajuanCutiModel();
-        $pengajuanCuti->personil_id = $request->personil_id;
         $pengajuanCuti->tanggal_mulai_cuti = $request->tanggal_mulai_cuti;
         $pengajuanCuti->tanggal_selesai_cuti = $request->tanggal_selesai_cuti;
-        $pengajuanCuti->sisa_cuti_id = $sisaCuti ? $sisaCuti->id : null;
+        $pengajuanCuti->cuti_id = $jenisCuti->id;
         $pengajuanCuti->status = 'Menunggu Persetujuan';
         $pengajuanCuti->alasan_cuti = $request->alasan_cuti;
         $pengajuanCuti->no_telepon = $request->no_telepon;
@@ -148,6 +172,15 @@ class PengajuanCutiController extends Controller
             'status_sekretaris' => 'Menunggu Persetujuan',
             'komandan_id' => $komandan->id,
             'status_komandan' => 'Menunggu Persetujuan',
+        ]);
+
+        $dataCutiPersonel = DataCutiPersonelModel::create([
+            "personil_id" => $request->personil_id,
+            "cuti_id" => $jenisCuti->id,
+            "pengajuan_cuti_id" => $pengajuanCuti->id,
+            'tanggal_mulai' => $request->tanggal_mulai_cuti,
+            'tanggal_selesai' => $request->tanggal_selesai_cuti,
+            'jumlah_hari' => $jumlahHariYangDiambil,
         ]);
     
         return redirect()->route('personil.pengajuan-cuti.index')->with('success', 'Pengajuan cuti berhasil dibuat.');
@@ -171,6 +204,22 @@ class PengajuanCutiController extends Controller
         $start = new \DateTime($startDate);
         $end = new \DateTime($endDate);
         return $end->diff($start)->days + 1;
+    }
+
+    public function cetak_surat_cuti($id){
+        $suratCuti = PengajuanCutiModel::find($id);
+        $time = Carbon::now()->timestamp;
+        $date = date('Y-m-d', $time);
+        // dd($suratCuti);
+        if ($suratCuti == null) {
+            return abort('404', 'Surat cuti tidak ditemukan');
+        }
+        // Render view ke PDF
+        $pdf = PDF::loadView('personil.pengajuan-cuti.cetak-surat-cuti', compact('suratCuti'))
+                ->setPaper('a4', 'potrait'); 
+
+        // Download atau tampilkan PDF
+        return $pdf->stream('rekap-presensi-harian-'.$date.'.pdf');
     }
 
 }

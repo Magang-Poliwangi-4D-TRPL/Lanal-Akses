@@ -65,6 +65,12 @@ class UserAdminSeeder extends Seeder
         $paspotmar_akun->removeRole('personel');
         $paspotmar_akun->assignRole($role_paspotmar);
     
+        $kaakun = PersonilModel::where('nrp', '21726/P')->first();
+        $kaakun_akun = User::where('personil_id', $kaakun->id)->first();
+        $role_kaakun = Role::where('name', 'kaakun')->first();
+        $kaakun_akun->removeRole('personel');
+        $kaakun_akun->assignRole($role_kaakun);
+    
     
     }
 }

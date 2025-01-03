@@ -50,28 +50,49 @@
                     <!-- Tampilkan tombol dengan class yang sesuai -->
                     <div class="btn btn-lg {{ $statusClass }}">
                         {{ $suratPengajuan->status }}
-                    </div>
+                    </div> <br>
                 </div>
             </div>
         </div>
         
-        <div class="container-fluid mt-4 p-0 border-bottom">
-            <h4 class="h4">Profil Anggota</h4>
+        <div class="container-fluid mt-4 py-0 border-bottom">
+            <div class="row justify-content-between">
+                <h4 class="h4">Profil Anggota</h4>
+                <a href="{{ route('admin.surat-cuti.edit',['id' => $suratPengajuan->id]) }}" class="btn btn-sm btn-primary mt-4">Edit Pengajuan Cuti <i class="bi bi-pencil-square"></i></a>
+            </div>
+            @empty($suratPengajuan->dataCutiPersonel->id)
             <div class="row justify-content-start">
                 <div class="col-md-2 ">
-                    @empty($suratPengajuan->personil->image_url)
+                    @empty($suratPengajuan->dataCutiPegawai->pegawai->image_url)
                         <img src="{{  URL::asset('images/admin/default-profile.jpg') }}" alt="default-profile" border="0" height="auto" class="rounded-circle image-profile">
                         
                     @else
-                        <img src="{{ asset($suratPengajuan->personil->image_url) }}" alt="Profil {{ $suratPengajuan->personil->nama_lengkap }}" border="0" height="auto" class="rounded image-profile">
+                        <img src="{{ asset($suratPengajuan->dataCutiPegawai->pegawai->image_url) }}" alt="Profil {{ $suratPengajuan->dataCutiPegawai->pegawai->nama_pegawai }}" border="0" height="auto" class="rounded image-profile">
                     @endempty
                 </div>
                 <div class="col-md-8 align-item-start ">
-                    <h4><b>{{ $suratPengajuan->personil->nama_lengkap }}</b></h4>
-                    <p class="text-secondary">{{ $suratPengajuan->personil->nrp }}</p>
-                    <a class="btn btn-sm btn-light" href="{{ route('admin.personil.show', $suratPengajuan->personil->nrp) }}" target="_blank" rel="noopener noreferrer">Lihat Profil Anggota</a>
+                    <h4><b>{{ $suratPengajuan->dataCutiPegawai->pegawai->nama_pegawai }}</b></h4>
+                    <p class="text-secondary">{{ $suratPengajuan->dataCutiPegawai->pegawai->nip }}</p>
+                    <a class="btn btn-sm btn-light" href="{{ route('admin.pegawai.show', $suratPengajuan->dataCutiPegawai->pegawai->nip) }}" target="_blank" rel="noopener noreferrer">Lihat Profil Anggota</a>
                 </div>
             </div>
+            @else    
+            <div class="row justify-content-start">
+                <div class="col-md-2 ">
+                    @empty($suratPengajuan->dataCutiPersonel->personil->image_url)
+                        <img src="{{  URL::asset('images/admin/default-profile.jpg') }}" alt="default-profile" border="0" height="auto" class="rounded-circle image-profile">
+                        
+                    @else
+                        <img src="{{ asset($suratPengajuan->dataCutiPersonel->personil->image_url) }}" alt="Profil {{ $suratPengajuan->dataCutiPersonel->personil->nama_lengkap }}" border="0" height="auto" class="rounded image-profile">
+                    @endempty
+                </div>
+                <div class="col-md-8 align-item-start ">
+                    <h4><b>{{ $suratPengajuan->dataCutiPersonel->personil->nama_lengkap }}</b></h4>
+                    <p class="text-secondary">{{ $suratPengajuan->dataCutiPersonel->personil->nrp }}</p>
+                    <a class="btn btn-sm btn-light" href="{{ route('admin.personil.show', $suratPengajuan->dataCutiPersonel->personil->nrp) }}" target="_blank" rel="noopener noreferrer">Lihat Profil Anggota</a>
+                </div>
+            </div>
+            @endempty
             <h5 class="h5 text-secondary mt-4">Detail Surat Pengajuan Cuti</h5>
             <div class="row mt-1">
                 <div class="col-md-6">

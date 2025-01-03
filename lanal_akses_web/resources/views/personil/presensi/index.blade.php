@@ -26,16 +26,10 @@
             <div class="col-md-6 my-auto">
                 <div class="row rounded bg-light py-4">
                     <div class="col-md-4">
-                        @foreach ($statusKehadiran as $item)
-                            @if ($presensi_hari_ini->status_kehadiran === $item)
-                                <div class="m-1 py-1 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$loop->iteration-1] }}">
-                                    <p class="px-0  m-0" style="">{{ $presensi_hari_ini->status_kehadiran}}</p>
-                                    <i class="fa-solid fa-{{ $statusKehadiranIcon[$loop->iteration-1] }} {{ $iconColor[$loop->iteration-1] }} " style="font-size:10pt"></i>
-                                </div>
-                            @else
-                                                                
-                            @endif
-                        @endforeach    
+                        <div class="m-1 py-1 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$presensi_hari_ini->status_kehadiran] }}">
+                            <p class="px-0  m-0 " style="">{{ $presensi_hari_ini->status_kehadiran}}</p>
+                            <i class="fa-solid fa-{{ $statusKehadiranIcon[$presensi_hari_ini->status_kehadiran] }} {{ $iconColor[$presensi_hari_ini->status_kehadiran] }} " style="font-size:10pt"></i>
+                        </div>
                     </div>
                     @if($presensi_hari_ini->status_kehadiran == 'Belum Absen')
                         <div class="col-md-8">
@@ -83,16 +77,10 @@
                             <td width="5%">{{ $dataAbsensiPersonil->personil->nrp }}</td>
                             <td width="15%">{{ $dataAbsensiPersonil->tanggal_kehadiran }}</td>
                             <td width="15%" class="text-center">
-                                @foreach ($statusKehadiran as $item)
-                                    @if ($dataAbsensiPersonil->status_kehadiran == $item)
-                                    <div class="m-1 py-1 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$loop->iteration-1] }}">
-                                        <p class="px-0  m-0" style="">{{ $dataAbsensiPersonil->status_kehadiran}}</p>
-                                        <i class="fa-solid fa-{{ $statusKehadiranIcon[$loop->iteration-1] }} {{ $iconColor[$loop->iteration-1] }} " style="font-size:10pt"></i>
-                                    </div>
-                                    @else
-                                        
-                                    @endif
-                                @endforeach    
+                                <div class="m-1 py-1 row justify-content-around align-items-center rounded border border-{{ $bgStatusKehadiran[$dataAbsensiPersonil->status_kehadiran] }}">
+                                    <p class="px-0  m-0 " style="">{{ $dataAbsensiPersonil->status_kehadiran}}</p>
+                                    <i class="fa-solid fa-{{ $statusKehadiranIcon[$dataAbsensiPersonil->status_kehadiran] }} {{ $iconColor[$dataAbsensiPersonil->status_kehadiran] }} " style="font-size:10pt"></i>
+                                </div>
                             </td>
                             <td width="10%">{{ $dataAbsensiPersonil->jam_masuk == null? '-' : $dataAbsensiPersonil->jam_masuk }}</td>
                             <td width="10%">{{ $dataAbsensiPersonil->jam_pulang == null? '-' : $dataAbsensiPersonil->jam_pulang }}</td>

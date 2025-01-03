@@ -27,18 +27,14 @@
                 </div>
             </div>
             @if(session('message'))
-                <div class="alert alert-warning">
-                    {{ session('message') }}
-                </div>
+                <div class="alert alert-warning">{{ session('message') }}</div>
             @endif
             @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
+                <div class="alert alert-danger"><ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
-                    </ul>
-                </div>
+                    </ul></div>
             @endif
             
             <div class="form-absensi row justify-content-center mt-3">

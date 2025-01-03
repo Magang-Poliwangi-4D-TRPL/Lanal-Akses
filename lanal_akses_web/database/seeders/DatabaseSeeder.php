@@ -38,7 +38,6 @@ class DatabaseSeeder extends Seeder
             "jam_pulang_selesai" => '23:59:00',
             "keterangan" => 'Setiap personil dan pegawai akan menggunakan format waktu jam kerja ini sebagai patokan presensi',
         ]);
-        $this->call(SekretarisSeeder::class);
         $this->call(UserAdminSeeder::class);
     }
 }

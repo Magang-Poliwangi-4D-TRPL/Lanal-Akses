@@ -36,35 +36,38 @@ public function index()
         ->orderBy('tanggal_kehadiran', 'desc')
         ->get();
 
-    $statusKehadiranIcon = [
-        'check',
-        'xmark',
-        'clock',
-        'file',
-        'circle-exclamation',
-    ];
-    $statusKehadiran = [
-        'Hadir',
-        'Tidak Hadir',
-        'Terlambat',
-        'Cuti',
-        'Belum Absen',
-    ];
-    $bgStatusKehadiran = [
-        'success',
-        'danger',
-        'warning',
-        'primary',
-        'secondary',
-    ];
-    $iconColor = [
-        'text-success',
-        'text-danger',
-        'text-warning',
-        'text-primary',
-        'text-secondary',
-    ];
-
+        $statusKehadiranIcon = [
+            'Hadir'=> 'check',
+             'Tidak Hadir'=> 'xmark',
+             'Terlambat'=>'clock',
+             'Cuti Sakit'=>'file',
+             'Cuti Tahunan'=>'file',
+             'Belum Absen'=> 'circle-exclamation',
+         ];
+         $statusKehadiran = [
+             'Hadir',
+             'Tidak Hadir',
+             'Terlambat',
+             'Cuti Sakit',
+             'Cuti Tahunan',
+             'Belum Absen',
+         ];
+         $bgStatusKehadiran = [
+            'Hadir'=>'success',
+            'Tidak Hadir'=> 'danger',
+            'Terlambat'=>'warning',
+            'Cuti Sakit'=>'primary',
+            'Cuti Tahunan'=>'primary',
+            'Belum Absen'=>'secondary',
+         ];
+         $iconColor = [
+            'Hadir'=>'text-success',
+            'Tidak Hadir'=>'text-danger',
+            'Terlambat'=>'text-warning',
+            'Cuti Sakit'=>'text-primary',
+            'Cuti Tahunan'=>'text-primary',
+            'Belum Absen'=>'text-secondary',
+         ];
     $presensi_hari_ini = KehadiranModel::where('tanggal_kehadiran', $date)->where('personil_id', $personil->id)->get()->first();
 
     // Count each status
